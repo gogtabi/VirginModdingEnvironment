@@ -1,4 +1,4 @@
-package org.maghtuireadh.virginmod.objects;
+package org.maghtuireadh.virginmod.objects.items;
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.Util.IHasModel;
