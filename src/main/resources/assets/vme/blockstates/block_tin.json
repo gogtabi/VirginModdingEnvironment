@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "hm:block_tin" }
+        "normal": { "model": "vme:block_tin" }
         }
 }
