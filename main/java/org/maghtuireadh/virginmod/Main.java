@@ -20,18 +20,12 @@ public class Main {
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
-		
-	}
+	public static void preInit(FMLPreInitializationEvent event) {}
 	
 	@EventHandler
-	public static void preInit(FMLInitializationEvent event) {
-		
-	}
+	public static void preInit(FMLInitializationEvent event) {}
 	
 	@EventHandler
-	public static void preInit(FMLPostInitializationEvent event) {
-		
-	}
+	public static void preInit(FMLPostInitializationEvent event) {}
 	
 }

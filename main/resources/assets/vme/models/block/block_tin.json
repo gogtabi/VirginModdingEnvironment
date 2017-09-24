@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "vme:blocks/block_itn"
+        "all": "vme:blocks/block_tin"
     }
 }
