@@ -1,5 +1,6 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
+import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.util.IHasModel;
 
@@ -17,5 +18,10 @@ public class ToolPickaxe extends ItemPickaxe implements IHasModel {
 		
 		ItemInit.ITEMS.add(this);
 	}
-
+	
+	@Override
+	public void registerModels()
+	{
+		Main.proxy.registerItemRenderer(this, 0, "inventory");
+	}
 }

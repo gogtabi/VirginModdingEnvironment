@@ -6,10 +6,12 @@ import java.util.List;
 import org.maghtuireadh.virginmod.objects.armor.ArmorBase.ArmorBase;
 import org.maghtuireadh.virginmod.objects.blocks.BlockBase;
 import org.maghtuireadh.virginmod.objects.items.ItemBase;
+import org.maghtuireadh.virginmod.objects.tools.ToolAxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolHoe;
 import org.maghtuireadh.virginmod.objects.tools.ToolPickaxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolShovel;
 import org.maghtuireadh.virginmod.objects.tools.ToolSword;
+import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -22,14 +24,14 @@ public class ItemInit {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	//Material
 	public static final ToolMaterial TOOL_COPPER = EnumHelper.addToolMaterial("tool_copper", 2, 180, 5.0F, 1.5F, 5);
-	public static final ArmorMaterial ARMOR_COPPER = EnumHelper.addArmorMaterial("armor_copper", textureName, 13, new int[]{1, 4, 5, 2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F)"
+	public static final ArmorMaterial ARMOR_COPPER = EnumHelper.addArmorMaterial("armor_copper", Reference.MODID + ":copper", 13, new int[]{1, 4, 5, 2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
 			
 	
 	//Items
 	public static final Item INGOT_COPPER = new ItemBase("ingot_copper");
 
 	//Tools
-	public static final Item AXE_COPPER = new ToolAxe("axe_copper");
+	public static final Item AXE_COPPER = new ToolAxe("axe_copper", TOOL_COPPER);
 	public static final Item HOE_COPPER = new ToolHoe("hoe_copper", TOOL_COPPER);
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);

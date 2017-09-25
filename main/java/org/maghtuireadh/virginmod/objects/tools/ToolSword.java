@@ -1,5 +1,6 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
+import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.util.IHasModel;
 
@@ -16,6 +17,11 @@ public class ToolSword extends ItemSword implements IHasModel {
 		setCreativeTab(CreativeTabs.MATERIALS);
 		
 		ItemInit.ITEMS.add(this);
+	}
+
+	@Override
+	public void registerModels() {
+		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 
 }

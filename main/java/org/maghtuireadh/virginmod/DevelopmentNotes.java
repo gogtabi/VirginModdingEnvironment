@@ -1,0 +1,1 @@
+// 09-24-17 Copper Sword and Block are not rendering again.
