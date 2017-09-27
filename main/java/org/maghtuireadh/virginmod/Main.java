@@ -1,8 +1,10 @@
 package org.maghtuireadh.virginmod;
 
 import org.maghtuireadh.virginmod.proxy.CommonProxy;
+import org.maghtuireadh.virginmod.tabs.VirginModTab;
 import org.maghtuireadh.virginmod.util.Reference;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -15,6 +17,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Main {
 	@Instance
 	public static Main instance;
+	
+	public static final CreativeTabs virginmodtab = new VirginModTab("virginmodtab");
 	
 	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
 	public static CommonProxy proxy;

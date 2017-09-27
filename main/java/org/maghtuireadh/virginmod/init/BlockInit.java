@@ -14,5 +14,5 @@ import net.minecraft.block.BlockFurnace;
 
 public class BlockInit {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
-	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.ROCK, 1.0F, "pickaxe", 2, 2.0F);
+	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.IRON);
 }
