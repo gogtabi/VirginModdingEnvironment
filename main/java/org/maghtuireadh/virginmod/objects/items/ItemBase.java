@@ -1,9 +1,9 @@
 package org.maghtuireadh.virginmod.objects.items;
 
 import org.maghtuireadh.virginmod.Main;
-import org.maghtuireadh.virginmod.util.IHasModel;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.proxy.ClientProxy;
+import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
