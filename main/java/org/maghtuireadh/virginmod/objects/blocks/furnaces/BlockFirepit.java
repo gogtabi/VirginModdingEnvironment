@@ -19,13 +19,14 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements ITickable{
 
-private final boolean isBurning;
+private boolean isBurning;
 int firepitBurnTime;
 int fuelLvl;
 int burnRate;
@@ -62,15 +63,45 @@ World worldIn;
         else
         {
         	ItemStack heldItem = playerIn.getHeldItemMainhand();
-        	//If Held Item = Fuel
-        	heldItem.shrink(1);
+        	this.setFuelValues(heldItem);
+        	return true;
         }
     }
-	public void update(){
+	
+	private void setFuelValues(ItemStack heldItem) {
+		if (heldItem.isEmpty()){		}
+		else
+		{ 
+			int coalBurn;
+			int coalRate;
+			int ashBurn;
+			int ashRate;
+			Item item = null;
 			
+			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
+	        {
+	                this.firepitBurnTime += 300;
+	                this.coalBurn += 100;
+	                this.coalRate = 25;
+	                this.ashBurn += 100;
+	                heldItem.shrink(1);
+	        }
+		}
+			
+		
+	}
+
+	public void update(){
+		if (this.firepitBurnTime>0)
+		{
+			this.isBurning=true;
+		}
+		
 		if (this.isBurning){
 				--this.firepitBurnTime;
+				this.setLightLevel(1);
 		}
+		
 		//How do I get World in this instance?
 		if (!this.worldIn.isRemote){
 			if (!this.isBurning && coalBurn > 0){
@@ -81,8 +112,8 @@ World worldIn;
 					this.coalGrowth = 0;
 				}
 			}
-				
-			if (!this.isBurning && ashBurn > 0){
+			
+						if (!this.isBurning && ashBurn > 0){
 					--ashBurn;
 					++ashGrowth;
 					
@@ -94,9 +125,12 @@ World worldIn;
 				
 			if (!this.isBurning && firepitBurnTime == 0){
 					this.isBurning = false;
+					this.coalBurn = 0;
+					this.ashBurn = 0;
 					this.coalRate = 0;
 					this.ashRate = 0;
 			}
+			
 		}
 	}
 	
