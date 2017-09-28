@@ -20,6 +20,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -34,9 +35,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements ITileEntityProvider {
 	
-	private boolean isBurning, isStoked;
-int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
-World worldIn;
+	World worldIn;
+	Float lightLvl;
+	boolean isBurning;
 
 	public BlockFirepit(String unlocalizedName) {
 	super(Material.ROCK);
@@ -47,10 +48,21 @@ World worldIn;
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
-	protected BlockFirepit(boolean isBurning){
-		    super(Material.ROCK);
-		    this.isBurning = isBurning;
-	}
+	 @Override
+	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	 TileEntityFirePit tileentity = (TileEntityFirePit) worldIn.getTileEntity(pos);
+	 
+	 if(tileentity.getBurning()) {
+     	if(this.isBurning && lightLvl!=tileentity.getLight())
+     	{
+        	 this.setLightLevel(lightLvl);
+        }
+	 }
+     else
+     {
+     		this.setLightLevel(0.0F);
+     }
+	 }
 
 	public int quantityDropped(Random random){
 			 return 6;
@@ -68,30 +80,14 @@ World worldIn;
         }
         else
         {
-        	ItemStack heldItem = playerIn.getHeldItemMainhand();
-        	this.setFuelValues(heldItem);
-        	return true;
-        }
-    }
-	
-	private void setFuelValues(ItemStack heldItem) {
-		if (heldItem.isEmpty()){}
-		else
-		{ 
-			Item item = heldItem.getItem();
-			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
-	        {
-	                this.firepitBurnTime += 300;
-	                this.coalBurn += 100;
-	                this.coalRate = 25;
-	                this.ashBurn += 100;
-	                heldItem.shrink(1);
-	        }
-		}
-			
-		
-	}
-	
+            TileEntityFirePit tileentity = (TileEntityFirePit) worldIn.getTileEntity(pos);
+           	ItemStack heldItem = playerIn.getHeldItemMainhand();
+           	tileentity.setFuelValues(heldItem);
+           	return true;    
+           }
+
+     }
+ 
 	@SideOnly(Side.CLIENT)
     @SuppressWarnings("incomplete-switch")
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)

@@ -1,11 +1,22 @@
 package org.maghtuireadh.virginmod.tileentity;
 
 
+import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
@@ -13,6 +24,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 public class TileEntityFirePit extends TileEntity implements ITickable{
 	private boolean isBurning, isStoked;
 	int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
+	float lightLvl;
 	
 	private int cooldown;
 	
@@ -36,6 +48,7 @@ public class TileEntityFirePit extends TileEntity implements ITickable{
 		this.ashRate = nbt.getInteger("AshRate");
 		this.isBurning = nbt.getBoolean("IsBurning");
 		this.isStoked = nbt.getBoolean("IsStoked");
+		this.lightLvl = nbt.getFloat("Light Level");
 		
 		super.readFromNBT(nbt);
 	}
@@ -56,7 +69,17 @@ public class TileEntityFirePit extends TileEntity implements ITickable{
 		nbt.setInteger("AshRate", this.ashRate);
 		nbt.setBoolean("IsBurning", this.isBurning);
 		nbt.setBoolean("IsStoked", this.isStoked);
+		nbt.setFloat("Light Level", lightLvl);
+		
 		return super.writeToNBT(nbt);
+	}
+	
+	public float getLight (){
+		return lightLvl;
+	}
+	
+	public boolean getBurning() {
+		return isBurning;
 	}
 	
 	public void update(){
@@ -66,8 +89,9 @@ public class TileEntityFirePit extends TileEntity implements ITickable{
 		}
 		
 		if (this.isBurning){
+				
 				--this.firepitBurnTime;
-				this.setLightLevel(1);
+				this.lightLvl=1.0f;
 		}	
 		
 		if (!this.world.isRemote){
@@ -99,7 +123,28 @@ public class TileEntityFirePit extends TileEntity implements ITickable{
 			}
 			
 		}
+		this.markDirty();
 	}
+
+	
+	public void setFuelValues(ItemStack heldItem) {
+		if (heldItem.isEmpty()){}
+		else
+		{ 
+			Item item = heldItem.getItem();
+			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
+	        {
+	                this.firepitBurnTime += 300;
+	                this.coalBurn += 100;
+	                this.coalRate = 25;
+	                this.ashBurn += 100;
+	                heldItem.shrink(1);
+	        }
+		}
+			
+		
+	}
+	
 	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
