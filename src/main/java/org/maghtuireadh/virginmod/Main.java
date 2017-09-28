@@ -24,7 +24,9 @@ public class Main {
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {}
+	public static void preInit(FMLPreInitializationEvent event) {
+		proxy.registerTileEntities();
+	}
 	
 	@EventHandler
 	public static void preInit(FMLInitializationEvent event) {}

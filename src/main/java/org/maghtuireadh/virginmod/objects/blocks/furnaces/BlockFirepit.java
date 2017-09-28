@@ -5,9 +5,11 @@ import java.util.Random;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
+import org.maghtuireadh.virginmod.tileentity.TileEntityBlockBreaker;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFirepit extends Block implements ITickable{
+public class BlockFirepit extends Block implements ITickable, ITileEntityProvider {
 	
 private boolean isBurning, isStoked;
 int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
@@ -50,8 +52,11 @@ protected BlockFirepit(boolean isBurning){
 		    super(Material.ROCK);
 		    this.isBurning = isBurning;
 	}
-		
 
+	@Override	
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityBlockBreaker();
+	}
 
 	public int quantityDropped(Random random){
 			 return 6;
@@ -157,5 +162,3 @@ protected BlockFirepit(boolean isBurning){
             }
         }
     }	
-	
-	
