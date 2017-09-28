@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "1.0"
-group = "Base" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "VirginModdingEnvironment"
+group = "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "modid"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.1-14.22.1.2478"
+    version = "1.12.1-14.22.1.2479"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.

@@ -1,0 +1,109 @@
+[11:13:03] [main/INFO]: Setting user: Player816
+[11:13:07] [main/INFO]: LWJGL Version: 2.9.4
+[11:13:11] [main/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Virgin Mod
+[11:13:13] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[11:13:13] [Thread-5/INFO]: Initializing LWJGL OpenAL
+[11:13:13] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[11:13:14] [Thread-5/INFO]: OpenAL initialized.
+[11:13:14] [Sound Library Loader/INFO]: Sound engine started
+[11:13:17] [main/WARN]: Texture vme:textures/custom/coal_bed.png with size 24x24 will have visual artifacts at mip level 4, it can only support level 3. Please report to the mod author that the texture should be some multiple of 16x16.
+[11:13:18] [main/INFO]: Created: 512x512 textures-atlas
+[11:13:20] [main/INFO]: Narrator library for x64 successfully loaded
+[11:13:21] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[11:13:41] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
+[11:13:41] [Server thread/INFO]: Generating keypair
+[11:13:41] [Server thread/INFO]: Loaded 488 advancements
+[11:13:42] [Server thread/INFO]: Preparing start region for level 0
+[11:13:43] [Server thread/INFO]: Preparing spawn area: 8%
+[11:13:44] [Server thread/INFO]: Preparing spawn area: 20%
+[11:13:45] [Server thread/INFO]: Preparing spawn area: 33%
+[11:13:46] [Server thread/INFO]: Preparing spawn area: 46%
+[11:13:47] [Server thread/INFO]: Preparing spawn area: 58%
+[11:13:48] [Server thread/INFO]: Preparing spawn area: 74%
+[11:13:49] [Server thread/INFO]: Preparing spawn area: 92%
+[11:13:50] [Server thread/INFO]: Changing view distance to 12, from 10
+[11:13:51] [Server thread/INFO]: Player816[local:E:dd577f2e] logged in with entity id 1921 at (-207.5, 74.0, 219.5)
+[11:13:51] [Server thread/INFO]: Player816 joined the game
+[11:13:53] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@2049799c[id=0dba4657-9c98-3a17-999f-e412cc5ea8b2,name=Player816,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) [guava-21.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3172) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_144]
+	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_144]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_144]
+[11:13:53] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3225ms behind, skipping 64 tick(s)
+[11:13:59] [Server thread/INFO]: Saving and pausing game...
+[11:13:59] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/overworld
+[11:13:59] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/the_nether
+[11:13:59] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/the_end
+[11:14:00] [Server thread/INFO]: Stopping server
+[11:14:00] [Server thread/INFO]: Saving players
+[11:14:00] [Server thread/INFO]: Player816 lost connection: Disconnected
+[11:14:00] [Server thread/INFO]: Player816 left the game
+[11:14:00] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[11:14:00] [Server thread/INFO]: Saving worlds
+[11:14:00] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/overworld
+[11:14:00] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/the_nether
+[11:14:00] [Server thread/INFO]: Saving chunks for level 'Tir na Nog'/the_end
+[11:14:04] [main/INFO]: Deleting level Tir na Nog
+[11:14:04] [main/INFO]: Attempt 1...
+[11:14:10] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
+[11:14:10] [Server thread/INFO]: Generating keypair
+[11:14:10] [Server thread/INFO]: Loaded 488 advancements
+[11:14:10] [Server thread/WARN]: Unable to find spawn biome
+[11:14:11] [Server thread/INFO]: Preparing start region for level 0
+[11:14:12] [Server thread/INFO]: Preparing spawn area: 15%
+[11:14:13] [Server thread/INFO]: Preparing spawn area: 31%
+[11:14:14] [Server thread/INFO]: Preparing spawn area: 46%
+[11:14:15] [Server thread/INFO]: Preparing spawn area: 62%
+[11:14:16] [Server thread/INFO]: Preparing spawn area: 77%
+[11:14:17] [Server thread/INFO]: Preparing spawn area: 91%
+[11:14:18] [Server thread/INFO]: Changing view distance to 12, from 10
+[11:14:19] [Server thread/INFO]: Player816[local:E:ae771cf5] logged in with entity id 4832 at (485.5, 63.0, -7.5)
+[11:14:19] [Server thread/INFO]: Player816 joined the game
+[11:14:20] [Server thread/INFO]: Saving and pausing game...
+[11:14:20] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[11:14:21] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[11:14:21] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[11:14:50] [Server thread/INFO]: [Player816: Set the time to 16000]
+[11:14:50] [main/INFO]: [CHAT] Set the time to 16000
+[11:15:03] [Server thread/INFO]: Saving and pausing game...
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[11:15:10] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[11:15:10] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[11:15:10] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 6204ms behind, skipping 124 tick(s)
+[11:15:49] [Server thread/INFO]: Saving and pausing game...
+[11:15:49] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[11:15:49] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[11:15:49] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[11:16:23] [Server thread/INFO]: Saving and pausing game...
+[11:16:23] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[11:16:23] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[11:16:23] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[11:16:42] [Server thread/INFO]: Stopping server
+[11:16:42] [Server thread/INFO]: Saving players
+[11:16:42] [Server thread/INFO]: Player816 lost connection: Disconnected
+[11:16:42] [Server thread/INFO]: Player816 left the game
+[11:16:42] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[11:16:42] [Server thread/INFO]: Saving worlds
+[11:16:42] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[11:16:42] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[11:16:42] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[11:16:44] [main/INFO]: Stopping!
+[11:16:44] [main/INFO]: SoundSystem shutting down...
+[11:16:44] [main/WARN]: Author: Paul Lamb, www.paulscode.com

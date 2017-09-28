@@ -1,13 +1,3 @@
 item.ingot_copper.name=Copper Ingot
-item.hoe_copper.name=Copper Hoe
-item.pickaxe_copper.name=Copper Pickaxe
-item.shovel_copper.name=Copper Shovel
-item.sword_copper.name=Copper Sword
-item.helmet_copper.name=Copper Helmet
-item.chestplate_copper.name=Copper Chestplate
-item.leggings_copper.name=Copper Leggings
-item.boots_copper.name=Copper Boots
-item.atd_torch.name=ATD Torch
-
 tile.block_copper.name=Copper Block
-tile.block_furnace.name=Firepit
+itemGroup.virginmodtab=Virgin Mod
