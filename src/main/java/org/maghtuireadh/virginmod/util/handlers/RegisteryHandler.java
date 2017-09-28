@@ -2,7 +2,7 @@ package org.maghtuireadh.virginmod.util.handlers;
 
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.util.IHasModel;
+import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
