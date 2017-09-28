@@ -5,7 +5,7 @@ import java.util.Random;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.tileentity.TileEntityBlockBreaker;
+import org.maghtuireadh.virginmod.tileentity.TileEntityFirePit;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.Block;
@@ -20,7 +20,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -33,13 +32,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFirepit extends Block implements ITickable, ITileEntityProvider {
+public class BlockFirepit extends Block implements ITileEntityProvider {
 	
-private boolean isBurning, isStoked;
+	private boolean isBurning, isStoked;
 int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
 World worldIn;
 
-public BlockFirepit(String unlocalizedName) {
+	public BlockFirepit(String unlocalizedName) {
 	super(Material.ROCK);
 	this.setUnlocalizedName("block_firepit");
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -48,14 +47,9 @@ public BlockFirepit(String unlocalizedName) {
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
-protected BlockFirepit(boolean isBurning){
+	protected BlockFirepit(boolean isBurning){
 		    super(Material.ROCK);
 		    this.isBurning = isBurning;
-	}
-
-	@Override	
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityBlockBreaker();
 	}
 
 	public int quantityDropped(Random random){
@@ -97,48 +91,6 @@ protected BlockFirepit(boolean isBurning){
 			
 		
 	}
-
-	public void update(){
-		if (this.firepitBurnTime>0)
-		{
-			this.isBurning=true;
-		}
-		
-		if (this.isBurning){
-				--this.firepitBurnTime;
-				this.setLightLevel(1);
-		}
-		
-		if (!this.worldIn.isRemote){
-			if (this.isBurning && coalBurn > 0){
-				--coalBurn;
-				++coalGrowth;
-				if (coalGrowth == coalRate){
-					++coalCount;
-					this.coalGrowth = 0;
-				}
-			}
-			
-						if (this.isBurning && ashBurn > 0){
-					--ashBurn;
-					++ashGrowth;
-					
-				if (ashGrowth == ashRate){
-						++ashCount;
-						this.ashGrowth = 0;
-				}
-			}
-				
-			if (this.isBurning && firepitBurnTime == 0){
-					this.isBurning = false;
-					this.coalBurn = 0;
-					this.ashBurn = 0;
-					this.coalRate = 0;
-					this.ashRate = 0;
-			}
-			
-		}
-	}
 	
 	@SideOnly(Side.CLIENT)
     @SuppressWarnings("incomplete-switch")
@@ -161,4 +113,10 @@ protected BlockFirepit(boolean isBurning){
             worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
             }
         }
-    }	
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityFirePit();
+	}
+
+}	
