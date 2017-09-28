@@ -13,18 +13,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class atd_torch extends BlockTorch {
+public class BlockATDTorch extends BlockTorch {
 	
 	public static int burntime = 500;
-	
-	
-	
 	
 	/**
 	 * Default constructor which sets the hardness and resistance
 	 * @param unlocalizedName The unlocalized name
 	 */
-	public atd_torch(String unlocalizedName) {
+	public BlockATDTorch(String unlocalizedName) {
 		this.setUnlocalizedName(unlocalizedName);
 		this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setLightLevel(15.0F);

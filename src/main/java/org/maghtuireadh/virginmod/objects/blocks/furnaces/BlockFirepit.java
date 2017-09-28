@@ -2,6 +2,11 @@ package org.maghtuireadh.virginmod.objects.blocks.furnaces;
 
 import java.util.Random;
 
+import org.maghtuireadh.virginmod.Main;
+import org.maghtuireadh.virginmod.init.BlockInit;
+import org.maghtuireadh.virginmod.init.ItemInit;
+import org.maghtuireadh.virginmod.util.Reference;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +23,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,24 +33,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements ITickable{
 	
-private boolean isBurning;
-int firepitBurnTime;
-int fuelLvl;
-int burnRate;
-boolean isStoked;
-int coalBurn;
-int coalCount;
-int coalGrowth;
-int coalRate;
-int ashBurn;
-int ashCount;
-int ashGrowth;
-int ashRate;
+private boolean isBurning, isStoked;
+int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
 World worldIn;
 
-public BlockFirepit() {
+public BlockFirepit(String unlocalizedName) {
 	super(Material.ROCK);
-}
+	this.setUnlocalizedName("block_firepit");
+	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+	setCreativeTab(Main.virginmodtab);
+	BlockInit.BLOCKS.add(this);
+	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+	}
 
 protected BlockFirepit(boolean isBurning){
 		    super(Material.ROCK);
