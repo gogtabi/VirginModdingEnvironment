@@ -11,8 +11,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.block.BlockFurnace;
+import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
+
 
 public class BlockInit {
+	public static Block BlockFirepit = new BlockFirepit();
+	
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.IRON);
+	public static final Block BLOCK_FIREPIT = new BlockBase("block_firepit", BlockFirepit, Material.ROCK);
 }

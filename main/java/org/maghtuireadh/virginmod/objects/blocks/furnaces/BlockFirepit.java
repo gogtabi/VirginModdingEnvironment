@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements ITickable{
-
+	
 private boolean isBurning;
 int firepitBurnTime;
 int fuelLvl;
@@ -41,11 +41,17 @@ int ashGrowth;
 int ashRate;
 World worldIn;
 
-	protected BlockFirepit(boolean isBurning){
+public BlockFirepit() {
+	super(Material.ROCK);
+}
+
+protected BlockFirepit(boolean isBurning){
 		    super(Material.ROCK);
 		    this.isBurning = isBurning;
 	}
 		
+
+
 	public int quantityDropped(Random random){
 			 return 6;
 	}
@@ -69,15 +75,10 @@ World worldIn;
     }
 	
 	private void setFuelValues(ItemStack heldItem) {
-		if (heldItem.isEmpty()){		}
+		if (heldItem.isEmpty()){}
 		else
 		{ 
-			int coalBurn;
-			int coalRate;
-			int ashBurn;
-			int ashRate;
-			Item item = null;
-			
+			Item item = heldItem.getItem();
 			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
 	        {
 	                this.firepitBurnTime += 300;
@@ -102,9 +103,8 @@ World worldIn;
 				this.setLightLevel(1);
 		}
 		
-		//How do I get World in this instance?
 		if (!this.worldIn.isRemote){
-			if (!this.isBurning && coalBurn > 0){
+			if (this.isBurning && coalBurn > 0){
 				--coalBurn;
 				++coalGrowth;
 				if (coalGrowth == coalRate){
@@ -113,7 +113,7 @@ World worldIn;
 				}
 			}
 			
-						if (!this.isBurning && ashBurn > 0){
+						if (this.isBurning && ashBurn > 0){
 					--ashBurn;
 					++ashGrowth;
 					
@@ -123,7 +123,7 @@ World worldIn;
 				}
 			}
 				
-			if (!this.isBurning && firepitBurnTime == 0){
+			if (this.isBurning && firepitBurnTime == 0){
 					this.isBurning = false;
 					this.coalBurn = 0;
 					this.ashBurn = 0;
