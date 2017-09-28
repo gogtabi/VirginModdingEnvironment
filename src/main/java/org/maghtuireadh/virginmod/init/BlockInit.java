@@ -17,11 +17,8 @@ import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 
 
 public class BlockInit {
-	public static Block BlockFirepit = new BlockFirepit();
-	
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.IRON);
 	public static final Block ATD_TORCH = new atd_torch("atd_torch");
-	public static final Block BLOCK_FIREPIT = new BlockBase("block_firepit", BlockFirepit, Material.ROCK);
-
+	public static final BlockFirepit BLOCK_FIREPIT = new BlockFirepit("block_firepit");
 }
