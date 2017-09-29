@@ -2,6 +2,7 @@ package org.maghtuireadh.virginmod.tileentity;
 
 
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
+import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -79,47 +80,44 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 	}
 	
 	public void update(){
-		if (this.firepitBurnTime>0)
+		if (firepitBurnTime>0)
 		{
-			this.isBurning=true;
+			isBurning=true;
+			Utils.getLogger().info("It's Burning");
 		}
 		
-		if (this.isBurning){
+		if (isBurning)
+		{
 				
-				--this.firepitBurnTime;
-				this.lightLvl=1.0f;
+				--firepitBurnTime;
+				lightLvl=1.0f;
 		}	
-		
-		if (!this.world.isRemote){
-			if (this.isBurning && coalBurn > 0){
-				--coalBurn;
-				++coalGrowth;
-				if (coalGrowth == coalRate){
-					++coalCount;
-					this.coalGrowth = 0;
-				}
+		if (isBurning && coalBurn > 0){
+			--coalBurn;
+			++coalGrowth;
+			if (coalGrowth == coalRate){
+				++coalCount;
+				coalGrowth = 0;
 			}
-			
-						if (this.isBurning && ashBurn > 0){
-					--ashBurn;
-					++ashGrowth;
-					
-				if (ashGrowth == ashRate){
-						++ashCount;
-						this.ashGrowth = 0;
-				}
-			}
-				
-			if (this.isBurning && firepitBurnTime == 0){
-					this.isBurning = false;
-					this.coalBurn = 0;
-					this.ashBurn = 0;
-					this.coalRate = 0;
-					this.ashRate = 0;
-			}
-			
 		}
-		this.markDirty();
+			
+		if (isBurning && ashBurn > 0){
+			--ashBurn;
+			++ashGrowth;
+					
+			if (ashGrowth == ashRate){
+					++ashCount;
+					this.ashGrowth = 0;
+			}
+		}
+				
+			if (isBurning && firepitBurnTime == 0){
+					isBurning = false;
+					coalBurn = 0;
+					ashBurn = 0;
+					coalRate = 0;
+					ashRate = 0;
+			}
 	}
 
 	
@@ -129,18 +127,16 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 		{ 
 			Item item = heldItem.getItem();
 			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
-	        {
-	                this.firepitBurnTime += 300;
-	                this.coalBurn += 100;
-	                this.coalRate = 25;
-	                this.ashBurn += 100;
-	                heldItem.shrink(1);
-	        }
+		        {
+		                firepitBurnTime += 300;
+		                coalBurn += 100;
+		                coalRate = 25;
+		                ashBurn += 100;
+		                heldItem.shrink(1);
+		                markDirty();
+		        }
 		}
-			
-		
 	}
-	
 	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {

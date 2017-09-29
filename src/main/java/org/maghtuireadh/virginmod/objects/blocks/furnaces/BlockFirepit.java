@@ -7,6 +7,7 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -20,7 +21,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFirepit extends Block implements ITileEntityProvider {
+public class BlockFirepit extends Block implements ITileEntityProvider{
 	
 	Float lightLvl;
 	boolean isBurning;
@@ -56,12 +56,15 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 		     	{
 		     	     
 		        	 this.setLightLevel(lightLvl);
+		        	 Utils.getLogger().info(lightLvl);	 
 		        }
 			 }
 		     else
 		     {
 		     		this.setLightLevel(0.0F);
+		     		Utils.getLogger().info("Set Light To 0");
 		     }
+		 	Utils.getLogger().info("Why isn't this doing anything?");
 		 } 
 
 	public int quantityDropped(Random random){
@@ -111,8 +114,12 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
             }
         }
 
+	public TileEntity createNewTileEntity(World worldIn, IBlockState state) {
+		return new TileEntityFirepit();
+	}
+
 	@Override
-	public TileEntityFirepit createNewTileEntity(World worldIn, int meta) {
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityFirepit();
 	}
 
