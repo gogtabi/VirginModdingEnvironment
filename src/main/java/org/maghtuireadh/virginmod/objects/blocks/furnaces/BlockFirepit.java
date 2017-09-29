@@ -35,7 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements ITileEntityProvider {
 	
-	World worldIn;
 	Float lightLvl;
 	boolean isBurning;
 
@@ -49,7 +48,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 	}
 
  @Override
-	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	 public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 	 TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);	 
 	 
 		 if(tileentity.getBurning()) {
@@ -86,7 +85,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	tileentity.setFuelValues(heldItem);
            	return true;    
-           }
+        }
 
      }
  
