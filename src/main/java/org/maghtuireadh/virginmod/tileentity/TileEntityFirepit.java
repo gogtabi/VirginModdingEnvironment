@@ -22,15 +22,25 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-public class TileEntityFirepit extends TileEntity implements ITickable{
+public class TileEntityFirepit extends TileEntity implements ITickable, ICapabilityProvider{
 	private boolean isBurning, isStoked;
-	int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
-	float lightLvl;
-	
+	private int firepitBurnTime = 0;
+	private int fuelLvl = 0;
+	private int burnRate = 0;
+	private int coalBurn = 0;
+	private int coalCount = 0;
+	private int coalGrowth = 0;
+	private int coalRate = 0;
+	private int ashBurn = 0;
+	private int ashCount = 0;
+	private int ashGrowth = 0;
+	private int ashRate = 0;
+	float lightLvl = 0.0F;
 	private int cooldown;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 		this.cooldown = nbt.getInteger("Cooldown");
 		this.firepitBurnTime = nbt.getInteger("FPBT");
 		this.fuelLvl = nbt.getInteger("FuelLvl");
@@ -47,27 +57,25 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.lightLvl = nbt.getFloat("Light Level");
 		
-		super.readFromNBT(nbt);
 	}
 	
 	@Override 
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("Cooldown", this.cooldown);
-		nbt.setInteger("FPBT", this.firepitBurnTime);
-		nbt.setInteger("FuelLvl", this.fuelLvl);
-		nbt.setInteger("BurnRate",this.burnRate);
-		nbt.setInteger("CoalBurn", this.coalBurn);
-		nbt.setInteger("CoalCount", this.coalCount);
-		nbt.setInteger("CoalGrowth", this.coalGrowth);
-		nbt.setInteger("CoalRate", this.coalRate);
-		nbt.setInteger("AshBurn", this.ashBurn);
-		nbt.setInteger("AshCount", this.ashCount);
-		nbt.setInteger("AshGrowth", this.ashGrowth);
-		nbt.setInteger("AshRate", this.ashRate);
-		nbt.setBoolean("IsBurning", this.isBurning);
-		nbt.setBoolean("IsStoked", this.isStoked);
-		nbt.setFloat("Light Level", lightLvl);
-		
+		nbt.setInteger("Cooldown", cooldown);
+		nbt.setInteger("FPBT", firepitBurnTime);
+		nbt.setInteger("FuelLvl", fuelLvl);
+		nbt.setInteger("BurnRate", burnRate);
+		nbt.setInteger("CoalBurn",coalBurn);
+		nbt.setInteger("CoalCount",coalCount);
+		nbt.setInteger("CoalGrowth",coalGrowth);
+		nbt.setInteger("CoalRate",coalRate);
+		nbt.setInteger("AshBurn",ashBurn);
+		nbt.setInteger("AshCount",ashCount);
+		nbt.setInteger("AshGrowth",ashGrowth);
+		nbt.setInteger("AshRate",ashRate);
+		nbt.setBoolean("IsBurning",isBurning);
+		nbt.setBoolean("IsStoked",isStoked);
+		nbt.setFloat("Light Level",lightLvl);
 		return super.writeToNBT(nbt);
 	}
 	
@@ -83,14 +91,16 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 		if (firepitBurnTime>0)
 		{
 			isBurning=true;
+			markDirty();
+			Utils.getLogger().info(firepitBurnTime + " update1");
 			Utils.getLogger().info("It's Burning");
 		}
 		
 		if (isBurning)
 		{
-				
 				--firepitBurnTime;
-				lightLvl=1.0f;
+				lightLvl=1.0F;
+				markDirty();
 		}	
 		if (isBurning && coalBurn > 0){
 			--coalBurn;
@@ -98,16 +108,19 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 			if (coalGrowth == coalRate){
 				++coalCount;
 				coalGrowth = 0;
+				markDirty();
 			}
 		}
 			
 		if (isBurning && ashBurn > 0){
 			--ashBurn;
 			++ashGrowth;
+			markDirty();
 					
 			if (ashGrowth == ashRate){
 					++ashCount;
 					this.ashGrowth = 0;
+					markDirty();
 			}
 		}
 				
@@ -117,7 +130,10 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 					ashBurn = 0;
 					coalRate = 0;
 					ashRate = 0;
+					markDirty();
 			}
+			markDirty();
+			Utils.getLogger().info(firepitBurnTime + "update");
 	}
 
 	
@@ -134,6 +150,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable{
 		                ashBurn += 100;
 		                heldItem.shrink(1);
 		                markDirty();
+		                Utils.getLogger().info(firepitBurnTime + "setFuelValues");
 		        }
 		}
 	}

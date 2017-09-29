@@ -47,7 +47,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider{
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
- @Override
+
 	 public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 	 TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);	 
 	 
@@ -78,20 +78,15 @@ public class BlockFirepit extends Block implements ITileEntityProvider{
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 	 	 
-        if (worldIn.isRemote)
-        {
-            return true;
-        }
-        else
-        {
+        if (!worldIn.isRemote){
             TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	tileentity.setFuelValues(heldItem);
-           	return true;    
+           	return true;
         }
-
+        	return true;
      }
- 
+
 	@SideOnly(Side.CLIENT)
     @SuppressWarnings("incomplete-switch")
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)

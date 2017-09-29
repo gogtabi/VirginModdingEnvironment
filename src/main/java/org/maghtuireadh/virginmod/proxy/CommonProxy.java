@@ -11,6 +11,6 @@ public class CommonProxy
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	public void registerVariantRenderer(Item item, int meta, String filename, String id) {}
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityFirepit.class, Reference.MODID + ":block_firepit");
+		GameRegistry.registerTileEntity(TileEntityFirepit.class, Reference.MODID + ":TileEntityFirepit");
 	}
 }
