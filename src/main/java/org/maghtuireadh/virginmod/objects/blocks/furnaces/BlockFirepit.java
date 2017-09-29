@@ -112,7 +112,8 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
             }
         }
 
-	public TileEntity createNewTileEntity(World worldIn, IBlockState state) {
+	@Override
+	public TileEntityFirepit createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityFirepit();
 	}
 
