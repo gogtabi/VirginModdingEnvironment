@@ -1,6 +1,6 @@
 package org.maghtuireadh.virginmod.proxy;
 
-import org.maghtuireadh.virginmod.tileentity.TileEntityFirePit;
+import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.item.Item;
@@ -11,6 +11,6 @@ public class CommonProxy
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	public void registerVariantRenderer(Item item, int meta, String filename, String id) {}
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityFirePit.class, Reference.MODID + ": block_breaker");
+		GameRegistry.registerTileEntity(TileEntityFirepit.class, Reference.MODID + ":block_firepit");
 	}
 }

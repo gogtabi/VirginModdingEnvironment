@@ -5,7 +5,7 @@ import java.util.Random;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.tileentity.TileEntityFirePit;
+import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.Block;
@@ -48,21 +48,22 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
-	 @Override
+ @Override
 	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-	 TileEntityFirePit tileentity = (TileEntityFirePit) worldIn.getTileEntity(pos);
+	 TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);	 
 	 
-	 if(tileentity.getBurning()) {
-     	if(this.isBurning && lightLvl!=tileentity.getLight())
-     	{
-        	 this.setLightLevel(lightLvl);
-        }
-	 }
-     else
-     {
-     		this.setLightLevel(0.0F);
-     }
-	 }
+		 if(tileentity.getBurning()) {
+		     	if(this.isBurning && lightLvl!=tileentity.getLight())
+		     	{
+		     	     
+		        	 this.setLightLevel(lightLvl);
+		        }
+			 }
+		     else
+		     {
+		     		this.setLightLevel(0.0F);
+		     }
+		 } 
 
 	public int quantityDropped(Random random){
 			 return 6;
@@ -74,13 +75,14 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+	 	 
         if (worldIn.isRemote)
         {
             return true;
         }
         else
         {
-            TileEntityFirePit tileentity = (TileEntityFirePit) worldIn.getTileEntity(pos);
+            TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	tileentity.setFuelValues(heldItem);
            	return true;    
@@ -110,9 +112,8 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
             }
         }
 
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityFirePit();
+	public TileEntity createNewTileEntity(World worldIn, IBlockState state) {
+		return new TileEntityFirepit();
 	}
 
 }	

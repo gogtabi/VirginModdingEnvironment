@@ -21,16 +21,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-public class TileEntityFirePit extends TileEntity implements ITickable{
+public class TileEntityFirepit extends TileEntity implements ITickable{
 	private boolean isBurning, isStoked;
 	int firepitBurnTime, fuelLvl, burnRate, coalBurn, coalCount, coalGrowth, coalRate, ashBurn, ashCount, ashGrowth, ashRate;
 	float lightLvl;
 	
 	private int cooldown;
-	
-	public TileEntityFirePit() {
-		
-	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

@@ -1,57 +1,17 @@
-[19:08:03] [main/INFO]: Setting user: Player332
-[19:08:06] [main/WARN]: Skipping bad option: lastServer:
-[19:08:06] [main/INFO]: LWJGL Version: 2.9.4
-[19:08:09] [main/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Virgin Mod
-[19:08:11] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:08:11] [Thread-5/INFO]: Initializing LWJGL OpenAL
-[19:08:11] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:08:11] [Thread-5/INFO]: OpenAL initialized.
-[19:08:11] [Sound Library Loader/INFO]: Sound engine started
-[19:08:14] [main/WARN]: Texture vme:textures/custom/coal_bed.png with size 24x24 will have visual artifacts at mip level 4, it can only support level 3. Please report to the mod author that the texture should be some multiple of 16x16.
-[19:08:14] [main/INFO]: Created: 512x512 textures-atlas
-[19:08:16] [main/WARN]: Skipping bad option: lastServer:
-[19:08:16] [main/INFO]: Narrator library for x64 successfully loaded
-[19:08:17] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
-[19:08:20] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
-[19:08:20] [Server thread/INFO]: Generating keypair
-[19:08:21] [Server thread/INFO]: Loaded 488 advancements
-[19:08:21] [Server thread/INFO]: Preparing start region for level 0
-[19:08:22] [Server thread/INFO]: Preparing spawn area: 59%
-[19:08:23] [Server thread/INFO]: Changing view distance to 12, from 10
-[19:08:24] [Server thread/INFO]: Player332[local:E:b33669af] logged in with entity id 289 at (405.8848028844437, 81.0, 77.72976969932695)
-[19:08:24] [Server thread/INFO]: Player332 joined the game
-[19:08:25] [Server thread/INFO]: Saving and pausing game...
-[19:08:25] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
-[19:08:25] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@4640f9e9[id=d0f5fb0c-30f8-3708-84d1-e619aef4d8f4,name=Player332,properties={},legacy=false]
-com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
-	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) [guava-21.0.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) [guava-21.0.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
-	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3172) [Minecraft.class:?]
-	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_144]
-	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_144]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_144]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_144]
-	at java.lang.Thread.run(Unknown Source) [?:1.8.0_144]
-[19:08:25] [main/INFO]: Loaded 20 advancements
-[19:08:25] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
-[19:08:25] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
-[19:09:05] [Server thread/INFO]: Player332 has made the advancement [Monster Hunter]
-[19:09:05] [main/INFO]: [CHAT] Player332 has made the advancement [Monster Hunter]
-[19:09:05] [main/INFO]: Loaded 30 advancements
-[19:09:17] [main/INFO]: Loaded 30 advancements
-[19:09:28] [Server thread/INFO]: Saving and pausing game...
-[19:09:28] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
-[19:09:29] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
-[19:09:29] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[09:36:41] [main/INFO]: Setting user: Player890
+[09:36:45] [main/WARN]: Skipping bad option: lastServer:
+[09:36:45] [main/INFO]: LWJGL Version: 2.9.4
+[09:36:52] [main/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Virgin Mod
+[09:36:54] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[09:36:55] [Thread-5/INFO]: Initializing LWJGL OpenAL
+[09:36:55] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[09:36:55] [Thread-5/INFO]: OpenAL initialized.
+[09:36:55] [Sound Library Loader/INFO]: Sound engine started
+[09:36:59] [main/WARN]: Texture vme:textures/custom/coal_bed.png with size 24x24 will have visual artifacts at mip level 4, it can only support level 3. Please report to the mod author that the texture should be some multiple of 16x16.
+[09:36:59] [main/INFO]: Created: 512x512 textures-atlas
+[09:37:01] [main/WARN]: Skipping bad option: lastServer:
+[09:37:02] [main/INFO]: Narrator library for x64 successfully loaded
+[09:37:03] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[09:41:35] [main/INFO]: Stopping!
+[09:41:35] [main/INFO]: SoundSystem shutting down...
+[09:41:35] [main/WARN]: Author: Paul Lamb, www.paulscode.com
