@@ -1,6 +1,5 @@
 package org.maghtuireadh.virginmod.tileentity;
 
-
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
@@ -16,9 +15,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
-public class TileEntityFirepit extends TileEntity implements ITickable, ICapabilityProvider{
-	private boolean isBurning, isStoked;
+public class TileEntityFirepit extends TileEntity implements ITickable {
+	private boolean Burning, isStoked;
 	private int firepitBurnTime = 0;
 	private int fuelLvl = 0;
 	private int burnRate = 0;
@@ -32,8 +30,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 	private int ashRate = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
-	private IBlockState blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
-	private IBlockState blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
+	
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -50,131 +47,137 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 		this.ashCount = nbt.getInteger("AshCount");
 		this.ashGrowth = nbt.getInteger("AshGrowth");
 		this.ashRate = nbt.getInteger("AshRate");
-		this.isBurning = nbt.getBoolean("IsBurning");
+		this.Burning = nbt.getBoolean("Burning");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.lightLvl = nbt.getFloat("Light Level");
-		
+
 	}
-	
-	@Override 
+
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("Cooldown", cooldown);
 		nbt.setInteger("FPBT", firepitBurnTime);
 		nbt.setInteger("FuelLvl", fuelLvl);
 		nbt.setInteger("BurnRate", burnRate);
-		nbt.setInteger("CoalBurn",coalBurn);
-		nbt.setInteger("CoalCount",coalCount);
-		nbt.setInteger("CoalGrowth",coalGrowth);
-		nbt.setInteger("CoalRate",coalRate);
-		nbt.setInteger("AshBurn",ashBurn);
-		nbt.setInteger("AshCount",ashCount);
-		nbt.setInteger("AshGrowth",ashGrowth);
-		nbt.setInteger("AshRate",ashRate);
-		nbt.setBoolean("IsBurning",isBurning);
-		nbt.setBoolean("IsStoked",isStoked);
-		nbt.setFloat("Light Level",lightLvl);
+		nbt.setInteger("CoalBurn", coalBurn);
+		nbt.setInteger("CoalCount", coalCount);
+		nbt.setInteger("CoalGrowth", coalGrowth);
+		nbt.setInteger("CoalRate", coalRate);
+		nbt.setInteger("AshBurn", ashBurn);
+		nbt.setInteger("AshCount", ashCount);
+		nbt.setInteger("AshGrowth", ashGrowth);
+		nbt.setInteger("AshRate", ashRate);
+		nbt.setBoolean("Burning", Burning);
+		nbt.setBoolean("IsStoked", isStoked);
+		nbt.setFloat("Light Level", lightLvl);
 		return super.writeToNBT(nbt);
 	}
-	
-	public float getLight (){
+
+	public float getLight() {
 		return lightLvl;
 	}
-	
+
 	public boolean getBurning() {
-		return isBurning;
+		return Burning;
 	}
-	
+
 	public void setBurning() {
-		if (this.world != null) { 
-			if (!this.world.isRemote) {
-				if (blockStateLit != this.world.getBlockState(pos)) {
-					this.world.setBlockState(pos, blockStateLit);
-	}}}}
-	public void resetBurning() {
-		//IBlockState BS1 = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
-		//if (BS1 != this.world.getBlockState(pos))
-		//this.world.setBlockState(pos, BS1);
+		if (this.world != null && !this.world.isRemote) { /*
+															 * if (blockStateLit != this.world.getBlockState(pos)) {
+															 */
+			this.blockType = this.getBlockType();
+
+			if (this.blockType instanceof BlockFirepit) {
+				((BlockFirepit) this.blockType).Burning(Burning, lightLvl);
+
+			}
+		}
 	}
-	
-	public void update(){
-		
-		if (firepitBurnTime>0)
-		{
-			isBurning=true;
-			this.setBurning();
+
+	public void resetBurning() {
+		// IBlockState BS1 =
+		// this.world.getBlockState(pos).withProperty(BlockFirepit.LIT,
+		// Boolean.valueOf(false));
+		// if (BS1 != this.world.getBlockState(pos))
+		// this.world.setBlockState(pos, BS1);
+	}
+
+	public void update() {
+
+		if (firepitBurnTime > 0) {
+			Burning = true;
 			markDirty();
-			Utils.getLogger().info(firepitBurnTime + " update1");
+			Utils.getLogger()
+					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
 			Utils.getLogger().info("It's Burning");
 		}
-		else
-		{
-			isBurning=false;
-			this.resetBurning();
+		/*
+		 * else { Burning=false; this.resetBurning(); }
+		 */
+
+		if (Burning) {
+			--firepitBurnTime;
+			if (firepitBurnTime < 500) {
+				lightLvl = 0.6F;
+			} else {
+				lightLvl = 1.0F;
+			}
+			markDirty();
 		}
-		
-		if (isBurning)
-		{
-				--firepitBurnTime;
-				lightLvl=1.0F;
-				if(firepitBurnTime<500) {
-					lightLvl=0.5F;
-				}
-				markDirty();
-		}	
-		if (isBurning && coalBurn > 0){
+		if (Burning && coalBurn > 0) {
 			--coalBurn;
 			++coalGrowth;
-			if (coalGrowth == coalRate){
+			if (coalGrowth == coalRate) {
 				++coalCount;
 				coalGrowth = 0;
 				markDirty();
 			}
 		}
-			
-		if (isBurning && ashBurn > 0){
+
+		if (Burning && ashBurn > 0) {
 			--ashBurn;
 			++ashGrowth;
 			markDirty();
-					
-			if (ashGrowth == ashRate){
-					++ashCount;
-					this.ashGrowth = 0;
-					markDirty();
+
+			if (ashGrowth == ashRate) {
+				++ashCount;
+				this.ashGrowth = 0;
+				markDirty();
 			}
 		}
-				
-			if (isBurning && firepitBurnTime == 0){
-					isBurning = false;
-					coalBurn = 0;
-					ashBurn = 0;
-					coalRate = 0;
-					ashRate = 0;
-					markDirty();
-			}
+
+		if (Burning && firepitBurnTime == 0) {
+			Burning = false;
+			coalBurn = 0;
+			ashBurn = 0;
+			coalRate = 0;
+			ashRate = 0;
+			lightLvl = 0;
 			markDirty();
-			this.world.getBlockState(pos).getBlock().setLightLevel(lightLvl);
-			Utils.getLogger().info(firepitBurnTime + "update");
+			Utils.getLogger()
+					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
+			Utils.getLogger().info("It's Not Burning");
+		}
+		markDirty();
+		this.setBurning();
 	}
 
-	
 	public void setFuelValues(ItemStack heldItem) {
-		if (heldItem.isEmpty()){}
-		else
-		{ 
+		if (heldItem.isEmpty()) {
+		} else {
 			Item item = heldItem.getItem();
-			if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
-		        {
-		                firepitBurnTime += 300;
-		                coalBurn += 100;
-		                coalRate = 25;
-		                ashBurn += 100;
-		                heldItem.shrink(1);
-		                markDirty();
-		                Utils.getLogger().info(firepitBurnTime + "setFuelValues");
-		        }
+			if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
+				firepitBurnTime += 300;
+				coalBurn += 100;
+				coalRate = 25;
+				ashBurn += 100;
+				heldItem.shrink(1);
+				markDirty();
+				Utils.getLogger().info(firepitBurnTime + "setFuelValues");
+			}
 		}
 	}
-	
+
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();

@@ -11,6 +11,7 @@ import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -26,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -39,7 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 
-public class BlockFirepit extends Block implements ITileEntityProvider {
+public class BlockFirepit extends BlockContainer implements ITileEntityProvider {
 
 	
 	public static final PropertyBool LIT = PropertyBool.create("lit");
@@ -50,7 +52,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 
 	Float lightLvl;
 
-	boolean isBurning;
+	boolean Burning;
 
 
 
@@ -75,14 +77,17 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 	
 	
 
-
 	 @Override
 
 	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 
 	 }
 	 
-	
+	public void Burning(boolean bool, float light)
+	{
+		this.Burning = bool;
+		this.setLightLevel(light);
+	}
 
 	public int quantityDropped(Random random){
 
@@ -140,7 +145,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 
     {
 
-        if (this.isBurning)
+        if (this.Burning)
 
         {
 
@@ -187,7 +192,7 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState2;
+		return this.blockState1;
 	}
 	
 	/**
