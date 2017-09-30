@@ -9,12 +9,16 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
-import org.maghtuireadh.virginmod.util.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -28,6 +32,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,7 +42,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockFirepit extends Block implements ITileEntityProvider {
 
 	
-
+	public static final PropertyBool LIT = PropertyBool.create("lit");
+	private IBlockState blockState1 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
+	private IBlockState blockState2 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(true));
+	
 	World worldIn;
 
 	Float lightLvl;
@@ -52,45 +60,29 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 	this.setUnlocalizedName(unlocalizedName);
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	setCreativeTab(Main.virginmodtab);
-	BlockInit.BLOCKS.add(this);
-	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-	utils.getLogger().info("msg");
+	this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false)));
+	BlockInit.BLOCKS.add(blockState1.getBlock());
+	//BlockInit.BLOCKS.add(blockState2.getBlock());
+	ItemInit.ITEMS.add(new ItemBlock(blockState1.getBlock()).setRegistryName(this.getRegistryName()));
+	//ItemInit.ITEMS.add(new ItemBlock(blockState2.getBlock()).setRegistryName(this.getRegistryName()));
 	
 	}
 
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {LIT});
+	}
+	
+	
 
 
 	 @Override
 
 	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 
-	 TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);
-
+	 }
 	 
-
-	 if(tileentity.getBurning()) {
-
-     	if(this.isBurning && lightLvl!=tileentity.getLight())
-
-     	{
-
-        	 this.setLightLevel(lightLvl);
-
-        }
-
-	 }
-
-     else
-
-     {
-
-     		this.setLightLevel(0.0F);
-
-     }
-
-	 }
-
-
+	
 
 	public int quantityDropped(Random random){
 
@@ -192,6 +184,58 @@ public class BlockFirepit extends Block implements ITileEntityProvider {
 
 	}
 
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.blockState2;
+	}
+	
+	/**
+	 * Returns the correct meta for the block
+	 * I recommend also saving the EnumFacing to the meta but I haven't
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		if(state == blockState2) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	}
+	
+	/**
+	 * Gets the block state from the meta
+	 */
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		if(meta==0) {
+		return blockState2;
+		} //Returns the correct state
+		else {
+			return blockState1;
+		}
+	
+	
+	}
+		
+	
+	/**
+	 * Makes sure that when you pick block you get the right version of the block
+	 */
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+			EntityPlayer player) {
+		return new ItemStack(Item.getItemFromBlock(this), 1, (int) (getMetaFromState(world.getBlockState(pos))));
+	}
+	
+	/**
+	 * Makes the block drop the right version of the block from meta data
+	 */
+	@Override
+	public int damageDropped(IBlockState state) {
+		return (int) (getMetaFromState(state));
+	}
 
 
 }	

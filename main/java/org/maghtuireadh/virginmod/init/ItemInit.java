@@ -36,7 +36,7 @@ public class ItemInit {
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);
-	public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
+	//spublic static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
 	
 	//Armor
 	public static final Item HELMET_COPPER = new ArmorBase("helmet_copper", ARMOR_COPPER, 1, EntityEquipmentSlot.HEAD);

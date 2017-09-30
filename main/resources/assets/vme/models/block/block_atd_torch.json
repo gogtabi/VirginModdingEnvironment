@@ -1,7 +1,5 @@
 {
-	"parent": "block/torch",
-	"textures": {
-		"all": "vme:blocks/atd_torch_on"
-	}
-	
-}
+    "parent": "block/torch",
+    "textures": {
+        "torch": "vme:blocks/atd_torch_on"
+    }
