@@ -1,9 +1,7 @@
 {
     "variants": {
-        "facing=up": { "model": "vme:block_atd_torch" },
-        "facing=east": { "model": "vme:block_atd_torch_wall" },
-        "facing=south": { "model": "vme:block_atd_torch_wall", "y": 90 },
-        "facing=west": { "model": "vme:block_atd_torch_wall", "y": 180 },
-        "facing=north": { "model": "vme:block_atd_torch_wall", "y": 270 }
+        
+        "normal": { "model": "vme:block/block_atd_torch" },
+      
     }
 }

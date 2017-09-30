@@ -7,18 +7,13 @@ import org.maghtuireadh.virginmod.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
@@ -37,6 +32,8 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 	private int ashRate = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
+	private IBlockState blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
+	private IBlockState blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -87,19 +84,41 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 		return isBurning;
 	}
 	
+	public void setBurning() {
+		if (this.world != null) { 
+			if (!this.world.isRemote) {
+				if (blockStateLit != this.world.getBlockState(pos)) {
+					this.world.setBlockState(pos, blockStateLit);
+	}}}}
+	public void resetBurning() {
+		//IBlockState BS1 = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
+		//if (BS1 != this.world.getBlockState(pos))
+		//this.world.setBlockState(pos, BS1);
+	}
+	
 	public void update(){
+		
 		if (firepitBurnTime>0)
 		{
 			isBurning=true;
+			this.setBurning();
 			markDirty();
 			Utils.getLogger().info(firepitBurnTime + " update1");
 			Utils.getLogger().info("It's Burning");
+		}
+		else
+		{
+			isBurning=false;
+			this.resetBurning();
 		}
 		
 		if (isBurning)
 		{
 				--firepitBurnTime;
 				lightLvl=1.0F;
+				if(firepitBurnTime<500) {
+					lightLvl=0.5F;
+				}
 				markDirty();
 		}	
 		if (isBurning && coalBurn > 0){
@@ -133,6 +152,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 					markDirty();
 			}
 			markDirty();
+			this.world.getBlockState(pos).getBlock().setLightLevel(lightLvl);
 			Utils.getLogger().info(firepitBurnTime + "update");
 	}
 

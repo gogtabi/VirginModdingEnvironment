@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockAtdTorch extends BlockTorch implements IHasModel {
+public class BlockATDTorch extends BlockTorch implements IHasModel {
 	
 	public static int burntime = 40;
 	
@@ -28,7 +28,7 @@ public class BlockAtdTorch extends BlockTorch implements IHasModel {
 	 * Default constructor which sets the hardness and resistance
 	 * @param unlocalizedName The unlocalized name
 	 */
-	public BlockAtdTorch(String name) {
+	public BlockATDTorch(String name) {
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setLightLevel(1.0F);
@@ -40,7 +40,7 @@ public class BlockAtdTorch extends BlockTorch implements IHasModel {
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
-	@Override
+	/*@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		world.scheduleBlockUpdate(pos, this , burntime, 0);
 		if (world.isRainingAt(pos)) {
@@ -50,8 +50,8 @@ public class BlockAtdTorch extends BlockTorch implements IHasModel {
 		}
 		 
 	}
-	
-
+	*/
+/*
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int fortune) {
@@ -64,18 +64,18 @@ public class BlockAtdTorch extends BlockTorch implements IHasModel {
 		
 		world.setBlockToAir(pos);
 	}
-
+*/
 	@Override
 	public void registerModels() {
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+		//Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 		
 	}
 
-	@Override
+	/*@Override
 	 public int quantityDropped(Random random)
     {
         return 0;
-    }
+    }*/
 	
 	
 	
