@@ -2,10 +2,9 @@ package org.maghtuireadh.virginmod.objects.items;
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.proxy.ClientProxy;
+import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ItemBase extends Item implements IHasModel
@@ -23,5 +22,8 @@ public class ItemBase extends Item implements IHasModel
 	public void registerModels()
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
+		
+		}
 	}
-}
+
+

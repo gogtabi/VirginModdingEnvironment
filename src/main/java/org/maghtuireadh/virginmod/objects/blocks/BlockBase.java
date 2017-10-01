@@ -38,6 +38,17 @@ public class BlockBase extends Block implements IHasModel{
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
+	public BlockBase(String name, Block block, Material material, ItemBlock itemBlock)
+	{
+		super(material);
+		setUnlocalizedName(name);
+		setRegistryName(name);
+		setCreativeTab(Main.virginmodtab);
+		
+		BlockInit.BLOCKS.add(this);
+		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+	}
+	
 	public BlockBase(String name, Material material, float hardness, String tool, int harvest, float resistance) {
 		super(material);
 		this.setHardness(hardness);

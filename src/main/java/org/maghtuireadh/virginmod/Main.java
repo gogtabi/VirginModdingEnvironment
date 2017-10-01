@@ -27,15 +27,16 @@ public class Main {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+
+	}
+	
+	@EventHandler
+	public static void Init(FMLInitializationEvent event) {
 		proxy.registerTileEntities();
+
 	}
 	
 	@EventHandler
-	public static void preInit(FMLInitializationEvent event) {
-	//	GameRegistry.registerTileEntity(TileEntityFirepit.class, Reference.MODID + "TileEntityFirepit");
-	}
-	
-	@EventHandler
-	public static void preInit(FMLPostInitializationEvent event) {}
+	public static void postInit(FMLPostInitializationEvent event) {}
 	
 }

@@ -3,15 +3,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.objects.armor.ArmorBase.ArmorBase;
 import org.maghtuireadh.virginmod.objects.items.ItemBase;
-import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
 import org.maghtuireadh.virginmod.objects.tools.ToolAxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolHoe;
 import org.maghtuireadh.virginmod.objects.tools.ToolPickaxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolShovel;
 import org.maghtuireadh.virginmod.objects.tools.ToolSword;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
+import org.maghtuireadh.virginmod.Main;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -21,22 +23,23 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemInit {
+
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	//Material
 	public static final ToolMaterial TOOL_COPPER = EnumHelper.addToolMaterial("tool_copper", 2, 180, 5.0F, 1.5F, 5);
 	public static final ArmorMaterial ARMOR_COPPER = EnumHelper.addArmorMaterial("armor_copper", Reference.MODID + ":copper", 13, new int[]{1, 4, 5, 2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
-			
 	
 	//Items
 	public static final Item INGOT_COPPER = new ItemBase("ingot_copper");
-
+	
+	
 	//Tools
 	public static final Item AXE_COPPER = new ToolAxe("axe_copper", TOOL_COPPER);
 	public static final Item HOE_COPPER = new ToolHoe("hoe_copper", TOOL_COPPER);
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);
-	//spublic static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
+	//public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
 	
 	//Armor
 	public static final Item HELMET_COPPER = new ArmorBase("helmet_copper", ARMOR_COPPER, 1, EntityEquipmentSlot.HEAD);
