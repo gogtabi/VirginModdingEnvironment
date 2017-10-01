@@ -93,7 +93,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			markDirty();
 		}
 	}
-
+	
 	public void resetBurning() {
 		// IBlockState BS1 =
 		// this.world.getBlockState(pos).withProperty(BlockFirepit.LIT,
@@ -101,6 +101,8 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		// if (BS1 != this.world.getBlockState(pos))
 		// this.world.setBlockState(pos, BS1);
 	}
+	
+
 
 	public void update() {
 

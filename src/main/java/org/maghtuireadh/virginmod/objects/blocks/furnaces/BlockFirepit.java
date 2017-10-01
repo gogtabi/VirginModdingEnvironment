@@ -1,7 +1,5 @@
 package org.maghtuireadh.virginmod.objects.blocks.furnaces;
 
-
-
 import java.util.Random;
 
 import org.maghtuireadh.virginmod.Main;
@@ -74,6 +72,16 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	}
 	
 	@Override
+	public int getLightValue(IBlockState state) {
+		;			if(state == blockState2) {
+			return 15;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
 		// TODO Auto-generated method stub
@@ -99,21 +107,23 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 
 	 }
-	 
+
 	public void setBurning(boolean bool, float light)
 	{
 		this.Burning = bool;
-		this.setLightLevel(light);
 	}
 
-	public static void setState(boolean isLit, World worldIn, BlockPos pos) {
+	public void setState(boolean isLit, World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		
-		if(isLit)
+		if(isLit) {
 			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, true));
-		if(!isLit)
+		}
+		if(!isLit) {
 			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, false));
+			this.getLightValue(state);
+		}
 		
 		if(tileentity != null) {
 			tileentity.validate();

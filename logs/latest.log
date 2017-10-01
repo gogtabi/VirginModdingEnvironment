@@ -1,31 +1,28 @@
-[13:24:08] [main/INFO]: Setting user: Player18
-[13:24:11] [main/WARN]: Skipping bad option: lastServer:
-[13:24:11] [main/INFO]: LWJGL Version: 2.9.4
-[13:24:14] [main/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Virgin Modding Environment
-[13:24:16] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[13:24:16] [Thread-5/INFO]: Initializing LWJGL OpenAL
-[13:24:16] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[13:24:16] [Thread-5/INFO]: OpenAL initialized.
-[13:24:17] [Sound Library Loader/INFO]: Sound engine started
-[13:24:19] [main/WARN]: Texture vme:textures/custom/coal_bed.png with size 24x24 will have visual artifacts at mip level 4, it can only support level 3. Please report to the mod author that the texture should be some multiple of 16x16.
-[13:24:20] [main/INFO]: Created: 512x512 textures-atlas
-[13:24:22] [main/WARN]: Skipping bad option: lastServer:
-[13:24:22] [main/INFO]: Narrator library for x64 successfully loaded
-[13:24:23] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
-[13:24:26] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
-[13:24:26] [Server thread/INFO]: Generating keypair
-[13:24:26] [Server thread/INFO]: Loaded 488 advancements
-[13:24:26] [Server thread/INFO]: Preparing start region for level 0
-[13:24:27] [Server thread/INFO]: Preparing spawn area: 73%
-[13:24:28] [Server thread/INFO]: Changing view distance to 12, from 10
-[13:24:29] [Server thread/INFO]: Player18[local:E:a0740b3d] logged in with entity id 1 at (-255.40103226176518, 83.0, 364.8298005627652)
-[13:24:29] [Server thread/INFO]: Player18 joined the game
-[13:24:30] [Server thread/INFO]: Saving and pausing game...
-[13:24:30] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
-[13:24:30] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
-[13:24:30] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
-[13:24:30] [main/INFO]: Loaded 2 advancements
-[13:24:30] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@7a84aaa8[id=02006724-8599-3350-ba13-0c0625a51a5e,name=Player18,properties={},legacy=false]
+[13:55:38] [main/INFO]: Setting user: Player328
+[13:55:42] [main/WARN]: Skipping bad option: lastServer:
+[13:55:42] [main/INFO]: LWJGL Version: 2.9.4
+[13:55:45] [main/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Virgin Modding Environment
+[13:55:47] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[13:55:47] [Thread-5/INFO]: Initializing LWJGL OpenAL
+[13:55:47] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[13:55:47] [Thread-5/INFO]: OpenAL initialized.
+[13:55:48] [Sound Library Loader/INFO]: Sound engine started
+[13:55:50] [main/WARN]: Texture vme:textures/custom/coal_bed.png with size 24x24 will have visual artifacts at mip level 4, it can only support level 3. Please report to the mod author that the texture should be some multiple of 16x16.
+[13:55:51] [main/INFO]: Created: 512x512 textures-atlas
+[13:55:53] [main/WARN]: Skipping bad option: lastServer:
+[13:55:53] [main/INFO]: Narrator library for x64 successfully loaded
+[13:55:54] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[13:55:56] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
+[13:55:56] [Server thread/INFO]: Generating keypair
+[13:55:57] [Server thread/INFO]: Loaded 488 advancements
+[13:55:57] [Server thread/INFO]: Preparing start region for level 0
+[13:55:58] [Server thread/INFO]: Preparing spawn area: 71%
+[13:55:58] [Server thread/INFO]: Changing view distance to 12, from 10
+[13:55:59] [Server thread/INFO]: Player328[local:E:6078ac93] logged in with entity id 1 at (-252.5652290370186, 82.0, 362.18997003494945)
+[13:55:59] [Server thread/INFO]: Player328 joined the game
+[13:56:00] [Server thread/INFO]: Saving and pausing game...
+[13:56:00] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[13:56:00] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@424b11f1[id=e5a660b6-9d51-36ee-858e-f73e02a3f36f,name=Player328,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
@@ -47,16 +44,49 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_144]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_144]
 	at java.lang.Thread.run(Unknown Source) [?:1.8.0_144]
-[13:26:11] [Server thread/INFO]: Saving and pausing game...
-[13:26:11] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
-[13:26:12] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
-[13:26:12] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
-[13:26:13] [Server thread/INFO]: Stopping server
-[13:26:13] [Server thread/INFO]: Saving players
-[13:26:13] [Server thread/INFO]: Player18 lost connection: Disconnected
-[13:26:13] [Server thread/INFO]: Player18 left the game
-[13:26:13] [Server thread/INFO]: Stopping singleplayer server as player logged out
-[13:26:13] [Server thread/INFO]: Saving worlds
-[13:26:13] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
-[13:26:13] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
-[13:26:13] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[13:56:00] [main/INFO]: Loaded 2 advancements
+[13:56:00] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[13:56:00] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[13:58:06] [Server thread/INFO]: Saving and pausing game...
+[13:58:06] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[13:58:06] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[13:58:06] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[13:58:07] [Server thread/INFO]: Stopping server
+[13:58:07] [Server thread/INFO]: Saving players
+[13:58:07] [Server thread/INFO]: Player328 lost connection: Disconnected
+[13:58:07] [Server thread/INFO]: Player328 left the game
+[13:58:07] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[13:58:07] [Server thread/INFO]: Saving worlds
+[13:58:07] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[13:58:07] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[13:58:07] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[14:01:59] [Server thread/INFO]: Starting integrated minecraft server version 1.12.1
+[14:01:59] [Server thread/INFO]: Generating keypair
+[14:01:59] [Server thread/INFO]: Loaded 488 advancements
+[14:01:59] [Server thread/INFO]: Preparing start region for level 0
+[14:02:00] [Server thread/INFO]: Changing view distance to 12, from 10
+[14:02:00] [Server thread/INFO]: Player328[local:E:8821e9eb] logged in with entity id 1401 at (-254.9112778750852, 82.0, 361.3358812911758)
+[14:02:00] [Server thread/INFO]: Player328 joined the game
+[14:02:01] [Server thread/INFO]: Saving and pausing game...
+[14:02:01] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[14:02:01] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[14:02:01] [main/INFO]: Loaded 2 advancements
+[14:02:01] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[14:05:46] [Server thread/INFO]: [Player328: Set the time to 16000]
+[14:05:46] [main/INFO]: [CHAT] Set the time to 16000
+[14:06:14] [Server thread/INFO]: Saving and pausing game...
+[14:06:14] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[14:06:14] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[14:06:14] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[14:06:15] [Server thread/INFO]: Stopping server
+[14:06:15] [Server thread/INFO]: Saving players
+[14:06:15] [Server thread/INFO]: Player328 lost connection: Disconnected
+[14:06:15] [Server thread/INFO]: Player328 left the game
+[14:06:15] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[14:06:15] [Server thread/INFO]: Saving worlds
+[14:06:15] [Server thread/INFO]: Saving chunks for level 'New World'/overworld
+[14:06:15] [Server thread/INFO]: Saving chunks for level 'New World'/the_nether
+[14:06:15] [Server thread/INFO]: Saving chunks for level 'New World'/the_end
+[14:06:17] [main/INFO]: Stopping!
+[14:06:17] [main/INFO]: SoundSystem shutting down...
+[14:06:17] [main/WARN]: Author: Paul Lamb, www.paulscode.com
