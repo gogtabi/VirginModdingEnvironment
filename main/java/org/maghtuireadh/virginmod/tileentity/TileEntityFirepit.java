@@ -1,6 +1,7 @@
 package org.maghtuireadh.virginmod.tileentity;
 
 
+import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
@@ -17,7 +18,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-public class TileEntityFirepit extends TileEntity implements ITickable, ICapabilityProvider{
+public class TileEntityFirepit extends TileEntity implements ITickable{
 	private boolean isBurning, isStoked;
 	private int firepitBurnTime = 0;
 	private int fuelLvl = 0;
@@ -32,9 +33,14 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 	private int ashRate = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
-	private IBlockState blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
-	private IBlockState blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
-
+	private IBlockState blockStateLit, blockStateUnlit;
+	
+	public void TileEntityFirpit() {
+		
+		blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
+		blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
@@ -85,20 +91,21 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 	}
 	
 	public void setBurning() {
-		if (this.world != null) { 
-			if (!this.world.isRemote) {
-				if (blockStateLit != this.world.getBlockState(pos)) {
-					this.world.setBlockState(pos, blockStateLit);
-	}}}}
+		//if (this.world != null) { 
+		//	if (!this.world.isRemote) {
+		//		if (blockStateLit != this.world.getBlockState(pos)) {
+					//this.world.setBlockState(pos, blockStateLit, 1);
+					world.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(BlockFirepit.LIT, true));
+	//}}}
+		}
 	public void resetBurning() {
-		//IBlockState BS1 = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
-		//if (BS1 != this.world.getBlockState(pos))
-		//this.world.setBlockState(pos, BS1);
+		//this.world.setBlockState(pos, blockStateUnlit);
+		world.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(BlockFirepit.LIT, false));
 	}
 	
 	public void update(){
 		
-		if (firepitBurnTime>0)
+		if (firepitBurnTime>0 && isBurning!=true)
 		{
 			isBurning=true;
 			this.setBurning();
@@ -106,11 +113,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 			Utils.getLogger().info(firepitBurnTime + " update1");
 			Utils.getLogger().info("It's Burning");
 		}
-		else
-		{
-			isBurning=false;
-			this.resetBurning();
-		}
+
 		
 		if (isBurning)
 		{
@@ -149,6 +152,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable, ICapabil
 					ashBurn = 0;
 					coalRate = 0;
 					ashRate = 0;
+					this.resetBurning();
 					markDirty();
 			}
 			markDirty();
