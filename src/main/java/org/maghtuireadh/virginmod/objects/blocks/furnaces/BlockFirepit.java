@@ -122,8 +122,8 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 		}
 		if(!isLit) {
 			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, false));
-			this.getLightValue(state);
 		}
+		this.getLightValue(state);
 		
 		if(tileentity != null) {
 			tileentity.validate();
