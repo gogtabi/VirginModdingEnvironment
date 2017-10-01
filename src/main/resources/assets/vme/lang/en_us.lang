@@ -1,3 +1,6 @@
 item.ingot_copper.name=Copper Ingot
 tile.block_copper.name=Copper Block
 itemGroup.virginmodtab=Virgin Mod
+
+container.TileEntityFirepit=Firepit
+tile.block_firepit.name=Firepit

@@ -1,0 +1,2583 @@
+[13:21:01] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
+[13:21:01] [main/INFO] [FML/]: Forge Mod Loader version 14.22.1.2479 for Minecraft 1.12.1 loading
+[13:21:01] [main/INFO] [FML/]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_144, running on Windows 7:amd64:6.1, installed at C:\Program Files\Java\jre1.8.0_144
+[13:21:01] [main/DEBUG] [FML/]: Java classpath at launch is:
+[13:21:01] [main/DEBUG] [FML/]:     C:\Minecraft Modding\1.12.1\VirginModdingEnvironment\bin
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\minecraft\net\minecraftforge\forge\1.12.1-14.22.1.2479\snapshot\20170624\forgeSrc-1.12.1-14.22.1.2479.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.1\f7be08ec23c21485b9b5a1cf1654c2ec8c58168d\jsr305-3.0.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\patchy\1.1\aef610b34a1be37fa851825f12372b78424d8903\patchy-1.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\oshi-project\oshi-core\1.1\9ddf7b048a8d701be231c0f4f95fd986198fd2d8\oshi-core-1.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.dev.jna\jna\4.4.0\cb208278274bf12ebdb56c61bd7407e6f774d65a\jna-4.4.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.dev.jna\platform\3.4.0\e3f70017be8100d3d6923f50b3d2ee17714e9c13\platform-3.4.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\5.0.3\cdd846cfc4e0f7eefafc02c0f5dce32b9303aa2a\jopt-simple-5.0.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.1.9.Final\97860965d6a0a6b98e7f569f3f966727b8db75\netty-all-4.1.9.Final.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\21.0\3a3d111be1be1b745edfa7d91678a12d7ed38709\guava-21.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.5\6c6c702c89bfff3cd9e80b04d668c5e190d588c6\commons-lang3-3.5.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.5\2852e6e05fbb95076fc091f6d1780f1f8fe35e0f\commons-io-2.5.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.10\4b95f4897fa13f2cd904aee711aeafc0c5295cd8\commons-codec-1.10.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.25\9834cdf236c22e84b946bba989e2f94ef5897c3c\authlib-1.5.25.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.10.17\e6a623bf93a230b503b0e3ae18c196fcd5aa3299\realms-1.10.17.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\it.unimi.dsi\fastutil\7.1.0\9835253257524c1be7ab50c057aa2d418fb72082\fastutil-7.1.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.8.1\e801d13612e22cad62a3f4f3fe7fdbe6334a8e72\log4j-api-2.8.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.8.1\4ac28ff2f1ddf05dae3043a190451e8c46b73c31\log4j-core-2.8.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\text2speech\1.10.3\48fd510879dff266c3815947de66e3d4809f8668\text2speech-1.10.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\jline\jline\2.13\2d9530d0a25daffaffda7c35037b046b627bb171\jline-2.13.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.2\3354e11e2b34215f06dab629ab88e06aca477c19\asm-debug-all-5.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.4-nightly-20150209\697517568c68e78ae0b4544145af031c81082dfe\lwjgl-2.9.4-nightly-20150209.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.4-nightly-20150209\d51a7c040a721d13efdfbd34f8b257b2df882ad0\lwjgl_util-2.9.4-nightly-20150209.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\ca.weblite\java-objc-bridge\1.0.0\6ef160c3133a78de015830860197602ca1c855d3\java-objc-bridge-1.0.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.fusesource.jansi\jansi\1.11\655c643309c2f45a56a747fda70e3fadf57e9f11\jansi-1.11.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\b84d5102b9dbfabfeb5e43c7e2828d98a7fc80e0\lwjgl-platform-2.9.4-nightly-20150209-natives-windows.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\931074f46c795d2f7b30ed6395df5715cfd7675b\lwjgl-platform-2.9.4-nightly-20150209-natives-linux.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\bcab850f8f487c3f4c4dbabde778bb82bd1a40ed\lwjgl-platform-2.9.4-nightly-20150209-natives-osx.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\minecraft\deobfedDeps\compileDummy.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\minecraft\deobfedDeps\providedDummy.jar
+[13:21:01] [main/DEBUG] [FML/]:     C:\Users\Hatter\.gradle\caches\minecraft\net\minecraftforge\forge\1.12.1-14.22.1.2479\start
+[13:21:01] [main/DEBUG] [FML/]: Java library path at launch is:
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files\Java\jre1.8.0_144\bin
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\Sun\Java\bin
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\system32
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows
+[13:21:01] [main/DEBUG] [FML/]:     C:/Program Files/Java/jre1.8.0_144/bin/server
+[13:21:01] [main/DEBUG] [FML/]:     C:/Program Files/Java/jre1.8.0_144/bin
+[13:21:01] [main/DEBUG] [FML/]:     C:/Program Files/Java/jre1.8.0_144/lib/amd64
+[13:21:01] [main/DEBUG] [FML/]:     C:\ProgramData\Oracle\Java\javapath
+[13:21:01] [main/DEBUG] [FML/]:     c:\Program Files (x86)\Intel\iCLS Client\
+[13:21:01] [main/DEBUG] [FML/]:     c:\Program Files\Intel\iCLS Client\
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\system32
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\System32\Wbem
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\System32\WindowsPowerShell\v1.0\
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files\Intel\Intel(R) Management Engine Components\DAL
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files\Intel\Intel(R) Management Engine Components\IPT
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files (x86)\QuickTime\QTSystem\
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files (x86)\Skype\Phone\
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files\Java\jdk1.8.0_131\bin
+[13:21:01] [main/DEBUG] [FML/]:     C:\Program Files\Git\cmd
+[13:21:01] [main/DEBUG] [FML/]:     C:\Windows\system32
+[13:21:01] [main/DEBUG] [FML/]:     
+[13:21:01] [main/DEBUG] [FML/]:     .
+[13:21:01] [main/DEBUG] [FML/]:     C:/Users/Hatter/.gradle/caches/minecraft/net/minecraft/natives/1.12.1
+[13:21:01] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[13:21:01] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
+[13:21:01] [main/INFO] [FML/]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[13:21:01] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
+[13:21:01] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
+[13:21:01] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
+[13:21:01] [main/INFO] [FML/]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[13:21:01] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
+[13:21:01] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
+[13:21:01] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to C:\Minecraft Modding\1.12.1\VirginModdingEnvironment\.
+[13:21:01] [main/DEBUG] [FML/]: Discovering coremods
+[13:21:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[13:21:01] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[13:21:01] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[13:21:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[13:21:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[13:21:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[13:21:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[13:21:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[13:21:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[13:21:01] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin \{net.minecraftforge.fml.relauncher.FMLCorePlugin\} class transformers
+[13:21:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
+[13:21:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
+[13:21:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
+[13:21:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
+[13:21:01] [main/DEBUG] [FML/]: Injection complete
+[13:21:01] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin \{net.minecraftforge.fml.relauncher.FMLCorePlugin\}
+[13:21:01] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
+[13:21:02] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
+[13:21:02] [main/DEBUG] [FML/]: Loading deobfuscation resource C:\Users\Hatter\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_snapshot\20170624\1.12.1\srgs\srg-mcp.srg with 36076 records
+[13:21:03] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
+[13:21:03] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
+[13:21:03] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[13:21:03] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin \{net.minecraftforge.classloading.FMLForgePlugin\} class transformers
+[13:21:03] [main/DEBUG] [FML/]: Injection complete
+[13:21:03] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin \{net.minecraftforge.classloading.FMLForgePlugin\}
+[13:21:03] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
+[13:21:03] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
+[13:21:03] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[13:21:03] [main/DEBUG] [FML/]: Loaded 208 rules from AccessTransformer config file forge_at.cfg
+[13:21:03] [main/DEBUG] [FML/]: Validating minecraft
+[13:21:03] [main/DEBUG] [FML/]: Minecraft validated, launching...
+[13:21:03] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[13:21:03] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[13:21:03] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[13:21:03] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[13:21:07] [main/DEBUG] [FML/]: Creating vanilla freeze snapshot
+[13:21:07] [main/DEBUG] [FML/]: Vanilla freeze snapshot created
+[13:21:08] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.001s
+[13:21:08] [main/INFO] [FML/]: -- System Details --
+Details:
+	Minecraft Version: 1.12.1
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 739489872 bytes (705 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel' Version: '4.0.0 - Build 9.18.10.3071' Renderer: 'Intel(R) HD Graphics 4600'
+[13:21:08] [main/INFO] [FML/]: MinecraftForge v14.22.1.2479 Initialized
+[13:21:08] [main/INFO] [FML/]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[13:21:08] [main/INFO] [FML/]: Replaced 1036 ore ingredients
+[13:21:08] [main/DEBUG] [FML/]: File C:\Minecraft Modding\1.12.1\VirginModdingEnvironment\config\injectedDependencies.json not found. No dependencies injected
+[13:21:08] [main/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
+[13:21:08] [main/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related directory at C:\Minecraft Modding\1.12.1\VirginModdingEnvironment\bin, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\minecraft\net\minecraftforge\forge\1.12.1-14.22.1.2479\snapshot\20170624\forgeSrc-1.12.1-14.22.1.2479.jar, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.1\f7be08ec23c21485b9b5a1cf1654c2ec8c58168d\jsr305-3.0.1.jar, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\patchy\1.1\aef610b34a1be37fa851825f12372b78424d8903\patchy-1.1.jar, examining for mod candidates
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\oshi-project\oshi-core\1.1\9ddf7b048a8d701be231c0f4f95fd986198fd2d8\oshi-core-1.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.dev.jna\jna\4.4.0\cb208278274bf12ebdb56c61bd7407e6f774d65a\jna-4.4.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.dev.jna\platform\3.4.0\e3f70017be8100d3d6923f50b3d2ee17714e9c13\platform-3.4.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\5.0.3\cdd846cfc4e0f7eefafc02c0f5dce32b9303aa2a\jopt-simple-5.0.3.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.1.9.Final\97860965d6a0a6b98e7f569f3f966727b8db75\netty-all-4.1.9.Final.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\21.0\3a3d111be1be1b745edfa7d91678a12d7ed38709\guava-21.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.5\6c6c702c89bfff3cd9e80b04d668c5e190d588c6\commons-lang3-3.5.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.5\2852e6e05fbb95076fc091f6d1780f1f8fe35e0f\commons-io-2.5.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.10\4b95f4897fa13f2cd904aee711aeafc0c5295cd8\commons-codec-1.10.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.25\9834cdf236c22e84b946bba989e2f94ef5897c3c\authlib-1.5.25.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.10.17\e6a623bf93a230b503b0e3ae18c196fcd5aa3299\realms-1.10.17.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\it.unimi.dsi\fastutil\7.1.0\9835253257524c1be7ab50c057aa2d418fb72082\fastutil-7.1.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.8.1\e801d13612e22cad62a3f4f3fe7fdbe6334a8e72\log4j-api-2.8.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.8.1\4ac28ff2f1ddf05dae3043a190451e8c46b73c31\log4j-core-2.8.1.jar
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.mojang\text2speech\1.10.3\48fd510879dff266c3815947de66e3d4809f8668\text2speech-1.10.3.jar, examining for mod candidates
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\jline\jline\2.13\2d9530d0a25daffaffda7c35037b046b627bb171\jline-2.13.jar
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.2\3354e11e2b34215f06dab629ab88e06aca477c19\asm-debug-all-5.2.jar, examining for mod candidates
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.4-nightly-20150209\697517568c68e78ae0b4544145af031c81082dfe\lwjgl-2.9.4-nightly-20150209.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.4-nightly-20150209\d51a7c040a721d13efdfbd34f8b257b2df882ad0\lwjgl_util-2.9.4-nightly-20150209.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\ca.weblite\java-objc-bridge\1.0.0\6ef160c3133a78de015830860197602ca1c855d3\java-objc-bridge-1.0.0.jar, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.fusesource.jansi\jansi\1.11\655c643309c2f45a56a747fda70e3fadf57e9f11\jansi-1.11.jar, examining for mod candidates
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\b84d5102b9dbfabfeb5e43c7e2828d98a7fc80e0\lwjgl-platform-2.9.4-nightly-20150209-natives-windows.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\931074f46c795d2f7b30ed6395df5715cfd7675b\lwjgl-platform-2.9.4-nightly-20150209-natives-linux.jar
+[13:21:08] [main/TRACE] [FML/]: Skipping known library file C:\Users\Hatter\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.4-nightly-20150209\bcab850f8f487c3f4c4dbabde778bb82bd1a40ed\lwjgl-platform-2.9.4-nightly-20150209-natives-osx.jar
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\minecraft\deobfedDeps\compileDummy.jar, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Hatter\.gradle\caches\minecraft\deobfedDeps\providedDummy.jar, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Found a minecraft related directory at C:\Users\Hatter\.gradle\caches\minecraft\net\minecraftforge\forge\1.12.1-14.22.1.2479\start, examining for mod candidates
+[13:21:08] [main/DEBUG] [FML/]: Minecraft jar mods loaded successfully
+[13:21:08] [main/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
+[13:21:08] [main/INFO] [FML/]: Searching C:\Minecraft Modding\1.12.1\VirginModdingEnvironment\mods for mods
+[13:21:08] [main/DEBUG] [FML/]: Examining directory bin for potential mods
+[13:21:08] [main/DEBUG] [FML/]: Found an mcmod.info file in directory bin
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/minecraft
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/minecraft/textures
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/minecraft/textures/gui
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/minecraft/textures/gui/container
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/minecraft/textures/gui/container/creative_inventory
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/blockstates
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/lang
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/models
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/models/block
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/models/item
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures/blocks
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures/custom
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures/items
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures/models
+[13:21:08] [main/TRACE] [FML/]: Recursing into package assets/vme/textures/models/armor
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/init
+[13:21:08] [main/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (org.maghtuireadh.virginmod.Main) - loading
+[13:21:08] [main/TRACE] [vme/]: Parsed dependency info : [] [] []
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/armor
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/armor/ArmorBase
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/blocks
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/blocks/furnaces
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/blocks/torches
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/items
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/objects/tools
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/proxy
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/tabs
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/tileentity
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/util
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/util/handlers
+[13:21:08] [main/TRACE] [FML/]: Recursing into package org/maghtuireadh/virginmod/util/interfaces
+[13:21:08] [main/DEBUG] [FML/]: Examining file forgeSrc-1.12.1-14.22.1.2479.jar for potential mods
+[13:21:08] [main/DEBUG] [FML/]: The mod container forgeSrc-1.12.1-14.22.1.2479.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file jsr305-3.0.1.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container jsr305-3.0.1.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file patchy-1.1.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container patchy-1.1.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file text2speech-1.10.3.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container text2speech-1.10.3.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file asm-debug-all-5.2.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container asm-debug-all-5.2.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file java-objc-bridge-1.0.0.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container java-objc-bridge-1.0.0.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file jansi-1.11.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container jansi-1.11.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file compileDummy.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container compileDummy.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining file providedDummy.jar for potential mods
+[13:21:09] [main/DEBUG] [FML/]: The mod container providedDummy.jar appears to be missing an mcmod.info file
+[13:21:09] [main/DEBUG] [FML/]: Examining directory start for potential mods
+[13:21:09] [main/DEBUG] [FML/]: No mcmod.info file found in directory start
+[13:21:09] [main/TRACE] [FML/]: Recursing into package net
+[13:21:09] [main/TRACE] [FML/]: Recursing into package net/minecraftforge
+[13:21:09] [main/TRACE] [FML/]: Recursing into package net/minecraftforge/gradle
+[13:21:09] [main/TRACE] [FML/]: Recursing into package net/minecraftforge/gradle/tweakers
+[13:21:10] [main/INFO] [FML/]: Forge Mod Loader has identified 5 mods to load
+[13:21:10] [main/TRACE] [FML/]: Received a system property request ''
+[13:21:10] [main/TRACE] [FML/]: System property request managing the state of 0 mods
+[13:21:10] [main/DEBUG] [FML/]: After merging, found state information for 0 mods
+[13:21:10] [main/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[13:21:10] [main/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[13:21:10] [main/DEBUG] [vme/]: Enabling mod vme
+[13:21:10] [main/TRACE] [FML/]: Verifying mod requirements are satisfied
+[13:21:10] [main/TRACE] [FML/]: All mod requirements are satisfied
+[13:21:10] [main/TRACE] [FML/]: Sorting mods into an ordered list
+[13:21:10] [main/TRACE] [FML/]: Mod sorting completed successfully
+[13:21:10] [main/DEBUG] [FML/]: Mod sorting data
+[13:21:10] [main/DEBUG] [FML/]: 	vme(Virgin Modding Environment:1.0): bin ()
+[13:21:10] [main/DEBUG] [FML/]: Loading @Config anotation data
+[13:21:10] [main/TRACE] [minecraft/minecraft]: Sending event FMLConstructionEvent to mod minecraft
+[13:21:10] [main/TRACE] [minecraft/minecraft]: Sent event FMLConstructionEvent to mod minecraft
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Construction - Minecraft took 0.004s
+[13:21:10] [main/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
+[13:21:10] [main/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.001s
+[13:21:10] [main/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
+[13:21:10] [main/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
+[13:21:10] [main/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
+[13:21:10] [main/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
+[13:21:10] [main/INFO] [FML/FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, vme] at CLIENT
+[13:21:10] [main/INFO] [FML/FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, vme] at SERVER
+[13:21:10] [main/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 0.557s
+[13:21:10] [main/TRACE] [forge/forge]: Sending event FMLConstructionEvent to mod forge
+[13:21:10] [main/DEBUG] [forge/forge]: Preloading CrashReport Classes
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$10
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$11
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$12
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$13
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$14
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$6
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$7
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$8
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/Minecraft$9
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/multiplayer/WorldClient$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/multiplayer/WorldClient$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/multiplayer/WorldClient$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/multiplayer/WorldClient$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/particle/ParticleManager$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/particle/ParticleManager$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/particle/ParticleManager$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/particle/ParticleManager$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/EntityRenderer$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/EntityRenderer$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/EntityRenderer$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/RenderGlobal$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/RenderItem$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/RenderItem$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/RenderItem$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/RenderItem$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/texture/TextureAtlasSprite$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/texture/TextureManager$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/texture/TextureMap$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/texture/TextureMap$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/client/renderer/texture/TextureMap$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$6
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReport$7
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReportCategory$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReportCategory$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReportCategory$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReportCategory$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/crash/CrashReportCategory$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/Entity$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/Entity$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/Entity$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/Entity$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/EntityTracker$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/entity/player/InventoryPlayer$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/nbt/NBTTagCompound$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/nbt/NBTTagCompound$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/network/NetHandlerPlayServer$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/network/NetworkSystem$6
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/MinecraftServer$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/MinecraftServer$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/dedicated/DedicatedServer$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/dedicated/DedicatedServer$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/integrated/IntegratedServer$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/server/integrated/IntegratedServer$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/tileentity/CommandBlockBaseLogic$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/tileentity/CommandBlockBaseLogic$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/tileentity/TileEntity$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/tileentity/TileEntity$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/tileentity/TileEntity$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/World$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/World$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/World$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/World$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/World$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/chunk/Chunk$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/gen/structure/MapGenStructure$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/gen/structure/MapGenStructure$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/gen/structure/MapGenStructure$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$10
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$2
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$3
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$4
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$5
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$6
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$7
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$8
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraft/world/storage/WorldInfo$9
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/common/util/TextTable
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/common/util/TextTable$Alignment
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/common/util/TextTable$Column
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/common/util/TextTable$Row
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/fml/client/SplashProgress$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/fml/common/FMLCommonHandler$1
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/fml/common/ICrashCallable
+[13:21:10] [main/DEBUG] [forge/forge]: 	net/minecraftforge/fml/common/Loader$1
+[13:21:10] [main/TRACE] [FML/forge]: Mod forge is using network checker : No network checking performed
+[13:21:10] [main/TRACE] [FML/forge]: Testing mod forge to verify it accepts its own version in a remote connection
+[13:21:10] [main/TRACE] [FML/forge]: The mod forge accepts its own version (14.22.1.2479)
+[13:21:10] [main/DEBUG] [FML/forge]: Attempting to inject @Config classes into forge for type INSTANCE
+[13:21:10] [main/TRACE] [forge/forge]: Sent event FMLConstructionEvent to mod forge
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.094s
+[13:21:10] [main/TRACE] [vme/vme]: Sending event FMLConstructionEvent to mod vme
+[13:21:10] [main/TRACE] [FML/vme]: Mod vme is using network checker : Accepting version 1.0
+[13:21:10] [main/TRACE] [FML/vme]: Testing mod vme to verify it accepts its own version in a remote connection
+[13:21:10] [main/TRACE] [FML/vme]: The mod vme accepts its own version (1.0)
+[13:21:10] [main/DEBUG] [FML/vme]: Attempting to inject @SidedProxy classes into vme
+[13:21:10] [main/DEBUG] [FML/vme]: Attempting to inject @EventBusSubscriber classes into the eventbus for vme
+[13:21:10] [main/DEBUG] [FML/vme]: Registering @EventBusSubscriber for org.maghtuireadh.virginmod.util.handlers.RegisteryHandler for mod vme
+[13:21:10] [main/DEBUG] [FML/vme]: Injected @EventBusSubscriber class org.maghtuireadh.virginmod.util.handlers.RegisteryHandler
+[13:21:10] [main/DEBUG] [FML/vme]: Attempting to inject @Config classes into vme for type INSTANCE
+[13:21:10] [main/TRACE] [vme/vme]: Sent event FMLConstructionEvent to mod vme
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Construction - Virgin Modding Environment took 0.026s
+[13:21:10] [main/DEBUG] [FML/]: Bar Finished: Construction took 0.683s
+[13:21:10] [main/DEBUG] [FML/]: Mod signature data
+[13:21:10] [main/DEBUG] [FML/]:  	Valid Signatures:
+[13:21:10] [main/DEBUG] [FML/]:  	Missing Signatures:
+[13:21:10] [main/DEBUG] [FML/]: 		minecraft	(Minecraft	1.12.1)	minecraft.jar
+[13:21:10] [main/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.19)	minecraft.jar
+[13:21:10] [main/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.12.1-14.22.1.2479.jar
+[13:21:10] [main/DEBUG] [FML/]: 		forge	(Minecraft Forge	14.22.1.2479)	forgeSrc-1.12.1-14.22.1.2479.jar
+[13:21:10] [main/DEBUG] [FML/]: 		vme	(Virgin Modding Environment	1.0)	bin
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.006s
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.011s
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.010s
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Virgin Modding Environment took 0.002s
+[13:21:10] [main/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.021s
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.021s
+[13:21:10] [main/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.050s
+[13:21:10] [main/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[13:21:10] [main/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[13:21:10] [main/INFO] [FML/]: Processing ObjectHolder annotations
+[13:21:10] [main/INFO] [FML/]: Found 1168 ObjectHolder annotations
+[13:21:10] [main/INFO] [FML/]: Identifying ItemStackHolder annotations
+[13:21:10] [main/INFO] [FML/]: Found 0 ItemStackHolder annotations
+[13:21:10] [main/TRACE] [minecraft/minecraft]: Sending event FMLPreInitializationEvent to mod minecraft
+[13:21:10] [main/TRACE] [minecraft/minecraft]: Sent event FMLPreInitializationEvent to mod minecraft
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft took 0.001s
+[13:21:10] [main/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
+[13:21:10] [main/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.001s
+[13:21:10] [main/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
+[13:21:10] [main/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.001s
+[13:21:10] [main/TRACE] [forge/forge]: Sending event FMLPreInitializationEvent to mod forge
+[13:21:10] [main/INFO] [FML/forge]: Configured a dormant chunk cache size of 0
+[13:21:10] [main/TRACE] [forge/forge]: Sent event FMLPreInitializationEvent to mod forge
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.071s
+[13:21:10] [main/TRACE] [vme/vme]: Sending event FMLPreInitializationEvent to mod vme
+[13:21:10] [main/TRACE] [vme/vme]: Sent event FMLPreInitializationEvent to mod vme
+[13:21:10] [main/DEBUG] [FML/]: Bar Step: PreInitialization - Virgin Modding Environment took 0.001s
+[13:21:10] [main/DEBUG] [FML/]: Bar Finished: PreInitialization took 0.073s
+[13:21:10] [main/INFO] [FML/]: Applying holder lookups
+[13:21:10] [main/INFO] [FML/]: Holder lookups applied
+[13:21:10] [main/INFO] [FML/]: Applying holder lookups
+[13:21:10] [main/INFO] [FML/]: Holder lookups applied
+[13:21:10] [main/INFO] [FML/]: Applying holder lookups
+[13:21:10] [main/INFO] [FML/]: Holder lookups applied
+[13:21:11] [main/INFO] [FML/]: Applying holder lookups
+[13:21:11] [main/INFO] [FML/]: Holder lookups applied
+[13:21:11] [main/INFO] [FML/]: Injecting itemstacks
+[13:21:11] [main/INFO] [FML/]: Itemstack injection complete
+[13:21:11] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 1.678s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.003s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.003s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.009s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.006s
+[13:21:12] [main/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.002s
+[13:21:12] [main/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.009s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - B3DLoader took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - OBJLoader took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelFluid$FluidLoader took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - ItemLayerModel$Loader took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - MultiLayerModel$Loader took 0.000s
+[13:21:12] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelDynBucket$LoaderDynBucket took 0.000s
+[13:21:15] [main/DEBUG] [FML/]: Bar Finished: ModelLoader: blocks took 2.287s
+[13:21:16] [main/DEBUG] [FML/]: Bar Finished: ModelLoader: items took 0.879s
+[13:21:16] [main/INFO] [FML/]: Max texture size: 8192
+[13:21:16] [main/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.673s
+[13:21:16] [main/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.031s
+[13:21:16] [main/DEBUG] [FML/]: Bar Finished: Texture creation took 0.036s
+[13:21:16] [main/DEBUG] [FML/]: Bar Finished: Texture mipmap and upload took 0.034s
+[13:21:17] [main/DEBUG] [FML/]: Bar Finished: ModelLoader: baking took 0.784s
+[13:21:17] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelManager took 4.911s
+[13:21:17] [main/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Model Manager took 4.956s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderItem took 0.003s
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Item Renderer took 0.339s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - EntityRenderer took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - BlockRendererDispatcher took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderGlobal took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading Resource - SearchTreeManager took 0.106s
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Entity Renderer took 0.400s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Rendering Setup took 5.706s
+[13:21:18] [main/INFO] [FML/]: Applying holder lookups
+[13:21:18] [main/INFO] [FML/]: Holder lookups applied
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sending event FMLInitializationEvent to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sent event FMLInitializationEvent to mod minecraft
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Initialization - Minecraft took 0.001s
+[13:21:18] [main/TRACE] [mcp/mcp]: Sending event FMLInitializationEvent to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sent event FMLInitializationEvent to mod mcp
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Coder Pack took 0.000s
+[13:21:18] [main/TRACE] [FML/FML]: Sending event FMLInitializationEvent to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sent event FMLInitializationEvent to mod FML
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Initialization - Forge Mod Loader took 0.000s
+[13:21:18] [main/TRACE] [forge/forge]: Sending event FMLInitializationEvent to mod forge
+[13:21:18] [main/TRACE] [forge/forge]: Sent event FMLInitializationEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Forge took 0.000s
+[13:21:18] [main/TRACE] [vme/vme]: Sending event FMLInitializationEvent to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sent event FMLInitializationEvent to mod vme
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: Initialization - Virgin Modding Environment took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Initialization took 0.002s
+[13:21:18] [main/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sending event IMCEvent to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sent event IMCEvent to mod minecraft
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft took 0.004s
+[13:21:18] [main/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sending event IMCEvent to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sent event IMCEvent to mod mcp
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Coder Pack took 0.000s
+[13:21:18] [main/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sending event IMCEvent to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sent event IMCEvent to mod FML
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Forge Mod Loader took 0.000s
+[13:21:18] [main/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod forge
+[13:21:18] [main/TRACE] [forge/forge]: Sending event IMCEvent to mod forge
+[13:21:18] [main/TRACE] [forge/forge]: Sent event IMCEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Forge took 0.000s
+[13:21:18] [main/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sending event IMCEvent to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sent event IMCEvent to mod vme
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Virgin Modding Environment took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: InterModComms$IMC took 0.005s
+[13:21:18] [main/INFO] [FML/]: Injecting itemstacks
+[13:21:18] [main/INFO] [FML/]: Itemstack injection complete
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sending event FMLPostInitializationEvent to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sent event FMLPostInitializationEvent to mod minecraft
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft took 0.000s
+[13:21:18] [main/TRACE] [mcp/mcp]: Sending event FMLPostInitializationEvent to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sent event FMLPostInitializationEvent to mod mcp
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Coder Pack took 0.000s
+[13:21:18] [main/TRACE] [FML/FML]: Sending event FMLPostInitializationEvent to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sent event FMLPostInitializationEvent to mod FML
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: PostInitialization - Forge Mod Loader took 0.000s
+[13:21:18] [main/TRACE] [forge/forge]: Sending event FMLPostInitializationEvent to mod forge
+[13:21:18] [main/TRACE] [forge/forge]: Sent event FMLPostInitializationEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Forge took 0.011s
+[13:21:18] [main/TRACE] [vme/vme]: Sending event FMLPostInitializationEvent to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sent event FMLPostInitializationEvent to mod vme
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: PostInitialization - Virgin Modding Environment took 0.001s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: PostInitialization took 0.012s
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sending event FMLLoadCompleteEvent to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sent event FMLLoadCompleteEvent to mod minecraft
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft took 0.000s
+[13:21:18] [main/TRACE] [mcp/mcp]: Sending event FMLLoadCompleteEvent to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sent event FMLLoadCompleteEvent to mod mcp
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Coder Pack took 0.000s
+[13:21:18] [main/TRACE] [FML/FML]: Sending event FMLLoadCompleteEvent to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sent event FMLLoadCompleteEvent to mod FML
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: LoadComplete - Forge Mod Loader took 0.000s
+[13:21:18] [main/TRACE] [forge/forge]: Sending event FMLLoadCompleteEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/forge]: Forge RecipeSorter Baking:
+[13:21:18] [main/DEBUG] [FML/forge]:   16: RecipeEntry("Before", UNKNOWN, )
+[13:21:18] [main/DEBUG] [FML/forge]:   15: RecipeEntry("minecraft:shaped", SHAPED, net.minecraft.item.crafting.ShapedRecipes) Before: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   14: RecipeEntry("forge:shapedore", SHAPED, net.minecraftforge.oredict.ShapedOreRecipe) Before: minecraft:shapeless After: minecraft:shaped
+[13:21:18] [main/DEBUG] [FML/forge]:   13: RecipeEntry("minecraft:mapextending", SHAPED, net.minecraft.item.crafting.RecipesMapExtending) Before: minecraft:shapeless After: minecraft:shaped
+[13:21:18] [main/DEBUG] [FML/forge]:   12: RecipeEntry("minecraft:shapeless", SHAPELESS, net.minecraft.item.crafting.ShapelessRecipes) After: minecraft:shaped
+[13:21:18] [main/DEBUG] [FML/forge]:   11: RecipeEntry("minecraft:repair", SHAPELESS, net.minecraft.item.crafting.RecipeRepairItem) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   10: RecipeEntry("minecraft:shield_deco", SHAPELESS, net.minecraft.item.crafting.ShieldRecipes$Decoration) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   9: RecipeEntry("minecraft:armordyes", SHAPELESS, net.minecraft.item.crafting.RecipesArmorDyes) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   8: RecipeEntry("minecraft:fireworks", SHAPELESS, net.minecraft.item.crafting.RecipeFireworks) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   7: RecipeEntry("minecraft:pattern_dupe", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   6: RecipeEntry("minecraft:tippedarrow", SHAPELESS, net.minecraft.item.crafting.RecipeTippedArrow) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   5: RecipeEntry("minecraft:mapcloning", SHAPELESS, net.minecraft.item.crafting.RecipesMapCloning) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   4: RecipeEntry("forge:shapelessore", SHAPELESS, net.minecraftforge.oredict.ShapelessOreRecipe) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   3: RecipeEntry("minecraft:pattern_add", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   2: RecipeEntry("minecraft:bookcloning", SHAPELESS, net.minecraft.item.crafting.RecipeBookCloning) After: minecraft:shapeless
+[13:21:18] [main/DEBUG] [FML/forge]:   1: RecipeEntry("After", UNKNOWN, )
+[13:21:18] [main/DEBUG] [FML/forge]: Sorting recipes
+[13:21:18] [main/TRACE] [forge/forge]: Sent event FMLLoadCompleteEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Forge took 0.008s
+[13:21:18] [main/TRACE] [vme/vme]: Sending event FMLLoadCompleteEvent to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sent event FMLLoadCompleteEvent to mod vme
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: LoadComplete - Virgin Modding Environment took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: LoadComplete took 0.009s
+[13:21:18] [main/DEBUG] [FML/]: Freezing registries
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sending event FMLModIdMappingEvent to mod minecraft
+[13:21:18] [main/TRACE] [minecraft/minecraft]: Sent event FMLModIdMappingEvent to mod minecraft
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft took 0.000s
+[13:21:18] [main/TRACE] [mcp/mcp]: Sending event FMLModIdMappingEvent to mod mcp
+[13:21:18] [main/TRACE] [mcp/mcp]: Sent event FMLModIdMappingEvent to mod mcp
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Coder Pack took 0.000s
+[13:21:18] [main/TRACE] [FML/FML]: Sending event FMLModIdMappingEvent to mod FML
+[13:21:18] [main/TRACE] [FML/FML]: Sent event FMLModIdMappingEvent to mod FML
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: ModIdMapping - Forge Mod Loader took 0.000s
+[13:21:18] [main/TRACE] [forge/forge]: Sending event FMLModIdMappingEvent to mod forge
+[13:21:18] [main/TRACE] [forge/forge]: Sent event FMLModIdMappingEvent to mod forge
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Forge took 0.194s
+[13:21:18] [main/TRACE] [vme/vme]: Sending event FMLModIdMappingEvent to mod vme
+[13:21:18] [main/TRACE] [vme/vme]: Sent event FMLModIdMappingEvent to mod vme
+[13:21:18] [main/DEBUG] [FML/]: Bar Step: ModIdMapping - Virgin Modding Environment took 0.000s
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: ModIdMapping took 0.195s
+[13:21:18] [main/DEBUG] [FML/]: All registries frozen
+[13:21:18] [main/INFO] [FML/]: Forge Mod Loader has successfully loaded 5 mods
+[13:21:18] [main/DEBUG] [FML/]: Bar Finished: Loading took 10.190s
+[13:21:25] [main/DEBUG] [FML/]: Overriding dimension: using 0
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:299
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:298
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:297
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:296
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:295
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:294
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:293
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:292
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:291
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:290
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:289
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:288
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:287
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:286
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:285
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:284
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:283
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:282
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:33] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:281
+[13:21:33] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:280
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:279
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:278
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:277
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:276
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:275
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:274
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:273
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:272
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:271
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:270
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:269
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:268
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:267
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:266
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:265
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:264
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:263
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:262
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:34] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:261
+[13:21:34] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:260
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:259
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:258
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:257
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:256
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:255
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:254
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:253
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:552
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:551
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:550
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:549
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:548
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:547
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:546
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:545
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:844
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:843
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:842
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:35] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:841
+[13:21:35] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:840
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:839
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:838
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:837
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1136
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1135
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1134
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1133
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1132
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1131
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1130
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1129
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1128
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1427
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1426
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1425
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1424
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1423
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1422
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:36] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1421
+[13:21:36] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1420
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1419
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1718
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1717
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1716
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1715
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1714
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1713
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1712
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1711
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1710
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:1709
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2008
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2007
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2006
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2005
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2004
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2003
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2002
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:37] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2001
+[13:21:37] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2000
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2299
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2298
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2297
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2296
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2295
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2294
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2293
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2292
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2291
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2290
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2289
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2288
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2587
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2586
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2585
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2584
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2583
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2582
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:38] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2581
+[13:21:38] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2580
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2579
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2578
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2877
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2876
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2875
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2874
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:2873
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3172
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3171
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3170
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3469
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3468
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3467
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3466
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3765
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3764
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3763
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3762
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:39] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3761
+[13:21:39] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3760
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3759
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3758
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3757
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3756
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3755
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3754
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3753
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3752
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3751
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3750
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3749
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3748
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3747
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3746
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3745
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3744
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3743
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3742
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:40] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3741
+[13:21:40] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3740
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3739
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3738
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3737
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3736
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3735
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3734
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3733
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3732
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3731
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3730
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3729
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3728
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3727
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3726
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3725
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3724
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3723
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3722
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:41] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3721
+[13:21:41] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3720
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3719
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3718
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3717
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3716
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3715
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3714
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3713
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3712
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3711
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3710
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3709
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3708
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3707
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3706
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3705
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3704
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3703
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3702
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:42] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3701
+[13:21:42] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3700
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3699
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3698
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3697
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3696
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3695
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3694
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3693
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3692
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3691
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3690
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3689
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3688
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3687
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3686
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3685
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3684
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3683
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3682
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:43] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3681
+[13:21:43] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3680
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3679
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3678
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3677
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3676
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3675
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3674
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3673
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3672
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3671
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3670
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3669
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3668
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3667
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3666
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3665
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3664
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3663
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3662
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:44] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3661
+[13:21:44] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3660
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3659
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3658
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3657
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3656
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3655
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3654
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3653
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3652
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3651
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3650
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3649
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3648
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3647
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3646
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3645
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3644
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3643
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3642
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:45] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3641
+[13:21:45] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3640
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3639
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3638
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3637
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3636
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3635
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3634
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3633
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3632
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3631
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3630
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3629
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3628
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3627
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3626
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3625
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3624
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3623
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3622
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:46] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3621
+[13:21:46] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3620
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3619
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3618
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3617
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3616
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3615
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3614
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3613
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3612
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3611
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3610
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3609
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3608
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3607
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3606
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3605
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3604
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3603
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3602
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:47] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3601
+[13:21:47] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3600
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3599
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3598
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3597
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3596
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3595
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3594
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3593
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3592
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3591
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3590
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3589
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3588
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3587
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3586
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3585
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3584
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3583
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3582
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:48] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3581
+[13:21:48] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3580
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3579
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3578
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3577
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3576
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3575
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3574
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3573
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3572
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3571
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3570
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3569
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3568
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3567
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3566
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3565
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3564
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3563
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3562
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:49] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3561
+[13:21:49] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3560
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3559
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3558
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3557
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3556
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3555
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3554
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3553
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3552
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3551
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3550
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3549
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3548
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3547
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3546
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3545
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3544
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3543
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3542
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:50] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3541
+[13:21:50] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3540
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3539
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3538
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3537
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3536
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3535
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3534
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3533
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3532
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3531
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3530
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3529
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3528
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3527
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3526
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3525
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3524
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3523
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3522
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:51] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:3521
+[13:21:51] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:299
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:298
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:297
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:596
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:595
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:58] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:594
+[13:21:58] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:593
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:592
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:591
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:590
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:589
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:588
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:587
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:586
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:585
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:584
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:583
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:582
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:581
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:580
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:579
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:578
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:577
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:576
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:575
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:21:59] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:574
+[13:21:59] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:573
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:572
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:571
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:570
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:569
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:568
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:567
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:566
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:565
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:564
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:563
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:562
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:561
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:560
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:559
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:558
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:557
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:556
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:555
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:00] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:554
+[13:22:00] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:553
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:552
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:551
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:550
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:549
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:548
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:547
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:546
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:545
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:544
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:543
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:542
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:541
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:540
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:539
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:538
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:537
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:536
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:535
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:01] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:534
+[13:22:01] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:533
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:532
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:531
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:530
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:529
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:528
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:527
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:526
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:525
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:524
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:523
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:522
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:521
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:520
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:519
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:518
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:517
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:516
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:515
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:02] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:514
+[13:22:02] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:513
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:512
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:511
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:510
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:509
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:508
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:507
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:506
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:505
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:504
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:503
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:502
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:501
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 1.0 Burning: true BurnTime:500
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:499
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:498
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:497
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:496
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:495
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:03] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:494
+[13:22:03] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:493
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:492
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:491
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:490
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:489
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:488
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:487
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:486
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:485
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:484
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:483
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:482
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:481
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:480
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:479
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:478
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:477
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:476
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:475
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:04] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:474
+[13:22:04] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:473
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:472
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:471
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:470
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:469
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:468
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:467
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:466
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:465
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:464
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:463
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:462
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:461
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:460
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:459
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:458
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:457
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:456
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:455
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:05] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:454
+[13:22:05] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:453
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:452
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:451
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:450
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:449
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:448
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:447
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:446
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:445
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:444
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:443
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:442
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:441
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:440
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:439
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:438
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:437
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:436
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:435
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:06] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:434
+[13:22:06] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:433
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:432
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:431
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:430
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:429
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:428
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:427
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:426
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:425
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:424
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:423
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:422
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:421
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:420
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:419
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:418
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:417
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:416
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:415
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:07] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:414
+[13:22:07] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:413
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:412
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:411
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:410
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:409
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:408
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:407
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:406
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:405
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:404
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:403
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:402
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:401
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:400
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:399
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:398
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:397
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:396
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:395
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:08] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:394
+[13:22:08] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:393
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:392
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:391
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:390
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:389
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:388
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:387
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:386
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:385
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:384
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:383
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:382
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:381
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:380
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:379
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:378
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:377
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:376
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:375
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:09] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:374
+[13:22:09] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:373
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:374
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:371
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:370
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:369
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:368
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:367
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:366
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:365
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:364
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:363
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:362
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:361
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:360
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:359
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:358
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:357
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:356
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:355
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:10] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:354
+[13:22:10] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:353
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:352
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:351
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:350
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:349
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:348
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:347
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:346
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:345
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:344
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:343
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:342
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:341
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:340
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:339
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:338
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:337
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:336
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:335
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:11] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:334
+[13:22:11] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:333
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:332
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:331
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:330
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:329
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:328
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:327
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:326
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:325
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:324
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:323
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:322
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:321
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:320
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:319
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:318
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:317
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:316
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:315
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:12] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:314
+[13:22:12] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:313
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:312
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:311
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:310
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:309
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:308
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:307
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:306
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:305
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:304
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:303
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:302
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:301
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:300
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:299
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:298
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:297
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:296
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:295
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:13] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:294
+[13:22:13] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:293
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:292
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:291
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:290
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:289
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:288
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:287
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:286
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:285
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:284
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:283
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:282
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:281
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:280
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:279
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:278
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:277
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:276
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:275
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:14] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:274
+[13:22:14] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:273
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:272
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:271
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:270
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:269
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:268
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:267
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:266
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:265
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:264
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:263
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:262
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:261
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:260
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:259
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:258
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:257
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:256
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:255
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:15] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:254
+[13:22:15] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:253
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:252
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:251
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:250
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:249
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:248
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:247
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:246
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:245
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:244
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:243
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:242
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:241
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:240
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:239
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:238
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:237
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:236
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:235
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:16] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:234
+[13:22:16] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:233
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:232
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:231
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:230
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:229
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:228
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:227
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:226
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:225
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:224
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:223
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:222
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:221
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:220
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:219
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:218
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:217
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:216
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:215
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:17] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:214
+[13:22:17] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:213
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:212
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:211
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:210
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:209
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:208
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:207
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:206
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:205
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:204
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:203
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:202
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:201
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:200
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:199
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:198
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:197
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:196
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:195
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:18] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:194
+[13:22:18] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:193
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:192
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:191
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:190
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:189
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:188
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:187
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:186
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:185
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:184
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:183
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:182
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:181
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:180
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:179
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:178
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:177
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:176
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:175
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:19] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:174
+[13:22:19] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:173
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:172
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:171
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:170
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:169
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:168
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:167
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:166
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:165
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:164
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:163
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:162
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:161
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:160
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:159
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:158
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:157
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:156
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:155
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:20] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:154
+[13:22:20] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:153
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:152
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:151
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:150
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:149
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:148
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:147
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:146
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:145
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:144
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:143
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:142
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:141
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:140
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:139
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:138
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:137
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:136
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:135
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:21] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:134
+[13:22:21] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:133
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:132
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:131
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:130
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:129
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:128
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:127
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:126
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:125
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:124
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:123
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:122
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:121
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:120
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:119
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:118
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:117
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:116
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:115
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:22] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:114
+[13:22:22] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:113
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:112
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:111
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:110
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:109
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:108
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:107
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:106
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:105
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:104
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:103
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:102
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:101
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:100
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:99
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:98
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:97
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:96
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:95
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:23] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:94
+[13:22:23] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:93
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:92
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:91
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:90
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:89
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:88
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:87
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:86
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:85
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:84
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:83
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:82
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:81
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:80
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:79
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:78
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:77
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:76
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:75
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:24] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:74
+[13:22:24] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:73
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:72
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:71
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:70
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:69
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:68
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:67
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:66
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:65
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:64
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:63
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:62
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:61
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:60
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:59
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:58
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:57
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:56
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:55
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:25] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:54
+[13:22:25] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:53
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:52
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:51
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:50
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:49
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:48
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:47
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:46
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:45
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:44
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:43
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:42
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:41
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:40
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:39
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:38
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:37
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:36
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:35
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:26] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:34
+[13:22:26] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:33
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:32
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:31
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:30
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:29
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:28
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:27
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:26
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:25
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:24
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:23
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:22
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:21
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:20
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:19
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:18
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:17
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:16
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:15
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:27] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:14
+[13:22:27] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:13
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:12
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:11
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:10
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:9
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:8
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:7
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:6
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:5
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:4
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:3
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:2
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.6 Burning: true BurnTime:1
+[13:22:28] [main/INFO] [vme/]: It's Burning
+[13:22:28] [main/INFO] [vme/]: Update1: Light: 0.0 Burning: false BurnTime:0
+[13:22:28] [main/INFO] [vme/]: It's Not Burning

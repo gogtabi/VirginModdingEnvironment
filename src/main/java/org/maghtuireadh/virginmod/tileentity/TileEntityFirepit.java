@@ -13,6 +13,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class TileEntityFirepit extends TileEntity implements ITickable {
@@ -82,15 +83,14 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	}
 
 	public void setBurning() {
-		if (this.world != null && !this.world.isRemote) { /*
-															 * if (blockStateLit != this.world.getBlockState(pos)) {
-															 */
+		if (this.world != null && !this.world.isRemote) { 
 			this.blockType = this.getBlockType();
 
 			if (this.blockType instanceof BlockFirepit) {
-				((BlockFirepit) this.blockType).Burning(Burning, lightLvl);
-
+				((BlockFirepit) this.blockType).setBurning(Burning, lightLvl);
+				((BlockFirepit) this.blockType).setState(Burning, world, pos);
 			}
+			markDirty();
 		}
 	}
 
@@ -110,18 +110,10 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			Utils.getLogger()
 					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
 			Utils.getLogger().info("It's Burning");
-		}
-		/*
-		 * else { Burning=false; this.resetBurning(); }
-		 */
 
 		if (Burning) {
 			--firepitBurnTime;
-			if (firepitBurnTime < 500) {
-				lightLvl = 0.6F;
-			} else {
-				lightLvl = 1.0F;
-			}
+			lightLvl = 1.0F;
 			markDirty();
 		}
 		if (Burning && coalBurn > 0) {
@@ -160,6 +152,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		}
 		markDirty();
 		this.setBurning();
+		}
 	}
 
 	public void setFuelValues(ItemStack heldItem) {

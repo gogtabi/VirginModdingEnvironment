@@ -1,6 +1,5 @@
 {
     "variants": {
-    	"normal": { "model": "vme:block_firepit" },
         "lit=true": { "model": "vme:block_firepit", "x": 90 },
         "lit=false": { "model": "vme:block_firepit", "x": 180 }
         }

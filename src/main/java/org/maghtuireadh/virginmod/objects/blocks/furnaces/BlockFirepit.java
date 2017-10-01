@@ -9,14 +9,14 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
+import org.maghtuireadh.virginmod.util.handlers.EnumHandler.FirepitStatesTemp;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -47,8 +47,6 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	public static final PropertyBool LIT = PropertyBool.create("lit");
 	private IBlockState blockState1 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
 	private IBlockState blockState2 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(true));
-	
-	World worldIn;
 
 	Float lightLvl;
 
@@ -75,20 +73,55 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 		return new BlockStateContainer(this, new IProperty[] {LIT});
 	}
 	
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer) {
+		// TODO Auto-generated method stub
+		return this.getDefaultState().withProperty(LIT, false);
+	}
 	
 
-	 @Override
+	/*@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.blockState1;
+	}*/
+	
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
+			ItemStack stack) {
+		
+		worldIn.setBlockState(pos, state.withProperty(LIT, false));
+	}
+	
+	@Override
 
-	 public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 
 	 }
 	 
-	public void Burning(boolean bool, float light)
+	public void setBurning(boolean bool, float light)
 	{
 		this.Burning = bool;
 		this.setLightLevel(light);
 	}
 
+	public static void setState(boolean isLit, World worldIn, BlockPos pos) {
+		IBlockState state = worldIn.getBlockState(pos);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		
+		if(isLit)
+			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, true));
+		if(!isLit)
+			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, false));
+		
+		if(tileentity != null) {
+			tileentity.validate();
+			worldIn.setTileEntity(pos, tileentity);
+		}
+	}
+			
+	
 	public int quantityDropped(Random random){
 
 			 return 6;
@@ -102,8 +135,21 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 					return Item.getItemFromBlock(Blocks.STONE_SLAB);
 
 	}
+	
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
+		this.setBurning(false, 0.0F);
+	}
 
-
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TileEntityFirepit tileentity = (TileEntityFirepit)worldIn.getTileEntity(pos);
+		
+		super.breakBlock(worldIn, pos, state);
+	}
+	
+	public EnumBlockRenderType getREnderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
 
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 
@@ -189,17 +235,14 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 
 	}
 
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState1;
-	}
 	
 	/**
 	 * Returns the correct meta for the block
 	 * I recommend also saving the EnumFacing to the meta but I haven't
 	 */
-	@Override
+	
+	
+/*	@Override
 	public int getMetaFromState(IBlockState state) {
 		if(state == blockState2) {
 			return 0;
@@ -207,8 +250,16 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 		else {
 			return 1;
 		}
-	}
-	
+	}*/
+	@Override
+	public int getMetaFromState(IBlockState state) {
+			if(state == blockState2) {
+				return 0;
+			}
+			else {
+				return 1;
+			}
+		}
 	/**
 	 * Gets the block state from the meta
 	 */
@@ -223,7 +274,7 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	
 	
 	}
-		
+	
 	
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -241,6 +292,8 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	public int damageDropped(IBlockState state) {
 		return (int) (getMetaFromState(state));
 	}
+	
+	
 
 
 }	
