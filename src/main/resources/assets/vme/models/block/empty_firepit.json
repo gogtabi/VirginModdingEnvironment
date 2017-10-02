@@ -1,5 +1,5 @@
 {
-	"textures": {"1": "blocks - Copy/cobblestone"},
+	"textures": {"1": "blocks/cobblestone"},
 	"elements": [
 		{
 			"name": "StoneRing - S",

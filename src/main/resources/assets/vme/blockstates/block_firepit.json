@@ -1,6 +1,6 @@
 {
     "variants": {
-        "lit=true": { "model": "vme:block_firepit"},
-        "lit=false": { "model": "vme:block_firepit"}
+        "lit=true": { "model": "vme:lit_firepit4"},
+        "lit=false": { "model": "vme:empty_firepit"}
         }
 }
