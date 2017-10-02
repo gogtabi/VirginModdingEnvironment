@@ -244,10 +244,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		else {
 			return blockState1;
 		}
-	
-	
-	}
-	
+}
 	
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -276,7 +273,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 
 	@Override
 	public void registerModels() {
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "block_firepit_off", "inventory");
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "block_firepit_on", "inventory");
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "block_firepit", "inventory");
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "block_firepit", "inventory");
 	}
 }
