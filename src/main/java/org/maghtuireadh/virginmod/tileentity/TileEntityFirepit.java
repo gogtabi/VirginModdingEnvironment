@@ -1,5 +1,6 @@
 package org.maghtuireadh.virginmod.tileentity;
 
+import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
@@ -31,7 +32,13 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	private int ashRate = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
+	private IBlockState blockStateLit, blockStateUnlit;
 	
+	public void TileEntityFirpit() {
+		
+		blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
+		blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -83,41 +90,34 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	}
 
 	public void setBurning() {
-		if (this.world != null && !this.world.isRemote) { 
-			this.blockType = this.getBlockType();
+        if (this.world != null && !this.world.isRemote) { 
+            this.blockType = this.getBlockType();
 
-			if (this.blockType instanceof BlockFirepit) {
-				((BlockFirepit) this.blockType).setBurning(Burning, lightLvl);
-				((BlockFirepit) this.blockType).setState(Burning, world, pos);
-			}
-			markDirty();
-		}
-	}
+            if (this.blockType instanceof BlockFirepit) {
+                ((BlockFirepit) this.blockType).setBurning(Burning);
+                ((BlockFirepit) this.blockType).setState(Burning, world, pos);
+            }
+            markDirty();
+        }
+    }
 	
-	public void resetBurning() {
-		// IBlockState BS1 =
-		// this.world.getBlockState(pos).withProperty(BlockFirepit.LIT,
-		// Boolean.valueOf(false));
-		// if (BS1 != this.world.getBlockState(pos))
-		// this.world.setBlockState(pos, BS1);
-	}
-	
-
-
-	public void update() {
-
-		if (firepitBurnTime > 0) {
-			Burning = true;
+	public void update(){
+		
+		if (firepitBurnTime>0 && Burning!=true)
+		{
+			Burning=true;
 			markDirty();
 			Utils.getLogger()
 					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
 			Utils.getLogger().info("It's Burning");
-
+		}
 		if (Burning) {
 			--firepitBurnTime;
-			lightLvl = 1.0F;
+			lightLvl = 1.0F;Utils.getLogger()
+			.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
 			markDirty();
 		}
+		
 		if (Burning && coalBurn > 0) {
 			--coalBurn;
 			++coalGrowth;
@@ -155,9 +155,8 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		markDirty();
 		this.setBurning();
 		}
-	}
 
-	public void setFuelValues(ItemStack heldItem) {
+public void setFuelValues(ItemStack heldItem) {
 		if (heldItem.isEmpty()) {
 		} else {
 			Item item = heldItem.getItem();

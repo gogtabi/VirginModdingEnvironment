@@ -9,7 +9,9 @@ import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
 import org.maghtuireadh.virginmod.util.handlers.EnumHandler.FirepitStatesTemp;
+import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -17,6 +19,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -29,6 +32,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -39,7 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 
-public class BlockFirepit extends BlockContainer implements ITileEntityProvider {
+public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider {
 
 	
 	public static final PropertyBool LIT = PropertyBool.create("lit");
@@ -55,10 +59,10 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	public BlockFirepit(String unlocalizedName) {
 
 	super(Material.ROCK);
+	this.setDefaultState(blockState1);
 	this.setUnlocalizedName(unlocalizedName);
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	setCreativeTab(Main.virginmodtab);
-	this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false)));
 	BlockInit.BLOCKS.add(blockState1.getBlock());
 	//BlockInit.BLOCKS.add(blockState2.getBlock());
 	ItemInit.ITEMS.add(new ItemBlock(blockState1.getBlock()).setRegistryName(this.getRegistryName()));
@@ -66,6 +70,11 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	
 	}
 
+
+	public void setLit() {
+		//this. 
+	}
+	
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {LIT});
@@ -89,12 +98,6 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	}
 	
 
-	/*@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState1;
-	}*/
-	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
@@ -108,7 +111,7 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 
 	 }
 
-	public void setBurning(boolean bool, float light)
+	public void setBurning(boolean bool)
 	{
 		this.Burning = bool;
 	}
@@ -136,9 +139,7 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 
 			 return 6;
 
-	}
-
-			
+	}			
 
 	public Item getItemDropped(IBlockState state, Random rand, int fortune){
 
@@ -148,7 +149,7 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 	
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
-		this.setBurning(false, 0.0F);
+		this.setBurning(false);
 	}
 
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -245,6 +246,11 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 
 	}
 
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.blockState1;
+	}
 	
 	/**
 	 * Returns the correct meta for the block
@@ -303,7 +309,17 @@ public class BlockFirepit extends BlockContainer implements ITileEntityProvider 
 		return (int) (getMetaFromState(state));
 	}
 	
-	
+	@Override
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+		for (int i = 0; i < 1 ; i++) {
+			//items.add(ItemStack.this, )
+		}
+		
+	}
 
-
-}	
+	@Override
+	public void registerModels() {
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "block_firepit_off", "inventory");
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "block_firepit_on", "inventory");
+	}
+}
