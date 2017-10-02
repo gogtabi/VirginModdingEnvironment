@@ -194,50 +194,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 
  
 
-	@SideOnly(Side.CLIENT)
-
-    @SuppressWarnings("incomplete-switch")
-
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-
-    {
-
-        if (this.Burning)
-
-        {
-
-            double d0 = (double)pos.getX() + 0.5D;
-
-            double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
-
-            double d2 = (double)pos.getZ() + 0.5D;
-
-            double d3 = 0.52D;
-
-            double d4 = rand.nextDouble() * 0.6D - 0.3D;
-
-
-
-            if (rand.nextDouble() < 0.1D)
-
-            {
-
-                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
-
-            }
-
-
-
-            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
-
-            worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
-
-            }
-
-        }
-
-
-
+	
 	@Override
 
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
