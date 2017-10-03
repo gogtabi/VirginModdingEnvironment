@@ -65,11 +65,11 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 		world.setBlockToAir(pos);
 	}
 */
-	@Override
+/*	@Override
 	public void registerModels() {
-		//Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 		
-	}
+	}*/
 
 	/*@Override
 	 public int quantityDropped(Random random)
