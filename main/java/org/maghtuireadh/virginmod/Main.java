@@ -2,7 +2,6 @@ package org.maghtuireadh.virginmod;
 
 import org.maghtuireadh.virginmod.proxy.CommonProxy;
 import org.maghtuireadh.virginmod.tabs.VirginModTab;
-import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +12,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main {

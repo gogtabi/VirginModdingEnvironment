@@ -4,22 +4,20 @@ import java.util.Random;
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
-import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockATDTorch extends BlockTorch implements IHasModel {
 	
-	public static int burntime = 40;
+	public static Long burnTime = (long) 40;
+	public  Long setTime = (long) 0;
 	
 	
 	
@@ -34,48 +32,50 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 		this.setLightLevel(1.0F);
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 20);
-		setCreativeTab(Main.virginmodtab);
+		//setCreativeTab(Main.virginmodtab);
 		
 		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		//ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
-	
-	/*@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		world.scheduleBlockUpdate(pos, this , burntime, 0);
-		if (world.isRainingAt(pos)) {
-			breakBlock(world, pos, state);
-		} else {
-			
-		}
-		 
-	}
-	*/
-/*
 	
 	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune) {
-			return Item.getItemFromBlock(BlockInit.ATD_TORCH);
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		//world.scheduleBlockUpdate(pos, this , burnTime, 0);
+		setTime = world.getTotalWorldTime();
+		if (world.isRainingAt(pos)) {
+			breakBlock(world, pos, state);
+		} 
+		Utils.getLogger().info("Set Time: " + setTime);
+		 
 	}
+
+
+	
+//	@Override
+//	public Item getItemDropped(IBlockState state, Random random, int fortune) {
+//			return Item.getItemFromBlock(BlockInit.ATD_TORCH);
+//	}
 
 	
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		
-		world.setBlockToAir(pos);
+		//if(world.getTotalWorldTime() - this.setTime < burnTime) {
+		//world.setBlockToAir(pos);
+		//}
+		Utils.getLogger().info("Get World Time: " + world.getTotalWorldTime());
 	}
-*/
+
 	@Override
 	public void registerModels() {
-		//Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 		
 	}
 
-	/*@Override
+	@Override
 	 public int quantityDropped(Random random)
     {
         return 0;
-    }*/
+    }
 	
 	
 	

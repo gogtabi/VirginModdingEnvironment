@@ -1,9 +1,7 @@
 package org.maghtuireadh.virginmod.proxy;
 
 import org.maghtuireadh.virginmod.util.Reference;
-import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
 
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
