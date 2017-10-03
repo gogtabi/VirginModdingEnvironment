@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "vme:block/block_atd_torch" }
+        }
+}
+
