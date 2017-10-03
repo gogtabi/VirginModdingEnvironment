@@ -1,5 +1,5 @@
 package org.maghtuireadh.virginmod.objects.blocks;
-import java.util.Random;
+
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
@@ -8,9 +8,6 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 

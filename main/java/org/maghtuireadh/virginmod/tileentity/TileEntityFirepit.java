@@ -1,12 +1,11 @@
 package org.maghtuireadh.virginmod.tileentity;
 
-import org.maghtuireadh.virginmod.init.BlockInit;
+
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,9 +14,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class TileEntityFirepit extends TileEntity implements ITickable {
 	private boolean Burning, isStoked;
@@ -37,6 +33,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	private int pitState = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
+	@SuppressWarnings("unused")
 	private IBlockState blockStateLit, blockStateUnlit;
 	public void TileEntityFirpit() {
 		
