@@ -6,7 +6,6 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSpade;
-import net.minecraft.item.Item.ToolMaterial;
 
 public class ToolShovel extends ItemSpade implements IHasModel {
 

@@ -6,8 +6,6 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemBucket;
 
 public class ToolSword extends ItemSword implements IHasModel {
 
