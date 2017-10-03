@@ -1,5 +1,6 @@
 {
-	"textures": {"1": "blocks/cobblestone"},
+	"textures": {"1": "blocks/cobblestone",
+	             "particle": "blocks/cobblestone"},
 	"elements": [
 		{
 			"name": "StoneRing - S",

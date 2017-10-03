@@ -101,7 +101,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 				
 		case 3: return 0; //unlit_firepit3
 			
-		case 4: return 6; //lit_firepit1
+		case 4: return 4; //lit_firepit1
 			
 		case 5: return 8; //lit_firepit2
 			
@@ -315,6 +315,18 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
+	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+			EnumFacing side) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
 	}
 	
 	public boolean isFullCube(IBlockState state)
