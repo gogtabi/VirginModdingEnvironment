@@ -2,13 +2,13 @@ package org.maghtuireadh.virginmod.objects.blocks.furnaces;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
-import org.maghtuireadh.virginmod.util.handlers.EnumHandler;
-import org.maghtuireadh.virginmod.util.handlers.EnumHandler.FirepitStatesTemp;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
@@ -17,6 +17,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -36,8 +37,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,21 +48,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider {
-
-	
-	public static final PropertyBool LIT = PropertyBool.create("lit");
-	private IBlockState blockState1 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
-	private IBlockState blockState2 = this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(true));
-
-	Float lightLvl;
-
+	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
+	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 11);
+	public static IBlockState[] states = new IBlockState[12];
 	boolean Burning;
 
+	public BlockFirepit(String unlocalizedName, Material material) {
 
-
-	public BlockFirepit(String unlocalizedName) {
-
-	super(Material.ROCK);
+	super(material);
 	this.setUnlocalizedName(unlocalizedName);
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	BlockInit.BLOCKS.add(this);
@@ -67,33 +63,68 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	//ItemInit.ITEMS.add(new ItemBlock(blockState2.getBlock()).setRegistryName(this.getRegistryName()));
 	this.setCreativeTab(Main.virginmodtab);
-	}
+	for (int i = 0; i < 12; i++) {
+        this.states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
+        }
+    }
 
-
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return FIREPIT_AABB;
+    }	
+	
+    @Nullable
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+    {
+        return FIREPIT_AABB;
+    }
+    
+    
 	public void setLit() {
 		//this. 
 	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {LIT});
+		return new BlockStateContainer(this, new IProperty[] {PITSTATE});
+		//return new BlockStateContainer(this, new IProperty[] {LIT});
 	}
 	
 	@Override
 	public int getLightValue(IBlockState state) {
-		;			if(state == blockState2) {
-			return 15;
-		}
-		else {
-			return 0;
-		}
+		switch (getMetaFromState(state)) {
+		case 0: return 0; //empty_firepit
+				
+		case 1: return 0; //unlit_firepit1
+			
+		case 2: return 0; //unlit_firepit2
+				
+		case 3: return 0; //unlit_firepit3
+			
+		case 4: return 6; //lit_firepit1
+			
+		case 5: return 8; //lit_firepit2
+			
+		case 6: return 10; //lit_firepit3
+		
+		case 7: return 12; //lit_firepit4
+			
+		case 8: return 0; //dirty_firepit
+
+		case 9: return 0; //extinguished_firepit1
+		
+		case 10: return 0; //extinguished_firepit2
+			
+		case 11: return 0; //extinguished_firepit3
+			
+		default: return 0;
+			}
 	}
-	
+
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
-		// TODO Auto-generated method stub
-		return this.getDefaultState().withProperty(LIT, false);
+		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
 
@@ -101,7 +132,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
 		
-		worldIn.setBlockState(pos, state.withProperty(LIT, false));
+		worldIn.setBlockState(pos, state.withProperty(PITSTATE, 0));
 	}
 	
 	@Override
@@ -110,21 +141,25 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 
 	 }
 
+	public boolean getBurning()
+	{
+		return Burning;
+	}
 	public void setBurning(boolean bool)
 	{
 		this.Burning = bool;
 	}
 
-	public void setState(boolean isLit, World worldIn, BlockPos pos) {
+	public int getState(World worldIn, BlockPos pos) {
+		IBlockState state = worldIn.getBlockState(pos);
+		return getMetaFromState(state);
+	}
+	
+	public void setState(int meta, World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
-		
-		if(isLit) {
-			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, true));
-		}
-		if(!isLit) {
-			worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(LIT, false));
-		}
+		worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(PITSTATE, meta));
+
 		this.getLightValue(state);
 		
 		if(tileentity != null) {
@@ -147,7 +182,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	}
 	
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false));
+		this.blockState.getBaseState().withProperty(PITSTATE, Integer.valueOf(0));
 		this.setBurning(false);
 	}
 
@@ -205,7 +240,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState1;
+		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
 	/**
@@ -225,25 +260,26 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	}*/
 	@Override
 	public int getMetaFromState(IBlockState state) {
-			if(state == blockState2) {
-				return 0;
-			}
-			else {
-				return 1;
-			}
+		int meta = state.getValue(PITSTATE);
+		return meta;
 		}
+	
+
 	/**
 	 * Gets the block state from the meta
 	 */
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		if(meta==0) {
+			return BlockFirepit.states[meta];
+		}
+			
+/*		if(meta==0) {
 		return blockState2;
 		} //Returns the correct state
 		else {
 			return blockState1;
-		}
-}
+		}*/
+
 	
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -264,16 +300,15 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	
 	@Override
 	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-		for (int i = 0; i < 2; i++) {
-			items.add(new ItemStack(this, 1, i));
-		}
+			items.add(new ItemStack(this, 1, 0));
 		}
 		
-
 	@Override
 	public void registerModels() {
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "block_firepit", "inventory");
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "block_firepit", "inventory");
+		for (int i=0;i<states.length-1;i++)
+		{
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "block_firepit", "states="+i);
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)

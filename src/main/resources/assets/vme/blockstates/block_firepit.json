@@ -1,6 +1,16 @@
 {
     "variants": {
-        "lit=true": { "model": "vme:lit_firepit4"},
-        "lit=false": { "model": "vme:empty_firepit"}
+        "pitstate=0": { "model": "vme:empty_firepit"},
+        "pitstate=1": { "model": "vme:unlit_firepit1"},
+        "pitstate=2": { "model": "vme:unlit_firepit2"},
+        "pitstate=3": { "model": "vme:unlit_firepit3"},
+        "pitstate=4": { "model": "vme:lit_firepit1"},
+        "pitstate=5": { "model": "vme:lit_firepit2"},
+        "pitstate=6": { "model": "vme:lit_firepit3"},
+        "pitstate=7": { "model": "vme:lit_firepit4"},
+        "pitstate=8": { "model": "vme:dirty_firepit"},
+        "pitstate=9": { "model": "vme:extinguished_firepit1"},
+        "pitstate=10": { "model": "vme:extinguished_firepit2"},
+        "pitstate=11": { "model": "vme:extinguished_firepit3"}
         }
 }

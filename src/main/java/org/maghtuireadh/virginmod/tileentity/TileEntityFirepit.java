@@ -15,6 +15,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
@@ -26,18 +27,19 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	private int coalBurn = 0;
 	private int coalCount = 0;
 	private int coalGrowth = 0;
-	private int coalRate = 0;
+	private double coalRate = 0;
+	private int coalBase = 0;
 	private int ashBurn = 0;
 	private int ashCount = 0;
 	private int ashGrowth = 0;
-	private int ashRate = 0;
+	private double ashRate = 0;
+	private int ashBase = 0;
+	private int pitState = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
 	private IBlockState blockStateLit, blockStateUnlit;
 	public void TileEntityFirpit() {
 		
-		blockStateLit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(true));
-		blockStateUnlit = this.world.getBlockState(pos).withProperty(BlockFirepit.LIT, Boolean.valueOf(false));
 	}
 
 	@Override
@@ -50,11 +52,14 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		this.coalBurn = nbt.getInteger("CoalBurn");
 		this.coalCount = nbt.getInteger("CoalCount");
 		this.coalGrowth = nbt.getInteger("CoalGrowth");
-		this.coalRate = nbt.getInteger("CoalRate");
+		this.coalRate = nbt.getDouble("CoalRate");
+		this.coalBase = nbt.getInteger("CoalBase");
 		this.ashBurn = nbt.getInteger("AshBurn");
 		this.ashCount = nbt.getInteger("AshCount");
 		this.ashGrowth = nbt.getInteger("AshGrowth");
-		this.ashRate = nbt.getInteger("AshRate");
+		this.ashRate = nbt.getDouble("AshRate");
+		this.ashBase = nbt.getInteger("AshBase");
+		this.pitState = nbt.getInteger("PitState");
 		this.Burning = nbt.getBoolean("Burning");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.lightLvl = nbt.getFloat("Light Level");
@@ -70,11 +75,14 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		nbt.setInteger("CoalBurn", coalBurn);
 		nbt.setInteger("CoalCount", coalCount);
 		nbt.setInteger("CoalGrowth", coalGrowth);
-		nbt.setInteger("CoalRate", coalRate);
+		nbt.setDouble("CoalRate", coalRate);
+		nbt.setInteger("CoalBase", coalBase);
 		nbt.setInteger("AshBurn", ashBurn);
 		nbt.setInteger("AshCount", ashCount);
 		nbt.setInteger("AshGrowth", ashGrowth);
-		nbt.setInteger("AshRate", ashRate);
+		nbt.setDouble("AshRate", ashRate);
+		nbt.setInteger("AshBase", ashBase);
+		nbt.setInteger("PitState", pitState);
 		nbt.setBoolean("Burning", Burning);
 		nbt.setBoolean("IsStoked", isStoked);
 		nbt.setFloat("Light Level", lightLvl);
@@ -94,31 +102,72 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
             this.blockType = this.getBlockType();
 
             if (this.blockType instanceof BlockFirepit) {
-                ((BlockFirepit) this.blockType).setBurning(Burning);
-                ((BlockFirepit) this.blockType).setState(Burning, world, pos);
+                if(((BlockFirepit) this.blockType).getBurning()!=Burning){
+                		((BlockFirepit) this.blockType).setBurning(Burning);
+                }
+                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState);
+                ((BlockFirepit) this.blockType).setState(pitState, world, pos);
             }
             markDirty();
         }
     }
 	
 	public void update(){
-		
-		if (firepitBurnTime>0 && Burning!=true)
-		{
-			Burning=true;
-			markDirty();
-			Utils.getLogger()
-					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
-			Utils.getLogger().info("It's Burning");
-		}
+		if (firepitBurnTime>0 && !Burning)
+			{
+				Burning=true;
+				markDirty();
+				Utils.getLogger().info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
+				Utils.getLogger().info("It's Burning");
+			}
 		if (Burning) {
-			--firepitBurnTime;
-			lightLvl = 1.0F;Utils.getLogger()
-			.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
+				--firepitBurnTime;
+				if(firepitBurnTime==0) {
+					Burning = false;
+					pitState = 8;
+					coalBurn = 0;
+					coalRate = 0;
+					coalBase = 0;
+					ashBurn = 0;
+					ashRate = 0;
+					ashBase = 0;
+					
+				}
+				if(firepitBurnTime!=0 && firepitBurnTime<=200) {
+					pitState=4;
+					coalRate = (coalBase*.85);
+					ashRate = (ashBase*1.3);
+					ashCount++;
+					coalCount++;
+				}
+				if(firepitBurnTime>=201 && firepitBurnTime<=600) {
+					pitState=5;
+					coalRate = coalBase;
+					ashRate = (ashBase*1.15);
+					ashCount++;
+					coalCount++;
+				}
+				if(firepitBurnTime>=601 && firepitBurnTime<=900) {
+					pitState=6;
+					coalRate = (coalBase*1.15);
+					ashRate = ashBase;
+					ashCount++;
+					coalCount++;
+				}
+				if(firepitBurnTime>=901 && firepitBurnTime<=1200) {
+					pitState=7;
+					coalRate = (coalBase*1.30);
+					ashRate = (ashBase*.85);
+					ashCount++;
+					coalCount++;
+				}	
 			markDirty();
+			this.setBurning();
 		}
+	}
 		
-		if (Burning && coalBurn > 0) {
+/*		if(!Burning) {
+		if (!Burning && coalBurn > 0) {
 			--coalBurn;
 			++coalGrowth;
 			if (coalGrowth == coalRate) {
@@ -128,7 +177,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			}
 		}
 
-		if (Burning && ashBurn > 0) {
+		if (!Burning && ashBurn > 0) {
 			--ashBurn;
 			++ashGrowth;
 			markDirty();
@@ -138,23 +187,8 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 				this.ashGrowth = 0;
 				markDirty();
 			}
-		}
-
-		if (Burning && firepitBurnTime == 0) {
-			Burning = false;
-			coalBurn = 0;
-			ashBurn = 0;
-			coalRate = 0;
-			ashRate = 0;
-			lightLvl = 0;
-			markDirty();
-			Utils.getLogger()
-					.info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
-			Utils.getLogger().info("It's Not Burning");
-		}
-		markDirty();
-		this.setBurning();
-		}
+		}*/
+		
 
 public void setFuelValues(ItemStack heldItem) {
 		if (heldItem.isEmpty()) {
@@ -162,12 +196,12 @@ public void setFuelValues(ItemStack heldItem) {
 			Item item = heldItem.getItem();
 			if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
 				firepitBurnTime += 300;
-				coalBurn += 100;
-				coalRate = 25;
-				ashBurn += 100;
+				coalBurn += 100; //How long will produce coal
+				coalBase = 100; //How often will produce coal
+				ashBurn += 100; //How long will produce ash
+				ashBase = 100;	//How often will produce ash		
 				heldItem.shrink(1);
 				markDirty();
-				Utils.getLogger().info(firepitBurnTime + "setFuelValues");
 			}
 		}
 	}

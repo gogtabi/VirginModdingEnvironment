@@ -1,8 +1,8 @@
 {
 	"textures": {
 		"0": "blocks/cobblestone",
-		"2": "custom/coal_bed_glowing",
-		"3": "custom/Burned_Oak"
+		"2": "vme:custom/coal_bed_glowing",
+		"3": "vme:custom/Burned_Oak"
 	},
 	"elements": [
 		{
