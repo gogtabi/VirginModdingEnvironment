@@ -7,18 +7,24 @@ import org.maghtuireadh.virginmod.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class TileEntityFirepit extends TileEntity implements ITickable {
 	private boolean Burning, isStoked;
 	private int firepitBurnTime = 0;
-	private int fuelLvl = 0;
 	private int burnRate = 0;
 	private int coalBurn = 0;
 	private int coalCount = 0;
@@ -33,10 +39,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	private int pitState = 0;
 	float lightLvl = 0.0F;
 	private int cooldown;
-	@SuppressWarnings("unused")
-	private IBlockState blockStateLit, blockStateUnlit;
 	public void TileEntityFirpit() {
-		
 	}
 
 	@Override
@@ -44,7 +47,6 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		super.readFromNBT(nbt);
 		this.cooldown = nbt.getInteger("Cooldown");
 		this.firepitBurnTime = nbt.getInteger("FPBT");
-		this.fuelLvl = nbt.getInteger("FuelLvl");
 		this.burnRate = nbt.getInteger("BurnRate");
 		this.coalBurn = nbt.getInteger("CoalBurn");
 		this.coalCount = nbt.getInteger("CoalCount");
@@ -60,14 +62,12 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		this.Burning = nbt.getBoolean("Burning");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.lightLvl = nbt.getFloat("Light Level");
-
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("Cooldown", cooldown);
 		nbt.setInteger("FPBT", firepitBurnTime);
-		nbt.setInteger("FuelLvl", fuelLvl);
 		nbt.setInteger("BurnRate", burnRate);
 		nbt.setInteger("CoalBurn", coalBurn);
 		nbt.setInteger("CoalCount", coalCount);
@@ -110,13 +110,6 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
     }
 	
 	public void update(){
-		if (firepitBurnTime>0 && !Burning)
-			{
-				Burning=true;
-				markDirty();
-				Utils.getLogger().info("Update1: " + "Light: " + lightLvl + " Burning: " + Burning + " BurnTime:" + firepitBurnTime);
-				Utils.getLogger().info("It's Burning");
-			}
 		if (Burning) {
 				--firepitBurnTime;
 				if(firepitBurnTime==0) {
@@ -127,82 +120,201 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 					coalBase = 0;
 					ashBurn = 0;
 					ashRate = 0;
-					ashBase = 0;
-					
+					ashBase = 0;	
 				}
 				if(firepitBurnTime!=0 && firepitBurnTime<=200) {
 					pitState=4;
 					coalRate = (coalBase*.85);
 					ashRate = (ashBase*1.3);
-					ashCount++;
-					coalCount++;
+					ashGrowth++;
+					coalGrowth++;
 				}
 				if(firepitBurnTime>=201 && firepitBurnTime<=600) {
 					pitState=5;
 					coalRate = coalBase;
 					ashRate = (ashBase*1.15);
-					ashCount++;
-					coalCount++;
+					ashGrowth++;
+					coalGrowth++;
 				}
 				if(firepitBurnTime>=601 && firepitBurnTime<=900) {
 					pitState=6;
 					coalRate = (coalBase*1.15);
 					ashRate = ashBase;
-					ashCount++;
-					coalCount++;
+					ashGrowth++;
+					coalGrowth++;
 				}
-				if(firepitBurnTime>=901 && firepitBurnTime<=1200) {
+				if(firepitBurnTime>=901){
 					pitState=7;
 					coalRate = (coalBase*1.30);
 					ashRate = (ashBase*.85);
-					ashCount++;
-					coalCount++;
+					ashGrowth++;
+					coalGrowth++;
 				}	
-			markDirty();
-			this.setBurning();
+			
 		}
+		if((ashGrowth>=ashRate) && Burning) {
+			ashCount++;
+			ashGrowth=0;
+		}
+		if((coalGrowth>=coalRate) && Burning) {
+			coalCount++;
+			coalGrowth=0;
+		}
+		markDirty();
+		this.setBurning();
 	}
-		
-/*		if(!Burning) {
-		if (!Burning && coalBurn > 0) {
-			--coalBurn;
-			++coalGrowth;
-			if (coalGrowth == coalRate) {
-				++coalCount;
-				coalGrowth = 0;
-				markDirty();
-			}
+
+public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
+			
+	if (heldItem.isEmpty()) {
+		/*if(!Burning && (coalCount!=0 || ashCount!=0))
+		{
+			inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
+//			inventory.addItemStackToInventory();
+			coalCount=0;
+			ashCount=0;
+			pitState = getUnlit(firepitBurnTime);
 		}
-
-		if (!Burning && ashBurn > 0) {
-			--ashBurn;
-			++ashGrowth;
-			markDirty();
-
-			if (ashGrowth == ashRate) {
-				++ashCount;
-				this.ashGrowth = 0;
-				markDirty();
+		else if(!Burning && firepitBurnTime!=0)
+		{
+			inventory.addItemStackToInventory(new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime/300),2));
+			firepitBurnTime=0;
+			pitState = getUnlit(firepitBurnTime);
+*/
+	}
+	else {
+		Item item = heldItem.getItem(); 
+		int itemName = item.getIdFromItem(item);
+		switch (itemName) {
+		case 259:
+			if (firepitBurnTime>0 && !Burning)
+			{
+				Burning=true;
+				Utils.getLogger().info("It's Burning");
+			}			
+			break;
+		case 4108:
+			if (firepitBurnTime>0 && !Burning)
+			{
+				Burning=true;
+				Utils.getLogger().info("It's Burning");
+			}			
+			break;
+		case 326:
+			if (Burning) {
+				Burning=false;
+				pitState = getExtinguished(pitState);
+				coalBurn = ((int)((float)coalBurn*0.5));
+				coalRate = coalBase*.75;
+				ashBurn = ((int)((float)ashBurn*0.5));
+				ashRate = ashBase*1.25;
 			}
-		}*/
-		
+			break;
+		case 3:
+			if (firepitBurnTime<=150 && Burning) {
+				Burning = false;
+				pitState = getExtinguished(pitState);
+				coalBurn = 0;
+				coalRate = coalBase;
+				ashBurn = 0;
+				ashRate = ashBase;
+				heldItem.shrink(1);
 
-public void setFuelValues(ItemStack heldItem) {
-		if (heldItem.isEmpty()) {
-		} else {
-			Item item = heldItem.getItem();
+			}
+			else if (firepitBurnTime>=151 && Burning){
+				firepitBurnTime=(firepitBurnTime-150);
+				heldItem.shrink(1);
+			}
+		default:
 			if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
 				firepitBurnTime += 300;
-				coalBurn += 100; //How long will produce coal
-				coalBase = 100; //How often will produce coal
-				ashBurn += 100; //How long will produce ash
-				ashBase = 100;	//How often will produce ash		
+				coalBurn += 200; //How long will produce coal
+				coalBase = 400; //How often will produce coal
+				coalBase = 400;
+				ashBurn += 200; //How long will produce ash
+				ashBase = 400;	//How often will produce ash
+				ashRate = ashBase;
+				pitState = getUnlit(firepitBurnTime);
+				this.setBurning();
 				heldItem.shrink(1);
-				markDirty();
+				markDirty();}
+			break;}
 			}
 		}
-	}
 
+
+	public int getUnlit(int fuelLevel) {
+		if(!Burning) {
+			if((coalCount==0 && ashCount==0) && fuelLevel>0) {
+				if(fuelLevel>0 && fuelLevel <=300) {
+					return 1;
+				}
+				if(fuelLevel>=301 && fuelLevel <= 600) {
+					return 2;
+				}
+				if(fuelLevel>=610) {
+					return 3;}
+			}
+			else if((coalCount>0 || ashCount>0) && fuelLevel>0)
+			{
+				if(fuelLevel>0 && fuelLevel <=300) {
+					return 9;
+				}
+				if(fuelLevel>=301 && fuelLevel <= 600) {
+					return 10;
+				}
+				if(fuelLevel>=610) {
+					return 11;}
+			}
+			else
+			{
+				if((coalCount>0 || ashCount>0) && fuelLevel==0) {
+					return 8;
+				}
+				if((coalCount==0 && ashCount==0) && fuelLevel==0) {
+					return 0;
+				}
+			}
+		}
+		else {
+			if(fuelLevel==0) {
+				return 0;
+			}
+			if(fuelLevel>0 && fuelLevel <=300) {
+				return 4;
+			}
+			if(fuelLevel>=301 && fuelLevel <= 600) {
+				return 5;
+			}
+			if(fuelLevel>=610 && fuelLevel <= 900) {
+				return 6;
+			}
+			if(fuelLevel>=901) {
+				return 7;
+			}
+		}
+		return 11;
+	}
+	public int getExtinguished(int pitState){
+		switch (pitState)
+		{
+			case 4:
+			return 8;
+			
+			case 5:
+			return 9;	
+			
+			case 6:
+			return 10;
+			
+			case 7:
+			return 11;
+			
+			default:
+			return 8;
+			}				
+	}
+	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -233,6 +345,10 @@ public void setFuelValues(ItemStack heldItem) {
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeToNBT(nbt);
 		return nbt;
+	}
+
+	public void cleanPit(InventoryPlayer inventory) {
+		
 	}
 
 }

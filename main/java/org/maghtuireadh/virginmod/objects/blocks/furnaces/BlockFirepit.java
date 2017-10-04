@@ -15,12 +15,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -54,9 +56,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	this.setUnlocalizedName(unlocalizedName);
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	BlockInit.BLOCKS.add(this);
-	//BlockInit.BLOCKS.add(blockState2.getBlock());
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-	//ItemInit.ITEMS.add(new ItemBlock(blockState2.getBlock()).setRegistryName(this.getRegistryName()));
 	this.setCreativeTab(Main.virginmodtab);
 	for (int i = 0; i < 12; i++) {
         states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
@@ -73,16 +73,10 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
     {
         return FIREPIT_AABB;
     }
-    
-    
-	public void setLit() {
-		//this. 
-	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {PITSTATE});
-		//return new BlockStateContainer(this, new IProperty[] {LIT});
 	}
 	
 	@Override
@@ -182,7 +176,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	}
 
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		@SuppressWarnings("unused")
 		TileEntityFirepit tileentity = (TileEntityFirepit)worldIn.getTileEntity(pos);
 		
 		super.breakBlock(worldIn, pos, state);
@@ -195,30 +188,27 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 
     {
-
         if (worldIn.isRemote)
-
         {
-
             return true;
-
         }
-
         else
-
         {
-
             TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);
 
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
+           	Item item = heldItem.getItem();
+           	int itemID = item.getIdFromItem(item);
 
-           	tileentity.setFuelValues(heldItem);
+           	tileentity.rightClick(heldItem, playerIn.inventory);
+          
+           	if(itemID == 259)
+           	{
+           		heldItem.damageItem(1, playerIn);
+           	}
 
            	return true;    
-
-           }
-
-
+            }
 
      }
 
@@ -244,16 +234,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	 * I recommend also saving the EnumFacing to the meta but I haven't
 	 */
 	
-	
-/*	@Override
-	public int getMetaFromState(IBlockState state) {
-		if(state == blockState2) {
-			return 0;
-		}
-		else {
-			return 1;
-		}
-	}*/
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int meta = state.getValue(PITSTATE);
@@ -269,13 +249,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 			return BlockFirepit.states[meta];
 		}
 			
-/*		if(meta==0) {
-		return blockState2;
-		} //Returns the correct state
-		else {
-			return blockState1;
-		}*/
-
 	
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -298,7 +271,9 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
 			items.add(new ItemStack(this, 1, 0));
 		}
-		
+	
+	
+	
 	@Override
 	public void registerModels() {
 		for (int i=0;i<states.length-1;i++)
@@ -316,7 +291,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	@Override
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
 			EnumFacing side) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

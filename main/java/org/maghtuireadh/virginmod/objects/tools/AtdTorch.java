@@ -3,7 +3,7 @@ package org.maghtuireadh.virginmod.objects.tools;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.objects.blocks.movinglight.te.TEMovingLightSource;
+import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
