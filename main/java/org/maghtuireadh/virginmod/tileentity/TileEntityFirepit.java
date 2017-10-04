@@ -1,6 +1,8 @@
 package org.maghtuireadh.virginmod.tileentity;
 
 
+import java.util.Random;
+
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
@@ -86,23 +88,15 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 		return super.writeToNBT(nbt);
 	}
 
-	public float getLight() {
-		return lightLvl;
-	}
-
-	public boolean getBurning() {
-		return Burning;
-	}
-
 	public void setBurning() {
         if (this.world != null && !this.world.isRemote) { 
 	            this.blockType = this.getBlockType();
 	
 	            if (this.blockType instanceof BlockFirepit) {
-	                if(((BlockFirepit) this.blockType).getBurning()!=Burning){
+	                if(((BlockFirepit) this.blockType).getBurning()!=Burning){ //Only update BlockFirepit Burning bool on a change
 	                		((BlockFirepit) this.blockType).setBurning(Burning);
 	                }
-	                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState){
+	                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState){ //Only update BlockFirepit State On A Change
 		                ((BlockFirepit) this.blockType).setState(pitState, world, pos);
 		            }
 	         markDirty();
@@ -124,46 +118,47 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 					ashBase = 0;	
 				}
 				if(firepitBurnTime!=0 && firepitBurnTime<=200) {
-					pitState=4;
-					coalRate = (coalBase*.85);
-					ashRate = (ashBase*1.3);
+					pitState=4;	//set BlockFirepit State To lit_firepit1
+					coalRate = (coalBase*.85); //Increase rate of coal production by 15%
+					ashRate = (ashBase*1.3); //Decrease rate of ash production by 30%
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=201 && firepitBurnTime<=600) {
-					pitState=5;
-					coalRate = coalBase;
-					ashRate = (ashBase*1.15);
+					pitState=5; //set BlockFirepit State To lit_firepit2
+					coalRate = coalBase; 
+					ashRate = (ashBase*1.15); //Decrease rate of ash production by 15%
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=601 && firepitBurnTime<=900) {
-					pitState=6;
-					coalRate = (coalBase*1.15);
-					ashRate = ashBase;
+					pitState=6; //set BlockFirepit State To lit_firepit3
+					coalRate = (coalBase*1.15); //Decrease rate of coal production by 15%
+					ashRate = ashBase; 
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=901){
-					pitState=7;
-					coalRate = (coalBase*1.30);
-					ashRate = (ashBase*.85);
+					pitState=7; //set BlockFirepit State To lit_firepit4
+					coalRate = (coalBase*1.30); //Decrease rate of coal production by 30%
+					ashRate = (ashBase*.85); //Increase rate of ash control by 15%
 					ashGrowth++;
 					coalGrowth++;
 				}	
 			
 		}
 		if((ashGrowth>=ashRate) && Burning) {
-			ashCount++;
-			ashGrowth=0;
+			ashCount++; //Increase amount of ash that will be returned.
+			ashGrowth=0; //Reset ashGrowth
 		}
 		if((coalGrowth>=coalRate) && Burning) {
-			coalCount++;
-			coalGrowth=0;
+			coalCount++; //Increase amount of coal that will be returned.
+			coalGrowth=0; //Reset coalGrowth
 		}
 		markDirty();
 		this.setBurning();
 	}
+
 
 public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			
@@ -244,54 +239,54 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 		}
 	}
 		
-	public int getUnlit(int fuelLevel) {
+	public int getUnlit(int fuelLevel) { //returns state based on fuelLevel
 		if(!Burning) {
 			if((coalCount==0 && ashCount==0) && fuelLevel>0) {
 				if(fuelLevel>0 && fuelLevel <=300) {
-					return 1;
+					return 1; // ulit_firepit1
 				}
 				if(fuelLevel>=301 && fuelLevel <= 600) {
-					return 2;
+					return 2; // ulit_firepit2
 				}
 				if(fuelLevel>=610) {
-					return 3;}
+					return 3;} // unlit_firepit3
 			}
 			else if((coalCount>0 || ashCount>0) && fuelLevel>0)
 			{
 				if(fuelLevel>0 && fuelLevel <=300) {
-					return 9;
+					return 9; // extinguished_firepit1
 				}
 				if(fuelLevel>=301 && fuelLevel <= 600) {
-					return 10;
+					return 10; // extinguished_firepit1
 				}
 				if(fuelLevel>=610) {
-					return 11;}
+					return 11;} // extinguished_firepit1
 			}
 			else
 			{
 				if((coalCount>0 || ashCount>0) && fuelLevel==0) {
-					return 8;
+					return 8; // dirty_firepit
 				}
 				if((coalCount==0 && ashCount==0) && fuelLevel==0) {
-					return 0;
+					return 0; // empty_firepit
 				}
 			}
 		}
 		else {
 			if(fuelLevel==0) {
-				return 0;
+				return 0; // vme:empty_firepit
 			}
 			if(fuelLevel>0 && fuelLevel <=300) {
-				return 4;
+				return 4; // lit_firepit1
 			}
 			if(fuelLevel>=301 && fuelLevel <=600) {
-				return 5;
+				return 5; // lit_firepit2
 			}
 			if(fuelLevel>=610 && fuelLevel <=900) {
-				return 6;
+				return 6; // lit_firepit3
 			}
 			if(fuelLevel>=901) {
-				return 7;
+				return 7; // lit_firepit4
 			}
 		}
 		return 11;
@@ -299,20 +294,20 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 	public int getExtinguished(int pitState){
 		switch (pitState)
 		{
-			case 4:
-			return 8;
+			case 4: // lit_firepit1
+			return 8; // dirty_firepit
 			
-			case 5:
-			return 9;	
+			case 5: // lit_firepit2
+			return 9;	// extinguished_Firepit1
 			
-			case 6:
-			return 10;
+			case 6: // lit_firepit3
+			return 10;  // extinguished_Firepit2
+			 
+			case 7: // lit_firepit4
+			return 11; // extinguished_Firepit3
 			
-			case 7:
-			return 11;
-			
-			default:
-			return 8;
+			default: 
+			return 8; // dirty_firepit
 			}				
 	}
 	
