@@ -4,21 +4,24 @@ import java.util.Random;
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
+import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.WoodlandMansion;
 
 public class BlockATDTorch extends BlockTorch implements IHasModel {
 	
 	public static Long burnTime = (long) 40;
 	public  Long setTime = (long) 0;
-	
 	
 	
 	
@@ -33,7 +36,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 20);
 		//setCreativeTab(Main.virginmodtab);
-		
 		BlockInit.BLOCKS.add(this);
 		//ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
@@ -46,6 +48,12 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 			breakBlock(world, pos, state);
 		} 
 		Utils.getLogger().info("Set Time: " + setTime);
+		
+		
+		
+		if(ItemInit.ATD_TORCH != Items.BUCKET) {
+			
+		}
 		 
 	}
 

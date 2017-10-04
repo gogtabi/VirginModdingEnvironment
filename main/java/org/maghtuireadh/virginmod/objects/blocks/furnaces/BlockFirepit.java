@@ -163,9 +163,9 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		}
 	}
 			
-	
-	public int quantityDropped(Random random){
 
+
+	public int quantityDropped(Random random){
 			 return 6;
 
 	}			
@@ -199,7 +199,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
         if (worldIn.isRemote)
 
         {
-
             return true;
 
         }
