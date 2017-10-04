@@ -96,18 +96,19 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 
 	public void setBurning() {
         if (this.world != null && !this.world.isRemote) { 
-            this.blockType = this.getBlockType();
-
-            if (this.blockType instanceof BlockFirepit) {
-                if(((BlockFirepit) this.blockType).getBurning()!=Burning){
-                		((BlockFirepit) this.blockType).setBurning(Burning);
-                }
-                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState);
-                ((BlockFirepit) this.blockType).setState(pitState, world, pos);
-            }
-            markDirty();
+	            this.blockType = this.getBlockType();
+	
+	            if (this.blockType instanceof BlockFirepit) {
+	                if(((BlockFirepit) this.blockType).getBurning()!=Burning){
+	                		((BlockFirepit) this.blockType).setBurning(Burning);
+	                }
+	                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState){
+		                ((BlockFirepit) this.blockType).setState(pitState, world, pos);
+		            }
+	         markDirty();
+	            } 
         }
-    }
+	}
 	
 	public void update(){
 		if (Burning) {
@@ -167,7 +168,7 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			
 	if (heldItem.isEmpty()) {
-		/*if(!Burning && (coalCount!=0 || ashCount!=0))
+		if(!Burning && (coalCount!=0 || ashCount!=0))
 		{
 			inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
 //			inventory.addItemStackToInventory();
@@ -180,11 +181,11 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			inventory.addItemStackToInventory(new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime/300),2));
 			firepitBurnTime=0;
 			pitState = getUnlit(firepitBurnTime);
-*/
+		}
 	}
 	else {
 		Item item = heldItem.getItem(); 
-		int itemName = item.getIdFromItem(item);
+		int itemName = Item.getIdFromItem(item);
 		switch (itemName) {
 		case 259:
 			if (firepitBurnTime>0 && !Burning)
@@ -219,7 +220,7 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 				ashBurn = 0;
 				ashRate = ashBase;
 				heldItem.shrink(1);
-
+			break;
 			}
 			else if (firepitBurnTime>=151 && Burning){
 				firepitBurnTime=(firepitBurnTime-150);
@@ -234,15 +235,15 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 				ashBurn += 200; //How long will produce ash
 				ashBase = 400;	//How often will produce ash
 				ashRate = ashBase;
+				coalRate = coalBase;
 				pitState = getUnlit(firepitBurnTime);
 				this.setBurning();
 				heldItem.shrink(1);
 				markDirty();}
 			break;}
-			}
 		}
-
-
+	}
+		
 	public int getUnlit(int fuelLevel) {
 		if(!Burning) {
 			if((coalCount==0 && ashCount==0) && fuelLevel>0) {
@@ -283,10 +284,10 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			if(fuelLevel>0 && fuelLevel <=300) {
 				return 4;
 			}
-			if(fuelLevel>=301 && fuelLevel <= 600) {
+			if(fuelLevel>=301 && fuelLevel <=600) {
 				return 5;
 			}
-			if(fuelLevel>=610 && fuelLevel <= 900) {
+			if(fuelLevel>=610 && fuelLevel <=900) {
 				return 6;
 			}
 			if(fuelLevel>=901) {

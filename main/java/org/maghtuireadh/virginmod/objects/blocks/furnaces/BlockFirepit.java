@@ -198,7 +198,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	Item item = heldItem.getItem();
-           	int itemID = item.getIdFromItem(item);
+           	int itemID = Item.getIdFromItem(item);
 
            	tileentity.rightClick(heldItem, playerIn.inventory);
           
