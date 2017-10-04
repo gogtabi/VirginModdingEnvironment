@@ -1,4 +1,4 @@
-package org.maghtuireadh.virginmod.objects.blocks.movinglight.te;
+package org.maghtuireadh.virginmod.tileentity;
 
 import java.util.UUID;
 

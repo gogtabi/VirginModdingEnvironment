@@ -1,6 +1,6 @@
 package org.maghtuireadh.virginmod.objects.blocks.movinglight;
 
-import org.maghtuireadh.virginmod.objects.blocks.movinglight.te.TEMovingLightSource;
+import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.BlockAir;
