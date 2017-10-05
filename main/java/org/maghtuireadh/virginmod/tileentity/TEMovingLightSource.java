@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
+import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,7 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 			world.setBlockToAir(pos);
 			world.removeTileEntity(pos);
 		}
+		Utils.getLogger().info("This is working");
 	}
 
 	@Override
@@ -53,8 +55,10 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 
 	public boolean shouldKill() {
 		final EntityPlayer player = findLightSourceCreator();
-		Boolean hasTorch = player.getHeldItemMainhand() == new ItemStack(ItemInit.ATD_TORCH);
-		return player == null || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D || !hasTorch;
+		//Boolean hasTorch = player.getHeldItemMainhand().getUnlocalizedName() != "atd_torch";
+		Boolean kill = player == null || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D;// || hasTorch;
+		Utils.getLogger().info(kill);
+		return kill;
 	}
 
 	public TEMovingLightSource setPlayer(EntityPlayer player) {
