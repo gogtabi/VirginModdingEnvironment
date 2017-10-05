@@ -1,6 +1,8 @@
 package org.maghtuireadh.virginmod.tileentity;
 
 
+import java.util.Random;
+
 import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
 
@@ -116,46 +118,47 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 					ashBase = 0;	
 				}
 				if(firepitBurnTime!=0 && firepitBurnTime<=200) {
-					pitState=4;
-					coalRate = (coalBase*.85);
-					ashRate = (ashBase*1.3);
+					pitState=4;	//set BlockFirepit State To lit_firepit1
+					coalRate = (coalBase*.85); //Increase rate of coal production by 15%
+					ashRate = (ashBase*1.3); //Decrease rate of ash production by 30%
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=201 && firepitBurnTime<=600) {
-					pitState=5;
-					coalRate = coalBase;
-					ashRate = (ashBase*1.15);
+					pitState=5; //set BlockFirepit State To lit_firepit2
+					coalRate = coalBase; 
+					ashRate = (ashBase*1.15); //Decrease rate of ash production by 15%
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=601 && firepitBurnTime<=900) {
-					pitState=6;
-					coalRate = (coalBase*1.15);
-					ashRate = ashBase;
+					pitState=6; //set BlockFirepit State To lit_firepit3
+					coalRate = (coalBase*1.15); //Decrease rate of coal production by 15%
+					ashRate = ashBase; 
 					ashGrowth++;
 					coalGrowth++;
 				}
 				if(firepitBurnTime>=901){
-					pitState=7;
-					coalRate = (coalBase*1.30);
-					ashRate = (ashBase*.85);
+					pitState=7; //set BlockFirepit State To lit_firepit4
+					coalRate = (coalBase*1.30); //Decrease rate of coal production by 30%
+					ashRate = (ashBase*.85); //Increase rate of ash control by 15%
 					ashGrowth++;
 					coalGrowth++;
 				}	
 			
 		}
 		if((ashGrowth>=ashRate) && Burning) {
-			ashCount++;
-			ashGrowth=0;
+			ashCount++; //Increase amount of ash that will be returned.
+			ashGrowth=0; //Reset ashGrowth
 		}
 		if((coalGrowth>=coalRate) && Burning) {
-			coalCount++;
-			coalGrowth=0;
+			coalCount++; //Increase amount of coal that will be returned.
+			coalGrowth=0; //Reset coalGrowth
 		}
 		markDirty();
 		this.setBurning();
 	}
+
 
 public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			
