@@ -9,16 +9,18 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockATDTorch extends BlockTorch implements IHasModel {
 	
+
 	public static Long burnTime = (long) 40;
 	public  Long setTime = (long) 0;
-	
 	
 	
 	
@@ -33,20 +35,19 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 20);
 		//setCreativeTab(Main.virginmodtab);
-		
 		BlockInit.BLOCKS.add(this);
 		//ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		//world.scheduleBlockUpdate(pos, this , burnTime, 0);
-		setTime = world.getTotalWorldTime();
+		this.setTime = world.getTotalWorldTime();
 		if (world.isRainingAt(pos)) {
 			breakBlock(world, pos, state);
 		} 
 		Utils.getLogger().info("Set Time: " + setTime);
-		 
+			 
 	}
 
 
