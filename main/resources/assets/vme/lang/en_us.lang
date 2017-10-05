@@ -1,4 +1,6 @@
 item.ingot_copper.name=Copper Ingot
+item.atd_torch.name=ATD Torch
+tile.block_atd_torch.name=ATD Torch
 tile.block_copper.name=Copper Block
 itemGroup.virginmodtab=Virgin Mod
 

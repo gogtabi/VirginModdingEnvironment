@@ -77,8 +77,8 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
     {
         return 0;
     }
-	
+}
 	
 	
 
-	}
+	
