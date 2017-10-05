@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider {
 
 	BlockPos BP;
+	EntityPlayer player;
 	
 	public AtdTorch(String name, ToolMaterial material) {
 		super(material);
@@ -44,7 +45,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 
-		return new TEMovingLightSource();
+		return new TEMovingLightSource().setPlayer(player);
 
 	}
 	
@@ -88,9 +89,11 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 			}
 			else {
 			}
-			Utils.getLogger().info("Thats null bruh");	
+				
 		}
-		
+		else {
+		Utils.getLogger().info("Thats null bruh");
+		}
         return EnumActionResult.PASS;
     }
 	
