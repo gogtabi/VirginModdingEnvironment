@@ -125,7 +125,6 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			else if(((BlockFirepit) this.getBlockType()).getWeather(world, pos))
 			{
 				firepitBurnTime = firepitBurnTime-3;
-				//Utils.getLogger().info("It's Raining On Your Firepit!" + firepitBurnTime);
 			}
 			else{
 				firepitBurnTime--;
@@ -133,9 +132,9 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			
 			if(firepitBurnTime<=0) {
 				firepitBurnTime=0;
+				pitState = 8;
 				Burning = false;
 				isStoked = false;
-				getUnlit(firepitBurnTime);
 				stokedTimer = 0;
 				coalBurn = 0;
 				coalRate = 0;
@@ -186,10 +185,10 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			coalCount++; //Increase amount of coal that will be returned.
 			coalGrowth=0; //Reset coalGrowth
 		}
-		Utils.getLogger().info("CoalCount: " + coalCount + " AshCount:" + ashCount);
+		this.setBurning();
 		stokedCheck();		
 		markDirty();
-		this.setBurning();
+		
 	}
 	
 public void stokedCheck() {
@@ -201,40 +200,53 @@ public void stokedCheck() {
 }
 
 
-public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
+public void rightClick(ItemStack heldItem, EntityPlayer player) {
 			
 	if (heldItem.isEmpty()) {
 		if(!Burning && (coalCount!=0 || ashCount!=0))
 		{
-			inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
-			inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
+			player.inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
+			player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
 			coalCount=0;
 			ashCount=0;
 			pitState = getUnlit(firepitBurnTime);
 		}
 		else if(!Burning && firepitBurnTime!=0)
 		{
-			inventory.addItemStackToInventory(new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime/300),2));
+			player.inventory.addItemStackToInventory(new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime/300),2));
 			firepitBurnTime=0;
 			pitState = getUnlit(firepitBurnTime);
 		}
 	}
 	else {
-		Item item = heldItem.getItem(); 
-		String itemName = item.getUnlocalizedName();
-		//Utils.getLogger().info(itemName);
+       	Item item = heldItem.getItem();
+       	String itemName = item.getUnlocalizedName();
 		switch (itemName) {
 		case "item.flintAndSteel":
 			if (firepitBurnTime>0 && !Burning)
 			{
 				Burning=true;
-			}			
+				heldItem.damageItem(1, player);
+			}
+			else {
+			}
 			break;
 		case "item.atd_torch":
 			if (firepitBurnTime>0 && !Burning)
 			{
 				Burning=true;
-			}			
+			}	
+			else {
+			}
+			break;
+		case "item.atd_poker_iron":
+			if (Burning) {
+			isStoked = true;
+			stokedTimer = 300;
+			heldItem.damageItem(1, player);
+			}
+			else {	
+			}
 			break;
 		case "item.bucketWater":
 			if (Burning) {
@@ -244,6 +256,8 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 				coalRate = coalBase*.75;
 				ashBurn = ((int)((float)ashBurn*0.5));
 				ashRate = ashBase*1.25;
+				heldItem.shrink(1);
+				player.inventory.addItemStackToInventory(new ItemStack(Items.BUCKET, 1));		
 			}
 			break;
 		case "tile.dirt":
@@ -255,18 +269,12 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 				ashBurn = 0;
 				ashRate = ashBase;
 				heldItem.shrink(1);
-				break;
 			}
 			else {
 				firepitBurnTime = firepitBurnTime-150;
 				heldItem.shrink(1);
-				break;
 			}
-			
-		case "item.atd_poker_iron":
-				isStoked = true;
-				stokedTimer = 300;
-				break;
+			break;
 			
 		default:
 			if(firepitBurnTime<=1000) {
@@ -281,11 +289,14 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 				pitState = getUnlit(firepitBurnTime);
 				this.setBurning();
 				heldItem.shrink(1);
-				markDirty();}
 			break;}
+			else {
+			}		
+				markDirty();
 			}
 		}
 	}
+}
 
 		
 	public int getUnlit(int fuelLevel) { //returns state based on fuelLevel
