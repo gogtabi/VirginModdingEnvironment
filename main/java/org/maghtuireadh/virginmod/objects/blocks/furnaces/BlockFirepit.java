@@ -9,6 +9,7 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
@@ -22,6 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -46,10 +48,10 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
 	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 11);
 	public static IBlockState[] states = new IBlockState[12];
-	boolean Burning;
+	boolean Burning = false;
+	public boolean isStoked = false;
 
 	public BlockFirepit(String unlocalizedName, Material material) {
-
 	super(material);
 	this.setUnlocalizedName(unlocalizedName);
 	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -77,8 +79,18 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		return new BlockStateContainer(this, new IProperty[] {PITSTATE});
 	}
 	
+	public void setStoked(boolean stoked) {
+		isStoked=stoked;
+		//Utils.getLogger().info("setStoked: " + isStoked);
+	}
+	
+	public boolean getStoked() {
+		return isStoked;
+	}
 	@Override
 	public int getLightValue(IBlockState state) {
+		//Utils.getLogger().info("getLight Stoked: " + isStoked + "Is Stoked?: " + isStoked);
+		if(!isStoked) {
 		switch (getMetaFromState(state)) {
 		case 0: return 0; //empty_firepit
 				
@@ -104,8 +116,37 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 			
 		case 11: return 0; //extinguished_firepit3
 			
-		default: return 0;
-			}
+		default: return 0;}
+		}
+		else {
+			switch (getMetaFromState(state)) {
+			case 0: return 0; //empty_firepit
+					
+			case 1: return 0; //unlit_firepit1
+				
+			case 2: return 0; //unlit_firepit2
+					
+			case 3: return 0; //unlit_firepit3
+				
+			case 4: return 4; //lit_firepit1
+				
+			case 5: return 10; //lit_firepit2
+				
+			case 6: return 12; //lit_firepit3
+			
+			case 7: return 14; //lit_firepit4
+				
+			case 8: return 0; //dirty_firepit
+
+			case 9: return 0; //extinguished_firepit1
+			
+			case 10: return 0; //extinguished_firepit2
+				
+			case 11: return 0; //extinguished_firepit3
+				
+			default: return 0;}
+		}
+
 	}
 
 	@Override
@@ -146,9 +187,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(PITSTATE, meta));
-
-		this.getLightValue(state);
-		
+	
 		if(tileentity != null) {
 			tileentity.validate();
 			worldIn.setTileEntity(pos, tileentity);
@@ -179,13 +218,14 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		super.breakBlock(worldIn, pos, state);
 	}
 	
-	public EnumBlockRenderType getREnderType(IBlockState state) {
+	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
 	}
 
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 
     {
+   		heldItem.damageItem(1, playerIn);
         if (worldIn.isRemote)
         {
             return true;
@@ -196,19 +236,19 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	Item item = heldItem.getItem();
-           	int itemID = Item.getIdFromItem(item);
-
+           	String itemName = item.getUnlocalizedName();
            	tileentity.rightClick(heldItem, playerIn.inventory);
-          
-           	if(itemID == 259)
+           	
+           	if(itemName == "item.flintAndSteel")
            	{
            		heldItem.damageItem(1, playerIn);
            	}
-
+           	
+           	if(itemName == "item.atd_poker_iron")
+           	
+           	}
            	return true;    
-            }
-
-     }
+        }
 
  
 
@@ -300,6 +340,16 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
+	}
+
+	public boolean getWeather(World world, BlockPos pos) {
+		if(world.isRainingAt(pos.up()) && world.canBlockSeeSky(pos))
+		{
+			return true;
+		}
+		else {
+			return false;	
+		}
 	}
 	
 

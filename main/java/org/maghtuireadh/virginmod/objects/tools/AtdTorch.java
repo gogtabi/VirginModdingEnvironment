@@ -92,7 +92,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 				
 		}
 		else {
-		Utils.getLogger().info("Thats null bruh");
+		//Utils.getLogger().info("Thats null bruh");
 		}
         return EnumActionResult.PASS;
     }

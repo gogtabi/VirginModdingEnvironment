@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.maghtuireadh.virginmod.objects.armor.ArmorBase.ArmorBase;
 import org.maghtuireadh.virginmod.objects.items.ItemBase;
+import org.maghtuireadh.virginmod.objects.tools.AtdPokerIron;
 import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
 import org.maghtuireadh.virginmod.objects.tools.ToolAxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolHoe;
@@ -13,6 +14,7 @@ import org.maghtuireadh.virginmod.objects.tools.ToolShovel;
 import org.maghtuireadh.virginmod.objects.tools.ToolSword;
 import org.maghtuireadh.virginmod.util.Reference;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -29,7 +31,9 @@ public class ItemInit {
 	
 	//Items
 	public static final Item INGOT_COPPER = new ItemBase("ingot_copper");
-	
+	public static final Item ATD_WOOD_ASH = new ItemBase("atd_ash_wood");
+	public static final Item ATD_STRING_JUTE = new ItemBase("atd_string_jute");
+	public static final Item ATD_STRING_SISAL = new ItemBase("atd_string_sisal");
 	
 	//Tools
 	public static final Item AXE_COPPER = new ToolAxe("axe_copper", TOOL_COPPER);
@@ -38,6 +42,7 @@ public class ItemInit {
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);
 	public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
+	public static final Item ATD_POKER_IRON = new AtdPokerIron("atd_poker_iron", ToolMaterial.IRON);
 	
 	//Armor
 	public static final Item HELMET_COPPER = new ArmorBase("helmet_copper", ARMOR_COPPER, 1, EntityEquipmentSlot.HEAD);
