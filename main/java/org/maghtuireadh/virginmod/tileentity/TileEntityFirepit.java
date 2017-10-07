@@ -103,15 +103,24 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 	                if(((BlockFirepit) this.blockType).getBurning()!=Burning){ //Only update BlockFirepit Burning bool on a change
 	                	((BlockFirepit) this.blockType).setBurning(Burning);
 	                }
-	                if(((BlockFirepit) this.blockType).getStoked()!=isStoked)
-	                {
-	            		((BlockFirepit) this.blockType).setStoked(isStoked);
-	                	((BlockFirepit) this.blockType).setState(pitState, world, pos);
+	                if(((BlockFirepit) this.blockType).getStoked()!=isStoked) {
+	                	((BlockFirepit) this.blockType).setStoked(isStoked);
 	                }
-	                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState){ //Only update BlockFirepit State On A Change
+	                if(((BlockFirepit) this.blockType).getState(world, pos)!=pitState) { //Only update BlockFirepit State On A Change
 	                	((BlockFirepit) this.blockType).setState(pitState, world, pos);
-		            }
-	            markDirty();          
+		            }  
+	                
+	               /* if(((BlockFirepit) this.blockType).getState(world, pos)==pitState && ((BlockFirepit) this.blockType).getStoked()!=isStoked) { //Only update BlockFirepit State On A Change
+	                	IBlockState state=((BlockFirepit) this.blockType).getStateFromMeta(pitState);
+	                	((BlockFirepit) this.blockType).setStoked(isStoked);
+	                	Utils.getLogger().info("Begin Stoking Shuffle");
+	                	((BlockFirepit) this.blockType).setState((pitState-1), world, pos);
+	                	Utils.getLogger().info("Mid Stoking Shuffle");
+	                	((BlockFirepit) this.blockType).setState(pitState, world, pos);
+	                	Utils.getLogger().info("End Stoking Shuffle");
+		            }*/
+	                
+
 	            }
         }
     }
@@ -131,18 +140,45 @@ public class TileEntityFirepit extends TileEntity implements ITickable {
 			}
 			
 			if(firepitBurnTime<=0) {
-				firepitBurnTime=0;
-				pitState = 8;
-				Burning = false;
-				isStoked = false;
-				stokedTimer = 0;
-				coalBurn = 0;
-				coalRate = 0;
-				coalBase = 0;
-				ashBurn = 0;
-				ashRate = 0;
-				ashBase = 0;
-				
+				if(firepitBurnTime<=0 && coalCount>0) {
+					Random rand=new Random();
+					int burnChance= rand.nextInt(100);
+					
+					if(burnChance<coalCount*10) {
+						coalCount--;
+						ashCount++;
+						firepitBurnTime=200;
+						isStoked = false;
+						Utils.getLogger().info("Coals Burning: " + coalCount);
+					}
+					else
+					{
+						firepitBurnTime=0;
+						pitState = 8;
+						Burning = false;
+						isStoked = false;
+						stokedTimer = 0;
+						coalBurn = 0;
+						coalRate = 0;
+						coalBase = 0;
+						ashBurn = 0;
+						ashRate = 0;
+						ashBase = 0;	
+					}
+				}
+				else {
+					firepitBurnTime=0;
+					pitState = 8;
+					Burning = false;
+					isStoked = false;
+					stokedTimer = 0;
+					coalBurn = 0;
+					coalRate = 0;
+					coalBase = 0;
+					ashBurn = 0;
+					ashRate = 0;
+					ashBase = 0;
+				}
 			}
 			else if(firepitBurnTime!=0 && firepitBurnTime<=200) {
 				pitState=4;	//set BlockFirepit State To lit_firepit1
@@ -281,9 +317,9 @@ public void rightClick(ItemStack heldItem, EntityPlayer player) {
 				if(Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
 				firepitBurnTime += 300;
 				coalBurn += 200; //How long will produce coal
-				coalBase = 100; //How often will produce coal
+				coalBase = 300; //How often will produce coal
 				ashBurn += 200; //How long will produce ash
-				ashBase = 100;	//How often will produce ash
+				ashBase = 300;	//How often will produce ash
 				ashRate = ashBase;
 				coalRate = coalBase;
 				pitState = getUnlit(firepitBurnTime);
