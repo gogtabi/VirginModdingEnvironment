@@ -8,6 +8,7 @@ import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.BlockTorch;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -28,6 +29,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel {
 	
 	/**
 	 * Default constructor which sets the hardness and resistance
+	 * @param material 
 	 * @param unlocalizedName The unlocalized name
 	 */
 	public BlockATDTorch(String name) {

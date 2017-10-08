@@ -19,7 +19,7 @@ public class BlockInit {
 	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.IRON);
 	public static final Block ATD_TORCH = new BlockATDTorch("block_atd_torch");
 	public static final BlockFirepit BLOCK_FIREPIT = new BlockFirepit("block_firepit", Material.ROCK);
-	public static final BlockFirepit_Revision BLOCK_FIREPIT2 = new BlockFirepit_Revision("block_firepit_revision", Material.ROCK);
+	public static final BlockFirepit_Revision BLOCK_FIREPIT_REVISION = new BlockFirepit_Revision("block_firepit_revision", Material.ROCK);
 	public static final BlockATDPumpkin BLOCK_ATD_PUMPKIN = new BlockATDPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockATDLitPumpkin BLOCK_ATD_LIT_PUMPKIN = new BlockATDLitPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockMovingLightSource BLOCK_MLS = new BlockMovingLightSource("block_mls");

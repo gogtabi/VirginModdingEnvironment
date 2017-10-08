@@ -1,3 +1,4 @@
+
 package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
 import java.util.Random;
@@ -50,7 +51,6 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	public static final PropertyBool ISLIT = PropertyBool.create("islit");
 	public static final PropertyBool STOKED = PropertyBool.create("stoked");
 	public static final PropertyBool BANKED = PropertyBool.create("banked");
-	public static final PropertyBool DIRTY = PropertyBool.create("dirty");
 	public static IBlockState[] states = new IBlockState[27];
 	private boolean isLit = false;
 	private boolean isStoked = false;
@@ -67,35 +67,22 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		this.setCreativeTab(Main.virginmodtab);
-		int j = 0; //fuelLevel value for below iterations that register each state
-		for (int i = 0; i < 6 ; i++) {
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(DIRTY, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
+		for (int i = 0, j = 0; i < 3 && j < 4; i++) {
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, true);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, false);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, true);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, true).withProperty(DIRTY, false);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, true).withProperty(DIRTY, true);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, true).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
 			}
-		for (int i = 6; i < states.length ; i++) {
+		for (int i = 3, j=0; i < states.length && j < 3 ; i++) {
 			j++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, false);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, true);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, true).withProperty(DIRTY, false);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, true);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, false).withProperty(DIRTY, true);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, true).withProperty(BANKED, false).withProperty(DIRTY, false);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, true).withProperty(BANKED, false).withProperty(DIRTY, true);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false).withProperty(BANKED, true).withProperty(DIRTY, true);
+			states[i] = this.blockState.getBaseState().withProperty(BANKED, true).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
 			}	
 				
 		}
@@ -151,7 +138,6 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		return states[meta];
 
 	}
-	
 	
 	@Override 
 	public int getLightValue(IBlockState state) {
@@ -220,7 +206,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(BANKED, false).withProperty(DIRTY, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+		return this.getDefaultState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 
 	}
 	
@@ -228,7 +214,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {	
-		worldIn.setBlockState(pos, state.withProperty(BANKED, false).withProperty(DIRTY, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false));
+		worldIn.setBlockState(pos, state.withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false));
 	}
 	
 	public int quantityDropped(Random random){
@@ -244,7 +230,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	}
 	
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-	this.blockState.getBaseState().withProperty(BANKED, false).withProperty(DIRTY, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+	this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 	}
 	
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -260,7 +246,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState.getBaseState().withProperty(BANKED, false).withProperty(DIRTY, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+		return this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 	}
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -321,7 +307,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FUELLEVEL, ISLIT, STOKED, BANKED, DIRTY});
+		return new BlockStateContainer(this, new IProperty[] {BANKED, FUELLEVEL, ISLIT, STOKED});
 	}
 	
 		

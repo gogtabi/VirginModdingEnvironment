@@ -2,28 +2,14 @@ package org.maghtuireadh.virginmod.tileentity;
 
 import java.util.Random;
 
-import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit;
 import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockHearth;
 import org.maghtuireadh.virginmod.util.Utils;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFlintAndSteel;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class TileEntityHearth extends TileEntity implements ITickable{
 	private int MaxBurn, hearthState, rainingBurnRate, bankedBurnRate, coalProdTime, coalInCount, coalProgress, coalProdBase, ashProdTime, ashBaseRate, ashInCount, ashProgress, ashBaseRateRate, baseBurnRate, fuelLevel, stokedTime, bankedburnRate, stokedBurnRate = 0;
@@ -177,7 +163,6 @@ public class TileEntityHearth extends TileEntity implements ITickable{
 		}
 		Utils.getLogger().info("fuelpitBurnTime: " + fuelLevel + " ashInCount: " + ashInCount + " coalInCount: "
 				+ coalInCount + " isStoked: " + isStoked + " isBanked: " + isBanked);
-		this.setIsLit();
 		stokedCheck();
 		markDirty();
 	}
@@ -188,31 +173,5 @@ public class TileEntityHearth extends TileEntity implements ITickable{
 			stokedTime = 0;
 		}
 	}
-	
-	public void setIsLit() {
-		if (this.world != null && !this.world.isRemote) {
-			this.blockType = this.getBlockType();
-			BlockHearth firePit = ((BlockHearth) this.blockType);
-
-			if (blockType instanceof BlockHearth) {
-				if (firePit.getBurning() != isLit) { // Only update BlockFirepit Burning bool
-					firePit.setIsLit(isLit);       // on a change
-					
-				}
-				if (firePit.getStoked() != isStoked) {
-					firePit.setStoked(isStoked);
-				}
-				if (firePit.getState(world, pos) != hearthState) { // Only update BlockFirepit
-				   firePit.setState(hearthState, world, pos);    // State On A Change
-				/* ((this.getBlockMetadata() != pitState)){
-					IBlockState currentState = this.world.getBlockState(pos);
-					this.world.setBlockState(BlockFirepit.PITSTATE, currentState.withProperty(BlockFirepit.PITSTATE, pitstate))
-					*/
-				}
-
-			}
-		}
-	}
-
 	
 }

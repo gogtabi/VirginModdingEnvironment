@@ -95,7 +95,7 @@ public class TileEntityFirepit_Revision extends TileEntityHearth {
 
 			if ((this.getBlockMetadata() != pitState)){
 					IBlockState currentState = this.world.getBlockState(pos);
-					this.world.setBlockState(pos, currentState.withProperty(firePit.FUELLEVEL,burnStage).withProperty(firePit.ISLIT,isLit).withProperty(firePit.STOKED,isStoked).withProperty(firePit.BANKED,isBanked).withProperty(firePit.DIRTY,isDirty));
+					this.world.setBlockState(pos, currentState.withProperty(firePit.BANKED,isBanked).withProperty(firePit.FUELLEVEL,burnStage).withProperty(firePit.ISLIT,isLit).withProperty(firePit.STOKED,isStoked));
 					firePit.getLightValue(currentState);
 				}
 			}
