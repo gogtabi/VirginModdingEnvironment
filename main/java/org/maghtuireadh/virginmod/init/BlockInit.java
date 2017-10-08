@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.maghtuireadh.virginmod.objects.blocks.BlockBase;
-import org.maghtuireadh.virginmod.objects.blocks.furnaces.BlockFirepit;
+import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit;
+import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit_Revision;
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDLitPumpkin;
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDPumpkin;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
@@ -18,9 +19,8 @@ public class BlockInit {
 	public static final Block BLOCK_COPPER = new BlockBase("block_copper", Material.IRON);
 	public static final Block ATD_TORCH = new BlockATDTorch("block_atd_torch");
 	public static final BlockFirepit BLOCK_FIREPIT = new BlockFirepit("block_firepit", Material.ROCK);
+	public static final BlockFirepit_Revision BLOCK_FIREPIT2 = new BlockFirepit_Revision("block_firepit_revision", Material.ROCK);
 	public static final BlockATDPumpkin BLOCK_ATD_PUMPKIN = new BlockATDPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockATDLitPumpkin BLOCK_ATD_LIT_PUMPKIN = new BlockATDLitPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockMovingLightSource BLOCK_MLS = new BlockMovingLightSource("block_mls");
-
-//	public static final BlockFirepit2 ADV_FIREPIT = new BlockFirepit2("advanced_firepit");
 }

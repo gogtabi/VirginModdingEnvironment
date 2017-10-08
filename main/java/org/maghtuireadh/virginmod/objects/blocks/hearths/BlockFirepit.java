@@ -1,4 +1,4 @@
-package org.maghtuireadh.virginmod.objects.blocks.furnaces;
+package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
 import java.util.Random;
 
@@ -78,8 +78,10 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
            	ItemStack heldItem = playerIn.getHeldItemMainhand();
            	tileentity.rightClick(heldItem, playerIn);
 
-           	return true; }   
+           	return true; 
+           	}   
         }
+
 	/*============================================================================
 	 *                         Getters & Setters
 	  ============================================================================*/
@@ -238,22 +240,21 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
+	@Override
 	/**
 	 * Returns the correct meta for the block
 	 * I recommend also saving the EnumFacing to the meta but I haven't
 	 */
-	
-	@Override
 	public int getMetaFromState(IBlockState state) {
 		int meta = state.getValue(PITSTATE);
 		return meta;
 		}
 	
+	
+	@Override
 	/**
 	 * Gets the block state from the meta
 	 */
-	
-	@Override
 	public IBlockState getStateFromMeta(int meta) {
 			return BlockFirepit.states[meta];
 		}
