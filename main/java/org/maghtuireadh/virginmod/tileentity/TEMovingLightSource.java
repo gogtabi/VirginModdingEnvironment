@@ -30,7 +30,7 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 			world.setBlockToAir(pos);
 			world.removeTileEntity(pos);
 		}
-		Utils.getLogger().info("This is working");
+		
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 		final EntityPlayer player = findLightSourceCreator();
 		//Boolean hasTorch = player.getHeldItemMainhand().getUnlocalizedName() != "atd_torch";
 		Boolean kill = player == null || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D;// || hasTorch;
-		Utils.getLogger().info(kill);
+		
 		return kill;
 	}
 

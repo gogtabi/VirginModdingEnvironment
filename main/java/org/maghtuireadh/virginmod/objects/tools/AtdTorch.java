@@ -9,9 +9,15 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -22,6 +28,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider {
+	
+	public static final PropertyBool LIT = PropertyBool.create("lit");
 
 	BlockPos BP;
 	EntityPlayer player;
@@ -31,7 +39,6 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
-	
 		ItemInit.ITEMS.add(this);
 	}
 	
@@ -41,6 +48,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
+	
 	@Override
 
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -48,6 +56,14 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		return new TEMovingLightSource().setPlayer(player);
 
 	}
+	
+	@Override
+	  public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+  {
+		entity.setFire(5);
+	return false;
+		
+  }
 	
 	@Override
 	  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
@@ -67,30 +83,37 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		int thisZ2 = pos.getZ() - 1;
 		RayTraceResult RT = this.rayTrace(worldIn, player, false);
 		if (RT!=null) {	
-			if(RT.sideHit == EnumFacing.UP) {
-				BP =  new BlockPos(thisX,thisY1,thisZ);
-				worldIn.setBlockState(BP, BS_up);
+			if(RT.typeOfHit != RayTraceResult.Type.ENTITY) {	
+				if(worldIn.getBlockState(pos).getMaterial() != Material.CIRCUITS) {
+				if(RT.sideHit == EnumFacing.UP) {
+						BP =  new BlockPos(thisX,thisY1,thisZ);
+						worldIn.setBlockState(BP, BS_up);
+				}
+				else if(RT.sideHit == EnumFacing.NORTH) {
+					BP =  new BlockPos(thisX,thisY,thisZ2);
+					worldIn.setBlockState(BP, BS_north);
+				}
+				else if(RT.sideHit == EnumFacing.SOUTH) {
+					BP =  new BlockPos(thisX,thisY,thisZ1);
+					worldIn.setBlockState(BP, BS_south);
+				}
+				else if(RT.sideHit == EnumFacing.EAST) {
+					BP =  new BlockPos(thisX1,thisY,thisZ);
+					worldIn.setBlockState(BP, BS_east);
+				}
+				else if(RT.sideHit == EnumFacing.WEST) {
+					BP =  new BlockPos(thisX2,thisY,thisZ);
+					worldIn.setBlockState(BP, BS_west);
+				}
+				}
 			}
-			else if(RT.sideHit == EnumFacing.NORTH) {
-				BP =  new BlockPos(thisX,thisY,thisZ2);
-				worldIn.setBlockState(BP, BS_north);
+			//else if (RT.typeOfHit == RayTraceResult.Type.ENTITY) {
+				//RT.entityHit.setFire(5);
+			//}
 			}
-			else if(RT.sideHit == EnumFacing.SOUTH) {
-				BP =  new BlockPos(thisX,thisY,thisZ1);
-				worldIn.setBlockState(BP, BS_south);
-			}
-			else if(RT.sideHit == EnumFacing.EAST) {
-				BP =  new BlockPos(thisX1,thisY,thisZ);
-				worldIn.setBlockState(BP, BS_east);
-			}
-			else if(RT.sideHit == EnumFacing.WEST) {
-				BP =  new BlockPos(thisX2,thisY,thisZ);
-				worldIn.setBlockState(BP, BS_west);
-			}
-			else {
-			}
+		
 				
-		}
+		
 		else {
 		Utils.getLogger().info("Thats null bruh");
 		}

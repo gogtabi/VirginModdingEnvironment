@@ -186,14 +186,14 @@ public void rightClick(ItemStack heldItem, InventoryPlayer inventory) {
 			if (firepitBurnTime>0 && !Burning)
 			{
 				Burning=true;
-				Utils.getLogger().info("It's Burning");
+				
 			}			
 			break;
 		case 4108:
 			if (firepitBurnTime>0 && !Burning)
 			{
 				Burning=true;
-				Utils.getLogger().info("It's Burning");
+			
 			}			
 			break;
 		case 326:
