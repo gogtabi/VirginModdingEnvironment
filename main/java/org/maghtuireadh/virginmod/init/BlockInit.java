@@ -12,6 +12,9 @@ import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSou
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.biome.BiomeForest;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenBirchTree;
 
 
 public class BlockInit {
@@ -23,4 +26,9 @@ public class BlockInit {
 	public static final BlockATDPumpkin BLOCK_ATD_PUMPKIN = new BlockATDPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockATDLitPumpkin BLOCK_ATD_LIT_PUMPKIN = new BlockATDLitPumpkin("block_atd_pumpkin", Material.GOURD);
 	public static final BlockMovingLightSource BLOCK_MLS = new BlockMovingLightSource("block_mls");
+	public static final Block ORE_END = new BlockOres("ore_end", "end");
+	public static final Block ORE_OVERWORLD = new BlockOres("ore_overworld", "overworld");
+	public static final Block ORE_NETHER = new BlockOres("ore_nether", "nether");
+	
+
 }

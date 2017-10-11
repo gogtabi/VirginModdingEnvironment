@@ -36,10 +36,6 @@ public class TileEntityFirepit_Revision extends TileEntityHearth {
 	private int rainingBurnRate = 4;
 	private double coalRate, ashRate = 0;
 	
-	public TileEntityFirepit_Revision() {
-		
-	}
-	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
@@ -95,7 +91,7 @@ public class TileEntityFirepit_Revision extends TileEntityHearth {
 
 			if ((this.getBlockMetadata() != pitState)){
 					IBlockState currentState = this.world.getBlockState(pos);
-					this.world.setBlockState(pos, currentState.withProperty(firePit.BANKED,isBanked).withProperty(firePit.FUELLEVEL,burnStage).withProperty(firePit.ISLIT,isLit).withProperty(firePit.STOKED,isStoked));
+					this.world.setBlockState(pos, currentState.withProperty(firePit.FUELLEVEL,burnStage).withProperty(firePit.ISLIT,isLit).withProperty(firePit.STOKED,isStoked));
 					firePit.getLightValue(currentState);
 				}
 			}

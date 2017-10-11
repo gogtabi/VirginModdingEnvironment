@@ -39,6 +39,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenMelon;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,8 +47,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider {
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
-	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 11);
-	public static IBlockState[] states = new IBlockState[12];
+	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 15);
+	public static IBlockState[] states = new IBlockState[16];
 	private boolean Burning = false;
 	private boolean isStoked = false;
 
@@ -58,7 +59,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	BlockInit.BLOCKS.add(this);
 	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	this.setCreativeTab(Main.virginmodtab);
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 15; i++) {
         states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
         }
     }
@@ -86,14 +87,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	 *                         Getters & Setters
 	  ============================================================================*/
 
-	public void setStoked(boolean stoked) {
-		isStoked=stoked;
-	}
-
-	public boolean getStoked() {
-		return isStoked;
-	}
-	
 	public boolean getWeather(World world, BlockPos pos) {
 		if(world.isRainingAt(pos.up()) && world.canBlockSeeSky(pos))
 		{
@@ -103,11 +96,7 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 			return false;	
 		}
 	}	
-	
-	public boolean getBurning()
-	{
-		return Burning;
-	}
+
 	public void setBurning(boolean bool)
 	{
 		this.Burning = bool;
@@ -131,7 +120,6 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	
 	@Override
 	public int getLightValue(IBlockState state) {
-		if(!isStoked) {
 			switch (getMetaFromState(state)) {
 			case 0: return 0; //empty_firepit
 					
@@ -156,38 +144,16 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 			case 10: return 0; //extinguished_firepit2
 				
 			case 11: return 0; //extinguished_firepit3
+			
+			case 12: return 12; //lit_firepit3
+			
+			case 13: return 14; //lit_firepit4
+			
+			case 14: return 6; //unlit_firepit2
+			
+			case 15: return 6; //unlit_firepit3
 				
 			default: return 0;}
-		}
-		else {
-			switch (getMetaFromState(state)) {
-			case 0: return 0; //empty_firepit
-					
-			case 1: return 0; //unlit_firepit1
-				
-			case 2: return 0; //unlit_firepit2
-					
-			case 3: return 0; //unlit_firepit3
-				
-			case 4: return 4; //lit_firepit1
-				
-			case 5: return 10; //lit_firepit2
-				
-			case 6: return 12; //lit_firepit3
-			
-			case 7: return 14; //lit_firepit4
-				
-			case 8: return 0; //dirty_firepit
-
-			case 9: return 0; //extinguished_firepit1
-			
-			case 10: return 0; //extinguished_firepit2
-				
-			case 11: return 0; //extinguished_firepit3
-				
-			default: return 0;}
-		}
-
 	}
 	
 	/*============================================================================

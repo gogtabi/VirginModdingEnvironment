@@ -1,0 +1,7 @@
+{
+    "variants":
+    {
+    "variant=aluminum": { "model": "vme:ore_overworld_aluminum"},
+    "variant=copper": { "model": "vme:ore_overworld_copper"}
+    }
+}

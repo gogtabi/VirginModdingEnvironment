@@ -34,7 +34,7 @@ public class MovingLightEvent {
 			Utils.getLogger().info("The event happened");
 			}
 			else {
-			Utils.getLogger().info("The event didnt happen");
+			Utils.getLogger().info("The event didn't happen");
 	}
 	}
 

@@ -1,19 +1,20 @@
 {
     "variants": {
-        "banked=false,fuelLevel=0,islit=false,stoked=false": { "model": "vme:empty_firepit"},
-        "banked=false,fuelLevel=0,islit=true,stoked=false": { "model": "vme:lit_firepit1"},
-        "banked=true,fuelLevel=0,islit=true,stoked=false": { "model": "vme:dirty_firepit"},       
-        "banked=false,fuelLevel=1,islit=false,stoked=false": { "model": "vme:extinguished_firepit3"},
-        "banked=false,fuelLevel=1,islit=true,stoked=false" : { "model": "vme:lit_firepit4"},
-        "banked=false,fuelLevel=1,islit=true,stoked=true": { "model": "vme:lit_firepit4"},
-        "banked=true,fuelLevel=1,islit=true,stoked=false": { "model": "vme:lit_firepit4"},      
-        "banked=false,fuelLevel=2,islit=false,stoked=false": { "model": "vme:extinguished_firepit3"},
-        "banked=false,fuelLevel=2,islit=true,stoked=false": { "model": "vme:lit_firepit4"},
-        "banked=false,fuelLevel=2,islit=true,stoked=true": { "model": "vme:lit_firepit4"},
-        "banked=true,fuelLevel=2,islit=true,stoked=false": { "model": "vme:lit_firepit4"},      
-        "banked=false,fuelLevel=3,islit=false,stoked=false": { "model": "vme:extinguished_firepit3"},
-        "banked=false,fuelLevel=3,islit=true,stoked=false": { "model": "vme:lit_firepit4"},
-        "banked=false,fuelLevel=3,islit=true,stoked=true": { "model": "vme:lit_firepit4"},
-        "banked=true,fuelLevel=3,islit=true,stoked=false" : { "model": "vme:lit_firepit4"}
+        "fuelLevel=0,islit=false,stoked=false": { "model": "vme:empty_firepit"},
+        "fuelLevel=0,islit=true,stoked=false": { "model": "vme:lit_firepit"},  
+        "fuelLevel=0,islit=true,stoked=true": { "model": "vme:lit_firepit"},
+        "fuelLevel=0,islit=false,stoked=true": { "model": "vme:lit_firepit"},     
+        "fuelLevel=1,islit=false,stoked=false": { "model": "vme:unlit_firepit1"},
+        "fuelLevel=1,islit=false,stoked=true": { "model": "vme:extinguished_firepit1"},
+        "fuelLevel=1,islit=true,stoked=false" : { "model": "vme:lit_firepit1"},
+        "fuelLevel=1,islit=true,stoked=true" : { "model": "vme:lit_firepit1"},    
+        "fuelLevel=2,islit=false,stoked=false": { "model": "vme:extinguished_firepit3"},
+        "fuelLevel=2,islit=true,stoked=false": { "model": "vme:lit_firepit4"},
+        "fuelLevel=2,islit=true,stoked=true": { "model": "vme:lit_firepit4"}, 
+        "fuelLevel=2,islit=false,stoked=true": { "model": "vme:lit_firepit4"}, 
+        "fuelLevel=3,islit=false,stoked=false": { "model": "vme:extinguished_firepit3"},
+        "fuelLevel=3,islit=true,stoked=false": { "model": "vme:lit_firepit4"},
+        "fuelLevel=3,islit=true,stoked=true": { "model": "vme:lit_firepit4"},
+        "fuelLevel=3,islit=false,stoked=true": { "model": "vme:lit_firepit4"}
         }
 }

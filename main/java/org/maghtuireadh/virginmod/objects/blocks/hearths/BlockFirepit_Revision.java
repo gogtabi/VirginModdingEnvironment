@@ -11,6 +11,7 @@ import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit_Revision;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.handlers.EnumHandler.LitStates;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import akka.util.Switch;
@@ -19,6 +20,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +36,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -47,15 +50,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockFirepit_Revision extends Block implements IHasModel, ITileEntityProvider {
 
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
+	public static final PropertyEnum<LitStates> LIT_STATE = PropertyEnum.<LitStates>create("litstate", LitStates.class);
 	public static final PropertyInteger FUELLEVEL = PropertyInteger.create("fuellevel", 0, 3);
 	public static final PropertyBool ISLIT = PropertyBool.create("islit");
 	public static final PropertyBool STOKED = PropertyBool.create("stoked");
-	public static final PropertyBool BANKED = PropertyBool.create("banked");
-	public static IBlockState[] states = new IBlockState[27];
+	public static IBlockState[] states = new IBlockState[16];
 	private boolean isLit = false;
 	private boolean isStoked = false;
-	private boolean isBanked = false;
-	private boolean isDirty = false;
 	
 	public BlockFirepit_Revision(String unlocalizedName,Material material) {
 		/*
@@ -67,24 +68,15 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		this.setCreativeTab(Main.virginmodtab);
-		for (int i = 0, j = 0; i < 3 && j < 4; i++) {
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
+		for (int i = 0, j = 0; i < 16 && j < 4; i++) {
+			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
+			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, true).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
-			}
-		for (int i = 3, j=0; i < states.length && j < 3 ; i++) {
-			j++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, false);
+			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, false).withProperty(STOKED, true);
 			i++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, true);
-			i++;
-			states[i] = this.blockState.getBaseState().withProperty(BANKED, true).withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, false);
-			}	
-				
+			states[i] = this.blockState.getBaseState().withProperty(FUELLEVEL,j).withProperty(ISLIT, true).withProperty(STOKED, true);
+			j++;}
 		}
 	/*
 	 * Block Activation - Right Click, check for tool in hand
@@ -119,14 +111,15 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return new TileEntityFirepit_Revision();
+
 	}
 	
 	public int getMetaFromState(IBlockState state) {
 		IBlockState thisState = null;
 		int meta=0;
-		for(int i=0; i< 16 && state!=thisState ;i++)
+		for(int i=0; i< states.length-1 && state!=thisState ;i++)
 		{
 			thisState=states[i];
 			meta=i;
@@ -144,15 +137,11 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		int fuel = state.getValue(FUELLEVEL);
 		boolean lit = state.getValue(ISLIT);
 		boolean stoked = state.getValue(STOKED);
-		boolean banked = state.getValue(BANKED);
 		
 		switch (fuel) {
 		case 0:
 			if(lit==false) {
 				return 0;	
-			}
-			else if (banked==true) {
-				return 4;
 			}
 			else {
 				return 6;
@@ -160,9 +149,6 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		case 1:
 			if(lit==false) {
 				return 0;
-			}
-			else if(banked==true) {
-				return 4;
 			}
 			else if(stoked==true) {
 				return 10;
@@ -174,9 +160,6 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 			if(lit==false) {
 				return 0;
 			}
-			else if(banked==true) {
-				return 4;
-			}
 			else if(stoked==true) {
 				return 12;
 			}
@@ -186,9 +169,6 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 		case 3:
 			if(lit==false) {
 				return 0;
-			}
-			else if(banked==true) {
-				return 4;
 			}
 			else if(stoked==true) {
 				return 14;
@@ -206,7 +186,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+		return this.getDefaultState().withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 
 	}
 	
@@ -214,7 +194,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {	
-		worldIn.setBlockState(pos, state.withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false));
+		worldIn.setBlockState(pos, state.withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false));
 	}
 	
 	public int quantityDropped(Random random){
@@ -230,7 +210,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	}
 	
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-	this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+	this.blockState.getBaseState().withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 	}
 	
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -246,7 +226,7 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.blockState.getBaseState().withProperty(BANKED, false).withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
+		return this.blockState.getBaseState().withProperty(FUELLEVEL,0).withProperty(ISLIT, false).withProperty(STOKED, false);
 	}
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
@@ -307,9 +287,8 @@ public class BlockFirepit_Revision extends Block implements IHasModel, ITileEnti
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {BANKED, FUELLEVEL, ISLIT, STOKED});
+		return new BlockStateContainer(this, new IProperty[] {FUELLEVEL, ISLIT, STOKED});
 	}
-	
-		
 }
 	
+

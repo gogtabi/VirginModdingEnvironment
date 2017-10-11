@@ -11,6 +11,10 @@
         "pitstate=8": { "model": "vme:dirty_firepit"},
         "pitstate=9": { "model": "vme:extinguished_firepit1"},
         "pitstate=10": { "model": "vme:extinguished_firepit2"},
-        "pitstate=11": { "model": "vme:extinguished_firepit3"}
+        "pitstate=11": { "model": "vme:extinguished_firepit3"},
+        "pitstate=12": { "model": "vme:lit_firepit3"},
+        "pitstate=13": { "model": "vme:lit_firepit4"},
+        "pitstate=14": { "model": "vme:extinguished_firepit1"},
+        "pitstate=15": { "model": "vme:extinguished_firepit2"}
         }
 }
