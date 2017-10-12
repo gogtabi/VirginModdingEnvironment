@@ -23,7 +23,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class TileEntityFirepit extends TileEntityHearth{
 	private boolean Burning, isBanked, isStoked = false;
-	private int firepitMaxBurn = 2000;
+	private int firepitMaxBurn = 24000;
 	private int firepitBurnTime, burnRate, coalBurn, coalCount, coalGrowth, coalBase, ashBurn, ashCount, ashGrowth, ashBase, pitState, stokedTimer = 0;
 	private int firepitBurnRate = 2;
 	private int stokedBurnRate = 3;
@@ -101,7 +101,10 @@ public class TileEntityFirepit extends TileEntityHearth{
 
 	@Override
 	public void update() {
-
+		int low=(int) (firepitMaxBurn*.10);
+		int mid=(int) (firepitMaxBurn*.40);
+		int max=(int) (firepitMaxBurn*.70);
+		
 		Utils.getLogger().info("Update Is Happening");
 		if (Burning) {
 			if (stokedTimer > 0) {
@@ -158,114 +161,111 @@ public class TileEntityFirepit extends TileEntityHearth{
 				ashBase = 0;
 				}
 				
-			} else if ((firepitBurnTime != 0 && firepitBurnTime < MathHelper.floor(firepitMaxBurn * 0.10)) && isBanked) {
-				if(lastState==5) {
-					Utils.getLogger().info("Below 10% & Banked");
-					pitState = 14; // set BlockFirepit State To lit_firepit1
+				} else if ((firepitBurnTime != 0 && firepitBurnTime < low && isBanked)) {
+					if(lastState==5) {
+						Utils.getLogger().info("Below 10% & Banked");
+						pitState = 14; // set BlockFirepit State To lit_firepit1
+						coalRate = (coalBase * .85); // Increase rate of coal production by 15%
+						ashRate = (ashBase * 1.3); // Decrease rate of ash production by 30%
+						ashGrowth++;
+						coalGrowth++;
+						lastState=14;
+						isStoked=false;
+						stokedTimer=0;
+				}
+				else {
+					
+				}
+				
+				} else if ((firepitBurnTime != 0 && firepitBurnTime < low) && !isBanked){
+					Utils.getLogger().info("Below 10% & Not Banked");
+					pitState = 4; // set BlockFirepit State To lit_firepit1
 					coalRate = (coalBase * .85); // Increase rate of coal production by 15%
 					ashRate = (ashBase * 1.3); // Decrease rate of ash production by 30%
 					ashGrowth++;
 					coalGrowth++;
-					lastState=14;
+					lastState=4;
 					isStoked=false;
 					stokedTimer=0;
-				}	
-				
-			} else if (firepitBurnTime != 0 && firepitBurnTime < MathHelper.floor(firepitMaxBurn * 0.10) && !isBanked){
-				Utils.getLogger().info("Below 10% & Not Banked");
-				pitState = 4; // set BlockFirepit State To lit_firepit1
-				coalRate = (coalBase * .85); // Increase rate of coal production by 15%
-				ashRate = (ashBase * 1.3); // Decrease rate of ash production by 30%
-				ashGrowth++;
-				coalGrowth++;
-				lastState=4;
-				isStoked=false;
-				stokedTimer=0;
-			} else if (firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.10)
-					&& firepitBurnTime < MathHelper.floor(firepitMaxBurn * 0.40) && isBanked) {
-
-				Utils.getLogger().info("Between 10% - 40% & Banked");
-				pitState = 15; // set BlockFirepit State To extinguished_firepit2
-				isStoked=false;
-				stokedTimer=0;
-				coalRate = coalBase;
-				ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
-				ashGrowth++;
-				coalGrowth++;
-				lastState = 15;
-			} else if (firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.10)
-					&& firepitBurnTime < MathHelper.floor(firepitMaxBurn * 0.40)) {
-				Utils.getLogger().info("Below 10% & 40% Not Banked");
-				pitState = 5; // set BlockFirepit State To lit_firepit2
-				isStoked=false;
-				stokedTimer=0;
-				coalRate = coalBase;
-				ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
-				ashGrowth++;
-				coalGrowth++;
-				lastState = 15;
-			} 
-			else if (firepitBurnTime > MathHelper.floor(firepitMaxBurn * 0.40)
-					&& firepitBurnTime <= MathHelper.floor(firepitMaxBurn * 0.70) && isStoked) {
-
-				Utils.getLogger().info("Below 40 & 70% and Stoked");
-				pitState = 12; // set BlockFirepit State To lit_firepit3 (stoked)
-				coalRate = (coalBase * 1.15); // Decrease rate of coal production by 15%
-				ashRate = ashBase;
-				ashGrowth++;
-				coalGrowth++;
-				isBanked = false;
-				lastState = 12;
-			} else if (firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.40)
-					&& firepitBurnTime < MathHelper.floor(firepitMaxBurn * 0.70) && !isStoked) {
-
-				Utils.getLogger().info("Below 40 & 70% and Not Stoked");
-				pitState = 6; // set BlockFirepit State To lit_firepit3
-				isBanked=false;
-				coalRate = coalBase;
-				ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
-				ashGrowth++;
-				coalGrowth++;
-				lastState = 5;
-			} 
-			else if ((firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.70)) && isStoked) {
-
-				Utils.getLogger().info("Over 70% and Stoked");
-				pitState=13; // set BlockFirepit State To lit_firepit4 (stoked)
+				} else if ((firepitBurnTime >= low && firepitBurnTime < mid) && isBanked) {
+	
+					Utils.getLogger().info("Between 10% - 40% & Banked");
+					pitState = 15; // set BlockFirepit State To extinguished_firepit2
+					isStoked=false;
+					stokedTimer=0;
+					coalRate = coalBase;
+					ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
+					ashGrowth++;
+					coalGrowth++;
+					lastState = 15;
+				} else if (firepitBurnTime >= low && firepitBurnTime < mid) {
+					Utils.getLogger().info("Below 10% & 40% Not Banked");
+					pitState = 5; // set BlockFirepit State To lit_firepit2
+					isStoked=false;
+					stokedTimer=0;
+					coalRate = coalBase;
+					ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
+					ashGrowth++;
+					coalGrowth++;
+					lastState = 15;
+				} 
+				else if ((firepitBurnTime > mid && firepitBurnTime <= max) && isStoked) {
+	
+					Utils.getLogger().info("Below 40 & 70% and Stoked");
+					pitState = 12; // set BlockFirepit State To lit_firepit3 (stoked)
+					coalRate = (coalBase * 1.15); // Decrease rate of coal production by 15%
+					ashRate = ashBase;
+					ashGrowth++;
+					coalGrowth++;
+					isBanked = false;
+					lastState = 12;
+				} else if ((firepitBurnTime >= mid && firepitBurnTime < max) && !isStoked) {
+	
+					Utils.getLogger().info("Below 40 & 70% and Not Stoked");
+					pitState = 6; // set BlockFirepit State To lit_firepit3
+					isBanked=false;
+					coalRate = coalBase;
+					ashRate = (ashBase * 1.15); // Decrease rate of ash production by 15%
+					ashGrowth++;
+					coalGrowth++;
+					lastState = 5;
+				} 
+				else if (firepitBurnTime >= max && isStoked) {
+	
+					Utils.getLogger().info("Over 70% and Stoked");
+					pitState=13; // set BlockFirepit State To lit_firepit4 (stoked)
+					coalRate = (coalBase * 1.30); // Decrease rate of coal production by 30%
+					ashRate = (ashBase * .85); // Increase rate of ash control by 15%
+					ashGrowth++;
+					coalGrowth++;
+					isBanked = false;
+				}
+				else if (firepitBurnTime >= max && !isStoked) {
+					Utils.getLogger().info("Below 40 & 70% and not Stoked");
+				pitState=7; // set BlockFirepit State To lit_firepit4
 				coalRate = (coalBase * 1.30); // Decrease rate of coal production by 30%
 				ashRate = (ashBase * .85); // Increase rate of ash control by 15%
 				ashGrowth++;
 				coalGrowth++;
 				isBanked = false;
+				lastState = 7;
+				} 
+				else {
+					Utils.getLogger().info("Oh Shit Son, What?");
+				}
+			if (((ashGrowth >= ashRate) && Burning) && ashCount < 10) {
+				ashCount++; // Increase amount of ash that will be returned.
+				ashGrowth = 0; // Reset ashGrowth
 			}
-			else if (firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.70) && !isStoked) {
-				Utils.getLogger().info("Below 40 & 70% and not Stoked");
-			pitState=7; // set BlockFirepit State To lit_firepit4
-			coalRate = (coalBase * 1.30); // Decrease rate of coal production by 30%
-			ashRate = (ashBase * .85); // Increase rate of ash control by 15%
-			ashGrowth++;
-			coalGrowth++;
-			isBanked = false;
-			lastState = 7;
-			} 
-			else {
-				Utils.getLogger().info("Oh Shit Son, What?");
+			if (((coalGrowth >= coalRate) && Burning) && coalCount < 10) {
+				coalCount++; // Increase amount of coal that will be returned.
+				coalGrowth = 0; // Reset coalGrowth
 			}
-		if (((ashGrowth >= ashRate) && Burning) && ashCount < 10) {
-			ashCount++; // Increase amount of ash that will be returned.
-			ashGrowth = 0; // Reset ashGrowth
-		}
-		if (((coalGrowth >= coalRate) && Burning) && coalCount < 10) {
-			coalCount++; // Increase amount of coal that will be returned.
-			coalGrowth = 0; // Reset coalGrowth
+
 		}
 		Utils.getLogger().info("Burning: " + Burning + " fuelpitBurnTime: " + firepitBurnTime + " ashCount: " + ashCount + " coalCount: "
 				+ coalCount );
-		
-		
 		Utils.getLogger().info("State: " + pitState + " isStoked: " + isStoked + " isBanked: " + isBanked);
-		
-		}
 		this.setBurning();
 		stokedCheck();
 		markDirty();
@@ -322,9 +322,11 @@ public class TileEntityFirepit extends TileEntityHearth{
 			case "item.atd_poker_iron":
 				if (pitState==6 || pitState==7) {
 					isStoked = true;
-					stokedTimer = 300;
+					stokedTimer = 1000;
 					heldItem.damageItem(1, player);
-				} else {
+				} else if (isStoked) {
+					stokedTimer = 0;
+					isStoked = false;					
 				}
 				break;
 			case "item.atd_ash_wood":
@@ -346,7 +348,7 @@ public class TileEntityFirepit extends TileEntityHearth{
 				}
 				break;
 			case "tile.dirt":
-				if (firepitBurnTime <= 150 && Burning) {
+				if (firepitBurnTime <= 1500 && Burning) {
 					Burning = false;
 					pitState = getExtinguished(pitState);
 					coalBurn = 0;
@@ -355,18 +357,18 @@ public class TileEntityFirepit extends TileEntityHearth{
 					ashRate = ashBase;
 					heldItem.shrink(1);
 				} else {
-					firepitBurnTime = firepitBurnTime - 150;
+					firepitBurnTime = firepitBurnTime - 1500;
 					heldItem.shrink(1);
 				}
 				break;
 			default:
 				if (firepitBurnTime <= firepitMaxBurn) {
 					if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
-						firepitBurnTime += 300;
-						coalBurn += 200; // How long will produce coal
-						coalBase = 300; // How often will produce coal
-						ashBurn += 200; // How long will produce ash
-						ashBase = 300; // How often will produce ash
+						firepitBurnTime += 1000;
+						coalBurn += 1000; // How long will produce coal
+						coalBase = 2000; // How often will produce coal
+						ashBurn += 1000; // How long will produce ash
+						ashBase = 1000; // How often will produce ash
 						ashRate = ashBase;
 						coalRate = coalBase;
 						pitState = getUnlit(firepitBurnTime);
