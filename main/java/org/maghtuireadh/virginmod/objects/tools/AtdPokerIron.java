@@ -12,15 +12,13 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 
-public class AtdPokerIron extends ItemSpade implements IHasModel {
+public class ATDPokerIron extends ItemSpade implements IHasModel {
 
-	public AtdPokerIron(String name, ToolMaterial material) {
+	public ATDPokerIron(String name, ToolMaterial material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		this.setCreativeTab(Main.virginmodtab);
-		this.setCreativeTab(CreativeTabs.COMBAT);
-		this.setCreativeTab(CreativeTabs.TOOLS);
 		
 		ItemInit.ITEMS.add(this);
 	}

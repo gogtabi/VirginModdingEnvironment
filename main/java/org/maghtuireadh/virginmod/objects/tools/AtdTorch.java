@@ -21,12 +21,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider {
+public class ATDTorch extends ItemSword implements IHasModel, ITileEntityProvider {
 
 	BlockPos BP;
 	EntityPlayer player;
 	
-	public AtdTorch(String name, ToolMaterial material) {
+	public ATDTorch(String name, ToolMaterial material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.maghtuireadh.virginmod.objects.armor.ArmorBase.ArmorBase;
+import org.maghtuireadh.virginmod.objects.items.ATDEmberBundle;
 import org.maghtuireadh.virginmod.objects.items.ItemBase;
-import org.maghtuireadh.virginmod.objects.tools.AtdPokerIron;
-import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
+import org.maghtuireadh.virginmod.objects.items.NBTTutorialItem;
+import org.maghtuireadh.virginmod.objects.tools.ATDPokerIron;
+import org.maghtuireadh.virginmod.objects.tools.ATDTorch;
 import org.maghtuireadh.virginmod.objects.tools.ToolAxe;
 import org.maghtuireadh.virginmod.objects.tools.ToolHoe;
 import org.maghtuireadh.virginmod.objects.tools.ToolPickaxe;
@@ -34,6 +36,10 @@ public class ItemInit {
 	public static final Item ATD_WOOD_ASH = new ItemBase("atd_ash_wood");
 	public static final Item ATD_STRING_JUTE = new ItemBase("atd_string_jute");
 	public static final Item ATD_STRING_SISAL = new ItemBase("atd_string_sisal");
+	public static final Item ATD_BARK = new ItemBase("atd_bark");
+	public static final Item ATD_TINDER = new ItemBase("atd_tinder");
+	public static final Item ATD_TINDER_BUNDLE = new ItemBase("atd_tinder_bundle");
+	public static final Item ATD_EMBER_BUNDLE = new ATDEmberBundle("atd_ember_bundle");
 	
 	//Tools
 	public static final Item AXE_COPPER = new ToolAxe("axe_copper", TOOL_COPPER);
@@ -41,8 +47,8 @@ public class ItemInit {
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);
-	public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER);
-	public static final Item ATD_POKER_IRON = new AtdPokerIron("atd_poker_iron", ToolMaterial.IRON);
+	public static final Item ATD_TORCH = new ATDTorch("atd_torch", TOOL_COPPER);
+	public static final Item ATD_POKER_IRON = new ATDPokerIron("atd_poker_iron", ToolMaterial.IRON);
 	
 	//Armor
 	public static final Item HELMET_COPPER = new ArmorBase("helmet_copper", ARMOR_COPPER, 1, EntityEquipmentSlot.HEAD);
