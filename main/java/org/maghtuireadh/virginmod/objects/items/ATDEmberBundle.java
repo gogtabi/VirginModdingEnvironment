@@ -1,5 +1,7 @@
 package org.maghtuireadh.virginmod.objects.items;
 
+import java.util.Random;
+
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.util.Utils;
@@ -20,6 +22,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -53,13 +56,12 @@ public class ATDEmberBundle extends Item implements IHasModel{
 			this.setDamage(item, 0);
 		}
 		if (item.getItemDamage()<64) {
-			if(world.getBlockState(pos).getBlock()==Blocks.WATER) {
+			if(world.getBlockState(pos.up()).getBlock()==Blocks.WATER) {
 				item.shrink(1);
 			}
 			if((((world.getWorldTime() - nbt.getInteger("timestamp"))/burnTime))<64) {
 				if(world.isRainingAt(pos.up(3))) {
 				nbt.setInteger("burntime", (nbt.getInteger("burntime")-2));
-				player.sendMessage(new TextComponentString("Your ember bundle sizzles falters in the rain"));
 			} else {
 				nbt.setInteger("burntime", (nbt.getInteger("burntime")-1));
 				}
@@ -69,10 +71,20 @@ public class ATDEmberBundle extends Item implements IHasModel{
 			}
 		}
 		
-		if(nbt.getInteger("burntime")<=0) {
+		if(nbt.getInteger("burntime")<=0 && world.isRainingAt(pos.up(2))) {
+			Random rand = new Random();
+			if(rand.nextInt(100)<25){
+			player.sendMessage(new TextComponentString("Your ember hisses in the rain"));
+			item.setItemDamage(item.getItemDamage()+1);
+			nbt.setInteger("burntime", burnTime);}
+			else {
+				item.setItemDamage(item.getItemDamage()+1);
+				nbt.setInteger("burntime", burnTime);
+				}
+		} else if (nbt.getInteger("burntime")<=0) {
 			item.setItemDamage(item.getItemDamage()+1);
 			nbt.setInteger("burntime", burnTime);
-		}
+			}
 		
 		if(item.getItemDamage()==32) {
 			player.sendMessage(new TextComponentString("Your ember bundle glows dimly"));
