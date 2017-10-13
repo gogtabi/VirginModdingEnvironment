@@ -1,5 +1,6 @@
 package org.maghtuireadh.virginmod.tabs;
 
+import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,7 +13,7 @@ public class VirginModTab extends CreativeTabs{
 		this.setBackgroundImageName("virginmodtab.png");
 		}
 	
-	public ItemStack getTabIconItem() {return new ItemStack(ItemInit.INGOT_COPPER);
+	public ItemStack getTabIconItem() {return new ItemStack(BlockInit.BLOCK_FIREPIT);
 	}
 	
 

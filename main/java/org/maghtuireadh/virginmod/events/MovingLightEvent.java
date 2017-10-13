@@ -21,7 +21,7 @@ public class MovingLightEvent {
 	@SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
 	public void movingLightHandler(PlayerTickEvent event) {
 		if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || event.player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH) {
-			
+
 			return;
 		}
 
@@ -37,7 +37,7 @@ public class MovingLightEvent {
 			
 			}
 			else {
-			
+
 	}
 	}
 

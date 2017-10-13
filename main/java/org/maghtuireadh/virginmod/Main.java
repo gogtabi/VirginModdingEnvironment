@@ -1,9 +1,11 @@
 package org.maghtuireadh.virginmod;
 
+import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.events.MovingLightEvent;
 import org.maghtuireadh.virginmod.proxy.CommonProxy;
 import org.maghtuireadh.virginmod.tabs.VirginModTab;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.handlers.VanillaHandler;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,7 +29,7 @@ public class Main {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-
+		VMEConfig.preInit();
 	}
 	
 	@EventHandler
@@ -38,5 +40,5 @@ public class Main {
 	
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {}
-	
+	final VanillaHandler vanillahandler = new VanillaHandler();
 }

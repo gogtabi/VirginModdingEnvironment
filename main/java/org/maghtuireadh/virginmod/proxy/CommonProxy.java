@@ -1,6 +1,7 @@
 package org.maghtuireadh.virginmod.proxy;
 
 
+import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.events.MovingLightEvent;
 import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
@@ -12,7 +13,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy 
 {
-
+	public void preInit() {
+		VMEConfig.clientPreInit();
+	}
+	public void init () {
+		
+	}
+	public void postInit() {
+		
+	}
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	public void registerVariantRenderer(Item item, int meta, String filename, String id) {}
 	public void registerTileEntities() {
