@@ -17,9 +17,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,16 +32,21 @@ import net.minecraft.world.World;
 
 public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider {
 	
-	public static final PropertyBool LIT = PropertyBool.create("lit");
 
 	BlockPos BP;
 	EntityPlayer player;
+	boolean lit = false;
+	int BurnTime = 0;
+	int EntityFireTime, TimeAway;
 	
-	public AtdTorch(String name, ToolMaterial material) {
+	public AtdTorch(String name, ToolMaterial material, int BurnTime, int EntityFireTime) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
+		this.maxStackSize = 1;
+		this.EntityFireTime = EntityFireTime;
+		this.BurnTime = BurnTime;
 		ItemInit.ITEMS.add(this);
 	}
 	
@@ -57,10 +65,61 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 
 	}
 	
+	
+	public boolean isLit() {
+		return this.lit;
+	}
+	
+	public void setLit(boolean lit) {
+		this.lit = lit;
+		
+	}
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+		
+		//if (playerIn.getActiveItemStack().getUnlocalizedName() == Items.FLINT_AND_STEEL.getUnlocalizedName()) {
+		//	this.setLit(true);
+	//	}
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+    }
+	
+	@Override
+	  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	    {
+		 if (!worldIn.isRemote) {
+			 
+				  if(this.isLit()) {
+					  this.BurnTime--;
+					  if(isSelected) {
+						  this.TimeAway = 30;
+						  Utils.getLogger().info("BurnTime remaining :"+this.BurnTime);
+						 }
+					  else {
+						  this.TimeAway--;
+						  Utils.getLogger().info("TimeAway remaining :"+this.TimeAway);
+					  }
+					  if (this.BurnTime <= 0 || this.TimeAway <= 0) {
+						  this.setLit(false);
+			 }}
+		
+		else {
+			
+		
+		}
+				  Utils.getLogger().info(stack+","+worldIn+","+entityIn+","+itemSlot+","+isSelected);		  
+		 }
+		 
+		}
+	
+	
+	
+	
 	@Override
 	  public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
   {
-		entity.setFire(5);
+		entity.setFire(this.EntityFireTime);
 	return false;
 		
   }
@@ -82,8 +141,19 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		int thisZ1 = pos.getZ() + 1;
 		int thisZ2 = pos.getZ() - 1;
 		RayTraceResult RT = this.rayTrace(worldIn, player, false);
-		if (RT!=null) {	
-			if(RT.typeOfHit != RayTraceResult.Type.ENTITY) {	
+		
+		if (RT!=null && !worldIn.isRemote) {	
+			if(RT.typeOfHit != RayTraceResult.Type.ENTITY) {
+				if(1==1) {
+					//worldIn.getBlockState(pos).getBlock().getUnlocalizedName() == Blocks.GRASS.getDefaultState().getBlock().getUnlocalizedName()) {
+					
+					Utils.getLogger().info("b4 this is "+this.isLit());
+					this.setLit(true);
+					this.BurnTime = 3000;
+					Utils.getLogger().info("aftr this is "+this.isLit());
+				}
+				else {
+					Utils.getLogger().info(worldIn.getBlockState(pos).getBlock().getUnlocalizedName() +" == "+ Blocks.GRASS.getDefaultState().getBlock().getUnlocalizedName());
 				if(worldIn.getBlockState(pos).getMaterial() != Material.CIRCUITS) {
 				if(RT.sideHit == EnumFacing.UP) {
 						BP =  new BlockPos(thisX,thisY1,thisZ);
@@ -106,18 +176,24 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					worldIn.setBlockState(BP, BS_west);
 				}
 				}
+				else {
+					Utils.getLogger().info("dunno");
+				}
+				}
 			}
-			//else if (RT.typeOfHit == RayTraceResult.Type.ENTITY) {
-				//RT.entityHit.setFire(5);
-			//}
+			else {
+				Utils.getLogger().info("not block");
 			}
-		
-				
+			
+			}
+	
 		
 		else {
 		Utils.getLogger().info("Thats null bruh");
 		}
+	      Utils.getLogger().info("Used");
         return EnumActionResult.PASS;
+  
     }
 	
 	
