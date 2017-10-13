@@ -1,5 +1,6 @@
 package org.maghtuireadh.virginmod;
 
+import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.events.MovingLightEvent;
 import org.maghtuireadh.virginmod.proxy.CommonProxy;
 import org.maghtuireadh.virginmod.tabs.VirginModTab;
@@ -28,7 +29,7 @@ public class Main {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-
+		VMEConfig.preInit();
 	}
 	
 	@EventHandler
