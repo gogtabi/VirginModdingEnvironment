@@ -76,7 +76,7 @@ public class VMEConfig {
 		
 		
 		
-		Property propertyFirepitMaxFuelLevel = config.get(CATEGORY_NAME_FIREPIT, "firepit_maximum_fuel_level", 12000);
+		Property propertyFirepitMaxFuelLevel = config.get(CATEGORY_NAME_FIREPIT, "firepit_maximum_fuel_level", 10);
 		Property propertyFirepitDefaultBurnRate = config.get(CATEGORY_NAME_FIREPIT, "firepit_default_burn_rate", 2);
 		Property propertyFirepitStokedBurnRate = config.get(CATEGORY_NAME_FIREPIT, "firepit_stoked_burn_rate", 3);
 		Property propertyFirepitRainingBurnRate = config.get(CATEGORY_NAME_FIREPIT,"firepit_raining_burn_rate", 4);
