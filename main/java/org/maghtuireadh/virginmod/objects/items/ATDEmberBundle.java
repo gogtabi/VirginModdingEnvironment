@@ -7,30 +7,18 @@ import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import scala.languageFeature.postfixOps;
 
 public class ATDEmberBundle extends Item implements IHasModel{
-	private int burnTime=100;
+	private int burnTime=10;
 	
 	public ATDEmberBundle(String name) {
 		setUnlocalizedName(name);
@@ -46,6 +34,7 @@ public class ATDEmberBundle extends Item implements IHasModel{
 		}
 	
 	public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
+		if(!world.isRemote) {
 		NBTTagCompound nbt = item.getTagCompound();
 		final EntityPlayer player = (EntityPlayer)par3Entity;
 		BlockPos pos= new BlockPos(player.posX,player.posY,player.posZ);
@@ -86,7 +75,7 @@ public class ATDEmberBundle extends Item implements IHasModel{
 			nbt.setInteger("burntime", burnTime);
 			}
 		
-		if(item.getItemDamage()==32) {
+		if(item.getItemDamage()==32 && item.getItemDamage()==100) {
 			player.sendMessage(new TextComponentString("Your ember bundle glows dimly"));
 			}else if(item.getItemDamage()==48) {
 				player.sendMessage(new TextComponentString("Your ember bundle is mostly ash"));
@@ -95,9 +84,10 @@ public class ATDEmberBundle extends Item implements IHasModel{
 				item.shrink(1);
 			}
 		item.setTagCompound(nbt);	
-		Utils.getLogger().info("Info Output: " + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
+		Utils.getLogger().info("Info Output: " + item.getItemDamage() + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
 		
 		}
+	}
 	}
 
 /*	

@@ -1,5 +1,7 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
+import java.util.UUID;
+
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
@@ -7,6 +9,7 @@ import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -17,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -31,18 +35,19 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 
 	BlockPos BP;
 	EntityPlayer player;
-	boolean lit = false;
-	int BurnTime = 0;
-	int EntityFireTime, TimeAway;
+	private int BurnTime = 0;
+	private int EntityFireTime;
+	private int TimeAway = 30;
+	private NBTTagCompound nbt;
 	
-	public AtdTorch(String name, ToolMaterial material, int BurnTime, int EntityFireTime) {
+	public AtdTorch(String name, ToolMaterial material, int burnTime, int EntityFireTime) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
 		this.maxStackSize = 1;
 		this.EntityFireTime = EntityFireTime;
-		this.BurnTime = BurnTime;
+		BurnTime = burnTime;
 		ItemInit.ITEMS.add(this);
 	}
 	
@@ -63,11 +68,32 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	
 	
 	public boolean isLit() {
-		return this.lit;
+		return nbt.getBoolean("lit");
+		  
 	}
 	
-	public void setLit(boolean lit) {
-		this.lit = lit;
+	public  void setLit(boolean lit) {
+		nbt.setBoolean("lit", lit);
+		
+	}
+	
+	public void setBurnTime(int burntime) {
+		nbt.setInteger("burntime", burntime);
+		  Utils.getLogger().info("set burn time " + burntime);
+	}
+	
+	public  int getBurnTime() {
+		return nbt.getInteger("burntime");
+		  
+	}
+	
+	public void setTimeAway(int timeaway) {
+		nbt.setInteger("timeaway", timeaway);
+		Utils.getLogger().info("set time away " + timeaway);
+	}
+	
+	public  int getTimeAway() {
+		return nbt.getInteger("timeaway");
 		
 	}
 	
@@ -76,35 +102,51 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
     {
 		
 		//if (playerIn.getActiveItemStack().getUnlocalizedName() == Items.FLINT_AND_STEEL.getUnlocalizedName()) {
-		//	this.setLit(true);
+			//setLit(true);
 	//	}
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 	
 	@Override
-	  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	  public void onUpdate(final ItemStack stack, final World world, final Entity entityIn, final int itemSlot, final boolean isSelected)
 	    {
-		 if (!worldIn.isRemote) {
+		 if (!world.isRemote) {
+					nbt = stack.getTagCompound();
+					player = (EntityPlayer)entityIn;
+					BlockPos pos= new BlockPos(player.posX,player.posY,player.posZ);
+					if(nbt == null)	{
+						nbt = new NBTTagCompound();
+						nbt.setLong("timestamp", world.getWorldTime());
+						setTimeAway(TimeAway);
+						setBurnTime(BurnTime);
+						setLit(false);
+						//nbt.setUniqueId("id", itemSlot);
+						setDamage(stack, 0);
+					}
 			 
-				  if(this.isLit()) {
-					  this.BurnTime--;
+				  if(isLit()) {
+					  setBurnTime(getBurnTime()-1);
 					  if(isSelected) {
-						  this.TimeAway = 30;
-						  Utils.getLogger().info("BurnTime remaining :"+this.BurnTime);
+						  setTimeAway(30);
 						 }
 					  else {
-						  this.TimeAway--;
-						  Utils.getLogger().info("TimeAway remaining :"+this.TimeAway);
+						  setTimeAway(getTimeAway()-1);
 					  }
-					  if (this.BurnTime <= 0 || this.TimeAway <= 0) {
-						  this.setLit(false);
-			 }}
+					  if (getBurnTime() <= 0) {
+						  stack.shrink(1);
+			 }
+					  else if( getTimeAway() <= 0) {
+						  setLit(false);
+						  setTimeAway(30);
+					  }
+				  }
 		
 		else {
 			
 		
-		}
-				  Utils.getLogger().info(stack+","+worldIn+","+entityIn+","+itemSlot+","+isSelected);		  
+		}         stack.setTagCompound(nbt);
+				  Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," + getBurnTime() + "," + getTimeAway() + "," + isLit() );		  
+				  
 		 }
 		 
 		}
@@ -140,16 +182,11 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		
 		if (RT!=null && !worldIn.isRemote) {	
 			if(RT.typeOfHit != RayTraceResult.Type.ENTITY) {
-				if(1==1) {
+				if(Block.getIdFromBlock(worldIn.getBlockState(pos).getBlock()) == Block.getIdFromBlock(Blocks.GRASS.getDefaultState().getBlock())) {
 					//worldIn.getBlockState(pos).getBlock().getUnlocalizedName() == Blocks.GRASS.getDefaultState().getBlock().getUnlocalizedName()) {
-					
-					Utils.getLogger().info("b4 this is "+this.isLit());
-					this.setLit(true);
-					this.BurnTime = 3000;
-					Utils.getLogger().info("aftr this is "+this.isLit());
+					setLit(true);
 				}
 				else {
-					Utils.getLogger().info(worldIn.getBlockState(pos).getBlock().getUnlocalizedName() +" == "+ Blocks.GRASS.getDefaultState().getBlock().getUnlocalizedName());
 				if(worldIn.getBlockState(pos).getMaterial() != Material.CIRCUITS) {
 				if(RT.sideHit == EnumFacing.UP) {
 						BP =  new BlockPos(thisX,thisY1,thisZ);
@@ -171,23 +208,21 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					BP =  new BlockPos(thisX2,thisY,thisZ);
 					worldIn.setBlockState(BP, BS_west);
 				}
+				player.inventory.deleteStack(player.inventory.getCurrentItem());
 				}
 				else {
-					Utils.getLogger().info("dunno");
 				}
 				}
 			}
 			else {
-				Utils.getLogger().info("not block");
 			}
 			
 			}
 	
 		
 		else {
-		Utils.getLogger().info("Thats null bruh");
 		}
-	      Utils.getLogger().info("Used");
+
         return EnumActionResult.PASS;
   
     }
