@@ -8,6 +8,7 @@ import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -33,6 +34,13 @@ public class ATDEmberBundle extends Item implements IHasModel{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 		}
 	
+	@Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+		
+    }
+	
+	@Override
 	public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
 		if(!world.isRemote) {
 		NBTTagCompound nbt = item.getTagCompound();

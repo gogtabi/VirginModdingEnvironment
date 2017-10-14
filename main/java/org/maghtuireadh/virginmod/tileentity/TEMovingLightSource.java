@@ -9,7 +9,6 @@ import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSou
 import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -55,10 +54,22 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 
 	public boolean shouldKill() {
 		final EntityPlayer player = findLightSourceCreator();
-		//Boolean hasTorch = player.getHeldItemMainhand().getUnlocalizedName() != "atd_torch";
-		Boolean kill = player == null || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D;// || hasTorch;
+		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D) {
+	
+			return true;
+			
+		}
+		else if (player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH) {
+	
+			return true;
+		}
+		else {
+		
+			return false;
+		}
+		
 
-		return kill;
+		
 	}
 
 	public TEMovingLightSource setPlayer(EntityPlayer player) {

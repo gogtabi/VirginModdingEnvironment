@@ -4,9 +4,9 @@ package org.maghtuireadh.virginmod.events;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
-import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -20,8 +20,8 @@ public class MovingLightEvent {
 	
 	@SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
 	public void movingLightHandler(PlayerTickEvent event) {
-		if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || event.player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH) {
-
+		if(!event.player.world.isRemote) {
+		if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || (Item.getIdFromItem(event.player.getHeldItemMainhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH) && Item.getIdFromItem(event.player.getHeldItemOffhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH))) {
 			return;
 		}
 
@@ -31,6 +31,7 @@ public class MovingLightEvent {
 		final BlockPos pos = new BlockPos(blockX, blockY + 1, blockZ);
 
 		//if (event.player.world.isAirBlock(pos)) {
+		    
 			if(event.player.world.isAirBlock(pos)) {
 			final BlockMovingLightSource lightSource = BlockInit.BLOCK_MLS;
 			event.player.world.setBlockState(pos, lightSource.setPlayer(event.player).getDefaultState());
@@ -38,7 +39,8 @@ public class MovingLightEvent {
 			}
 			else {
 
-	}
+			}
+		}
 	}
 
 	@SubscribeEvent
