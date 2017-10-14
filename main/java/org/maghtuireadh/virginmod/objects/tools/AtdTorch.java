@@ -39,6 +39,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	private int EntityFireTime;
 	private int TimeAway = 30;
 	private NBTTagCompound nbt;
+	private boolean lit;
 	
 	public AtdTorch(String name, ToolMaterial material, int burnTime, int EntityFireTime) {
 		super(material);
@@ -77,9 +78,9 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		
 	}
 	
-	public void setBurnTime(int burntime) {
+	public void setBurnTime(int burntime, int slot) {
 		nbt.setInteger("burntime", burntime);
-		  Utils.getLogger().info("set burn time " + burntime);
+		  Utils.getLogger().info("set burn time " + burntime + ", "  + slot);
 	}
 	
 	public  int getBurnTime() {
@@ -87,9 +88,9 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		  
 	}
 	
-	public void setTimeAway(int timeaway) {
+	public void setTimeAway(int timeaway, int slot) {
 		nbt.setInteger("timeaway", timeaway);
-		Utils.getLogger().info("set time away " + timeaway);
+		Utils.getLogger().info("set time away " + timeaway + ", "  + slot);
 	}
 	
 	public  int getTimeAway() {
@@ -117,27 +118,32 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					if(nbt == null)	{
 						nbt = new NBTTagCompound();
 						nbt.setLong("timestamp", world.getWorldTime());
-						setTimeAway(TimeAway);
-						setBurnTime(BurnTime);
+						setTimeAway(TimeAway, itemSlot);
+						setBurnTime(BurnTime, itemSlot);
 						setLit(false);
 						//nbt.setUniqueId("id", itemSlot);
 						setDamage(stack, 0);
 					}
+				
+					if (this.lit && isSelected) {
+						setLit(true);
+						this.lit=false;
+					}
 			 
-				  if(isLit()) {
-					  setBurnTime(getBurnTime()-1);
+				  if(isLit() ) {
+					  setBurnTime(getBurnTime()-1, itemSlot);
 					  if(isSelected) {
-						  setTimeAway(30);
+						  setTimeAway(30, itemSlot);
 						 }
 					  else {
-						  setTimeAway(getTimeAway()-1);
+						  setTimeAway(getTimeAway()-1, itemSlot);
 					  }
 					  if (getBurnTime() <= 0) {
 						  stack.shrink(1);
 			 }
 					  else if( getTimeAway() <= 0) {
 						  setLit(false);
-						  setTimeAway(30);
+						  setTimeAway(30, itemSlot);
 					  }
 				  }
 		
@@ -184,7 +190,8 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 			if(RT.typeOfHit != RayTraceResult.Type.ENTITY) {
 				if(Block.getIdFromBlock(worldIn.getBlockState(pos).getBlock()) == Block.getIdFromBlock(Blocks.GRASS.getDefaultState().getBlock())) {
 					//worldIn.getBlockState(pos).getBlock().getUnlocalizedName() == Blocks.GRASS.getDefaultState().getBlock().getUnlocalizedName()) {
-					setLit(true);
+					//setLit(true);
+					this.lit = true;
 				}
 				else {
 				if(worldIn.getBlockState(pos).getMaterial() != Material.CIRCUITS) {
