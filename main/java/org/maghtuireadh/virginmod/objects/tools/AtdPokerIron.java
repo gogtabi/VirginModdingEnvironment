@@ -12,9 +12,9 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 
-public class ATDPokerIron extends ItemSpade implements IHasModel {
+public class AtdPokerIron extends ItemSpade implements IHasModel {
 
-	public ATDPokerIron(String name, ToolMaterial material) {
+	public AtdPokerIron(String name, ToolMaterial material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

@@ -6,8 +6,11 @@ import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -18,7 +21,7 @@ public class MovingLightEvent {
 	@SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
 	public void movingLightHandler(PlayerTickEvent event) {
 		if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || event.player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH) {
-			//Utils.getLogger().info("The event failed" );
+
 			return;
 		}
 
@@ -31,20 +34,20 @@ public class MovingLightEvent {
 			if(event.player.world.isAirBlock(pos)) {
 			final BlockMovingLightSource lightSource = BlockInit.BLOCK_MLS;
 			event.player.world.setBlockState(pos, lightSource.setPlayer(event.player).getDefaultState());
-			Utils.getLogger().info("The event happened");
+			
 			}
 			else {
-			Utils.getLogger().info("The event didn't happen");
+
 	}
 	}
 
-	/*@SubscribeEvent
+	@SubscribeEvent
 	public void onBlockHarvest(HarvestDropsEvent event) {
-		if (ConfigHandler.vanillaTorchDropsUnlit && event.getState().getBlock() == Blocks.TORCH) {
+		if (event.getState().getBlock() == Blocks.TORCH) {
 			event.getDrops().clear();
 			event.setDropChance(1.0F);
-			event.getDrops().add(new ItemStack(RealisticTorchesBlocks.torchUnlit));
+			event.getDrops().add(new ItemStack(ItemInit.ATD_TORCH));
 	 	 }
-	}*/
+	}
 
 }
