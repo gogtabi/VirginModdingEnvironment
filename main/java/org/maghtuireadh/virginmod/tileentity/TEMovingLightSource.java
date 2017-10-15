@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 
 public class TEMovingLightSource extends TileEntity implements ITickable {
 
@@ -61,6 +62,10 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 		}
 		else if (player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH) {
 	
+			return true;
+		}
+		else if (false) {//(player.getHeldItemMainhand().getTagCompound().getBoolean("lit") != true && player.getHeldItemOffhand().getTagCompound().getBoolean("lit") != true) {
+			
 			return true;
 		}
 		else {

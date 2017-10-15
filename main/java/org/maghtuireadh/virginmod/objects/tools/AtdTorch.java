@@ -41,24 +41,45 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	BlockPos BP;
 	EntityPlayer player;
 	private int BurnTime = 0;
-	private int EntityFireTime;
+	private int EntityFireTime, RainRes;
+	private float RainChance;
 	private int TimeAway = 30;
 	private NBTTagCompound nbt;
 	private boolean lit;
 	
-	public AtdTorch(String name, ToolMaterial material, int burnTime, int EntityFireTime) {
+
+    /**
+     * ATD torch set
+     * @param name The name of the torch, used for unlocalized and registry name
+     * @param material The item material, affects damage to entity
+     * @param burnTime How many ticks it can burn for
+     * @param entityFireTime How long it sets entities on fire for
+     * @param rainChance The chance that rain will damage res
+     * @param rainRes The number of rain res ticks the item has
+     */
+	
+	public AtdTorch(String name, ToolMaterial material, int burnTime, int entityFireTime, float rainChance, int rainRes) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
 		this.maxStackSize = 1;
-		this.EntityFireTime = EntityFireTime;
+		this.EntityFireTime = entityFireTime;
 		BurnTime = burnTime;
+		RainRes = rainRes;
+		RainChance = rainChance;
 		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                return isLit() ? 1.0F : 0.0F;
+            	if(stack.hasTagCompound()) 
+            	{
+            		return isLit() ? 1.0F : 0.0F;
+            	}
+            	else
+            	{
+            		return 0.0F;
+            	}
             }
         });
 		ItemInit.ITEMS.add(this);
@@ -85,14 +106,20 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	
 	
 	public boolean isLit() {
+		if(nbt.hasKey("lit")) {
 		return nbt.getBoolean("lit");
+		}
+		else
+		{
+			return false;
+		}
 		  
 	}
 	
 	public  void setLit(boolean lit, long worldTime) {
 		nbt.setBoolean("lit", lit);
 		nbt.setLong("worldtime", worldTime);
-		
+
 	}
 	
 	public void setBurnTime(long burntime) {
@@ -138,6 +165,8 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 						//setTimeAway(TimeAway);
 						setLit(false, (long)0);
 						setDamage(stack, 0);
+						nbt.setFloat("rainchance", RainChance);
+						nbt.setInteger("rainres", RainRes);
 					}
 				
 					if (this.lit && isSelected) {
@@ -159,10 +188,28 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 						  stack.shrink(1);
 					  }
 					  else if(getTimeAway() <= 0) {
-						  setBurnTime(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()));
+						setBurnTime(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()));
 						  setLit(false, (long)0);
 						  
 						  
+					  }
+					  if (world.isRainingAt(pos.up(2)))
+					  {
+						  int res = nbt.getInteger("rainres");
+						  float cha = nbt.getFloat("rainchance");
+						  float ran = world.rand.nextFloat();
+						  if (ran*cha>60) 
+						  {
+							  Utils.getLogger().info(ran);
+								
+								nbt.setInteger("rainres", res-1);
+								if (res<=0) 
+								{
+									setBurnTime(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()));
+									nbt.setInteger("rainres", RainRes);
+									setLit(false, (long)0);
+								}
+						  }
 					  }
 				  }
 		
