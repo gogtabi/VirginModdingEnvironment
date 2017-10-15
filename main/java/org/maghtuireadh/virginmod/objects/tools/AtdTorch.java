@@ -1,6 +1,6 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
-import java.util.UUID;
+import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
@@ -16,8 +16,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,9 +28,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider {
 	
@@ -49,13 +54,24 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		this.maxStackSize = 1;
 		this.EntityFireTime = EntityFireTime;
 		BurnTime = burnTime;
+		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+                return isLit() ? 1.0F : 0.0F;
+            }
+        });
 		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
 	public void registerModels()
 	{
+		//for (int i=0;i<2;i++) {
+		//Main.proxy.registerVariantRenderer(this, i, this.getUnlocalizedName(), "lit="+i);
+		//}
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
+		//Main.proxy.registerItemRenderer(this, 1, "lit");
 	}
 	
 	
@@ -73,24 +89,25 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 		  
 	}
 	
-	public  void setLit(boolean lit) {
+	public  void setLit(boolean lit, long worldTime) {
 		nbt.setBoolean("lit", lit);
+		nbt.setLong("worldtime", worldTime);
 		
 	}
 	
-	public void setBurnTime(int burntime, int slot) {
-		nbt.setInteger("burntime", burntime);
-		  Utils.getLogger().info("set burn time " + burntime + ", "  + slot);
+	public void setBurnTime(long burntime) {
+		nbt.setLong("burntime", burntime);
+		 // Utils.getLogger().info("set burn time " + burntime + ", "  + slot);
 	}
 	
-	public  int getBurnTime() {
-		return nbt.getInteger("burntime");
+	public  Long getBurnTime() {
+		return nbt.getLong("burntime");
 		  
 	}
 	
-	public void setTimeAway(int timeaway, int slot) {
+	public void setTimeAway(int timeaway) {
 		nbt.setInteger("timeaway", timeaway);
-		Utils.getLogger().info("set time away " + timeaway + ", "  + slot);
+		//Utils.getLogger().info("set time away " + timeaway + ", "  + slot);
 	}
 	
 	public  int getTimeAway() {
@@ -117,33 +134,35 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					BlockPos pos= new BlockPos(player.posX,player.posY,player.posZ);
 					if(nbt == null)	{
 						nbt = new NBTTagCompound();
-						nbt.setLong("timestamp", world.getWorldTime());
-						setTimeAway(TimeAway, itemSlot);
-						setBurnTime(BurnTime, itemSlot);
-						setLit(false);
-						//nbt.setUniqueId("id", itemSlot);
+						
+						//setTimeAway(TimeAway);
+						setLit(false, (long)0);
 						setDamage(stack, 0);
 					}
 				
 					if (this.lit && isSelected) {
-						setLit(true);
+						//entityIn.replaceItemInInventory(itemSlot, new ItemStack(stack.getItem(), 1, itemSlot, nbt));
+						setLit(true, world.getTotalWorldTime());
 						this.lit=false;
 					}
 			 
-				  if(isLit() ) {
-					  setBurnTime(getBurnTime()-1, itemSlot);
-					  if(isSelected) {
-						  setTimeAway(30, itemSlot);
+				  if(isLit()) {
+					  //setBurnTime(getBurnTime()-1);
+					  if(isSelected && getTimeAway() < this.TimeAway) {
+						  
+						  setTimeAway(this.TimeAway);
 						 }
-					  else {
-						  setTimeAway(getTimeAway()-1, itemSlot);
+					  else if (!isSelected){
+						  setTimeAway(getTimeAway()-1);
 					  }
-					  if (getBurnTime() <= 0) {
+					  if (world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()) > this.BurnTime) {
 						  stack.shrink(1);
-			 }
-					  else if( getTimeAway() <= 0) {
-						  setLit(false);
-						  setTimeAway(30, itemSlot);
+					  }
+					  else if(getTimeAway() <= 0) {
+						  setBurnTime(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()));
+						  setLit(false, (long)0);
+						  
+						  
 					  }
 				  }
 		
@@ -151,7 +170,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 			
 		
 		}         stack.setTagCompound(nbt);
-				  Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," + getBurnTime() + "," + getTimeAway() + "," + isLit() );		  
+				  Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
 				  
 		 }
 		 

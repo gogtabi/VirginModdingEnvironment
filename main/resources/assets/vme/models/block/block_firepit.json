@@ -1,5 +1,4 @@
 {
-    "parent:": "vme:/block_firepit",
     "textures": {
     "0": "blocks/cobblestone",
     "particle": "minecraft:blocks/cobblestone"},
