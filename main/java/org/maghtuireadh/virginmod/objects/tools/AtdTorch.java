@@ -74,7 +74,8 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
             {
             	if(stack.hasTagCompound()) 
             	{
-            		return isLit() ? 1.0F : 0.0F;
+            		
+            		return stack.getTagCompound().getBoolean("lit") ? 1.0F : 0.0F;
             	}
             	else
             	{
