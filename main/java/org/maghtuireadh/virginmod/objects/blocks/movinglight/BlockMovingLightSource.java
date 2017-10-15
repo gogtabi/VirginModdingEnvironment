@@ -6,7 +6,7 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.util.Reference;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -21,13 +21,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockMovingLightSource extends Block implements ITileEntityProvider {
+public class BlockMovingLightSource extends BlockAir implements ITileEntityProvider {
 
 
 	private EntityPlayer player;
 
 	public BlockMovingLightSource(String name) {
-		super(Material.AIR);
+		super();
 		this.setUnlocalizedName(name);
 		this.setRegistryName(new ResourceLocation(Reference.MODID, name));
 		BlockInit.BLOCKS.add(this);

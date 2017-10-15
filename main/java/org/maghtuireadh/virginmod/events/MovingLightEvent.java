@@ -20,7 +20,7 @@ public class MovingLightEvent {
 	
 	@SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
 	public void movingLightHandler(PlayerTickEvent event) {
-		if(!event.player.world.isRemote) {
+		/*if(!event.player.world.isRemote) {
 		if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || (Item.getIdFromItem(event.player.getHeldItemMainhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH) && Item.getIdFromItem(event.player.getHeldItemOffhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH))) {
 			return;
 		}
@@ -40,7 +40,7 @@ public class MovingLightEvent {
 			else {
 
 			}
-		}
+		}*/
 	}
 
 	@SubscribeEvent

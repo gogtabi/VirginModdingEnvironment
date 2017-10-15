@@ -64,10 +64,6 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 	
 			return true;
 		}
-		else if (false) {//(player.getHeldItemMainhand().getTagCompound().getBoolean("lit") != true && player.getHeldItemOffhand().getTagCompound().getBoolean("lit") != true) {
-			
-			return true;
-		}
 		else {
 		
 			return false;

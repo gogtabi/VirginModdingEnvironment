@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
+import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
 import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
@@ -20,6 +21,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,8 +32,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -129,8 +133,14 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	}
 	
 	public  Long getBurnTime() {
+		if(nbt.hasKey("burntime"))
+		{
 		return nbt.getLong("burntime");
-		  
+		}
+		else
+		{
+			return (long)0;
+		}
 	}
 	
 	public void setTimeAway(int timeaway) {
@@ -139,8 +149,14 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	}
 	
 	public  int getTimeAway() {
+		if(nbt.hasKey("timeaway"))
+		{
 		return nbt.getInteger("timeaway");
-		
+		}
+		else
+		{
+		return 0;	
+		}
 	}
 	
 	@Override
@@ -212,17 +228,39 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 								}
 						  }
 					  }
-				  }
+					  
+	
+							//if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || event.player.getHeldEquipment() == null || (Item.getIdFromItem(event.player.getHeldItemMainhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH) && Item.getIdFromItem(event.player.getHeldItemOffhand().getItem()) != Item.getIdFromItem(ItemInit.ATD_TORCH))) {
+							//	return;
+							//}
+
+							final int blockX = MathHelper.floor(player.posX);
+							final int blockY = MathHelper.floor(player.posY - 0.2D - player.getYOffset());
+							final int blockZ = MathHelper.floor(player.posZ);
+							final BlockPos pos1 = new BlockPos(blockX, blockY + 1, blockZ);
+
+							//if (event.player.world.isAirBlock(pos)) {
+							    
+								if(player.world.isAirBlock(pos1)) {
+								final BlockMovingLightSource lightSource = BlockInit.BLOCK_MLS;
+								player.world.setBlockState(pos, lightSource.setPlayer(player).getDefaultState());
+								
+								}
+								else {
+
+								}
+							}
+				  
 		
 		else {
 			
 		
 		}         stack.setTagCompound(nbt);
 				  Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
-				  
+		 }
 		 }
 		 
-		}
+		
 	
 	
 	
