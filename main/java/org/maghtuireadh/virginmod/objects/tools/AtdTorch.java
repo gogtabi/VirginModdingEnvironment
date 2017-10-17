@@ -7,7 +7,8 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
-import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
+import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
+import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
@@ -107,7 +108,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
 
-		return new TEMovingLightSource().setPlayer(player);
+		return new TileEntityMovingLightSource().setPlayer(player);
 
 	}
 	
@@ -199,9 +200,19 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					
 					if (place && isSelected)
 					{
-						world.setBlockState(BP, BSHold.withProperty(BlockATDTorch.BURNTIME, (int)(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()))).withProperty(BlockATDTorch.LIT,false));
+						world.setBlockState(BP, BSHold.withProperty(BlockATDTorch.LIT,false));
+						long time;
+						if (nbt.getLong("worldtime") > 0)
+						{
+							time = BurnTime - (world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime()));
+						}
+						else
+						{
+							time = BurnTime;
+						}
+						((TileEntityATDTorch) world.getTileEntity(BP)).setTime(time);
 						place=false;
-						Utils.getLogger().info("Sent");
+						player.inventory.deleteStack(player.inventory.getCurrentItem());
 					}
 			 
 				  if(isLit()) 
@@ -359,7 +370,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 									//worldIn.setBlockState(BP, BS_west);
 								}
 							
-								player.inventory.deleteStack(player.inventory.getCurrentItem());
+								
 								break;
 							}
 						}

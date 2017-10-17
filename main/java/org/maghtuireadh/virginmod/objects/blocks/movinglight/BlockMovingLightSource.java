@@ -3,7 +3,7 @@ package org.maghtuireadh.virginmod.objects.blocks.movinglight;
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.init.BlockInit;
-import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
+import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Reference;
 
 import net.minecraft.block.BlockAir;
@@ -44,7 +44,7 @@ public class BlockMovingLightSource extends BlockAir implements ITileEntityProvi
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
 	{
-		return new TEMovingLightSource().setPlayer(player);
+		return new TileEntityMovingLightSource().setPlayer(player);
 	}
 
 	public BlockMovingLightSource setPlayer(EntityPlayer player) 

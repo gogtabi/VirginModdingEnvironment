@@ -3,7 +3,7 @@ package org.maghtuireadh.virginmod.proxy;
 
 import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.events.MovingLightEvent;
-import org.maghtuireadh.virginmod.tileentity.TEMovingLightSource;
+import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 
@@ -32,7 +32,7 @@ public class CommonProxy
 	public void registerTileEntities() 
 	{
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, Reference.MODID + ":TileEntityFirepit");
-		GameRegistry.registerTileEntity(TEMovingLightSource.class, Reference.MODID + ":TEMovingLightSource");
+		GameRegistry.registerTileEntity(TileEntityMovingLightSource.class, Reference.MODID + ":TEMovingLightSource");
 		MinecraftForge.EVENT_BUS.register(new MovingLightEvent());
 	}	
 }

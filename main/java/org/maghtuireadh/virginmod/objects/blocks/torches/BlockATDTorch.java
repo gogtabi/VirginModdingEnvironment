@@ -5,8 +5,7 @@ import java.util.Random;
 import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
-import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit;
-import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
+import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
@@ -14,15 +13,12 @@ import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -48,6 +44,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 		this.setRegistryName(name);
 		this.setLightLevel(1.0F);
 		this.setTickRandomly(true);
+		this.setDefaultState(this.getDefaultState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, false));
 		Blocks.FIRE.setFireInfo(this, 60, 20);
 		//setCreativeTab(Main.virginmodtab);
 		BlockInit.BLOCKS.add(this);
@@ -62,42 +59,31 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 		return blockstate;
 	}
 	
+	public void extinguish(World world, BlockPos pos)
+	{
+		world.setBlockToAir(pos);
+	}
+	
 	@Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {FACING,LIT});
     }
 	
-	@Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-		for(int i=0 ; i < FireStarters.length;i++)
-		{
-			 if (playerIn.getActiveItemStack().getItem() == FireStarters[i] && state != this.getBlockState().getBaseState().withProperty(BlockATDTorch.LIT, true))
-			 {
-				BlockPos BP = new BlockPos(hitX,hitY,hitZ);
-				IBlockState BS = worldIn.getBlockState(BP).withProperty(BlockATDTorch.LIT, true);
-				worldIn.setBlockState(BP, BS);
-			 }
-					
-		}
-		return false;
-    }
 	
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		
 		if(world.getTotalWorldTime() - this.setTime > burnTime)
 		{
-		world.setBlockToAir(pos);
+		//world.setBlockToAir(pos);
 		}
-		Utils.getLogger().info("Get World Time: " + world.getTotalWorldTime());
 	}
 
 	@Override
 	public void registerModels() {
 		for(int i = 0; i < 9; i++)
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "Block_atd_Torch", "inventory");
+		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "Block_atd_Torch", "state="+i);
 		
 	}
 
@@ -109,20 +95,73 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		//int meta = state.getValue(PITSTATE);
+		int meta = 0;
+		if (state.getValue(FACING) == EnumFacing.UP)
+		{
+			meta = 1;
+		}
+		if (state.getValue(FACING) == EnumFacing.NORTH)
+		{
+			meta = 2;
+		}
+		if (state.getValue(FACING) == EnumFacing.SOUTH)
+		{
+			meta = 3;
+		}
+		if (state.getValue(FACING) == EnumFacing.EAST)
+		{
+			meta = 4;
+		}
+		if (state.getValue(FACING) == EnumFacing.WEST)
+		{
+			meta = 5;
+		}
+		if (state.getValue(LIT))
+		{
+			meta = (meta * 2) - 1;
+		}
+		else
+		{
+			meta = meta - 1;
+		}
 		return meta;
 		}
 	
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-			return //BlockFirepit.states[meta];
+		switch (meta)
+		{
+			case 0:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, false);
+			case 1:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false);
+			case 2:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH).withProperty(LIT, false);
+			case 3:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(LIT, false);
+			case 4:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.WEST).withProperty(LIT, false);
+			case 5:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true);
+			case 6:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, true);
+			case 7:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH).withProperty(LIT, true);
+			case 8:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(LIT, true);
+			case 9:
+				return this.getDefaultState().withProperty(FACING, EnumFacing.WEST).withProperty(LIT, true);
+			default:
+				return this.getDefaultState();
+		}
+				
 		}
 	
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 
-		return new TileEntityFirepit();
+		return new TileEntityATDTorch();
 
 	}
 }
