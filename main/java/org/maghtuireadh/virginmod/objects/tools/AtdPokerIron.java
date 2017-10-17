@@ -12,9 +12,11 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 
-public class AtdPokerIron extends ItemSpade implements IHasModel {
+public class AtdPokerIron extends ItemSpade implements IHasModel 
+{
 
-	public AtdPokerIron(String name, ToolMaterial material) {
+	public AtdPokerIron(String name, ToolMaterial material) 
+	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -23,8 +25,8 @@ public class AtdPokerIron extends ItemSpade implements IHasModel {
 		ItemInit.ITEMS.add(this);
 	}
 	
-public void registerModels() {
+	public void registerModels() 
+	{
 	Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-
 }

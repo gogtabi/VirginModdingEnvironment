@@ -3,26 +3,31 @@ package org.maghtuireadh.virginmod.util.handlers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
-public class EnumHandler {
+public class EnumHandler 
+{
 	
-	public enum LitStates implements IStringSerializable {
+	public enum LitStates implements IStringSerializable 
+	{
 		UNLIT("unlit"),
 		LIT("lit"),
 		LIT_STOKED("lit_stoked"),
-		LIT_BANKED("lit_banked")
-		;
+		LIT_BANKED("lit_banked");
+		
 		private final String name;
 		
-		private LitStates(String name) {
+		private LitStates(String name) 
+		{
 			this.name=name;
 		}
 
 		@Override
-		public String toString() {
+		public String toString() 
+		{
 			return this.name();
 		}
 		@Override
-		public String getName() {
+		public String getName() 
+		{
 			return this.name;
 		}
 		
@@ -41,7 +46,8 @@ public class EnumHandler {
 			this(meta, name, name);
 		}
 		
-		private EnumType(int meta, String name, String unlocalizedName) {
+		private EnumType(int meta, String name, String unlocalizedName) 
+		{
 			this.meta=(meta);
 			this.name= name;
 			this.unlocalizedName = unlocalizedName;
@@ -51,11 +57,13 @@ public class EnumHandler {
 		
 		
 		@Override
-		public String getName() {
+		public String getName() 
+		{
 			return this.name;
 		}
 		
-		public int getMeta() {
+		public int getMeta() 
+		{
 			return this.meta;
 		}
 			

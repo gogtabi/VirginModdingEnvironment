@@ -159,49 +159,47 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	 *                         Initialization Elements
 	  ============================================================================*/	
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) 
+	{
 		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) 
+	{
 		worldIn.setBlockState(pos, state.withProperty(PITSTATE, 0));
 	}
 	
-	public int quantityDropped(Random random){
-	
-		 return 6;
-	
+	public int quantityDropped(Random random)
+	{
+		return 6;
 	}			
 	
-	public Item getItemDropped(IBlockState state, Random rand, int fortune){
-	
-				return Item.getItemFromBlock(Blocks.STONE_SLAB);
-	
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Item.getItemFromBlock(Blocks.STONE_SLAB);
 	}
 	
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) 
+	{
 	this.blockState.getBaseState().withProperty(PITSTATE, Integer.valueOf(0));
 	this.setBurning(false);
 	}
 	
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-	TileEntityFirepit tileentity = (TileEntityFirepit)worldIn.getTileEntity(pos);
-	
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) 
+	{
 	super.breakBlock(worldIn, pos, state);
 	}
 	
-	public EnumBlockRenderType getRenderType(IBlockState state) {
+	public EnumBlockRenderType getRenderType(IBlockState state) 
+	{
 	return EnumBlockRenderType.MODEL;
 	}
 	
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) 
+	{
 		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
@@ -210,26 +208,28 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	 * Returns the correct meta for the block
 	 * I recommend also saving the EnumFacing to the meta but I haven't
 	 */
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(IBlockState state) 
+	{
 		int meta = state.getValue(PITSTATE);
 		return meta;
-		}
+	}
 	
 	
 	@Override
 	/**
 	 * Gets the block state from the meta
 	 */
-	public IBlockState getStateFromMeta(int meta) {
-			return BlockFirepit.states[meta];
-		}
+	public IBlockState getStateFromMeta(int meta) 
+	{
+		return BlockFirepit.states[meta];
+	}
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
 	 */
 	
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-			EntityPlayer player) {
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
+	{
 		return new ItemStack(Item.getItemFromBlock(this), 1, (int) (getMetaFromState(world.getBlockState(pos))));
 	}
 	
@@ -238,24 +238,26 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	 */
 	
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-
+	public TileEntity createNewTileEntity(World worldIn, int meta) 
+	{
 		return new TileEntityFirepit();
-
 	}
 
 	@Override
-	public int damageDropped(IBlockState state) {
+	public int damageDropped(IBlockState state) 
+	{
 		return (int) (getMetaFromState(state));
 	}
 	
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) 
+	{
 			items.add(new ItemStack(this, 1, 0));
-		}
+	}
 	
 	@Override
-	public void registerModels() {
+	public void registerModels() 
+	{
 		for (int i=0;i<states.length-1;i++)
 		{
 		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "block_firepit", "states="+i);
@@ -269,13 +271,14 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	}
 	
 	@Override
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) 
+	{
 		return true;
 	}
 	
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(IBlockState state) 
+	{
 		return false;
 	}
 	
@@ -296,7 +299,8 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
     }
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
+	protected BlockStateContainer createBlockState() 
+	{
 		return new BlockStateContainer(this, new IProperty[] {PITSTATE});
 	}
 }

@@ -14,19 +14,23 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 
-public class TEMovingLightSource extends TileEntity implements ITickable {
+public class TEMovingLightSource extends TileEntity implements ITickable 
+{
 
 	public static final String NAME = "te_moving_light_source";
 
 	private UUID playerUUID;
 
-	public TEMovingLightSource() {
+	public TEMovingLightSource()
+	{
 
 	}
 
 	@Override
-	public void update() {
-		if (shouldKill() && world.getBlockState(pos).getBlock() instanceof BlockMovingLightSource) {
+	public void update() 
+	{
+		if (shouldKill() && world.getBlockState(pos).getBlock() instanceof BlockMovingLightSource) 
+		{
 			world.setBlockToAir(pos);
 			world.removeTileEntity(pos);
 		}
@@ -34,60 +38,59 @@ public class TEMovingLightSource extends TileEntity implements ITickable {
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) 
+	{
 		super.writeToNBT(tag);
-
-		if (playerUUID != null) {
+		if (playerUUID != null) 
+		{
 			tag.setString("PlayerUUID", playerUUID.toString());
 		}
-
 		return tag;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(NBTTagCompound tag) 
+	{
 		super.readFromNBT(tag);
-
-		if (tag.hasKey("PlayerUUID")) {
+		if (tag.hasKey("PlayerUUID")) 
+		{
 			playerUUID = UUID.fromString(tag.getString("PlayerUUID"));
 		}
 	}
 
-	public boolean shouldKill() {
+	public boolean shouldKill() 
+	{
 		final EntityPlayer player = findLightSourceCreator();
-		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D) {
-	
-			return true;
-			
-		}
-		else if (player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH) {
-	
+		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D) 
+		{
 			return true;
 		}
-		else {
-		
+		else if (player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH) 
+		{
+			return true;
+		}
+		else 
+		{
 			return false;
 		}
-		
-
-		
 	}
 
-	public TEMovingLightSource setPlayer(EntityPlayer player) {
-		if (player != null) {
+	public TEMovingLightSource setPlayer(EntityPlayer player) 
+	{
+		if (player != null) 
+		{
 			playerUUID = player.getGameProfile() != null ? player.getGameProfile().getId() : null;
 		}
-
 		return this;
 	}
 
 	@Nullable
-	public EntityPlayer findLightSourceCreator() {
-		if (playerUUID != null) {
+	public EntityPlayer findLightSourceCreator() 
+	{
+		if (playerUUID != null) 
+		{
 			return world.getPlayerEntityByUUID(playerUUID);
 		}
-
 		return world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 2.0D, false);
 	}
-
 }

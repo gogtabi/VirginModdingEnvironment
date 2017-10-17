@@ -11,10 +11,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class BlockBase extends Block implements IHasModel{
+public class BlockBase extends Block implements IHasModel
+{
 
 
-	public BlockBase(String name, Material material) {
+	public BlockBase(String name, Material material) 
+	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -46,7 +48,8 @@ public class BlockBase extends Block implements IHasModel{
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
-	public BlockBase(String name, Material material, float hardness, String tool, int harvest, float resistance) {
+	public BlockBase(String name, Material material, float hardness, String tool, int harvest, float resistance) 
+	{
 		super(material);
 		this.setHardness(hardness);
 		this.setHarvestLevel(tool, harvest);
@@ -57,7 +60,8 @@ public class BlockBase extends Block implements IHasModel{
 	}
 
 	@Override
-	public void registerModels() {
+	public void registerModels() 
+	{
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }
