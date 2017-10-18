@@ -1,5 +1,7 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
+import java.util.Set;
+
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
@@ -12,17 +14,19 @@ import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
+import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,12 +37,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvider 
+public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvider 
 {
 	
 
@@ -53,7 +56,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	private boolean lit, dontkill, extinguish, place;
 	public static Block[] FireBlocks = new Block[] {BlockInit.ATD_TORCH,BlockInit.BLOCK_FIREPIT,Blocks.FIRE,Blocks.FLOWING_LAVA,Blocks.LIT_FURNACE,Blocks.MAGMA,Blocks.TORCH};
 	public static Material[] PlaceBlocks = new Material[] {Material.CLAY,Material.GRASS,Material.SAND,Material.SNOW,Material.CRAFTED_SNOW,Material.GROUND};
-	
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE, Blocks.SNOW);
 
     /**
      * ATD torch set
@@ -63,19 +66,21 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
      * @param entityFireTime How long it sets entities on fire for
      * @param rainChance The chance that rain will damage res
      * @param rainRes The number of rain res ticks the item has
+     * @param stackSize The size of the stack
      */
 	
-	public AtdTorch(String name, ToolMaterial material, int burnTime, int entityFireTime, float rainChance, int rainRes) 
+	public AtdTorch(String name, ToolMaterial material, int burnTime, int entityFireTime, float rainChance, int rainRes, int stackSize) 
 	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
-		this.maxStackSize = 1;
+		setCreativeTab(Main.virginmodtab);
+		this.maxStackSize = stackSize;
 		this.EntityFireTime = entityFireTime;
 		BurnTime = burnTime;
 		RainRes = rainRes;
 		RainChance = rainChance;
+		setDamage(new ItemStack(this), 0);
 		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() 
 		{
             @SideOnly(Side.CLIENT)
@@ -98,18 +103,14 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	@Override
 	public void registerModels()
 	{
-	
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
 	
 	@Override
-
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
-
 		return new TileEntityMovingLightSource().setPlayer(player);
-
 	}
 	
 	
@@ -172,8 +173,41 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
 		
-		 return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
     }
+	
+	@Override
+    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+    {
+	
+		Utils.getLogger().info("OnItemUseFirst");
+		
+        return EnumActionResult.PASS;
+    }
+	
+	@Override
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+		if(!player.world.isRemote)
+		{
+		Utils.getLogger().info("OnItemUsing" + count);
+		}
+	}
+	
+	@Override
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
+    {
+		if(!worldIn.isRemote)
+		{
+		Utils.getLogger().info("OnItemUseFinish");
+        
+		}
+		return stack;
+    }
+	
+	
 	
 	@Override
 	  public void onUpdate(final ItemStack stack, final World world, final Entity entityIn, final int itemSlot, final boolean isSelected)
@@ -187,6 +221,12 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					{
 						nbt = new NBTTagCompound();
 						setLit(false, (long)0);
+						setDamage(stack, 0);
+						nbt.setFloat("rainchance", RainChance);
+						nbt.setInteger("rainres", RainRes);
+					}
+					else if (!nbt.hasKey("rainchance"))
+					{
 						setDamage(stack, 0);
 						nbt.setFloat("rainchance", RainChance);
 						nbt.setInteger("rainres", RainRes);
@@ -212,7 +252,7 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 						}
 						((TileEntityATDTorch) world.getTileEntity(BP)).setTime(time);
 						place=false;
-						player.inventory.deleteStack(player.inventory.getCurrentItem());
+						player.inventory.decrStackSize(player.inventory.currentItem, 1);
 					}
 			 
 				  if(isLit()) 
@@ -278,11 +318,13 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 					}
 				}
 				stack.setTagCompound(nbt);
-				Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
+				
+				//Utils.getLogger().info("OnItemUse" + getMaxItemUseDuration(new ItemStack(this)) + ", " +  player.getItemInUseCount());
+				//Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
 		 	}
 	    }
 		 
-		
+	
 	
 	
 	
@@ -294,9 +336,29 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 			return false;	
 		}
 	
+	
+	
+	@Override
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return EnumAction.NONE;
+    }
+	
+	@Override
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
+		//Utils.getLogger().info("got max duration");
+        return 15;
+    }
+	/*	
 	@Override
 	  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     	{
+			Utils.getLogger().info("OnItemUse" + getMaxItemUseDuration(new ItemStack(this)) + ", " +  player.getItemInUseCount());
+			return EnumActionResult.PASS;
+			
+    	}
+			
 			IBlockState BS_up = BlockInit.ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.UP);
 			IBlockState BS_north = BlockInit.ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH);
 			IBlockState BS_south = BlockInit.ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
@@ -379,5 +441,5 @@ public class AtdTorch extends ItemSword implements IHasModel, ITileEntityProvide
 			}
 				
 			return EnumActionResult.PASS;
-    	}
+    	}*/
 }

@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "inventory": { "model": "vme:moving_light_source", "transform": "forge:default-block" },      
+        "normal": { "model": "vme:moving_light_source" }
+    }
+}

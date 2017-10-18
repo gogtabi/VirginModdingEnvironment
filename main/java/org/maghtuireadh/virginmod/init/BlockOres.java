@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 public class BlockOres extends Block implements IHasModel, IMetaName {
 	
-	public static final PropertyEnum<EnumHandler.EnumType> VARIANT = PropertyEnum.<EnumHandler.EnumType>create("varaint", EnumHandler.EnumType.class);
+	public static final PropertyEnum<EnumHandler.EnumType> VARIANT = PropertyEnum.<EnumHandler.EnumType>create("variant", EnumHandler.EnumType.class);
 	
 	public String name, dimension;
 	
@@ -86,7 +86,7 @@ public class BlockOres extends Block implements IHasModel, IMetaName {
 	public void registerModels() {
 			for (int i= 0; i <EnumHandler.EnumType.values().length; i++) 
 			{
-				Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "ore_" + this.dimension + EnumHandler.EnumType.values()[i].getName(), "inventory");
+				Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "ore_" + this.dimension + "_" + EnumHandler.EnumType.values()[i].getName(), "inventory");
 			}
 		
 	}
