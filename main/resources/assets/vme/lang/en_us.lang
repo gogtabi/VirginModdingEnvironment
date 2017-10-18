@@ -1,5 +1,9 @@
+
 item.ingot_copper.name=Copper Ingot
+item.atd_torch.name=ATD Torch
+
 tile.block_copper.name=Copper Block
+tile.block_atd_torch.name=ATD Torch
 itemGroup.virginmodtab=Virgin Mod
 
 container.TileEntityFirepit=Firepit
@@ -35,4 +39,10 @@ gui.config.hearths.firepit_mid_ash_modifier.name=Ash Modifier When Fire Pit At M
 gui.config.hearths.firepit_max_stoked_coal_mod.name=Coal Modifier When At Max Fuel And Stoked
 gui.config.hearths.firepit_max_stoked_ash_modifier.name=Ash Modifier When At Max Fuel And Stoked
 gui.config.hearths.firepit_max_coal_modifier.name=Coal Modifier When Fire Pit At Max Fuel
+
+gui.config.hearths.firepit_max_coal_modifier.comment=This Is A Double That Modifies The Base Rate Coal Is Produced At At The Max Fuel Level.
 gui.config.hearths.firepit_max_ash_modifier.name=Ash Modifier When Fire Pit At Max Fuel
+gui.config.hearths.firepit_max_ash_modifier.comment=This Is A Double That Modifies The Base Rate Coal Is Produced At At The Max Fuel Level.
+
+gui.config.hearths.firepit_max_ash_modifier.name=Ash Modifier When Fire Pit At Max Fuel
+

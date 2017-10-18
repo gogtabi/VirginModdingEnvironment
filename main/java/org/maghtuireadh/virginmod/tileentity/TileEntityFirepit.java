@@ -272,7 +272,64 @@ public class TileEntityFirepit extends TileEntityHearth{
 			isStoked = false;
 			stokedTimer = 0;
 		}
-	}
+	
+
+	/*else {
+		Item item = heldItem.getItem(); 
+		int itemName = Item.getIdFromItem(item);
+		switch (itemName) {
+		case 259:
+			if (firepitBurnTime>0 && !Burning)
+			{
+				Burning=true;
+				
+			}			
+			break;
+		case 4108:
+			if (firepitBurnTime>0 && !Burning)
+			{
+				Burning=true;
+			
+			}			
+			break;
+		case 326:
+			if (Burning) {
+				Burning=false;
+				pitState = getExtinguished(pitState);
+				coalBurn = ((int)((float)coalBurn*0.5));
+				coalRate = coalBase*.75;
+				ashBurn = ((int)((float)ashBurn*0.5));
+				ashRate = ashBase*1.25;
+			}
+			break;
+		case 3:
+			if (firepitBurnTime<=150 && Burning) {
+				Burning = false;
+				pitState = getExtinguished(pitState);
+				coalBurn = 0;
+				coalRate = coalBase;
+				ashBurn = 0;
+				ashRate = ashBase;
+				heldItem.shrink(1);
+			break;
+			}
+			else if (firepitBurnTime>=151 && Burning){
+				firepitBurnTime=(firepitBurnTime-150);
+				heldItem.shrink(1);
+			}
+		default:
+			if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
+				firepitBurnTime += 300;
+				coalBurn += 200; //How long will produce coal
+				coalBase = 400; //How often will produce coal
+				coalBase = 400;
+				ashBurn += 200; //How long will produce ash
+				ashBase = 400;	//How often will produce ash
+				ashRate = ashBase;
+				coalRate = coalBase;
+			}}}*/
+			}
+
 
 	public void attemptIgnite(int igniteChance) {
 		Utils.getLogger().info("attemptIgniteFired");
@@ -288,6 +345,7 @@ public class TileEntityFirepit extends TileEntityHearth{
 				player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
 				coalCount = 0;
 				ashCount = 0;
+
 				pitState = getUnlit(firepitBurnTime);
 			} else if (!Burning && firepitBurnTime != 0) {
 				player.inventory.addItemStackToInventory(
