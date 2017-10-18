@@ -11,6 +11,7 @@ import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
+import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -44,27 +45,31 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 
-public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider {
+public class BlockFirepit extends BlockHearth implements IIgnitable{
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
 	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 15);
 	public static IBlockState[] states = new IBlockState[16];
 	private boolean Burning = false;
 	private boolean isStoked = false;
 
-	public BlockFirepit(String unlocalizedName, Material material) {
-	super(material);
-	this.setUnlocalizedName(unlocalizedName);
-	this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-	BlockInit.BLOCKS.add(this);
-	ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-	this.setCreativeTab(Main.virginmodtab);
-	for (int i = 0; i < 15; i++) {
-        states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
-        }
-    }
+	public BlockFirepit(String unlocalizedName, Material material) 
+	{
+		super(unlocalizedName, material);
+		for (int i = 0; i < 15; i++) 
+		{
+	        states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
+	    }
+	}
+	
+	@Override
+	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		 TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+
+        	ItemStack heldItem = player.getHeldItemMainhand();
+        	tileentity.attemptIgnite(igniteChance);
+	}
 
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-
     {
 
         if (worldIn.isRemote)
@@ -79,8 +84,8 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
            	tileentity.rightClick(heldItem, playerIn);
 
            	return true; 
-           	}   
-        }
+        }   
+    }
 
 	/*============================================================================
 	 *                         Getters & Setters
@@ -219,18 +224,22 @@ public class BlockFirepit extends Block implements IHasModel,ITileEntityProvider
 	/**
 	 * Gets the block state from the meta
 	 */
-	public IBlockState getStateFromMeta(int meta) 
-	{
-		return BlockFirepit.states[meta];
-	}
+
+	public IBlockState getStateFromMeta(int meta) {
+			return states[meta];
+		}
+	
+
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
 	 */
 	
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
-	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, (int) (getMetaFromState(world.getBlockState(pos))));
+
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+			EntityPlayer player) {
+		return new ItemStack(Item.getItemFromBlock(this), 1, 0);
+
 	}
 	
 	/**
