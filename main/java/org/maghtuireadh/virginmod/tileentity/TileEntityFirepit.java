@@ -5,6 +5,7 @@ import java.util.Random;
 import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit;
+import org.maghtuireadh.virginmod.util.Utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -273,6 +274,10 @@ public class TileEntityFirepit extends TileEntityHearth{
 		}
 	}
 
+	public void attemptIgnite(int igniteChance) {
+		Utils.getLogger().info("attemptIgniteFired");
+		Burning=true;
+	}
 	public void rightClick(ItemStack heldItem, EntityPlayer player) {
 		Item item = heldItem.getItem();
 		String itemName = item.getUnlocalizedName();
@@ -303,10 +308,11 @@ public class TileEntityFirepit extends TileEntityHearth{
 				}
 				break;
 			case "item.atd_ember_bundle":
-				if (!Burning && firepitBurnTime > 0) {
+				/*if (!Burning && firepitBurnTime > 0) {
 					Burning = true;
 					heldItem.shrink(1);
-				}
+				}*/
+				break;
 			case "item.flintAndSteel":
 				if (firepitBurnTime > 0 && !Burning) {
 					Burning = true;

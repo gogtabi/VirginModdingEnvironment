@@ -1,4 +1,4 @@
-package org.maghtuireadh.virginmod.objects.items;
+package org.maghtuireadh.virginmod.util.interfaces;
 
 import net.minecraft.item.ItemStack;
 
