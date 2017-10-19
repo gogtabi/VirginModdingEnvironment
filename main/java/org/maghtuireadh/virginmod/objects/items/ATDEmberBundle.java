@@ -50,10 +50,7 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 
 	
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> gogtabi-master
+
 	public ATDEmberBundle(String name) 
 	{
 		setUnlocalizedName(name);
