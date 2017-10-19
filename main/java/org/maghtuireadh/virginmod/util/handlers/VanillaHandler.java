@@ -4,8 +4,6 @@ import net.minecraft.init.Blocks;
 
 public class VanillaHandler 
 {
-
-
 	public VanillaHandler() 
 	{
 		Blocks.LAVA.setLightLevel(0.6F);

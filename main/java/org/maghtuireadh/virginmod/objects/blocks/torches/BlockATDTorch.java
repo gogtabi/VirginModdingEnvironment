@@ -28,15 +28,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
+
 public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityProvider 
 {
-
-	
-
 	public Long burnTime = (long) 0;
 	public Long setTime = (long) 0;
 	public static Item[] FireStarters = new Item[] {Items.FLINT_AND_STEEL,ItemInit.ATD_EMBER_BUNDLE,ItemInit.ATD_TORCH};
-
 	public static PropertyBool LIT = PropertyBool.create("lit");	
 
 	/**
@@ -80,7 +77,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) 
 	{
-
 		
 		if(world.getTotalWorldTime() - this.setTime > burnTime)
 		{
@@ -113,8 +109,10 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	
 	@Override
 
+
 	public int getMetaFromState(IBlockState state) 
 	{
+
 
 		int meta = 0;
 		if (state.getValue(FACING) == EnumFacing.UP)

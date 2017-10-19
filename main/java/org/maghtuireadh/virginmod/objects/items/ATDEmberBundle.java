@@ -190,5 +190,3 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 	    {
 	        return EnumAction.NONE;
 	    }*/
-
-

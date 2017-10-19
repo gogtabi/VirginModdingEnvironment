@@ -48,7 +48,7 @@ public class EnumHandler
 		
 		private EnumType(int meta, String name, String unlocalizedName) 
 		{
-			this.meta=(meta);
+			this.meta=meta;
 			this.name= name;
 			this.unlocalizedName = unlocalizedName;
 			
