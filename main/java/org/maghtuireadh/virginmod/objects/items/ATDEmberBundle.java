@@ -50,7 +50,10 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 
 	
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> gogtabi-master
 	public ATDEmberBundle(String name) 
 	{
 		setUnlocalizedName(name);
@@ -110,6 +113,9 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
     	stack.shrink(1);
 		return stack;
     }*/
+
+
+
 	public void registerModels() 
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
@@ -169,6 +175,7 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 			item.setTagCompound(nbt);	
 			Utils.getLogger().info("Info Output: " + item.getItemDamage() + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
 			}
+
 		}
 	}
 }
@@ -190,4 +197,3 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 	    {
 	        return EnumAction.NONE;
 	    }*/
-
