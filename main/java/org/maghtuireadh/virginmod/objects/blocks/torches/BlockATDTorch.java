@@ -34,7 +34,10 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	public Long setTime = (long) 0;
 	public static Item[] FireStarters = new Item[] {Items.FLINT_AND_STEEL,ItemInit.ATD_EMBER_BUNDLE,ItemInit.ATD_TORCH};
 	public static PropertyBool LIT = PropertyBool.create("lit");	
+<<<<<<< HEAD
 
+=======
+>>>>>>> b85c9a38c92261f636607cbf426cfed345b97a61
 	/**
 	 * Default constructor which sets the hardness and resistance
 	 * @param unlocalizedName The unlocalized name
@@ -154,7 +157,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	@Override
 	public IBlockState getStateFromMeta(int meta) 
 	{
-
 		switch (meta)
 		{
 			case 0:
@@ -180,7 +182,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 			default:
 				return this.getDefaultState();
 		}
-
 	}
 	
 	@Override
