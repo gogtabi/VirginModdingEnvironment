@@ -224,31 +224,19 @@ public class BlockFirepit extends BlockHearth implements IIgnitable{
 	/**
 	 * Gets the block state from the meta
 	 */
-<<<<<<< HEAD
-	public IBlockState getStateFromMeta(int meta) {
-			return states[meta];
-		}
-	
-=======
 	public IBlockState getStateFromMeta(int meta) 
 	{
 		return BlockFirepit.states[meta];
 	}
->>>>>>> 1d1c73e22b3446cf5e1a1d413ae1593b9d8eec22
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
 	 */
 	
 	@Override
-<<<<<<< HEAD
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-			EntityPlayer player) {
-		return new ItemStack(Item.getItemFromBlock(this), 1, 0);
-=======
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
+			EntityPlayer player) 
 	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, (int) (getMetaFromState(world.getBlockState(pos))));
->>>>>>> 1d1c73e22b3446cf5e1a1d413ae1593b9d8eec22
+		return new ItemStack(Item.getItemFromBlock(this), 1, 0);
 	}
 	
 	/**

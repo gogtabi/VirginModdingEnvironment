@@ -10,11 +10,13 @@ import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -24,6 +26,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -31,6 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -54,6 +58,7 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		ItemInit.ITEMS.add(this);
 	}
 	
+
 	/**
      * This is called when the item is used, before the block is activated.
      * @param stack The Item Stack
@@ -165,3 +170,21 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		}
 	}
 }
+
+
+
+
+/*	
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+		 {
+		 }
+	 
+	public int getMaxItemUseDuration(ItemStack stack)
+	    {
+	        return 72000;
+	    }
+	public EnumAction getItemUseAction(ItemStack stack)
+	    {
+	        return EnumAction.NONE;
+	    }*/
+

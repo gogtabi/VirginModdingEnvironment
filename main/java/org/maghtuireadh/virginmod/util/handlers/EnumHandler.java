@@ -1,6 +1,6 @@
 package org.maghtuireadh.virginmod.util.handlers;
 
-import net.minecraft.block.state.IBlockState;
+
 import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler 
@@ -48,7 +48,7 @@ public class EnumHandler
 		
 		private EnumType(int meta, String name, String unlocalizedName) 
 		{
-			this.meta=(meta);
+			this.meta=meta;
 			this.name= name;
 			this.unlocalizedName = unlocalizedName;
 			
