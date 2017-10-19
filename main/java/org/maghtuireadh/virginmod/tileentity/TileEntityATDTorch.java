@@ -29,7 +29,7 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 		// TODO Auto-generated method stub
 		if(!world.isRemote)
 		{
-			if(timeset>0)
+			if(timeset > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == Boolean.valueOf(true))
 			{
 				Utils.getLogger().info(timeset);
 				if (world.getTotalWorldTime()-start > timeset )

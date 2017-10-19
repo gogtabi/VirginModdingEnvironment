@@ -28,14 +28,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-
 public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityProvider 
 {
 	public Long burnTime = (long) 0;
 	public Long setTime = (long) 0;
 	public static Item[] FireStarters = new Item[] {Items.FLINT_AND_STEEL,ItemInit.ATD_EMBER_BUNDLE,ItemInit.ATD_TORCH};
 	public static PropertyBool LIT = PropertyBool.create("lit");	
-
 	/**
 	 * Default constructor which sets the hardness and resistance
 	 * @param unlocalizedName The unlocalized name
@@ -65,7 +63,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	{
 		world.setBlockToAir(pos);
 	}
-
+	
 	@Override
     protected BlockStateContainer createBlockState()
     {
@@ -74,7 +72,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	
 	
 	@Override
-
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) 
 	{
 		
@@ -85,11 +82,19 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	}
 	
 	@Override
-
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-		playerIn.inventory.setItemStack(new ItemStack(ItemInit.ATD_TORCH));
-        return true;
+		if(playerIn.getHeldItemMainhand().isEmpty())
+		{
+			playerIn.inventory.setItemStack(new ItemStack(ItemInit.ATD_TORCH));
+			Utils.getLogger().info("hand is empty");
+			return true;
+		}
+		else
+		{
+			Utils.getLogger().info("hand is not empty");
+			return false;
+		}
     }
 	
 	@Override
@@ -108,8 +113,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
     }
 	
 	@Override
-
-
 	public int getMetaFromState(IBlockState state) 
 	{
 
@@ -150,7 +153,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	@Override
 	public IBlockState getStateFromMeta(int meta) 
 	{
-
 		switch (meta)
 		{
 			case 0:
@@ -176,7 +178,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 			default:
 				return this.getDefaultState();
 		}
-
 	}
 	
 	@Override

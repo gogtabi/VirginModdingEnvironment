@@ -7,4 +7,3 @@ public interface IMetaBlockName
 	String getSpecialName(ItemStack stack);
 }
 
-
