@@ -117,11 +117,7 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-	
-<<<<<<< HEAD
-=======
-    
->>>>>>> b85c9a38c92261f636607cbf426cfed345b97a61
+
 	public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
 		NBTTagCompound nbt = item.getTagCompound();
 		final EntityPlayer player = (EntityPlayer)par3Entity;
