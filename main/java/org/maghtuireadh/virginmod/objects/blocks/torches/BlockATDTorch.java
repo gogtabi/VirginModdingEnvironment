@@ -154,7 +154,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	@Override
 	public IBlockState getStateFromMeta(int meta) 
 	{
-
 		switch (meta)
 		{
 			case 0:
@@ -180,7 +179,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 			default:
 				return this.getDefaultState();
 		}
-
 	}
 	
 	@Override

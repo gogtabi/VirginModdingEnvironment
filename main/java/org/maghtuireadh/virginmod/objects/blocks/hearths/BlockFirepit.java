@@ -229,7 +229,6 @@ public class BlockFirepit extends BlockHearth implements IIgnitable{
 	{
 		return BlockFirepit.states[meta];
 	}
-
 	/**
 	 * Makes sure that when you pick block you get the right version of the block
 	 */
