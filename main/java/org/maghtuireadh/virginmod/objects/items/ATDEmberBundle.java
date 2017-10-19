@@ -110,8 +110,6 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
     	stack.shrink(1);
 		return stack;
     }*/
-<<<<<<< HEAD
-
 	public void registerModels() 
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
@@ -174,77 +172,6 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		}
 	}
 }
-
-
-=======
-    
-	public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
-		NBTTagCompound nbt = item.getTagCompound();
-		final EntityPlayer player = (EntityPlayer)par3Entity;
-		BlockPos pos= new BlockPos(player.posX,player.posY,player.posZ);
-		if(nbt == null)	{
-			nbt = new NBTTagCompound();
-			nbt.setInteger("burntime", burnTime);
-			nbt.setLong("timestamp", world.getWorldTime());
-			this.setDamage(item, 0);		
-		}
-		if (item.getItemDamage()<64) {
-			if(world.getBlockState(pos.up()).getBlock()==Blocks.WATER) {
-				item.shrink(1);
-			}
-			if((((world.getWorldTime() - nbt.getInteger("timestamp"))/burnTime))<64) {
-				if(world.isRainingAt(pos.up(3))) {
-				nbt.setInteger("burntime", (nbt.getInteger("burntime")-2));
-			} else {
-				nbt.setInteger("burntime", (nbt.getInteger("burntime")-1));
-
-				}
-			}
-		
-			if(nbt.getInteger("burntime")<=0 && world.isRainingAt(pos.up(2))) 
-			{
-				Random rand = new Random();
-				if(rand.nextInt(100)<25)
-				{
-					player.sendMessage(new TextComponentString("Your ember hisses in the rain"));
-					item.setItemDamage(item.getItemDamage()+1);
-					nbt.setInteger("burntime", burnTime);
-				}
-				else 
-				{
-					item.setItemDamage(item.getItemDamage()+1);
-					nbt.setInteger("burntime", burnTime);
-				}
-			} 
-			else if (nbt.getInteger("burntime")<=0) 
-			{
-				item.setItemDamage(item.getItemDamage()+1);
-				nbt.setInteger("burntime", burnTime);
-			}
-		
-
-		if(item.getItemDamage()==32) {
-			if(item.getItemDamage()==48 && nbt.getInteger("burntime")==100) {
-			player.sendMessage(new TextComponentString("Your ember bundle glows dimly"));
-			} else {}
-		}
-		
-		if(item.getItemDamage()==48) {
-			if(item.getItemDamage()==48 && nbt.getInteger("burntime")==100) {
-				player.sendMessage(new TextComponentString("Your ember bundle is mostly ash"));
-				} else {}
-		}
-		
-		if(item.getItemDamage()>=64) 
-		{
-				player.sendMessage(new TextComponentString("Your ember bundle has gone out!"));
-				item.shrink(1);
-		}
-		item.setTagCompound(nbt);	
-		Utils.getLogger().info("Info Output: " + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
-		}
-		}
->>>>>>> gogtabi-master
 
 
 
