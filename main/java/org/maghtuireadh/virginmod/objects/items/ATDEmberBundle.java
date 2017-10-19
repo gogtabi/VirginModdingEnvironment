@@ -47,7 +47,7 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 	private int itemUseDuration=0;
 	private int igniteChance=100;
 	private BlockPos targetPosition;
-	
+
 	public ATDEmberBundle(String name) 
 	{
 		setUnlocalizedName(name);
@@ -170,6 +170,8 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		}
 	}
 }
+
+
 
 
 

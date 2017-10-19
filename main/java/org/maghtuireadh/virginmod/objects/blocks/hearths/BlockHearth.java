@@ -28,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHasModel, ITileEntityProvider 
 {
 	int lightCount;
@@ -41,6 +42,7 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		this.setCreativeTab(Main.virginmodtab);
 		lightCount=100;
+
 	}
 	
 /*	@Override

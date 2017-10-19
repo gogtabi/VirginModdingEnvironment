@@ -27,7 +27,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityProvider 
 {
 	public Long burnTime = (long) 0;
@@ -73,7 +72,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	
 	
 	@Override
-
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) 
 	{
 		
@@ -84,7 +82,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	}
 	
 	@Override
-
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		playerIn.inventory.setItemStack(new ItemStack(ItemInit.ATD_TORCH));
@@ -108,7 +105,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
     }
 	
 	@Override
-	
 	public int getMetaFromState(IBlockState state) 
 	{
 		int meta = 0;
@@ -147,7 +143,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	@Override
 	public IBlockState getStateFromMeta(int meta) 
 	{
-
 		switch (meta)
 		{
 			case 0:
@@ -173,7 +168,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 			default:
 				return this.getDefaultState();
 		}
-
 	}
 	
 	@Override
