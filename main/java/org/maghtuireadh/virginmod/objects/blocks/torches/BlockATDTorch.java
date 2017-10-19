@@ -33,7 +33,6 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	public Long setTime = (long) 0;
 	public static Item[] FireStarters = new Item[] {Items.FLINT_AND_STEEL,ItemInit.ATD_EMBER_BUNDLE,ItemInit.ATD_TORCH};
 	public static PropertyBool LIT = PropertyBool.create("lit");	
-
 	/**
 	 * Default constructor which sets the hardness and resistance
 	 * @param unlocalizedName The unlocalized name
