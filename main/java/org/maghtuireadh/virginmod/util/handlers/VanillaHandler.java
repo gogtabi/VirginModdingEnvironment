@@ -7,11 +7,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-public class VanillaHandler {
+public class VanillaHandler 
+{
 
-	public VanillaHandler() {
-		Blocks.LAVA.setLightLevel(0.5F);
-		Blocks.FLOWING_LAVA.setLightLevel(0.5F);
+	public VanillaHandler() 
+	{
+		Blocks.LAVA.setLightLevel(0.6F);
+		Blocks.FLOWING_LAVA.setLightLevel(0.6F);
 		Blocks.LIT_FURNACE.setLightLevel(0.5F);
 	}
 }

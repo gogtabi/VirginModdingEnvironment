@@ -7,9 +7,11 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSpade;
 
-public class ToolShovel extends ItemSpade implements IHasModel {
+public class ToolShovel extends ItemSpade implements IHasModel 
+{
 
-	public ToolShovel(String name, ToolMaterial material) {
+	public ToolShovel(String name, ToolMaterial material) 
+	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

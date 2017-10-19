@@ -16,11 +16,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 
 public class BlockATDPumpkin extends BlockPumpkin{
-	public BlockATDPumpkin(String string, Material gourd) {
+	public BlockATDPumpkin(String string, Material gourd) 
+	{
+		
 	}
 
 /*	private static final Predicate<IBlockState> IS_PUMPKIN = new Predicate<IBlockState>()
-			{
+	{
 				public boolean apply(@Nullable IBlockState state)
 		        {
 		            return state!= null && (state.getBlock() == BlockInit.BLOCK_ATD_PUMPKIN || state.getBlock() == BlockInit.BLOCK_ATD_LIT_PUMPKIN);

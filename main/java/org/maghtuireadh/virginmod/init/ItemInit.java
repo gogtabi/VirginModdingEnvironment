@@ -45,8 +45,7 @@ public class ItemInit {
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);
-	public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER, 300, 5);
-
+	public static final Item ATD_TORCH = new AtdTorch("atd_torch", TOOL_COPPER, 500, 5, 70, 30);
 	public static final Item ATD_POKER_IRON = new AtdPokerIron("atd_poker_iron", ToolMaterial.IRON);
 	
 	//Armor

@@ -12,7 +12,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @EventBusSubscriber
-public class RegisteryHandler {
+public class RegisteryHandler 
+{
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)

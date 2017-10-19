@@ -7,9 +7,11 @@ import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemPickaxe;
 
-public class ToolPickaxe extends ItemPickaxe implements IHasModel {
+public class ToolPickaxe extends ItemPickaxe implements IHasModel 
+{
 
-	public ToolPickaxe(String name, ToolMaterial material) {
+	public ToolPickaxe(String name, ToolMaterial material) 
+	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

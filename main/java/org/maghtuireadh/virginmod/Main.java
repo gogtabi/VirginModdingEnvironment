@@ -18,7 +18,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
-public class Main {
+public class Main 
+{
 	@Instance
 	public static Main instance;
 	
@@ -28,17 +29,20 @@ public class Main {
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
+	public static void preInit(FMLPreInitializationEvent event) 
+	{
 		VMEConfig.preInit();
 	}
 	
 	@EventHandler
-	public static void Init(FMLInitializationEvent event) {
+	public static void Init(FMLInitializationEvent event) 
+	{
 		proxy.registerTileEntities();
 
 	}
 	
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {}
+	
 	final VanillaHandler vanillahandler = new VanillaHandler();
 }
