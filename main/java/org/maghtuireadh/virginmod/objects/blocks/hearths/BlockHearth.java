@@ -42,8 +42,8 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		this.setCreativeTab(Main.virginmodtab);
 		lightCount=100;
-
 	}
+
 	
 /*	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int attemptCount)
@@ -76,7 +76,8 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 	}
 
 	@Override
-	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {		
+	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {}
+
+
 	}
 
-}
