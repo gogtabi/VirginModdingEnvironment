@@ -74,9 +74,39 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		return null;
 	}
 
+
 	@Override
-	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {}
-
-
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+
+	@Override
+	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+}
 

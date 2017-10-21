@@ -57,8 +57,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	private boolean lit, dontkill, extinguish, place;
 	public static Block[] FireBlocks = new Block[] {BlockInit.ATD_TORCH,BlockInit.BLOCK_FIREPIT,Blocks.FIRE,Blocks.FLOWING_LAVA,Blocks.LIT_FURNACE,Blocks.MAGMA,Blocks.TORCH};
 	public static Material[] PlaceBlocks = new Material[] {Material.CLAY,Material.GRASS,Material.SAND,Material.SNOW,Material.CRAFTED_SNOW,Material.GROUND};
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE, Blocks.SNOW);
-
+	
     /**
      * ATD torch set
      * @param name The name of the torch, used for unlocalized and registry name
