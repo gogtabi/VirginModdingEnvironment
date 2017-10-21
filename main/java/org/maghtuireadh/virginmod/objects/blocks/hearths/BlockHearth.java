@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHasModel, ITileEntityProvider 
 {
 	int lightCount;
-	List<ItemStack> listFireStarter = new ArrayList<ItemStack>();
 	public BlockHearth(String unlocalizedName, Material material) 
 	{
 		super(material);
@@ -75,7 +74,38 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 	}
 
 	@Override
-	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {}
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		return true;}
+
+		
+
+
+	@Override
+	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 	}

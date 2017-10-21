@@ -62,11 +62,12 @@ public class BlockFirepit extends BlockHearth implements IIgnitable{
 	}
 	
 	@Override
-	public void attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
 		 TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 
         	ItemStack heldItem = player.getHeldItemMainhand();
         	tileentity.attemptIgnite(igniteChance);
+			return true;
 	}
 
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
