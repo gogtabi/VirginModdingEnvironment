@@ -2,39 +2,48 @@ package org.maghtuireadh.virginmod.tileentity;
 
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
 import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
 public class TileEntityATDTorch extends TileEntity implements ITickable
 {
 	long timeset,start = (long)0;
-/*
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
+		if (nbt==null)
+		{
+			nbt = new NBTTagCompound();
+		}
 		super.readFromNBT(nbt);
-		this.fuelLevel = nbt.getInteger("FuelLevel");
+		//this.fuelLevel = nbt.getInteger("FuelLevel");
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) 
 	{
-		nbt.setInteger("FuelLevel", this.fuelLevel);
+		if (nbt==null)
+		{
+			nbt = new NBTTagCompound();
+		}
+		//nbt.setInteger("FuelLevel", this.fuelLevel);
 		return super.writeToNBT(nbt);
 	}
-	*/
+	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		if(!world.isRemote)
 		{
-			if(timeset > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == Boolean.valueOf(true))
+			if(timeset > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == true)
 			{
 				Utils.getLogger().info(timeset);
 				if (world.getTotalWorldTime()-start > timeset )
 				{
-					((BlockATDTorch)world.getBlockState(pos).getBlock()).extinguish(world, pos);
+					((IIgnitable)world.getBlockState(pos).getBlock()).extinguish(world, pos, null);
 					Utils.getLogger().info("killed");
 				}
 			}
@@ -46,5 +55,10 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 		start = world.getTotalWorldTime();
 		timeset = time;
 	}
+	public long getTime()
+	{
+		return world.getTotalWorldTime()-start-timeset;
+	}
+
 
 }

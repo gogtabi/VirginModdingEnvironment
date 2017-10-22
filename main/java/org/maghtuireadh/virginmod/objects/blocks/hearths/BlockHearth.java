@@ -1,3 +1,4 @@
+
 package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ import net.minecraft.world.World;
 public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHasModel, ITileEntityProvider 
 {
 	int lightCount;
-	List<ItemStack> listFireStarter = new ArrayList<ItemStack>();
 	public BlockHearth(String unlocalizedName, Material material) 
 	{
 		super(material);
@@ -44,7 +44,21 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 	}
 
 	
-
+/*	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int attemptCount)
+    {
+		ItemStack heldItem = player.getHeldItemMainhand();
+		if (worldIn.isRemote)
+        {
+            return true;
+        }
+		else for (int i=0;i<listFireStarter.size()-1 && heldItem!=listFireStarter.get(i);i++)
+		{
+			itemFireStarter item = (itemFireStarter) heldItem.getItem();
+			item.getIgniteCount();
+        }
+		return true;
+    }*/
 	
 	@Override
 	public void registerModels() 
@@ -60,12 +74,11 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		return null;
 	}
 
-
 	@Override
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		return true;}
+
+		
 
 
 	@Override
@@ -88,11 +101,17 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		return 0;
 	}
 
-
-	@Override
 	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
 
