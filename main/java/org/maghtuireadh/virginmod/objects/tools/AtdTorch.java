@@ -1,7 +1,5 @@
 package org.maghtuireadh.virginmod.objects.tools;
 
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
@@ -12,9 +10,9 @@ import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
 import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
 import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
-
-import com.google.common.collect.Sets;
+import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
@@ -25,13 +23,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -42,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvider 
+public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvider, IIgnitable, IFireStarter
 {
 	
 
@@ -57,7 +53,6 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	private boolean lit, dontkill, extinguish, place;
 	public static Block[] FireBlocks = new Block[] {BlockInit.ATD_TORCH,BlockInit.BLOCK_FIREPIT,Blocks.FIRE,Blocks.FLOWING_LAVA,Blocks.LIT_FURNACE,Blocks.MAGMA,Blocks.TORCH};
 	public static Material[] PlaceBlocks = new Material[] {Material.CLAY,Material.GRASS,Material.SAND,Material.SNOW,Material.CRAFTED_SNOW,Material.GROUND};
-	
     /**
      * ATD torch set
      * @param name The name of the torch, used for unlocalized and registry name
@@ -110,6 +105,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
+		
 		return new TileEntityMovingLightSource().setPlayer(player);
 	}
 	
@@ -136,7 +132,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				ItemStack IS = new ItemStack(stack.getItem());
 				IS.setCount(stack.getCount()-1);
 				player.inventory.addItemStackToInventory(IS);
-				player.getActiveItemStack().setCount(1);
+				player.inventory.getCurrentItem().setCount(1);
 				nbt.setBoolean("lit", lit);
 				nbt.setLong("worldtime", worldTime);
 				this.dontkill = false;
@@ -275,9 +271,9 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 						{
 							time = BurnTime;
 						}
-						((TileEntityATDTorch) world.getTileEntity(BP)).setTime(time);
+						((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(time, world, BP, player);
 						place=false;
-						player.inventory.decrStackSize(player.inventory.currentItem, 1);
+						player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() -1 );
 					}
 			 
 				  if(isLit()) 
@@ -421,7 +417,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					{
 						for (int i = 0;i < PlaceBlocks.length-1;i++)
 						{
-							if(PlaceBlocks[i]==worldIn.getBlockState(pos).getMaterial())
+							if(PlaceBlocks[i]==worldIn.getBlockState(pos).getMaterial() || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT)
 							{
 								
 								if(RT.sideHit == EnumFacing.UP) 
@@ -456,9 +452,13 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 									//BP =  new BlockPos(thisX2,thisY,thisZ);
 									//worldIn.setBlockState(BP, BS_west);
 								}
-								Utils.getLogger().info("PlaceBlocks " + PlaceBlocks[i]);
+								Utils.getLogger().info("PlaceBlocks " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
 								
 								break;
+							}
+							else
+							{
+								Utils.getLogger().info("PlaceBlocks " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
 							}
 						}
 					}
@@ -467,4 +467,35 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				
 			return EnumActionResult.PASS;
     	}
+
+	@Override
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		return this.lit = true;
+	}
+
+	@Override
+	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

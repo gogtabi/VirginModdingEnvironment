@@ -7,7 +7,9 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
 import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
+import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
@@ -20,7 +22,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -28,7 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityProvider 
+public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityProvider, IIgnitable, IFireStarter
 {
 	public Long burnTime = (long) 0;
 	public Long setTime = (long) 0;
@@ -52,17 +53,41 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 		//ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
-	
-	public IBlockState setTime(IBlockState blockstate, int time, World world)
-	{
-		this.burnTime = (long)time;
-		this.setTime = world.getTotalWorldTime();
-		return blockstate;
+
+	@Override
+	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		if (world.getBlockState(pos).getValue(LIT))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
+
+
+
+
+	@Override
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+		((TileEntityATDTorch)world.getTileEntity(pos)).setTime(fuel);
+		
+	}
+
 	
-	public void extinguish(World world, BlockPos pos)
+	
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer playa)
 	{
 		world.setBlockToAir(pos);
+		return true;
 	}
 	
 	@Override
@@ -75,27 +100,52 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) 
 	{
-		
-		if(world.getTotalWorldTime() - this.setTime > burnTime)
+		EntityPlayer player = null;
+		if(world.isRainingAt(pos.up()) && rand.nextFloat() < 0.4f)
 		{
-		//world.setBlockToAir(pos);
+			this.extinguish(world, pos, player);
 		}
 	}
 	
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-		if(playerIn.getHeldItemMainhand().isEmpty())
+		if(playerIn.getHeldItemMainhand().getItem() instanceof IIgnitable)
 		{
-			playerIn.inventory.setItemStack(new ItemStack(ItemInit.ATD_TORCH));
-			Utils.getLogger().info("hand is empty");
-			return true;
+			if (!((IIgnitable)playerIn.getHeldItemMainhand().getItem()).isLit(worldIn, pos, playerIn) && isLit(worldIn, pos, playerIn))
+			{
+				 ((IIgnitable)playerIn.getHeldItemMainhand().getItem()).attemptIgnite(100, worldIn, pos, playerIn);
+				 return true;
+			 }
+			return false; 
 		}
-		else
+		else if (playerIn.getHeldItemMainhand().getItem() instanceof IFireStarter)
 		{
-			Utils.getLogger().info("hand is not empty");
-			return false;
+		 	 if (!isLit(worldIn, pos, playerIn))
+			 {
+				return false; 
+			 }
+		 	return false; 
 		}
+		else 
+		{
+			if(playerIn.getHeldItemMainhand().isEmpty())
+			{
+				
+				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
+				worldIn.setBlockToAir(pos);
+				//Utils.getLogger().info("hand is empty");
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		
+		}
+		
+	
+		
     }
 	
 	@Override
@@ -186,6 +236,36 @@ public class BlockATDTorch extends BlockTorch implements IHasModel,ITileEntityPr
 	{
 		return new TileEntityATDTorch();
 	}
+
+
+	@Override
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		if(!world.getBlockState(pos).getValue(LIT))
+		{
+			for(int i = 0;i<FireStarters.length;i++) 
+			{
+				if (player.getHeldItemMainhand().getItem()==FireStarters[i])
+				{
+					world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, true));
+					Utils.getLogger().info("Lit, " + FireStarters[i].getUnlocalizedName());
+					return false;
+				}
+				else
+				{
+					Utils.getLogger().info("NOT Lit, " + player.getActiveItemStack().getItem().getUnlocalizedName());
+				}
+			}	
+			return false;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+
+
+
 }
 	
 	
