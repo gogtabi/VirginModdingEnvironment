@@ -13,18 +13,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy 
 {
-	public void preInit() 
-	{
-		VMEConfig.clientPreInit();
-	}
-	public void init () 
-	{
-		
-	}
-	public void postInit() 
-	{
-		
-	}
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	
 	public void registerVariantRenderer(Item item, int meta, String filename, String id) {}

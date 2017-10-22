@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main 
@@ -22,6 +23,7 @@ public class Main
 	public static Main instance;
 	
 	public static final CreativeTabs virginmodtab = new VirginModTab("virginmodtab");
+	final VanillaHandler vanillahandler = new VanillaHandler();
 	
 	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
 	public static CommonProxy proxy;
@@ -40,7 +42,9 @@ public class Main
 	}
 	
 	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event) {}
+	public static void postInit(FMLPostInitializationEvent event) {
+		ListHandler.writeLists();
+	}
 	
-	final VanillaHandler vanillahandler = new VanillaHandler();
+	
 }

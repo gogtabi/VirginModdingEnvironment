@@ -148,15 +148,6 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}*/
-    
-   /* @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
-    	((IIgnitable) world.getBlockState(targetPosition).getBlock()).attemptIgnite(igniteChance, world, targetPosition, (EntityPlayer) entityLiving);
-    	Utils.getLogger().info("Ember Bundle onItemUseFinish");
-    	stack.shrink(1);
-		return stack;
-    }*/
-
 
 	public void registerModels() 
 	{

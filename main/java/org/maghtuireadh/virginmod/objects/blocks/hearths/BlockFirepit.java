@@ -7,8 +7,10 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
+import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
+import org.maghtuireadh.virginmod.objects.items.ATDEmberBundle;
 import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
@@ -16,6 +18,7 @@ import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
+import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -43,6 +46,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -54,11 +58,6 @@ public class BlockFirepit extends BlockHearth{
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
 	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 15);
 	public static IBlockState[] states = new IBlockState[16];
-	List<String> FuelList = new ArrayList<String>();
-	List<Long> BurnTimeList = new ArrayList<Long>();
-	List<String> ExtinguishList = new ArrayList<String>();
-	List<String> BankerList = new ArrayList<String>();
-	List<String> StokerList = new ArrayList<String>();
 	
 	public BlockFirepit(String unlocalizedName, Material material) 
 	{
@@ -70,46 +69,84 @@ public class BlockFirepit extends BlockHearth{
 		{
 	        states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
 	    }
-		FuelList.contains("String");
 		
 	}
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		ItemStack heldItemStack = player.getHeldItemMainhand();
 		Item heldItem = player.getHeldItemMainhand().getItem();
-		String heldItemName = player.getHeldItemMainhand().getItem().getUnlocalizedName();
-        if(heldItem instanceof IFireStarter)
+		String heldItemName = heldItem.getRegistryName() + "-" + heldItemStack.getMetadata();		
+		//Utils.getLogger().info("heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
+		//Utils.getLogger().info("Length of FuelList: " + ListHandler.FuelList.size());
+		//Utils.getLogger().info("Fuel Object List String: " +  VMEConfig.fuelObjectListString);
+		/*for(int i = 0;i<=(ListHandler.FuelList.size()-1);i++){
+			Utils.getLogger().info("Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
+		}*/
+		
+        if(ListHandler.HearthFireStarterList.contains(heldItemName))
         {
-            return false;
+        	return false;
         } 
-        else if (FuelList.contains(heldItemName)) 
+        else if (ListHandler.HearthFuelList.contains(heldItemName)) 
         {
         	if(tileentity.getTEFuelMax())
         	{
+        		Utils.getLogger().info("On Fuel List, Fuel Not Full");
         		setFuel(world, pos, player);
 	           	return true;
         	}
 	        else
 	        {
+
+        		Utils.getLogger().info("On Fuel List, Fuel Full");
+        		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
 	        	return false;
 	        }
         }  
-        else if (ExtinguishList.contains(heldItemName))
+        else if (ListHandler.ExtinguishList.contains(heldItemName))
         {
-           	tileentity.setBurning(false);
+
+    		Utils.getLogger().info("On Extinguish List");
+           	tileentity.setExtinguished(true);
            	return true;
         }
-        else if (BankerList.contains(heldItemName))
+        else if (ListHandler.BankerList.contains(heldItemName))
         {
+        	player.sendMessage(new TextComponentString("You bank the coals."));
+    		Utils.getLogger().info("On Banker List, Fuel Full");
         	return true;
         }
-        else if (StokerList.contains(heldItemName))
+        else if (ListHandler.PokerList.contains(heldItemName))
         {
+        	player.sendMessage(new TextComponentString("You stoke the fire."));
+        	Utils.getLogger().info("On Poker List");
+        	return true;
+        }
+        else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
+        	if(tileentity.getCoalCount()>0 && tileentity.getIsLit() == true) {
+        		player.getHeldItemMainhand().shrink(1);
+            	player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE, 1));
+            	tileentity.setCoalCount(1);
+            	return true;
+        	}
+        	else
+        	{
+        		player.sendMessage(new TextComponentString("This firepit contains no burning coals."));
+        		return false;
+        	}
+        }
+        else if (player.getHeldItemMainhand().isEmpty())
+        {
+
+    		Utils.getLogger().info("Cleaning The Pit");
+        	tileentity.cleanPit(player);
         	return true;
         }
         else
         {
+        	Utils.getLogger().info("Not On List");
         	return false;
         }
     }
@@ -122,8 +159,8 @@ public class BlockFirepit extends BlockHearth{
 
 	@Override
 	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		return tileentity.getIsLit();
 	}
 
 
@@ -131,14 +168,14 @@ public class BlockFirepit extends BlockHearth{
 	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItem=player.getHeldItemMainhand();
-		tileentity.rightClick(heldItem, player);
+		tileentity.setExtinguished(true);
 		return false;
+		
 	}
 
 
 	@Override
 	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -146,7 +183,12 @@ public class BlockFirepit extends BlockHearth{
 	@Override
 	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
-		tileentity.setTEFuel(BurnTimeList.get(FuelList.indexOf(player.getHeldItemMainhand().getItem().getUnlocalizedName())));
+		if(player!=null) {
+			ItemStack heldItemStack= player.getHeldItemMainhand();
+			Item heldItem = player.getHeldItemMainhand().getItem();
+			String heldItemName = heldItem.getRegistryName() + ":" + heldItemStack.getMetadata();
+			tileentity.setTEFuel(heldItemName);
+		}
 	}
 	
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
