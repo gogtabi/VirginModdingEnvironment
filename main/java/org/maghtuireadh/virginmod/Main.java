@@ -4,6 +4,7 @@ import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.proxy.CommonProxy;
 import org.maghtuireadh.virginmod.tabs.VirginModTab;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 import org.maghtuireadh.virginmod.util.handlers.VanillaHandler;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,7 +41,10 @@ public class Main
 	}
 	
 	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event) {}
+	public static void postInit(FMLPostInitializationEvent event) 
+	{
+		ListHandler.writeLists();	
+	}
 	
 	final VanillaHandler vanillahandler = new VanillaHandler();
 }
