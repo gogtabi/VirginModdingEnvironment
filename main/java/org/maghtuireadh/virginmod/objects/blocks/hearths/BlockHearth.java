@@ -1,4 +1,3 @@
-
 package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
 import java.util.ArrayList;
@@ -109,4 +108,5 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 
 
 }
+
 
