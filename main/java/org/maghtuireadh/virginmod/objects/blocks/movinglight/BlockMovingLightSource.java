@@ -24,15 +24,17 @@ import net.minecraft.world.World;
 public class BlockMovingLightSource extends BlockAir implements ITileEntityProvider 
 {
 	private EntityPlayer player;
+	float lightlevel;
 
-	public BlockMovingLightSource(String name) 
+	public BlockMovingLightSource(String name, float lightlevel) 
 	{
 		super();
 		this.setUnlocalizedName(name);
 		this.setRegistryName(new ResourceLocation(Reference.MODID, name));
 		BlockInit.BLOCKS.add(this);
 		this.setDefaultState(getDefaultState());
-		setLightLevel(0.9F);
+		setLightLevel(lightlevel);
+		this.lightlevel = lightlevel;
 	}
 	
 	@Override
@@ -44,7 +46,7 @@ public class BlockMovingLightSource extends BlockAir implements ITileEntityProvi
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
 	{
-		return new TileEntityMovingLightSource().setPlayer(player);
+		return new TileEntityMovingLightSource().setPlayer(player, this.lightlevel);
 	}
 
 	public BlockMovingLightSource setPlayer(EntityPlayer player) 

@@ -1,14 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "vme:blocks/atd_torch_off"
-    },
-    "overrides": [
-        {
-            "predicate": {
-                "lit": 1
-            },
-            "model": "vme:item/atd_torch_on"
-        }
-       ]
+        "layer0": "vme:blocks/atd_torch_base_off"
+    }
 }
