@@ -39,9 +39,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	public float lightlevel;
 	public static PropertyBool LIT = PropertyBool.create("lit");	
 
-
 	public BlockATDTorch(String name, float lightlevel) 
-
 	{
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
