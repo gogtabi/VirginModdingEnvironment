@@ -1,3 +1,4 @@
+
 package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
 import java.util.ArrayList;
@@ -100,6 +101,10 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		return 0;
 	}
 
+	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
@@ -108,5 +113,5 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 	}
 
 
-	}
+}
 

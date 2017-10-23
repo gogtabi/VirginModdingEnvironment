@@ -6,6 +6,7 @@ import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockFirepit;
 import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,19 +19,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class TileEntityFirepit extends TileEntityHearth
 {
-	private boolean Burning, isBanked, isStoked = false;
+	private boolean isLit, isBanked, isStoked = false;
 	private int firepitMaxBurn = (int)VMEConfig.firepitMaxFuelLevel*1200;
-	private int firepitBurnTime, burnRate, coalBurn, coalCount, coalGrowth, coalBase, ashBurn, ashCount, ashGrowth, ashBase, pitState, stokedTimer = 0;
+	long firepitBurnTime, ashBase, coalBase;
+	private int burnRate, coalCount, coalGrowth, ashCount, ashGrowth,  pitState, stokedTimer = 0;
 	private int firepitBurnRate = VMEConfig.firepitDefaultBurnRate;
 	private int stokedBurnRate = VMEConfig.firepitStokedBurnRate;
 	private int bankedBurnRate = VMEConfig.firepitBankedBurnRate;
 	private int rainingBurnRate = VMEConfig.firepitRainingBurnRate;
 	private int coalMax = (int)VMEConfig.firepitCoalMax;
 	private int ashMax = (int)VMEConfig.firepitAshMax;
+	private int rainIgnitePenalty = 0; //VMEConfig.rainIgnitePenalty;
 	private double minBankedCoalRateMod = VMEConfig.firepitMinBankedCoalMod;
 	private double minBankedAshRateMod = VMEConfig.firepitMinBankedAshMod;
 	private double minCoalRateMod = VMEConfig.firepitMinCoalMod;
@@ -54,7 +58,7 @@ public class TileEntityFirepit extends TileEntityHearth
 	int low = (int) (firepitMaxBurn*.10);
 	int mid = (int) (firepitMaxBurn*.40);
 	int max = (int) (firepitMaxBurn*.70);
-	
+
 	
 	public TileEntityFirepit() 
 	{
@@ -65,49 +69,47 @@ public class TileEntityFirepit extends TileEntityHearth
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
 		super.readFromNBT(nbt);
-		this.coalBurn = nbt.getInteger("CoalBurn");
 		this.coalCount = nbt.getInteger("CoalCount");
 		this.coalGrowth = nbt.getInteger("CoalGrowth");
 		this.coalRate = nbt.getDouble("CoalRate");
-		this.coalBase = nbt.getInteger("CoalBase");
-		this.ashBurn = nbt.getInteger("AshBurn");
+		this.coalBase = nbt.getLong("CoalBase");
 		this.ashCount = nbt.getInteger("AshCount");
 		this.ashGrowth = nbt.getInteger("AshGrowth");
 		this.ashRate = nbt.getDouble("AshRate");
-		this.ashBase = nbt.getInteger("AshBase");
-		this.firepitBurnTime = nbt.getInteger("FPBT");
+		this.ashBase = nbt.getLong("AshBase");
+		this.firepitBurnTime = nbt.getLong("FPBT");
 		this.pitState = nbt.getInteger("PitState");
-		this.Burning = nbt.getBoolean("Burning");
+		this.isLit = nbt.getBoolean("isLit");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.isBanked = nbt.getBoolean("IsBanked");
 		this.stokedTimer = nbt.getInteger("StokedTimer");
 		this.lastState = nbt.getInteger("LastState");
+		this.rainIgnitePenalty = nbt.getInteger("RainPenalty");
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) 
 	{
 		nbt.setBoolean("IsBanked", isBanked);
-		nbt.setInteger("FPBT", firepitBurnTime);
-		nbt.setInteger("CoalBurn", coalBurn);
+		nbt.setLong("FPBT", firepitBurnTime);
 		nbt.setInteger("CoalCount", coalCount);
 		nbt.setInteger("CoalGrowth", coalGrowth);
 		nbt.setDouble("CoalRate", coalRate);
-		nbt.setInteger("CoalBase", coalBase);
-		nbt.setInteger("AshBurn", ashBurn);
+		nbt.setLong("CoalBase", coalBase);
 		nbt.setInteger("AshCount", ashCount);
 		nbt.setInteger("AshGrowth", ashGrowth);
 		nbt.setDouble("AshRate", ashRate);
-		nbt.setInteger("AshBase", ashBase);
+		nbt.setLong("AshBase", ashBase);
 		nbt.setInteger("PitState", pitState);
-		nbt.setBoolean("Burning", Burning);
+		nbt.setBoolean("Burning", isLit);
 		nbt.setBoolean("IsStoked", isStoked);
 		nbt.setInteger("StokedTimer", stokedTimer);
 		nbt.setInteger("LastState", lastState);
+		nbt.setInteger("RainPenalty", rainIgnitePenalty);
 		return super.writeToNBT(nbt);
 	}
 
-	public void setBurning() 
+	public void updateFirepit() 
 	{
 		if (this.world != null && !this.world.isRemote) 
 		{
@@ -116,9 +118,9 @@ public class TileEntityFirepit extends TileEntityHearth
 
 			if (blockType instanceof BlockFirepit) 
 			{
-				if (firePit.getState(world, pos) != pitState) // Only update BlockFirepit
+				if (firePit.getState(world, pos) != pitState) // Only update BlockFirepit State on a Change
 				{ 	
-					firePit.setState(pitState, world, pos);    // State On A Change
+					firePit.setState(pitState, world, pos);
 				}
 			}				
 		}
@@ -127,7 +129,7 @@ public class TileEntityFirepit extends TileEntityHearth
 	@Override
 	public void update() 
 	{
-		if (Burning) 
+		if (isLit) 
 		{
 			if (stokedTimer > 0) 
 			{
@@ -164,14 +166,12 @@ public class TileEntityFirepit extends TileEntityHearth
 					{
 						firepitBurnTime = 0;
 						pitState = 8;
-						Burning = false;
+						isLit = false;
 						isStoked = false;
 						isBanked = false;
 						stokedTimer = 0;
-						coalBurn = 0;
 						coalRate = 0;
 						coalBase = 0;
-						ashBurn = 0;
 						ashRate = 0;
 						ashBase = 0;
 					}
@@ -180,14 +180,12 @@ public class TileEntityFirepit extends TileEntityHearth
 				{
 					firepitBurnTime = 0;
 					pitState = 8;
-					Burning = false;
+					isLit = false;
 					isStoked = false;
 					isBanked = false;
 					stokedTimer = 0;
-					coalBurn = 0;
 					coalRate = 0;
 					coalBase = 0;
-					ashBurn = 0;
 					ashRate = 0;
 					ashBase = 0;
 				}
@@ -282,232 +280,109 @@ public class TileEntityFirepit extends TileEntityHearth
 				lastState = 7;
 			} 
 			
-			if (((ashGrowth >= ashRate) && Burning) && ashCount < ashMax) 
+			if (((ashGrowth >= ashRate) && isLit) && ashCount < ashMax) 
 			{
 				ashCount++; // Increase amount of ash that will be returned.
 				ashGrowth = 0; // Reset ashGrowth
 			}
 			
-			if (((coalGrowth >= coalRate) && Burning) && coalCount < coalMax) 
+			if (((coalGrowth >= coalRate) && isLit) && coalCount < coalMax) 
 			{
 				coalCount++; // Increase amount of coal that will be returned.
 				coalGrowth = 0; // Reset coalGrowth
 			}
 
 		}
-		//Utils.getLogger().info("Burning: " + Burning + " fuelpitBurnTime: " + firepitBurnTime + " ashCount: " + ashCount + " coalCount: "
-		//		+ coalCount );
-		//Utils.getLogger().info("State: " + pitState + " isStoked: " + isStoked + " isBanked: " + isBanked);
-		this.setBurning();
+		this.updateFirepit();
 		stokedCheck();
 		markDirty();
 	}
 
 	public void stokedCheck() 
 	{
-		if (isStoked == true && stokedTimer == 0 || isStoked == true && Burning == false) 
+		if (isStoked == true && stokedTimer == 0 || isStoked == true && isLit == false) 
 		{
 			isStoked = false;
 			stokedTimer = 0;
 		}
-	
-
-	/*else {
-		Item item = heldItem.getItem(); 
-		int itemName = Item.getIdFromItem(item);
-		switch (itemName) {
-		case 259:
-			if (firepitBurnTime>0 && !Burning)
-			{
-				Burning=true;
-				
-			}			
-			break;
-		case 4108:
-			if (firepitBurnTime>0 && !Burning)
-			{
-				Burning=true;
-			
-			}			
-			break;
-		case 326:
-			if (Burning) {
-				Burning=false;
-				pitState = getExtinguished(pitState);
-				coalBurn = ((int)((float)coalBurn*0.5));
-				coalRate = coalBase*.75;
-				ashBurn = ((int)((float)ashBurn*0.5));
-				ashRate = ashBase*1.25;
-			}
-			break;
-		case 3:
-			if (firepitBurnTime<=150 && Burning) {
-				Burning = false;
-				pitState = getExtinguished(pitState);
-				coalBurn = 0;
-				coalRate = coalBase;
-				ashBurn = 0;
-				ashRate = ashBase;
-				heldItem.shrink(1);
-			break;
-			}
-			else if (firepitBurnTime>=151 && Burning){
-				firepitBurnTime=(firepitBurnTime-150);
-				heldItem.shrink(1);
-			}
-		default:
-			if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) {
-				firepitBurnTime += 300;
-				coalBurn += 200; //How long will produce coal
-				coalBase = 400; //How often will produce coal
-				coalBase = 400;
-				ashBurn += 200; //How long will produce ash
-				ashBase = 400;	//How often will produce ash
-				ashRate = ashBase;
-				coalRate = coalBase;
-			}}}*/
-			}
-
-
-	public void attemptIgnite(int igniteChance) {
-		Utils.getLogger().info("attemptIgniteFired");
-		Burning=true;
 	}
 
-	public void rightClick(ItemStack heldItem, EntityPlayer player) 
+	public boolean attemptIgnite(int igniteChance, BlockPos pos) {
+		/*if(world.isRainingAt(pos.up())) {
+    	igniteChance = igniteChance-rainPenalty;
+    	}*/
+		Utils.getLogger().info("attemptIgnite Fired");
+		return isLit=true;
+	}
+	
+	public void setTEFuel(String fuelItemName) 
 	{
-		Item item = heldItem.getItem();
-		String itemName = item.getUnlocalizedName();
+
+		Utils.getLogger().info("Initiating Fuel Setting on TE");
+		int fuelIndex = ListHandler.FuelList.indexOf(fuelItemName);
+		long burnTime = ListHandler.BurnTimeList.get(fuelIndex);
+		long coalburnrate = ListHandler.CoalBurnRate.get(fuelIndex);
+		long ashburnrate = ListHandler.AshBurnRate.get(fuelIndex);
 		
-		if (heldItem.isEmpty()) 
+		firepitBurnTime=firepitBurnTime+burnTime;
+		if(coalRate == 0)
 		{
-			if (!Burning && (coalCount != 0 || ashCount != 0)) 
+			coalBase=coalburnrate;
+		}
+		else
+		{
+			coalRate=(coalburnrate+coalRate)/2;
+		}
+		if(ashRate == 0)
+		{
+			ashRate=ashburnrate;
+		}
+		else
+		{
+			ashRate=(ashburnrate+ashRate)/2;
+		}
+		
+		if (!isLit) 
+		{
+			pitState = getUnlitState(firepitBurnTime);
+		}
+		updateFirepit();
+	}
+	
+	public boolean getTEFuelMax() 
+	{
+		return firepitBurnTime<firepitMaxBurn ? true:false;
+		
+	};
+	
+	public void cleanPit(EntityPlayer player) 
+	{
+
+			if (!isLit && (coalCount != 0 || ashCount != 0)) 
 			{
 				player.inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
 				player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
 				coalCount = 0;
 				ashCount = 0;
 
-				pitState = getUnlit(firepitBurnTime);
+				pitState = getUnlitState(firepitBurnTime);
 			} 
-			else if (!Burning && firepitBurnTime != 0) 
+			else if (!isLit && firepitBurnTime != 0) 
 			{
 				player.inventory.addItemStackToInventory(
 				new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime / 300), 2));
 				firepitBurnTime = 0;
-				pitState = getUnlit(firepitBurnTime);				
+				pitState = getUnlitState(firepitBurnTime);				
 			}
-		}
-		switch (itemName) 
-		{
-		case "item.atd_tinder_bundle":
-			if (Burning && coalCount>0) 
-			{
-				player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE));
-				coalCount--;
-				heldItem.shrink(1);
-			}
-			break;
-		case "item.atd_ember_bundle":
-			if (!Burning && firepitBurnTime > 0) 
-			{
-				Burning = true;
-				heldItem.shrink(1);
-			}
-		case "item.flintAndSteel":
-			if (firepitBurnTime > 0 && !Burning) 
-			{
-				Burning = true;
-				heldItem.damageItem(1, player);
-			}
-			break;
-		case "item.atd_torch":
-			if (firepitBurnTime > 0 && !Burning) 
-			{
-				Burning = true;
-			}
-			break;
-		case "item.atd_poker_iron":
-			if (pitState==6 || pitState==7) 
-			{
-				isStoked = true;
-				stokedTimer = 1000;
-				heldItem.damageItem(1, player);
-			} 
-			else if (isStoked) 
-			{
-				stokedTimer = 0;
-				isStoked = false;					
-			}
-			break;
-		case "item.atd_ash_wood":
-			if (pitState==4 || pitState==5) 
-			{
-				isBanked = true;
-				ashCount++;
-				heldItem.shrink(1);	
-			}
-			break;
-		case "item.bucketWater":
-			if (Burning) 
-			{
-				this.Burning = false;
-				this.pitState = getExtinguished(pitState);
-				isStoked = false;
-				stokedTimer = 0;
-				isBanked = false;
-				heldItem.shrink(1);
-				player.inventory.addItemStackToInventory(new ItemStack(Items.BUCKET, 1));
-			}
-			break;
-		case "tile.dirt":
-			if (firepitBurnTime <= 1500 && Burning) 
-			{
-				Burning = false;
-				pitState = getExtinguished(pitState);
-				coalBurn = 0;
-				coalRate = coalBase;
-				ashBurn = 0;
-				ashRate = ashBase;
-				heldItem.shrink(1);
-			} 
-			else 
-			{
-				firepitBurnTime = firepitBurnTime - 1500;
-				heldItem.shrink(1);
-			}
-			break;
-		default:
-			if (firepitBurnTime <= firepitMaxBurn) 
-			{
-				if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD) 
-				{
-					firepitBurnTime += 1000;
-					coalBurn += 1000; // How long will produce coal
-					coalBase = 2000; // How often will produce coal
-					ashBurn += 1000; // How long will produce ash
-					ashBase = 1000; // How often will produce ash
-					ashRate = ashBase;
-					coalRate = coalBase;
-					this.setBurning();
-					heldItem.shrink(1);
-					if (!Burning) 
-					{
-						pitState = getUnlit(firepitBurnTime);
-					}
-					markDirty();
-				}
-			} 
-			break;
-		}
+		
 
 	}
 		
 		
 
-	public int getUnlit(int fuelLevel) // returns state based on fuelLevel
+	public int getUnlitState(long fuelLevel) // returns state based on fuelLevel
 	{ 
-		if (!Burning) 
+		if (!isLit) 
 		{
 			if ((coalCount == 0 && ashCount == 0) && fuelLevel > 0) 
 			{
@@ -574,11 +449,10 @@ public class TileEntityFirepit extends TileEntityHearth
 				return 7; // lit_firepit4
 			}
 		}
-		//Utils.getLogger().info("Failed");
 		return 11;
 	}
 
-	public int getExtinguished(int pitState) 
+	public int getExtinguishedState(int pitState) 
 	{
 		switch (pitState) 
 		{
@@ -636,9 +510,32 @@ public class TileEntityFirepit extends TileEntityHearth
 		return nbt;
 	}
 
-	public void cleanPit(InventoryPlayer inventory) 
-	{
+	public void setExtinguished(boolean b) {
+		isLit=b;
+		pitState = getUnlitState(firepitBurnTime);
+	}
 
+	
+	public boolean getIsLit() {
+		return isLit;
+	}
+
+	
+	public int getCoalCount() {
+		return coalCount;
+	}
+	
+	public void setCoalCount(int i) {
+		coalCount = coalCount-i;
+	}
+	
+	public int getAshCount() {
+		return ashCount;
+	}
+
+
+	public void setAshCount(int i) {
+		coalCount = coalCount-i;
 	}
 
 }

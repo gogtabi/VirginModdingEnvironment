@@ -42,6 +42,11 @@ public class VMEConfig {
 	public static double firepitMaxStokedAshMod;
 	public static double firepitMaxCoalMod;
 	public static double firepitMaxAshMod;
+	public static final String CATEGORY_FUEL_OBJECTS = "fuel_objects";
+	public static String hearthFuelObjectListString;
+	public static String lanternFuelObjectListString;
+
+	public static String fuelObjectListString;
 	
 	
 	public static void preInit() {
@@ -73,8 +78,6 @@ public class VMEConfig {
 	private static void syncConfig(boolean loadFromConfigFile, boolean readFieldsFromConfig) {
 		if(loadFromConfigFile)
 			config.load();
-		
-		
 		
 		Property propertyFirepitMaxFuelLevel = config.get(CATEGORY_NAME_FIREPIT, "firepit_maximum_fuel_level", 10);
 		Property propertyFirepitDefaultBurnRate = config.get(CATEGORY_NAME_FIREPIT, "firepit_default_burn_rate", 2);
@@ -125,33 +128,19 @@ public class VMEConfig {
 		propertyFirepitMinBankedCoalMod.setLanguageKey("gui.config.hearths.firepit_coal_min_banked_modifier.name");
 		propertyFirepitMinBankedCoalMod.setComment(I18n.format("gui.config.hearths.firepit_coal_min_banked_modifier.comment"));
 		propertyFirepitMinBankedAshMod.setLanguageKey("gui.config.hearths.firepit_ash_min_banked_modifier.comment");
-		//propertyFirepitMinBankedAshMod.setComment(I18n.format("gui.config.hearths.firepit_ash_min_banked_modifier.comment"));
 		propertyFirepitMinCoalMod.setLanguageKey("gui.config.hearths.firepit_coal_min_mod.name");
-		//propertyFirepitMinCoalMod.setComment(I18n.format("gui.config.hearths.firepit_coal_min_mod.comment"));
 		propertyFirepitMinAshMod.setLanguageKey("gui.config.hearths.firepit_ash_min_mod.comment");
-		//propertyFirepitMinAshMod.setComment(I18n.format("gui.config.hearths.firepit_ash_min_mod.comment"));
 		propertyFirepitLowBankedCoalMod.setLanguageKey("gui.config.hearths.firepit_low_banked_coal_modifier.name");
-		//propertyFirepitLowBankedCoalMod.setComment(I18n.format("gui.config.hearths.firepit_low_banked_coal_modifier.comment"));
 		propertyFirepitLowBankedAshMod.setLanguageKey("gui.config.hearths.firepit_low_banked_ash_modifier.name");
-		//propertyFirepitLowBankedAshMod.setComment(I18n.format("gui.config.hearths.firepit_low_banked_ash_modifier.comment"));
 		propertyFirepitLowCoalMod.setLanguageKey("gui.config.hearths.firepit_low_coal_modifier.name");
-		//propertyFirepitLowCoalMod.setComment(I18n.format("gui.config.hearths.firepit_low_coal_modifier.comment"));
 		propertyFirepitMidStokedCoalMod.setLanguageKey("gui.config.hearths.firepit_coal_mid_stoked_mod.name");
-		//propertyFirepitMidStokedCoalMod.setComment(I18n.format("gui.config.hearths.firepit_coal_mid_stoked_mod.comment"));
 		propertyFirepitMidStokedAshMod.setLanguageKey("gui.config.hearths.firepit_coal_mid_stoked_mod.name");
-		//propertyFirepitMidStokedAshMod.setComment(I18n.format("gui.config.hearths.firepit_coal_mid_stoked_mod.comment"));
 		propertyFirepitMidCoalMod.setLanguageKey("gui.config.hearths.firepit_mid_coal_modifier.name");
-		//propertyFirepitMidCoalMod.setComment(I18n.format("gui.config.hearths.firepit_mid_coal_modifier.comment"));
 		propertyFirepitMidAshMod.setLanguageKey("gui.config.hearths.firepit_mid_ash_modifer.name");
-		//propertyFirepitMidAshMod.setComment(I18n.format("gui.config.hearths.firepit_mid_ash_modifer.comment"));
 		propertyFirepitMaxStokedCoalMod.setLanguageKey("gui.config.hearths.firepit_max_stoked_coal_mod.name");
-		//propertyFirepitMaxStokedCoalMod.setComment(I18n.format("gui.config.hearths.firepit_max_stoked_coal_mod.comment"));
 		propertyFirepitMaxStokedAshMod.setLanguageKey("gui.config.hearths.firepit_max_stoked_ash_modifier.name");
-		//propertyFirepitMaxStokedAshMod.setComment(I18n.format("gui.config.hearths.firepit_max_stoked_ash_modifier.comment"));
 		propertyFirepitMaxCoalMod.setLanguageKey("gui.config.hearths.firepit_max_coal_modifier.name");
-		//propertyFirepitMaxCoalMod.setComment(I18n.format("gui.config.hearths.firepit_max_coal_modifier.comment"));
 		propertyFirepitMaxAshMod.setLanguageKey("gui.config.hearths.firepit_max_ash_modifier.name");
-		//propertyFirepitMaxAshMod.setComment(I18n.format("gui.config.hearths.firepit_max_ash_modifier.comment"));
 		
 		List<String> propertyOrderBlocks = new ArrayList<String>();
 		propertyOrderBlocks.add(propertyFirepitMaxFuelLevel.getName());
@@ -229,11 +218,33 @@ public class VMEConfig {
 		propertyFirepitMaxCoalMod.set(firepitMaxCoalMod);
 		propertyFirepitMaxAshMod.set(firepitMaxAshMod);
 		
+		Property propertyHearthFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "hearth_fuel_object_list", "minecraft:planks:2_1000_500_500_true_false,minecraft:planks:1_500_1000_1000_true_false");
+		Property propertyLanternFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "lantern_fuel_object_list", "minecraft:coal:0_0_0_0_false_true");
+		propertyHearthFuelObjectListString.setLanguageKey("gui.config.fuelobject.hearth_object_list.name");
+		propertyHearthFuelObjectListString.setComment(I18n.format("gui.config.fuelobject.hearth_fuel_object_list.comment"));
+		propertyLanternFuelObjectListString.setLanguageKey("gui.config.fuelobject.lantern_object_list.name");
+		propertyLanternFuelObjectListString.setComment(I18n.format("gui.config.fuelobject.lantern_fuel_object_list.comment"));
+		
+
+		List<String> propertyOrderFuelObjects = new ArrayList<String>();
+		propertyOrderFuelObjects.add(propertyHearthFuelObjectListString.getName());
+		propertyOrderFuelObjects.add(propertyLanternFuelObjectListString.getName());
+		
+		config.setCategoryPropertyOrder(CATEGORY_FUEL_OBJECTS, propertyOrderFuelObjects);
+		
+		
+		if(readFieldsFromConfig) {
+			hearthFuelObjectListString = propertyHearthFuelObjectListString.getString();
+			lanternFuelObjectListString = propertyLanternFuelObjectListString.getString();
+		}
+		
+		propertyHearthFuelObjectListString.set(hearthFuelObjectListString);
+		propertyLanternFuelObjectListString.set(lanternFuelObjectListString);
+		fuelObjectListString = hearthFuelObjectListString + "," + lanternFuelObjectListString;
 		
 		if(config.hasChanged())
 			config.save();
 	}
-		
 		public static class ConfigEventHandler {
 			@SubscribeEvent(priority = EventPriority.LOWEST)
 			public void onEvent(ConfigChangedEvent.OnConfigChangedEvent event) {

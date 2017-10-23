@@ -48,10 +48,6 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 	private int igniteChance=100;
 	private BlockPos targetPosition;
 
-	
-
-
-
 	public ATDEmberBundle(String name) 
 	{
 		setUnlocalizedName(name);
@@ -62,6 +58,14 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		ItemInit.ITEMS.add(this);
 	}
 	
+	@Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+        
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+    }
 
 	/**
      * This is called when the item is used, before the block is activated.
@@ -76,8 +80,9 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
     public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
     {    	Utils.getLogger().info("Ember Bundle getItemuseFirst");
     		targetPosition=pos;
-     	if(world.getBlockState(pos).getBlock() instanceof IIgnitable) {
-     		Utils.getLogger().info("Ember Bundle getItemuseFirst: PASS");
+     	if(world.getBlockState(pos).getBlock() instanceof IIgnitable) 
+     	{
+     		Utils.getLogger().info("Ember Bundle getItemuseFirst: SUCCESS");
      		return EnumActionResult.PASS;
      		
     	}
@@ -89,13 +94,53 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 
     	}
     }
+    
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+    		EnumFacing facing, float hitX, float hitY, float hitZ) {
+    	Utils.getLogger().info("Being Used");
+    	return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    }
+    
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) 
+    {
+    	if(world.getBlockState(targetPosition).getBlock() instanceof IIgnitable) 
+    	{
+    		((IIgnitable) world.getBlockState(targetPosition).getBlock()).attemptIgnite(igniteChance, world, targetPosition, (EntityPlayer) entityLiving);
+    	}
+    	stack.shrink(1);
+    	return stack;
+    }
+    
+    @Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		
+		return 100;
+	}
+    
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) 
+    {
+    	Utils.getLogger().info("Stopped Using");
+    	super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
+    }
+    
+	
 	
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
     	Utils.getLogger().info("Ember Bundle getItemuseAction");
-    	return EnumAction.EAT;
+    	return EnumAction.BOW;
     }
     
+    
+    @Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) 
+    {
+    	Utils.getLogger().info("Counting: " + count);
+    	super.onUsingTick(stack, player, count);
+    }
     
   /* @Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
@@ -103,23 +148,14 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 		
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}*/
-    
-   /* @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
-    	((IIgnitable) world.getBlockState(targetPosition).getBlock()).attemptIgnite(igniteChance, world, targetPosition, (EntityPlayer) entityLiving);
-    	Utils.getLogger().info("Ember Bundle onItemUseFinish");
-    	stack.shrink(1);
-		return stack;
-    }*/
-
 
 	public void registerModels() 
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-	
-    
-	public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
+
+}
+	/*public void onUpdate(final ItemStack item, final World world, final Entity par3Entity, final int par4, final boolean par5) {
 		NBTTagCompound nbt = item.getTagCompound();
 		final EntityPlayer player = (EntityPlayer)par3Entity;
 		BlockPos pos= new BlockPos(player.posX,player.posY,player.posZ);
@@ -182,10 +218,10 @@ public class ATDEmberBundle extends Item implements IHasModel, IFireStarter
 				item.shrink(1);
 		}
 		item.setTagCompound(nbt);	
-		Utils.getLogger().info("Info Output: " + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
+		//Utils.getLogger().info("Info Output: " + "  BurningNBT: " + nbt.getInteger("burntime") + " BurningVar: " + burnTime);
 		}
 	}
-}
+}*/
 
 
 

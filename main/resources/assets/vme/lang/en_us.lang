@@ -39,10 +39,12 @@ gui.config.hearths.firepit_mid_ash_modifier.name=Ash Modifier When Fire Pit At M
 gui.config.hearths.firepit_max_stoked_coal_mod.name=Coal Modifier When At Max Fuel And Stoked
 gui.config.hearths.firepit_max_stoked_ash_modifier.name=Ash Modifier When At Max Fuel And Stoked
 gui.config.hearths.firepit_max_coal_modifier.name=Coal Modifier When Fire Pit At Max Fuel
-
 gui.config.hearths.firepit_max_coal_modifier.comment=This Is A Double That Modifies The Base Rate Coal Is Produced At At The Max Fuel Level.
 gui.config.hearths.firepit_max_ash_modifier.name=Ash Modifier When Fire Pit At Max Fuel
 gui.config.hearths.firepit_max_ash_modifier.comment=This Is A Double That Modifies The Base Rate Coal Is Produced At At The Max Fuel Level.
-
 gui.config.hearths.firepit_max_ash_modifier.name=Ash Modifier When Fire Pit At Max Fuel
+gui.config.fuelobject.hearth_fuel_object_list.name=List Of Fuel Objects
+gui.config.fuelobject.hearth_fuel_object_list.comment=Configure your list of fuel objects in the following format: RegistryName:Meta_burnTimeinTicks_ashRateInTicks_coalRateInTicks_isHearthFuelBoolean_isLanternFuelBoolean, for example: "minecraft:planks:2_1000_500_500_true_false", separating each entry with a comma. Note that both lantern and hearth fuels get processed together internally, so only place each fuel in one list.
+gui.config.fuelobject.lantern_fuel_object_list.name=List Of Fuel Objects
+gui.config.fuelobject.lantern_fuel_object_list.comment=Please note that Coal Rate and Ash Rate values will have no effect on lanterns, and thus should be set to 0, but they MUST be included. For example: "minecraft:planks:2_1000_0_0_false_true" You MUST also include both boolean values.
 

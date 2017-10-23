@@ -1,20 +1,28 @@
 package org.maghtuireadh.virginmod.objects.blocks.hearths;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
+import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
+import org.maghtuireadh.virginmod.objects.items.ATDEmberBundle;
+import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
 import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
+import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -38,6 +46,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,52 +54,152 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 
-public class BlockFirepit extends BlockHearth implements IIgnitable{
+public class BlockFirepit extends BlockHearth{
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
 	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 15);
 	public static IBlockState[] states = new IBlockState[16];
-	private boolean Burning = false;
-	private boolean isStoked = false;
-
+	
 	public BlockFirepit(String unlocalizedName, Material material) 
 	{
 		super(unlocalizedName, material);
+		this.setHardness(1.5f);
+		this.setResistance(5.0f);
+		this.setSoundType(SoundType.STONE);
 		for (int i = 0; i < 15; i++) 
 		{
 	        states[i] =  this.blockState.getBaseState().withProperty(PITSTATE, i);
 	    }
+		
 	}
 	
-	@Override
-	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
-		 TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
-
-        	ItemStack heldItem = player.getHeldItemMainhand();
-        	tileentity.attemptIgnite(igniteChance);
-			return true;
-	}
-
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-
-        if (worldIn.isRemote)
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		ItemStack heldItemStack = player.getHeldItemMainhand();
+		Item heldItem = player.getHeldItemMainhand().getItem();
+		String heldItemName = heldItem.getRegistryName() + "-" + heldItemStack.getMetadata();		
+		//Utils.getLogger().info("heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
+		//Utils.getLogger().info("Length of FuelList: " + ListHandler.FuelList.size());
+		//Utils.getLogger().info("Fuel Object List String: " +  VMEConfig.fuelObjectListString);
+		/*for(int i = 0;i<=(ListHandler.FuelList.size()-1);i++){
+			Utils.getLogger().info("Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
+		}*/
+		
+        if(ListHandler.HearthFireStarterList.contains(heldItemName))
         {
-            return true;
+        	return false;
+        } 
+        else if (ListHandler.HearthFuelList.contains(heldItemName)) 
+        {
+        	if(tileentity.getTEFuelMax())
+        	{
+        		Utils.getLogger().info("On Fuel List, Fuel Not Full");
+        		setFuel(world, pos, player);
+	           	return true;
+        	}
+	        else
+	        {
+
+        		Utils.getLogger().info("On Fuel List, Fuel Full");
+        		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
+	        	return false;
+	        }
+        }  
+        else if (ListHandler.ExtinguishList.contains(heldItemName))
+        {
+
+    		Utils.getLogger().info("On Extinguish List");
+           	tileentity.setExtinguished(true);
+           	return true;
+        }
+        else if (ListHandler.BankerList.contains(heldItemName))
+        {
+        	player.sendMessage(new TextComponentString("You bank the coals."));
+    		Utils.getLogger().info("On Banker List, Fuel Full");
+        	return true;
+        }
+        else if (ListHandler.PokerList.contains(heldItemName))
+        {
+        	player.sendMessage(new TextComponentString("You stoke the fire."));
+        	Utils.getLogger().info("On Poker List");
+        	return true;
+        }
+        else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
+        	if(tileentity.getCoalCount()>0 && tileentity.getIsLit() == true) {
+        		player.getHeldItemMainhand().shrink(1);
+            	player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE, 1));
+            	tileentity.setCoalCount(1);
+            	return true;
+        	}
+        	else
+        	{
+        		player.sendMessage(new TextComponentString("This firepit contains no burning coals."));
+        		return false;
+        	}
+        }
+        else if (player.getHeldItemMainhand().isEmpty())
+        {
+
+    		Utils.getLogger().info("Cleaning The Pit");
+        	tileentity.cleanPit(player);
+        	return true;
         }
         else
         {
-            TileEntityFirepit tileentity = (TileEntityFirepit) worldIn.getTileEntity(pos);
-
-           	ItemStack heldItem = playerIn.getHeldItemMainhand();
-           	tileentity.rightClick(heldItem, playerIn);
-
-           	return true; 
-        }   
+        	Utils.getLogger().info("Not On List");
+        	return false;
+        }
     }
 
+	
+	/* =========================================================================================================
+	 * Interface Methods
+	 * =========================================================================================================
+	 */
+
+	@Override
+	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		return tileentity.getIsLit();
+	}
+
+
+	@Override
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		ItemStack heldItem=player.getHeldItemMainhand();
+		tileentity.setExtinguished(true);
+		return false;
+		
+	}
+
+
+	@Override
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		return 0;
+	}
+
+
+	@Override
+	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+		if(player!=null) {
+			ItemStack heldItemStack= player.getHeldItemMainhand();
+			Item heldItem = player.getHeldItemMainhand().getItem();
+			String heldItemName = heldItem.getRegistryName() + ":" + heldItemStack.getMetadata();
+			tileentity.setTEFuel(heldItemName);
+		}
+	}
+	
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+        ItemStack heldItem = player.getHeldItemMainhand();
+        return tileentity.attemptIgnite(igniteChance, pos);
+	}
+	
 	/*============================================================================
 	 *                         Getters & Setters
-	  ============================================================================*/
+	 *============================================================================*/
 
 	public boolean getWeather(World world, BlockPos pos) {
 		if(world.isRainingAt(pos.up()) && world.canBlockSeeSky(pos))
@@ -101,11 +210,6 @@ public class BlockFirepit extends BlockHearth implements IIgnitable{
 			return false;	
 		}
 	}	
-
-	public void setBurning(boolean bool)
-	{
-		this.Burning = bool;
-	}
 
 	public int getState(World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos);
@@ -190,7 +294,6 @@ public class BlockFirepit extends BlockHearth implements IIgnitable{
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) 
 	{
 	this.blockState.getBaseState().withProperty(PITSTATE, Integer.valueOf(0));
-	this.setBurning(false);
 	}
 	
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) 
