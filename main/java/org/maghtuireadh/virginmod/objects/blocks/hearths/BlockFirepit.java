@@ -94,7 +94,7 @@ public class BlockFirepit extends BlockHearth{
         	if(tileentity.getTEFuelMax())
         	{
         		Utils.getLogger().info("On Fuel List, Fuel Not Full");
-        		setFuel(world, pos, player);
+        		setFuel(ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName)), world, pos, player);
 	           	return true;
         	}
 	        else
@@ -181,7 +181,7 @@ public class BlockFirepit extends BlockHearth{
 
 
 	@Override
-	public void setFuel(World world, BlockPos pos, EntityPlayer player) {
+	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		if(player!=null) {
 			ItemStack heldItemStack= player.getHeldItemMainhand();

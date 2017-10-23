@@ -3,7 +3,6 @@ package org.maghtuireadh.virginmod.util.handlers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.maghtuireadh.virginmod.config.VMEConfig;
 import org.maghtuireadh.virginmod.util.Utils;
 

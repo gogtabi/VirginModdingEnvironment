@@ -4,15 +4,14 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
-import org.maghtuireadh.virginmod.util.Utils;
+import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.ResourceLocation;
 
 public class TileEntityMovingLightSource extends TileEntity implements ITickable 
 {
@@ -20,6 +19,7 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 	public static final String NAME = "te_moving_light_source";
 
 	private UUID playerUUID;
+	float lightlevel;
 
 	public TileEntityMovingLightSource()
 	{
@@ -65,18 +65,24 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 		{
 			return true;
 		}
-		else if (player.getHeldItemMainhand().getItem() != ItemInit.ATD_TORCH && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH) 
-		{
-			return true;
-		}
-		else 
+		else if (player.getHeldItemOffhand().getItem() instanceof IIgnitable && player.getHeldItemOffhand().getTagCompound().getBoolean("lit"))
 		{
 			return false;
 		}
+		else for (ItemStack stack : player.inventory.mainInventory) 
+		{
+			if (stack.hasTagCompound() &&
+					stack.getTagCompound().hasKey("lit") && stack.getTagCompound().getBoolean("lit"))
+			{
+			return false;
+			}
+		}
+		return true;
 	}
 
-	public TileEntityMovingLightSource setPlayer(EntityPlayer player) 
+	public TileEntityMovingLightSource setPlayer(EntityPlayer player, float lightlevel) 
 	{
+		this.lightlevel = lightlevel;
 		if (player != null) 
 		{
 			playerUUID = player.getGameProfile() != null ? player.getGameProfile().getId() : null;
