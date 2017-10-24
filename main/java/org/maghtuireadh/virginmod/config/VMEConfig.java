@@ -218,8 +218,8 @@ public class VMEConfig {
 		propertyFirepitMaxCoalMod.set(firepitMaxCoalMod);
 		propertyFirepitMaxAshMod.set(firepitMaxAshMod);
 		
-		Property propertyHearthFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "hearth_fuel_object_list", "minecraft:planks:2_1000_500_500_true_false,minecraft:planks:1_500_1000_1000_true_false");
-		Property propertyLanternFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "lantern_fuel_object_list", "minecraft:coal:0_0_0_0_false_true");
+		Property propertyHearthFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "hearth_fuel_object_list", "minecraft:planks-2_1000_500_500_true_false,minecraft:planks-1_500_1000_1000_true_false");
+		Property propertyLanternFuelObjectListString = config.get(CATEGORY_FUEL_OBJECTS, "lantern_fuel_object_list", "minecraft:coal-0_0_0_0_false_true");
 		propertyHearthFuelObjectListString.setLanguageKey("gui.config.fuelobject.hearth_object_list.name");
 		propertyHearthFuelObjectListString.setComment(I18n.format("gui.config.fuelobject.hearth_fuel_object_list.comment"));
 		propertyLanternFuelObjectListString.setLanguageKey("gui.config.fuelobject.lantern_object_list.name");
