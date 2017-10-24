@@ -7,11 +7,13 @@ import javax.annotation.Nullable;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.MathHelper;
 
 public class TileEntityMovingLightSource extends TileEntity implements ITickable 
 {
@@ -26,6 +28,9 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 
 	}
 
+
+
+	
 	@Override
 	public void update() 
 	{

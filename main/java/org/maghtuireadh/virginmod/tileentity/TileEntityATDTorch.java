@@ -6,18 +6,16 @@ import org.maghtuireadh.virginmod.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityATDTorch extends TileEntity implements ITickable
 {
-	long timeset,start,burntime = (long)0;
+	long sentTimeset,sentStart,timeset,start = (long)0;
 	public NBTTagCompound nbt;
+	BlockPos sentPos = null;
 
-	public TileEntityATDTorch(long burntime)
+	public TileEntityATDTorch()
 	{
-		this.burntime = burntime;
 		Utils.getLogger().info("constructed TE");
 	}
 	
@@ -26,21 +24,27 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
 		super.readFromNBT(nbt);
-		this.burntime = nbt.getLong("burntime");
-		this.timeset = nbt.getLong("timeset");
-		this.start = nbt.getLong("start");
-		Utils.getLogger().info("read from nbt");
+		if(nbt.hasKey("timeset") && nbt.hasKey("start"))
+		{
+			this.timeset = nbt.getLong("timeset");
+			this.start = nbt.getLong("start");
+			Utils.getLogger().info("read from nbt");
+		}
+		else
+		{
+			nbt.setLong("timeset", (long)0);
+			nbt.setLong("start", (long)0);
+			Utils.getLogger().info("in READ i wrote");
+		}
 	}
 	
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) 
 	{
-		super.writeToNBT(nbt);
-		nbt.setLong("burntime", this.burntime);
 		nbt.setLong("timeset", this.timeset);
 		nbt.setLong("start", this.start);
-
 		Utils.getLogger().info("write to nbt TE");
+		super.writeToNBT(nbt);
 		return nbt;
 	}
 
@@ -48,6 +52,14 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 	public void update() {
 		if(!world.isRemote)
 		{
+			if (sentPos != null && sentPos == pos)
+			{
+				timeset = sentTimeset;
+				start = sentStart;
+				sentTimeset = 0; 
+				sentStart = 0;
+				sentPos = null;
+			}
 			if(timeset > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == true)
 			{
 				Utils.getLogger().info(world.getTotalWorldTime()-start + " < " + timeset);
@@ -64,23 +76,13 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 		}
 	}
 	
-	public void setTime(long time)
+	public void setTime(long time, BlockPos pos)
 	{
-		start = world.getTotalWorldTime();
-		timeset = time;
+		sentStart = world.getTotalWorldTime();
+		sentTimeset = time;
+		sentPos = pos;
 		Utils.getLogger().info("set time " + time);
 		markDirty();
-	}
-	public long getTime()
-	{
-		if(start != 0 && timeset != 0)
-		{
-			return world.getTotalWorldTime()-start-timeset;
-		}
-		else
-		{
-			return burntime;
-		}
 	}
 
 

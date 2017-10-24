@@ -1,7 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "0": "vme:blocks/atd_torch_base_on" 
+        "0": "vme:blocks/atd_torch_base_on",
+        "particle": "minecraft:blocks/fire_layer_0" 
     },
     "elements": [
         {   "from": [ 7, 0, 7 ],

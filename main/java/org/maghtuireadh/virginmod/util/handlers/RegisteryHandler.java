@@ -28,7 +28,7 @@ public class RegisteryHandler
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
-		GameRegistry.registerTileEntity(TileEntityATDTorch.class, Reference.MODID+"atdtorch");
+		GameRegistry.registerTileEntity(TileEntityATDTorch.class, Reference.MODID+":atdtorch");
 	}
 	
 	@SubscribeEvent

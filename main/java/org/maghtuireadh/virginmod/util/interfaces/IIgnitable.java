@@ -1,6 +1,5 @@
 package org.maghtuireadh.virginmod.util.interfaces;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

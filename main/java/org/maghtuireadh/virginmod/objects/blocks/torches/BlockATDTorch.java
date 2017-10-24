@@ -6,6 +6,7 @@ import org.maghtuireadh.virginmod.Main;
 import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
@@ -27,6 +28,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -93,14 +95,25 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	}
 
 	@Override
-	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
-		return ((TileEntityATDTorch)world.getTileEntity(pos)).getTime();
+	public long getFuel(World world, BlockPos pos, EntityPlayer player) {	
+		
+		long start = world.getTileEntity(pos).getUpdateTag().getLong("start");
+		long timeset = world.getTileEntity(pos).getUpdateTag().getLong("timeset");
+		Utils.getLogger().info("start time= "+start+", timeset= "+timeset);
+		if(start != 0 && timeset != 0)
+		{
+			return world.getTotalWorldTime()-start-timeset;
+		}
+		else
+		{
+			return burnTime;
+		}
 	}
 
 
 	@Override
 	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
-		((TileEntityATDTorch)world.getTileEntity(pos)).setTime(fuel);
+		((TileEntityATDTorch)world.getTileEntity(pos)).setTime(fuel, pos);
 	}
 
 	@Override
@@ -109,10 +122,12 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		if(!world.getBlockState(pos).getValue(LIT))
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, true));
+			Utils.getLogger().info("light block in block");
 			return true;
 		}
 		else
 		{
+			Utils.getLogger().info("block was alrdy lit");
 			return false;
 		}
 		
@@ -123,8 +138,12 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		if (world.getBlockState(pos).getValue(LIT))
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, false));
+
+			Utils.getLogger().info("ext block in block");
 			return true;
 		}
+
+		Utils.getLogger().info("ext block in block fail");
 		return false;
 	}
 	
@@ -149,29 +168,41 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		ItemStack stack = playerIn.getHeldItemMainhand();
+		String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
 		if(stack.getItem() instanceof IIgnitable)
 		{
+			Utils.getLogger().info("block: item is ignitable" + heldItemName);
 			return false; 
 		}
-		if (ListHandler.ExtinguishList.contains(stack.getUnlocalizedName()))
+		if (ListHandler.ExtinguishList.contains(heldItemName))
 		{
+			Utils.getLogger().info("ext-list" + heldItemName);
 			this.extinguish(worldIn, pos, playerIn);
 			return true;
 		}
 		if(stack.isEmpty())
 		{
+			Utils.getLogger().info("hand is empty");
 			playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
 			IIgnitable item = (IIgnitable)playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItem();
-			item.setFuel(((TileEntityATDTorch)worldIn.getTileEntity(pos)).getTime(), worldIn, pos, playerIn);
+			long time = getFuel(worldIn, pos, playerIn);
+			item.setFuel(time, worldIn, pos, playerIn);
+			Utils.getLogger().info("set item fuel to" + time);
 			if(this.getMetaFromState(state)>=5)
 			{
 				item.attemptIgnite(100, worldIn, pos, playerIn);
+				Utils.getLogger().info("try to light the item");
 			}
 			worldIn.setBlockToAir(pos);
+			worldIn.removeTileEntity(pos);
+
+			Utils.getLogger().info("killed block and TE");
 			return true;
 		}
 		else
 		{
+
+			Utils.getLogger().info("hand not empty");
 			return false;
 		}
 		
@@ -180,9 +211,20 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	@Override
 	public void registerModels() 
 	{
-		for(int i = 0; i < 9; i++) 
+		String facing,lit;
+		for(int i = 0; i < 2; i++)
 		{
-		Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "Block_atd_Torch", "state="+i);
+			if(i==0) {lit="false";}
+			else {lit="true";}
+			for(int j = 0; j < 5; j++)
+			{
+				if(j==0) {facing="up";}
+				else if(j==1) {facing="east";}
+				else if(j==2) {facing="south";}
+				else if(j==3) {facing="west";}
+				else {facing="north";}
+				Main.proxy.registerVariantRenderer(Item.getItemFromBlock(this), (((i+1)*(j+1))-1), this.getUnlocalizedName().substring(5), "facing="+facing+","+"lit="+lit);
+			}
 		}
 	}
 
@@ -199,33 +241,21 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 
 		int meta = 0;
 		if (state.getValue(FACING) == EnumFacing.UP)
-		{
-			meta = 1;
-		}
+		{meta = 1;}
 		if (state.getValue(FACING) == EnumFacing.NORTH)
-		{
-			meta = 2;
-		}
+		{meta = 2;}
 		if (state.getValue(FACING) == EnumFacing.SOUTH)
-		{
-			meta = 3;
-		}
+		{meta = 3;}
 		if (state.getValue(FACING) == EnumFacing.EAST)
-		{
-			meta = 4;
-		}
+		{meta = 4;}
 		if (state.getValue(FACING) == EnumFacing.WEST)
-		{
-			meta = 5;
-		}
+		{meta = 5;}
+		
 		if (state.getValue(LIT))
-		{
-			meta = (meta * 2) - 1;
-		}
+		{meta = (meta + 5) - 1;}
 		else
-		{
-			meta = meta - 1;
-		}
+		{meta = meta - 1;}
+		
 		return meta;
 		}
 	
@@ -263,13 +293,13 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
-		return new TileEntityATDTorch(burnTime);
+		return new TileEntityATDTorch();
 	}
 	
 	@Override
     public int getLightValue(IBlockState state)
     {
-        return getMetaFromState(state) > 4 ? (int)this.lightlevel : 0;
+        return getMetaFromState(state) > 4 ? MathHelper.floor(this.lightlevel * 15.0F) : 0;
     }
 }
 	
