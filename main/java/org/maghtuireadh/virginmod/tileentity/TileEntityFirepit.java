@@ -79,7 +79,7 @@ public class TileEntityFirepit extends TileEntityHearth
 		this.ashBase = nbt.getLong("AshBase");
 		this.firepitBurnTime = nbt.getLong("FPBT");
 		this.pitState = nbt.getInteger("PitState");
-		this.isLit = nbt.getBoolean("isLit");
+		this.isLit = nbt.getBoolean("IsLit");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.isBanked = nbt.getBoolean("IsBanked");
 		this.stokedTimer = nbt.getInteger("StokedTimer");
@@ -101,7 +101,7 @@ public class TileEntityFirepit extends TileEntityHearth
 		nbt.setDouble("AshRate", ashRate);
 		nbt.setLong("AshBase", ashBase);
 		nbt.setInteger("PitState", pitState);
-		nbt.setBoolean("Burning", isLit);
+		nbt.setBoolean("IsLit", isLit);
 		nbt.setBoolean("IsStoked", isStoked);
 		nbt.setInteger("StokedTimer", stokedTimer);
 		nbt.setInteger("LastState", lastState);
@@ -122,6 +122,7 @@ public class TileEntityFirepit extends TileEntityHearth
 				{ 	
 					firePit.setState(pitState, world, pos);
 				}
+				markDirty();
 			}				
 		}
 	}
@@ -312,15 +313,15 @@ public class TileEntityFirepit extends TileEntityHearth
     	igniteChance = igniteChance-rainPenalty;
     	}*/
 		Utils.getLogger().info("attemptIgnite Fired");
-		return isLit=true;
+		isLit=true;
+		return isLit;
 	}
 	
-	public void setTEFuel(String fuelItemName) 
+	public void setTEFuel(long fuel, int fuelIndex) 
 	{
-
 		Utils.getLogger().info("Initiating Fuel Setting on TE");
-		int fuelIndex = ListHandler.FuelList.indexOf(fuelItemName);
-		long burnTime = ListHandler.BurnTimeList.get(fuelIndex);
+		Utils.getLogger().info("FuelIndex Return: " + fuelIndex);
+		long burnTime = fuel;
 		long coalburnrate = ListHandler.CoalBurnRate.get(fuelIndex);
 		long ashburnrate = ListHandler.AshBurnRate.get(fuelIndex);
 		
@@ -331,15 +332,15 @@ public class TileEntityFirepit extends TileEntityHearth
 		}
 		else
 		{
-			coalRate=(coalburnrate+coalRate)/2;
+			coalBase=(long) ((coalburnrate+coalRate)/2);
 		}
-		if(ashRate == 0)
+		if(ashBase == 0)
 		{
-			ashRate=ashburnrate;
+			ashBase=ashburnrate;
 		}
 		else
 		{
-			ashRate=(ashburnrate+ashRate)/2;
+			ashBase=(long) ((ashburnrate+ashRate)/2);
 		}
 		
 		if (!isLit) 
@@ -347,6 +348,7 @@ public class TileEntityFirepit extends TileEntityHearth
 			pitState = getUnlitState(firepitBurnTime);
 		}
 		updateFirepit();
+		markDirty();
 	}
 	
 	public boolean getTEFuelMax() 
@@ -357,25 +359,34 @@ public class TileEntityFirepit extends TileEntityHearth
 	
 	public void cleanPit(EntityPlayer player) 
 	{
-
-			if (!isLit && (coalCount != 0 || ashCount != 0)) 
+		Utils.getLogger().info("isLit?: " + isLit);
+		Utils.getLogger().info("Beginning cleanPit: " + "coalCount: " + coalCount + " ashCount: " + ashCount);
+		Utils.getLogger().info("Fire Pit Burn Time:" + firepitBurnTime);
+		/*	if (!isLit && (coalCount != 0 || ashCount != 0)) 
 			{
-				player.inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
+				player.inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, coalCount));
 				player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
 				coalCount = 0;
 				ashCount = 0;
-
-				pitState = getUnlitState(firepitBurnTime);
+				Utils.getLogger().info("Beginning cleanPit1: " + "coalCount: " + coalCount + " ashCount: " + ashCount);
+				Utils.getLogger().info("Why are we doing this? It's lit!");
 			} 
-			else if (!isLit && firepitBurnTime != 0) 
+			else if (!isLit && firepitBurnTime > 0) 
 			{
 				player.inventory.addItemStackToInventory(
-				new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime / 300), 2));
+				new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime / 1000), 2));
 				firepitBurnTime = 0;
-				pitState = getUnlitState(firepitBurnTime);				
+				Utils.getLogger().info("isLit: " + isLit);
+				Utils.getLogger().info("Beginning cleanPit2: " + "coalCount: " + coalCount + " ashCount: " + ashCount);
+				Utils.getLogger().info("Why are we doing this too? It's lit!");
 			}
-		
-
+			else
+			{
+				
+			}
+			pitState = getUnlitState(firepitBurnTime);
+			updateFirepit();
+			markDirty();*/
 	}
 		
 		

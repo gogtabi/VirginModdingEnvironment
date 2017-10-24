@@ -101,7 +101,7 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 	}
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
 		// TODO Auto-generated method stub
 		
 	}

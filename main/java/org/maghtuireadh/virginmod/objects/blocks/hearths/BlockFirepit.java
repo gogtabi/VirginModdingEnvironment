@@ -77,16 +77,21 @@ public class BlockFirepit extends BlockHearth{
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItemStack = player.getHeldItemMainhand();
 		Item heldItem = player.getHeldItemMainhand().getItem();
-		String heldItemName = heldItem.getRegistryName() + "-" + heldItemStack.getMetadata();		
-		//Utils.getLogger().info("heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
-		//Utils.getLogger().info("Length of FuelList: " + ListHandler.FuelList.size());
-		//Utils.getLogger().info("Fuel Object List String: " +  VMEConfig.fuelObjectListString);
-		/*for(int i = 0;i<=(ListHandler.FuelList.size()-1);i++){
-			Utils.getLogger().info("Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
-		}*/
+		String heldItemName = heldItem.getRegistryName() + "-" + heldItemStack.getMetadata();	
+		/*Utils.getLogger().info("heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
+		Utils.getLogger().info("Length of FuelList: " + ListHandler.FuelList.size());
+		Utils.getLogger().info("Fuel Object List String: " +  VMEConfig.fuelObjectListString);
 		
+		for(int i = 0;i<=(ListHandler.FuelList.size()-1);i++){
+			Utils.getLogger().info("Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
+		}
+		for(int i = 0;i<=(ListHandler.BurnTimeList.size()-1);i++) {
+			Utils.getLogger().info("Values of BurnTimeList: " + i + " " + ListHandler.BurnTimeList.get(i));
+		}
+		*/
         if(ListHandler.HearthFireStarterList.contains(heldItemName))
         {
+        	Utils.getLogger().info("HearthFireStarterListFired");
         	return false;
         } 
         else if (ListHandler.HearthFuelList.contains(heldItemName)) 
@@ -94,7 +99,9 @@ public class BlockFirepit extends BlockHearth{
         	if(tileentity.getTEFuelMax())
         	{
         		Utils.getLogger().info("On Fuel List, Fuel Not Full");
-        		setFuel(ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName)), world, pos, player);
+        		long fuel = ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName));
+        		setFuel(heldItemStack, fuel, world, pos); //Fuel Long is set by setFuel before sending to setTEFuel
+        		heldItemStack.shrink(1);
 	           	return true;
         	}
 	        else
@@ -181,14 +188,11 @@ public class BlockFirepit extends BlockHearth{
 
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
-		if(player!=null) {
-			ItemStack heldItemStack= player.getHeldItemMainhand();
-			Item heldItem = player.getHeldItemMainhand().getItem();
-			String heldItemName = heldItem.getRegistryName() + ":" + heldItemStack.getMetadata();
-			tileentity.setTEFuel(heldItemName);
-		}
+			String fuelItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();
+	        int fuelIndex = ListHandler.FuelList.indexOf(fuelItemName);
+			tileentity.setTEFuel(fuel, fuelIndex);
 	}
 	
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
