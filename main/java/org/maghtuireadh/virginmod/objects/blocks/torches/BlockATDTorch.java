@@ -23,6 +23,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -70,13 +71,13 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
     		if (enumfacing.getAxis().isHorizontal())
     		{
     			EnumFacing enumfacing1 = enumfacing.getOpposite();
-    			worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
-    			worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
+    			worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
+    			worldIn.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
     		}
     		else
     		{
-	            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-	            worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+	            worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+	            worldIn.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
     		}
     	}
     }
@@ -97,12 +98,14 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	@Override
 	public long getFuel(World world, BlockPos pos, EntityPlayer player) {	
 		
-		long start = world.getTileEntity(pos).getUpdateTag().getLong("start");
-		long timeset = world.getTileEntity(pos).getUpdateTag().getLong("timeset");
-		Utils.getLogger().info("start time= "+start+", timeset= "+timeset);
+		NBTTagCompound nbt = world.getTileEntity(pos).getTileData();
+		byte id = nbt.getId();
+		long start = nbt.getLong("start");
+		long timeset = nbt.getLong("timeset");
+		Utils.getLogger().info("BlockATD:time elapsed= "+(world.getTotalWorldTime()-start)+", burntimr= "+burnTime+", timeset= "+timeset+", on tagID= "+id);
 		if(start != 0 && timeset != 0)
 		{
-			return world.getTotalWorldTime()-start-timeset;
+			return (timeset - (world.getTotalWorldTime()-start));
 		}
 		else
 		{
@@ -112,7 +115,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
 		((TileEntityATDTorch)world.getTileEntity(pos)).setTime(fuel, pos);
 	}
 
@@ -122,12 +125,12 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		if(!world.getBlockState(pos).getValue(LIT))
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, true));
-			Utils.getLogger().info("light block in block");
+			Utils.getLogger().info("BlockATD:light block in block");
 			return true;
 		}
 		else
 		{
-			Utils.getLogger().info("block was alrdy lit");
+			Utils.getLogger().info("BlockATD:block was alrdy lit");
 			return false;
 		}
 		
@@ -139,11 +142,11 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, false));
 
-			Utils.getLogger().info("ext block in block");
+			Utils.getLogger().info("BlockATD:ext block in block");
 			return true;
 		}
 
-		Utils.getLogger().info("ext block in block fail");
+		Utils.getLogger().info("BlockATD:ext block in block fail");
 		return false;
 	}
 	
@@ -167,45 +170,48 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-		ItemStack stack = playerIn.getHeldItemMainhand();
-		String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
-		if(stack.getItem() instanceof IIgnitable)
+		if(!worldIn.isRemote)
 		{
-			Utils.getLogger().info("block: item is ignitable" + heldItemName);
-			return false; 
-		}
-		if (ListHandler.ExtinguishList.contains(heldItemName))
-		{
-			Utils.getLogger().info("ext-list" + heldItemName);
-			this.extinguish(worldIn, pos, playerIn);
-			return true;
-		}
-		if(stack.isEmpty())
-		{
-			Utils.getLogger().info("hand is empty");
-			playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
-			IIgnitable item = (IIgnitable)playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItem();
-			long time = getFuel(worldIn, pos, playerIn);
-			item.setFuel(time, worldIn, pos, playerIn);
-			Utils.getLogger().info("set item fuel to" + time);
-			if(this.getMetaFromState(state)>=5)
+			ItemStack stack = playerIn.getHeldItemMainhand();
+			String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
+			if(stack.getItem() instanceof IIgnitable)
 			{
-				item.attemptIgnite(100, worldIn, pos, playerIn);
-				Utils.getLogger().info("try to light the item");
+				Utils.getLogger().info("BlockATD: item is ignitable" + heldItemName);
+				return false; 
 			}
-			worldIn.setBlockToAir(pos);
-			worldIn.removeTileEntity(pos);
-
-			Utils.getLogger().info("killed block and TE");
-			return true;
+			if (ListHandler.ExtinguishList.contains(heldItemName))
+			{
+				Utils.getLogger().info("BlockATD:ext-list" + heldItemName);
+				this.extinguish(worldIn, pos, playerIn);
+				return true;
+			}
+			if(stack.isEmpty())
+			{
+				Utils.getLogger().info("BlockATD:hand is empty");
+				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
+				IIgnitable item = (IIgnitable)playerIn.inventory.getCurrentItem().getItem();//getStackInSlot(playerIn.inventory.currentItem).getItem();
+				long time = getFuel(worldIn, pos, playerIn);
+				item.setFuel(stack, time, worldIn, pos);
+				Utils.getLogger().info("BlockATD:set item fuel to " + time + " on itemstack " + stack);
+				if(this.getMetaFromState(state)>=5)
+				{
+					item.attemptIgnite(100, worldIn, pos, playerIn);
+					Utils.getLogger().info("BlockATD:try to light the item");
+				}
+				worldIn.setBlockToAir(pos);
+				worldIn.removeTileEntity(pos);
+	
+				Utils.getLogger().info("BlockATD:killed block and TE");
+				return true;
+			}
+			else
+			{
+	
+				Utils.getLogger().info("BlockATD:hand not empty");
+				return false;
+			}
 		}
-		else
-		{
-
-			Utils.getLogger().info("hand not empty");
-			return false;
-		}
-		
+		return false;
 	}
 		
 	@Override

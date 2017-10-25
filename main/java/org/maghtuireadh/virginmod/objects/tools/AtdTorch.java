@@ -24,6 +24,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
@@ -39,6 +40,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.xml.dtd.EMPTY;
 
 public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvider, IIgnitable, IFireStarter
 {
@@ -47,7 +49,9 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	BlockPos BP;
 	IBlockState BSHold;
 	EntityPlayer player;
-	private int BurnTime = 0;
+	ItemStack stackSet = new ItemStack(Items.AIR);
+	long burntTime = 0;
+	private long BurnTime = 0;
 	private int EntityFireTime, RainRes;
 	private float RainChance, lightlevel;
 	private int TimeAway = 30;
@@ -77,10 +81,11 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		this.maxStackSize = stackSize;
 		this.lightlevel = lightlevel;
 		this.EntityFireTime = entityFireTime;
-		BurnTime = burnTime;
+		BurnTime = (long)burnTime;
 		RainRes = rainRes;
 		RainChance = rainChance;
 		setDamage(new ItemStack(this), 0);
+		Utils.getLogger().info("Torch:constructed torch");
 		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() 
 		{
             @SideOnly(Side.CLIENT)
@@ -106,13 +111,14 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
+		Utils.getLogger().info("Torch:constructed TE");
 		return new TileEntityMovingLightSource().setPlayer(player, this.lightlevel);
 	}
 	
 	public NBTTagCompound newNBT(ItemStack stack)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setLong("burntime", (long)0);
+		//nbt.setLong("burntime", (long)0);
 		nbt.setFloat("rainchance", RainChance);
 		nbt.setInteger("rainres", RainRes);
 		nbt.setBoolean("lit", false);
@@ -144,7 +150,16 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 
 				if(isLit(stack))// && nbt.hasKey("lit")) 
 				{
-					 if(isSelected && getTimeAway(stack) < this.TimeAway) 
+					if(stackSet == stack)
+					{
+						setBurnTime(burntTime, stack);
+						stackSet = new ItemStack(Items.AIR);
+					}
+					else
+					{
+						Utils.getLogger().info("stacks aren't the same apparently\n                                       "+stackSet+"\n                                       "+stack);
+					}
+	                          				 if(isSelected && getTimeAway(stack) < this.TimeAway) 
 					 {
 						 setTimeAway(this.TimeAway, stack);
 						 Utils.getLogger().info("rst timeaway");
@@ -164,7 +179,12 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					 {
 						 extinguish(world, pos, player, stack);
 					 }
-					  
+					 else
+					 {
+						 Utils.getLogger().info(world.getTotalWorldTime()+" - "+ nbt.getLong("worldtime") +" + "+ getBurnTime(stack) +" > " + this.BurnTime);
+						 
+					 }
+					 
 					 if (world.isRainingAt(pos.up(1)))
 					 {
 						 int res = nbt.getInteger("rainres");
@@ -198,8 +218,15 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
 		if (world.rand.nextInt(100)<igniteChance)
 		{
+			if(!player.getHeldItemMainhand().isEmpty())
+			{
 			setLit(true, world.getTotalWorldTime(), player.getHeldItemMainhand());
 			return true;
+			}
+			else
+			{
+				Utils.getLogger().info("torch: attempted to light nothing");
+			}
 		}
 		return false;
 	}
@@ -230,9 +257,13 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	}
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) 
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) 
 	{	
-		this.setBurnTime(fuel, player.inventory.getCurrentItem());	
+		/*this.setBurnTime(fuel, stack);*/
+		this.burntTime = fuel;
+		this.stackSet = stack;
+		Utils.getLogger().info("Torch: fuel: "+fuel+", stack: "+stack);
+		
 	}
 	
 	public boolean isLit(ItemStack stack) 
@@ -253,6 +284,10 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	public  void setLit(boolean lit, long worldTime, ItemStack stack) 
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
+		if(nbt==null)
+		{
+			nbt = new NBTTagCompound();
+		}
 		if(stack.getCount()>1&&lit==true)
 		{
 			if(player.inventory.getFirstEmptyStack()!=-1)
@@ -279,8 +314,10 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		if(nbt==null)
 		{
 			nbt = newNBT(stack);
+			Utils.getLogger().info("Torch: made new nbt for set burntime");
 		}		
 		nbt.setLong("burntime", burntime);
+		Utils.getLogger().info("Torch: set burntime to: " + burntime);
 		stack.setTagCompound(nbt);
 	}
 	
@@ -288,13 +325,20 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		long burntime;
+		if(nbt==null)
+		{
+			nbt = newNBT(stack);
+			Utils.getLogger().info("Torch: made new nbt for get burntime");
+		}		
 		if(nbt.hasKey("burntime"))
 		{
 			burntime =  nbt.getLong("burntime");
+			Utils.getLogger().info("Torch: has burntime, got: " + burntime);
 		}
 		else
 		{
 			burntime = (long)0;
+			Utils.getLogger().info("Torch: no burntime, set to 0");
 		}
 		return burntime;
 	}
@@ -340,12 +384,13 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			if (nbt.getLong("worldtime") > 0)
 			{
 				time = BurnTime - ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack));
+				Utils.getLogger().info("place: burntime- " + BurnTime + ", world time- " + world.getTotalWorldTime()  +", set world time- " + nbt.getLong("worldtime") + ", get burntime- " + getBurnTime(stack));
 			}
 			else
 			{
 				time = BurnTime;
 			}
-			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(time, world, pos, player);
+			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(stack, time, world, pos);
 			Utils.getLogger().info("place: set fuel to " + time);
 			Utils.getLogger().info("place: itemstack b4 = " + player.inventory.getCurrentItem());
 			player.inventory.getCurrentItem().shrink(1);//setCount(player.inventory.getCurrentItem().getCount() -1 );
