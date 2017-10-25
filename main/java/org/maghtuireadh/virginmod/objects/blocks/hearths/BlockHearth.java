@@ -41,23 +41,6 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 		this.setCreativeTab(Main.virginmodtab);
 		lightCount=100;
 	}
-
-	
-/*	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int attemptCount)
-    {
-		ItemStack heldItem = player.getHeldItemMainhand();
-		if (worldIn.isRemote)
-        {
-            return true;
-        }
-		else for (int i=0;i<listFireStarter.size()-1 && heldItem!=listFireStarter.get(i);i++)
-		{
-			itemFireStarter item = (itemFireStarter) heldItem.getItem();
-			item.getIgniteCount();
-        }
-		return true;
-    }*/
 	
 	@Override
 	public void registerModels() 

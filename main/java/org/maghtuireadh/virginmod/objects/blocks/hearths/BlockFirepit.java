@@ -74,6 +74,8 @@ public class BlockFirepit extends BlockHearth{
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+		world.getChunkFromBlockCoords(pos).onUnload();
+		world.getChunkFromBlockCoords(pos).onLoad();
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItemStack = player.getHeldItemMainhand();
 		Item heldItem = player.getHeldItemMainhand().getItem();
@@ -89,11 +91,11 @@ public class BlockFirepit extends BlockHearth{
 			Utils.getLogger().info("Values of BurnTimeList: " + i + " " + ListHandler.BurnTimeList.get(i));
 		}
 		*/
-        if(ListHandler.HearthFireStarterList.contains(heldItemName))
+		if(ListHandler.HearthFireStarterList.contains(heldItemName))
         {
         	Utils.getLogger().info("HearthFireStarterListFired");
         	return false;
-        } 
+        }
         else if (ListHandler.HearthFuelList.contains(heldItemName)) 
         {
         	if(tileentity.getTEFuelMax())
@@ -106,7 +108,6 @@ public class BlockFirepit extends BlockHearth{
         	}
 	        else
 	        {
-
         		Utils.getLogger().info("On Fuel List, Fuel Full");
         		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
 	        	return false;
@@ -114,9 +115,8 @@ public class BlockFirepit extends BlockHearth{
         }  
         else if (ListHandler.ExtinguishList.contains(heldItemName))
         {
-
     		Utils.getLogger().info("On Extinguish List");
-           	tileentity.setExtinguished(true);
+           	tileentity.setExtinguishedState(true);
            	return true;
         }
         else if (ListHandler.BankerList.contains(heldItemName))
@@ -148,12 +148,14 @@ public class BlockFirepit extends BlockHearth{
         {
 
     		Utils.getLogger().info("Cleaning The Pit");
+    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
         	tileentity.cleanPit(player);
         	return true;
         }
         else
         {
         	Utils.getLogger().info("Not On List");
+    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
         	return false;
         }
     }
@@ -175,7 +177,7 @@ public class BlockFirepit extends BlockHearth{
 	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItem=player.getHeldItemMainhand();
-		tileentity.setExtinguished(true);
+		tileentity.setExtinguishedState(true);
 		return false;
 		
 	}
@@ -198,7 +200,7 @@ public class BlockFirepit extends BlockHearth{
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
         ItemStack heldItem = player.getHeldItemMainhand();
-        return tileentity.attemptIgnite(igniteChance, pos);
+		return tileentity.attemptIgnite(igniteChance, pos);
 	}
 	
 	/*============================================================================
