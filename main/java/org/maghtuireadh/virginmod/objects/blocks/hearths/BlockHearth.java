@@ -65,7 +65,7 @@ public class BlockHearth extends Block implements IIgnitable, IFireStarter, IHas
 
 
 	@Override
-	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+	public boolean Burning(World world, BlockPos pos, EntityPlayer player) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -54,7 +54,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 
-public class BlockFirepit extends BlockHearth{
+public class BlockFirepit extends BlockHearth
+{
 	protected static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(1.5D, 0.0D, 1.5D, -0.5D, .4D, -0.5D);
 	public static final PropertyInteger PITSTATE = PropertyInteger.create("pitstate", 0, 15);
 	public static IBlockState[] states = new IBlockState[16];
@@ -75,8 +76,6 @@ public class BlockFirepit extends BlockHearth{
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		Utils.getLogger().info("Fire Pit: onBlockActivated()");
-		world.getChunkFromBlockCoords(pos).onUnload();
-		world.getChunkFromBlockCoords(pos).onLoad();
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItemStack = player.getHeldItemMainhand();
 		Item heldItem = player.getHeldItemMainhand().getItem();
@@ -92,74 +91,73 @@ public class BlockFirepit extends BlockHearth{
 			Utils.getLogger().info("Values of BurnTimeList: " + i + " " + ListHandler.BurnTimeList.get(i));
 		}
 		*/
-		if(ListHandler.HearthFireStarterList.contains(heldItemName))
-        {
-        	Utils.getLogger().info("HearthFireStarterListFired");
-        	return false;
-        }
-        else if (ListHandler.HearthFuelList.contains(heldItemName)) 
-        {
-        	if(tileentity.getTEFuelMax())
-        	{
-        		Utils.getLogger().info("On Fuel List, Fuel Not Full");
-        		long fuel = ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName));
-        		setFuel(heldItemStack, fuel, world, pos); //Fuel Long is set by setFuel before sending to setTEFuel
-        		heldItemStack.shrink(1);
-	           	return true;
-        	}
-	        else
+			if(ListHandler.HearthFireStarterList.contains(heldItemName))
 	        {
-        		Utils.getLogger().info("On Fuel List, Fuel Full");
-        		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
 	        	return false;
 	        }
-        }  
-        else if (ListHandler.ExtinguishList.contains(heldItemName))
-        {
-    		Utils.getLogger().info("On Extinguish List");
-           	tileentity.setExtinguishedState(true);
-           	return true;
-        }
-        else if (ListHandler.BankerList.contains(heldItemName))
-        {
-        	player.sendMessage(new TextComponentString("You bank the coals."));
-    		Utils.getLogger().info("On Banker List, Fuel Full");
-        	return true;
-        }
-        else if (ListHandler.PokerList.contains(heldItemName))
-        {
-        	player.sendMessage(new TextComponentString("You stoke the fire."));
-        	Utils.getLogger().info("On Poker List");
-        	return true;
-        }
-        else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
-        	Utils.getLogger().info("Fire Pit: onBlockActivated() It's a tinder bundle");
-        	if(tileentity.getCoalCount()>0 && tileentity.getIsLit() == true) {
-        		player.getHeldItemMainhand().shrink(1);
-            	player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE, 1));
-            	tileentity.setCoalCount(1);
-            	return true;
-        	}
-        	else
-        	{
-        		player.sendMessage(new TextComponentString("This firepit contains no burning coals."));
-        		return false;
-        	}
-        }
-        else if (player.getHeldItemMainhand().isEmpty())
-        {
-
-    		Utils.getLogger().info("Cleaning The Pit");
-    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
-        	tileentity.cleanPit(player);
-        	return true;
-        }
-        else
-        {
-        	Utils.getLogger().info("Not On List");
-    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
-        	return false;
-        }
+	        else if (ListHandler.HearthFuelList.contains(heldItemName)) 
+	        {
+	        	if(tileentity.getTEFuelMax())
+	        	{
+	        		Utils.getLogger().info("On Fuel List, Fuel Not Full");
+	        		long fuel = ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName));
+	        		setFuel(heldItemStack, fuel, world, pos); //Fuel Long is set by setFuel before sending to setTEFuel
+	        		heldItemStack.shrink(1);
+		           	return true;
+	        	}
+		        else
+		        {
+	        		Utils.getLogger().info("On Fuel List, Fuel Full");
+	        		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
+		        	return false;
+		        }
+	        }  
+	        else if (ListHandler.ExtinguishList.contains(heldItemName))
+	        {
+	    		Utils.getLogger().info("On Extinguish List");
+	           	tileentity.setExtinguishedState(true);
+	           	return true;
+	        }
+	        else if (ListHandler.BankerList.contains(heldItemName))
+	        {
+	        	player.sendMessage(new TextComponentString("You bank the coals."));
+	    		Utils.getLogger().info("On Banker List, Fuel Full");
+	        	return true;
+	        }
+	        else if (ListHandler.PokerList.contains(heldItemName))
+	        {
+	        	player.sendMessage(new TextComponentString("You stoke the fire."));
+	        	Utils.getLogger().info("On Poker List");
+	        	return true;
+	        }
+	        else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
+	        	Utils.getLogger().info("Fire Pit: onBlockActivated() It's a tinder bundle");
+	        	if(tileentity.getCoalCount()>0 && tileentity.getBurning() == true) {
+	        		player.getHeldItemMainhand().shrink(1);
+	            	player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE, 1));
+	            	tileentity.setCoalCount(1);
+	            	return true;
+	        	}
+	        	else
+	        	{
+	        		player.sendMessage(new TextComponentString("This firepit contains no Burning coals."));
+	        		return false;
+	        	}
+	        }
+	        else if (player.getHeldItemMainhand().isEmpty())
+	        {
+	
+	    		Utils.getLogger().info("Cleaning The Pit");
+	    		Utils.getLogger().info("Burning?: " + tileentity.getBurning());
+	        	tileentity.cleanPit(player);
+	        	return true;
+	        }
+	        else
+	        {
+	        	Utils.getLogger().info("Not On List");
+	    		Utils.getLogger().info("Burning?: " + tileentity.getBurning());
+	        	return false;
+	        }
     }
 
 	
@@ -169,15 +167,17 @@ public class BlockFirepit extends BlockHearth{
 	 */
 
 	@Override
-	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
-		Utils.getLogger().info("Fire Pit: isLit()");
+	public boolean Burning(World world, BlockPos pos, EntityPlayer player) 
+	{
+		Utils.getLogger().info("Fire Pit: Burning()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
-		return tileentity.getIsLit();
+		return tileentity.getBurning();
 	}
 
 
 	@Override
-	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) 
+	{
 		Utils.getLogger().info("Fire Pit: Extinguish()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItem=player.getHeldItemMainhand();
@@ -186,54 +186,53 @@ public class BlockFirepit extends BlockHearth{
 		
 	}
 
-
 	@Override
-	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
-		Utils.getLogger().info("Fire Pit: GetFuel()");
-		return 0;
-	}
-
-
-	@Override
-	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) 
+	{
 		Utils.getLogger().info("Fire Pit: setFuel()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 			String fuelItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();
 	        int fuelIndex = ListHandler.FuelList.indexOf(fuelItemName);
 			tileentity.setTEFuel(fuel, fuelIndex);
-		Utils.getLogger().info("Fire Pit: isLit() fuelItemName: " + fuelItemName + " Fuel Amount: " + fuel);
+		Utils.getLogger().info("Fire Pit: Burning() fuelItemName: " + fuelItemName + " Fuel Amount: " + fuel);
 	}
 	
-	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
-		Utils.getLogger().info("Fire Pit: igniteChance()");
-		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
-        ItemStack heldItem = player.getHeldItemMainhand();
-        Utils.getLogger().info("Fire Pit: igniteChance() igniteChance: " + igniteChance + " BlockPos " + pos + " tileentity: " + tileentity);
-        return tileentity.attemptIgnite(igniteChance, pos);
+	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) 
+	{
+			Utils.getLogger().info("Fire Pit: igniteChance()");
+			TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
+	        ItemStack heldItem = player.getHeldItemMainhand();
+	        Utils.getLogger().info("Fire Pit: igniteChance() igniteChance: " + igniteChance + " BlockPos " + pos + " tileentity: " + tileentity);
+	        return tileentity.attemptIgnite(igniteChance, pos);
+
 	}
 	
 	/*============================================================================
 	 *                         Getters & Setters
 	 *============================================================================*/
 
-	public boolean getWeather(World world, BlockPos pos) {
+	public boolean getWeather(World world, BlockPos pos) 
+	{
 		Utils.getLogger().info("Fire Pit: getWeather() pos");
 		if(world.isRainingAt(pos.up()) && world.canBlockSeeSky(pos))
 		{
 			return true;
 		}
-		else {
+		else 
+		{
 			return false;	
 		}
 	}	
 
-	public int getState(World worldIn, BlockPos pos) {
+	public int getState(World worldIn, BlockPos pos) 
+	{
 		IBlockState state = worldIn.getBlockState(pos);
 		Utils.getLogger().info("Fire pit: getState(): " + getMetaFromState(state));
 		return getMetaFromState(state);
 	}
 	
-	public void setState(int meta, World worldIn, BlockPos pos) {
+	public void setState(int meta, World worldIn, BlockPos pos) 
+	{
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(PITSTATE, meta));
@@ -245,7 +244,8 @@ public class BlockFirepit extends BlockHearth{
 	}
 	
 	@Override
-	public int getLightValue(IBlockState state) {
+	public int getLightValue(IBlockState state) 
+	{
 		Utils.getLogger().info("Fire Pit: getLightValue() state" + state);
 			switch (getMetaFromState(state)) {
 			case 0: return 0; //empty_firepit

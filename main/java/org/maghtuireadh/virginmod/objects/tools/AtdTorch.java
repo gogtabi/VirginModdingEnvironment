@@ -141,7 +141,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				}
 				
 
-				if(nbt.hasKey("lit") && isLit(stack)) 
+				if(nbt.hasKey("lit") && IsLit(stack)) 
 				{
 					 if(isSelected && getTimeAway(stack) < this.TimeAway) 
 					 {
@@ -186,7 +186,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				}
 				stack.setTagCompound(nbt);
 			
-				//Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
+				//Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + IsLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
 		 	}
 	    }
 		 
@@ -201,7 +201,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	}
 
 	@Override
-	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+	public boolean Burning(stack, World world, BlockPos pos) {
 		return player.inventory.getCurrentItem().getTagCompound().getBoolean("lit");
 	}
 
@@ -226,12 +226,12 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	}
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) 
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) 
 	{	
 		this.setBurnTime(fuel, player.inventory.getCurrentItem());	
 	}
 	
-	public boolean isLit(ItemStack stack) 
+	public boolean IsLit(ItemStack stack) 
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		boolean lit;
@@ -323,7 +323,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			long time;
 			IBlockState BS;
 			NBTTagCompound nbt = stack.getTagCompound();
-			if(isLit(stack))
+			if(IsLit(stack))
 			{
 				BS = blockstate.withProperty(BlockATDTorch.LIT,true);
 			}
@@ -342,7 +342,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			{
 				time = BurnTime;
 			}
-			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(time, world, BP, player);
+			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(stack, time, world, BP);
 			Utils.getLogger().info("set fuel to " + time);
 			player.inventory.getCurrentItem().shrink(1);//setCount(player.inventory.getCurrentItem().getCount() -1 );
 			Utils.getLogger().info("set count to " + (player.inventory.getCurrentItem().getCount()));
@@ -390,14 +390,14 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			EntityPlayer player = (EntityPlayer)entityLiving;
 			IBlockState blockstate =  worldIn.getBlockState(rt.getBlockPos());
 			String name = blockstate.getBlock().getUnlocalizedName();
-			if(isLit(stack))
+			if(IsLit(stack))
 			{
 				if (ListHandler.ExtinguishList.contains(name))
 				{
 					extinguish(worldIn, player.getPosition(), player);
 					Utils.getLogger().info("tried to extinguish me");
 				}
-				else if (blockstate.getBlock() instanceof IIgnitable && !((IIgnitable)blockstate.getBlock()).isLit(worldIn, rt.getBlockPos(), player))
+				else if (blockstate.getBlock() instanceof IIgnitable && !((IIgnitable)blockstate.getBlock()).IsLit(worldIn, rt.getBlockPos(), player))
 				{
 					Utils.getLogger().info("im lit");
 					((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);

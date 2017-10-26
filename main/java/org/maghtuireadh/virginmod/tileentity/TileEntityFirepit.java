@@ -22,10 +22,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityFirepit extends TileEntityHearth
 {
-	private boolean isLit, isBanked, isStoked = false;
+	private boolean isBanked, isStoked = false;
+	private boolean Burning = false;
 	private int firepitMaxBurn = (int)VMEConfig.firepitMaxFuelLevel*1200;
 	long firepitBurnTime, ashBase, coalBase;
 	private int burnRate, coalCount, coalGrowth, ashCount, ashGrowth,  pitState, stokedTimer = 0;
@@ -59,8 +62,6 @@ public class TileEntityFirepit extends TileEntityHearth
 	int low = (int) (firepitMaxBurn*.10);
 	int mid = (int) (firepitMaxBurn*.40);
 	int max = (int) (firepitMaxBurn*.70);
-	private boolean Lit;
-
 	
 	public TileEntityFirepit() 
 	{
@@ -81,7 +82,7 @@ public class TileEntityFirepit extends TileEntityHearth
 		this.ashBase = nbt.getLong("AshBase");
 		this.firepitBurnTime = nbt.getLong("FPBT");
 		this.pitState = nbt.getInteger("PitState");
-		this.isLit = nbt.getBoolean("IsLit");
+		this.Burning = nbt.getBoolean("Burning");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.isBanked = nbt.getBoolean("IsBanked");
 		this.stokedTimer = nbt.getInteger("StokedTimer");
@@ -102,7 +103,7 @@ public class TileEntityFirepit extends TileEntityHearth
 		nbt.setDouble("AshRate", ashRate);
 		nbt.setLong("AshBase", ashBase);
 		nbt.setInteger("PitState", pitState);
-		nbt.setBoolean("IsLit", isLit);
+		nbt.setBoolean("Burning", Burning);
 		nbt.setBoolean("IsStoked", isStoked);
 		nbt.setInteger("StokedTimer", stokedTimer);
 		nbt.setInteger("LastState", lastState);
@@ -112,35 +113,30 @@ public class TileEntityFirepit extends TileEntityHearth
 
 	public void updateFirepit() 
 	{
-		/*Utils.getLogger().info("TEFirepit: updateFirepit() pre first if");
-		if (this.world != null && !this.world.isRemote) 
-		{
-			this.blockType = this.getBlockType();
-			BlockFirepit firePit = ((BlockFirepit) this.blockType);
-
-			if (blockType instanceof BlockFirepit) 
+			Utils.getLogger().info("TEFirepit: updateFirepit() pre first if");
+			if (this.world != null && !this.world.isRemote) 
 			{
-				Utils.getLogger().info("TEFirepit: updateFirepit() inside if instanceof");
-				if (firePit.getState(world, pos) != pitState) // Only update BlockFirepit State on a Change
-				{ 	
-					Utils.getLogger().info("TEFirepit: updateFirepit() inside update if changed");
-					firePit.setState(pitState, world, pos);
-				}
-				markDirty();
-			}				
-		}*/
+				this.blockType = this.getBlockType();
+				BlockFirepit firePit = ((BlockFirepit) this.blockType);
+	
+				if (blockType instanceof BlockFirepit) 
+				{
+					Utils.getLogger().info("TEFirepit: updateFirepit() inside if instanceof");
+					if (firePit.getState(world, pos) != pitState) // Only update BlockFirepit State on a Change
+					{ 	
+						Utils.getLogger().info("TEFirepit: updateFirepit() inside update if changed");
+						firePit.setState(pitState, world, pos);
+					}
+				}				
+			}
 	}
 
 	@Override
 	public void update() 
 	{
 		Utils.getLogger().info("TEFirepit: update()");
-		Utils.getLogger().info("TEFirepit: isLitValue inside update(): " + isLit);
-		if(!world.isRemote) 
-		{
-			Utils.getLogger().info("TEFirepit: update() (Inside !world.isRemote)");
-			Utils.getLogger().info("TEFirepit: isLitValue inside update()2: " + isLit);
-		/*if (isLit) 
+		Utils.getLogger().info("TEFirepit: BurningValue inside update(): " + Burning);
+		if (Burning) 
 			{
 				if (stokedTimer > 0) 
 				{
@@ -193,7 +189,7 @@ public class TileEntityFirepit extends TileEntityHearth
 							Utils.getLogger().info("TEFirepit Logger8");
 							firepitBurnTime = 0;
 							pitState = 8;
-							isLit = false;
+							Burning = false;
 							isStoked = false;
 							isBanked = false;
 							stokedTimer = 0;
@@ -209,7 +205,7 @@ public class TileEntityFirepit extends TileEntityHearth
 						Utils.getLogger().info("TEFirepit Logger9");
 						firepitBurnTime = 0;
 						pitState = 8;
-						isLit = false;
+						Burning = false;
 						isStoked = false;
 						isBanked = false;
 						stokedTimer = 0;
@@ -220,7 +216,7 @@ public class TileEntityFirepit extends TileEntityHearth
 					}
 					
 				} 
-				else if ((firepitBurnTime != 0 && firepitBurnTime < low && isBanked)) 
+				else if (firepitBurnTime != 0 && firepitBurnTime < low && isBanked) 
 				{
 					if(lastState==5) 
 					{
@@ -316,14 +312,14 @@ public class TileEntityFirepit extends TileEntityHearth
 					lastState = 7;
 				} 
 				
-				if (((ashGrowth >= ashRate) && isLit) && ashCount < ashMax) 
+				if (((ashGrowth >= ashRate) && Burning) && ashCount < ashMax) 
 				{
 					Utils.getLogger().info("TEFirepit Logger18");
 					ashCount++; // Increase amount of ash that will be returned.
 					ashGrowth = 0; // Reset ashGrowth
 				}
 				
-				if (((coalGrowth >= coalRate) && isLit) && coalCount < coalMax) 
+				if (((coalGrowth >= coalRate) && Burning) && coalCount < coalMax) 
 				{
 					Utils.getLogger().info("TEFirepit Logger19");
 					coalCount++; // Increase amount of coal that will be returned.
@@ -331,38 +327,39 @@ public class TileEntityFirepit extends TileEntityHearth
 				}
 	
 			}
-		this.updateFirepit();
-		stokedCheck();*/
+		updateFirepit();
+		stokedCheck();
 		markDirty();
-		}
 	}
 
 	public void stokedCheck() 
 	{
-		Utils.getLogger().info("TEFirepit Logger20");
-		/*if (isStoked == true && stokedTimer == 0 || isStoked == true && isLit == false) 
-		{
-			isStoked = false;
-			stokedTimer = 0;
-		}*/
+			Utils.getLogger().info("TEFirepit Logger20");
+			if (isStoked == true && stokedTimer == 0 || isStoked == true && Burning == false) 
+			{
+				isStoked = false;
+				stokedTimer = 0;
+			}
 	}
 
 	public boolean attemptIgnite(int igniteChance, BlockPos pos) 
 	{
-		if(!world.isRemote) 
-		{
 		Utils.getLogger().info("attemptIgnite Fired");
-		updateFirepit();	
-		markDirty();
-		return true;
+		if(!world.isRemote) {
+			this.Burning=true;
+			updateFirepit();	
+			markDirty();
+			return true;
 		}
-		return true;
+		else
+		{
+			return true;
+		}
+
 	}
 	
 	public void setTEFuel(long fuel, int fuelIndex) 
 	{
-		if(!world.isRemote) 
-		{
 			Utils.getLogger().info("Initiating Fuel Setting on TE");
 			Utils.getLogger().info("FuelIndex Return: " + fuelIndex);
 			long burnTime = fuel;
@@ -387,32 +384,26 @@ public class TileEntityFirepit extends TileEntityHearth
 				ashBase=(long) ((ashburnrate+ashRate)/2);
 			}
 			
-			if (!isLit) 
+			if (!Burning) 
 			{
 				pitState = getUnlitState(firepitBurnTime);
 			}
 			updateFirepit();
 			markDirty();
-		}
 	}
 	
 	public boolean getTEFuelMax() 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger21");
 		return firepitBurnTime<firepitMaxBurn ? true:false;
-		
-	};
+	}
 	
 	public void cleanPit(EntityPlayer player) 
 	{
-		if(!world.isRemote) 
-		{
-			Utils.getLogger().info("isLit?: " + isLit);
+			Utils.getLogger().info("Burning?: " + Burning);
 			Utils.getLogger().info("Beginning cleanPit: " + "coalCount: " + coalCount + " ashCount: " + ashCount);
 			Utils.getLogger().info("Fire Pit Burn Time:" + firepitBurnTime);
-			
-			if (!isLit && (coalCount != 0 || ashCount != 0)) 
+			if (!Burning && (coalCount != 0 || ashCount != 0)) 
 				{
 					player.inventory.addItemStackToInventory(new ItemStack(Items.COAL, coalCount, 1));
 					player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_WOOD_ASH, ashCount));
@@ -423,12 +414,12 @@ public class TileEntityFirepit extends TileEntityHearth
 					pitState = getUnlitState(firepitBurnTime);
 					updateFirepit();
 				} 
-				else if (!isLit && firepitBurnTime > 0) 
+				else if (!Burning && firepitBurnTime > 0) 
 				{
 					player.inventory.addItemStackToInventory(
 					new ItemStack(Blocks.PLANKS, MathHelper.floor(firepitBurnTime / 1000), 2));
 					firepitBurnTime = 0;
-					Utils.getLogger().info("isLit: " + isLit);
+					Utils.getLogger().info("Burning: " + Burning);
 					Utils.getLogger().info("Beginning cleanPit2: " + "coalCount: " + coalCount + " ashCount: " + ashCount);
 					Utils.getLogger().info("Why are we doing this too? It's lit!");
 					pitState = getUnlitState(firepitBurnTime);
@@ -439,7 +430,6 @@ public class TileEntityFirepit extends TileEntityHearth
 					
 				}
 			markDirty();
-		}
 	}
 		
 		
@@ -447,9 +437,7 @@ public class TileEntityFirepit extends TileEntityHearth
 	public int getUnlitState(long fuelLevel) // returns state based on fuelLevel
 	{ 
 		Utils.getLogger().info("TEFirepit Logger22");
-		if(!world.isRemote) 
-		{
-			if (!isLit) 
+			if (!Burning) 
 			{
 
 				Utils.getLogger().info("TEFirepit Logger23");
@@ -467,7 +455,7 @@ public class TileEntityFirepit extends TileEntityHearth
 					{
 
 						Utils.getLogger().info("TEFirepit Logger26");
-						return 1; // unlit_firepit2
+						return 2; // unlit_firepit2
 					}
 					if (firepitBurnTime >= MathHelper.floor(firepitMaxBurn * 0.70)) 
 					{
@@ -539,17 +527,12 @@ public class TileEntityFirepit extends TileEntityHearth
 				}
 				}
 			return 11;
-			} 
-		return 11;
 	}
 
 	public int getExtinguishedState(int pitState) 
 	{
 
 		Utils.getLogger().info("TEFirepit Logger39");
-		if(!world.isRemote) 
-		{
-
 			Utils.getLogger().info("TEFirepit Logger40");
 			switch (pitState) 
 			{
@@ -568,8 +551,6 @@ public class TileEntityFirepit extends TileEntityHearth
 			default:
 				return 8; // dirty_firepit
 			}
-		}
-		return 8;
 	}
 
 	@Override
@@ -612,40 +593,32 @@ public class TileEntityFirepit extends TileEntityHearth
 	public void setExtinguishedState(boolean b) 
 	{
 		Utils.getLogger().info("setExtinguishedState");
-		if(!world.isRemote) {
-		isLit=b;
+		Burning=b;
 		pitState = getUnlitState(firepitBurnTime);
-		}
 	}
 
 	
-	public boolean getIsLit() 
+	public boolean getBurning() 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger1");
-		return isLit;
+		return Burning;
 	}
 
 	
 	public int getCoalCount() 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger1");
 		return coalCount;
 	}
 	
 	public void setCoalCount(int i) 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger1");
-		if(!world.isRemote) {
 		coalCount = coalCount-i;
-		}
 	}
 	
 	public int getAshCount() 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger1");
 		return ashCount;
 	}
@@ -653,12 +626,8 @@ public class TileEntityFirepit extends TileEntityHearth
 
 	public void setAshCount(int i) 
 	{
-
 		Utils.getLogger().info("TEFirepit Logger1");
-		if(!world.isRemote) 
-		{
 		coalCount = coalCount-i;
-		}
 	}
 
 }

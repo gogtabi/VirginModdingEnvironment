@@ -80,7 +80,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
     }
 
 	@Override
-	public boolean isLit(World world, BlockPos pos, EntityPlayer player) 
+	public boolean Burning(World world, BlockPos pos, EntityPlayer player) 
 	{
 		if (world.getBlockState(pos).getValue(LIT))
 		{
@@ -99,7 +99,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 
 
 	@Override
-	public void setFuel(long fuel, World world, BlockPos pos, EntityPlayer player) {
+	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
 		((TileEntityATDTorch)world.getTileEntity(pos)).setTime(fuel);
 	}
 
@@ -162,7 +162,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		{
 			playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
 			IIgnitable item = (IIgnitable)playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItem();
-			item.setFuel(((TileEntityATDTorch)worldIn.getTileEntity(pos)).getTime(), worldIn, pos, playerIn);
+			item.setFuel(stack, ((TileEntityATDTorch)worldIn.getTileEntity(pos)).getTime(), worldIn, pos);
 			if(this.getMetaFromState(state)>=5)
 			{
 				item.attemptIgnite(100, worldIn, pos, playerIn);
@@ -271,6 +271,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
     {
         return getMetaFromState(state) > 4 ? (int)this.lightlevel : 0;
     }
+
 }
 	
 	
