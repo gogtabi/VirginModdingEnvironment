@@ -66,7 +66,7 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 	public boolean shouldKill() 
 	{
 		final EntityPlayer player = findLightSourceCreator();
-		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 2.0D) 
+		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 3.0D) 
 		{
 			return true;
 		}

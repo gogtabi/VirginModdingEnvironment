@@ -115,7 +115,7 @@ public class TileEntityFirepit extends TileEntityHearth
 
 	public void updateFirepit() 
 	{
-
+		/*Utils.getLogger().info("TEFirepit: updateFirepit() pre first if");
 		if (this.world != null && !this.world.isRemote) 
 		{
 			Utils.getLogger().info("FP-TE: updateFirepit");

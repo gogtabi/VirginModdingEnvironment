@@ -211,10 +211,23 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 						 BlockPos pos3 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()+1);
 						 BlockPos pos4 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()-1);
 						 world.setBlockState(pos, lightSource.setPlayer(player).getDefaultState());
-						 world.setBlockState(pos1, lightSource.setPlayer(player).getDefaultState());
-						 world.setBlockState(pos2, lightSource.setPlayer(player).getDefaultState());
-						 world.setBlockState(pos3, lightSource.setPlayer(player).getDefaultState());
-						 world.setBlockState(pos4, lightSource.setPlayer(player).getDefaultState());
+						 if(world.isAirBlock(pos1)) 
+						 {
+							 world.setBlockState(pos1, lightSource.setPlayer(player).getDefaultState());	 
+						 }
+						 if(world.isAirBlock(pos2)) 
+						 {
+							 world.setBlockState(pos2, lightSource.setPlayer(player).getDefaultState());	 
+						 }
+						 if(world.isAirBlock(pos3)) 
+						 {
+							 world.setBlockState(pos3, lightSource.setPlayer(player).getDefaultState());	 
+						 }
+						 if(world.isAirBlock(pos4)) 
+						 {
+							 world.setBlockState(pos4, lightSource.setPlayer(player).getDefaultState());	 
+						 }
+						 
 					  }	
 				}
 				stack.setTagCompound(nbt);
@@ -612,6 +625,10 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	
 	public int getMetadata(ItemStack stack)
     {
+		if(stack.hasTagCompound())
+		{
         return stack.getTagCompound().getBoolean("lit") ? 1 : 0;
+		}
+		return 0;
     }
 }
