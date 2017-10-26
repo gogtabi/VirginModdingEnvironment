@@ -74,6 +74,7 @@ public class BlockFirepit extends BlockHearth{
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+		Utils.getLogger().info("Fire Pit: onBlockActivated()");
 		world.getChunkFromBlockCoords(pos).onUnload();
 		world.getChunkFromBlockCoords(pos).onLoad();
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
@@ -132,6 +133,7 @@ public class BlockFirepit extends BlockHearth{
         	return true;
         }
         else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
+        	Utils.getLogger().info("Fire Pit: onBlockActivated() It's a tinder bundle");
         	if(tileentity.getCoalCount()>0 && tileentity.getIsLit() == true) {
         		player.getHeldItemMainhand().shrink(1);
             	player.inventory.addItemStackToInventory(new ItemStack(ItemInit.ATD_EMBER_BUNDLE, 1));
@@ -168,6 +170,7 @@ public class BlockFirepit extends BlockHearth{
 
 	@Override
 	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
+		Utils.getLogger().info("Fire Pit: isLit()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		return tileentity.getIsLit();
 	}
@@ -175,6 +178,7 @@ public class BlockFirepit extends BlockHearth{
 
 	@Override
 	public boolean extinguish(World world, BlockPos pos, EntityPlayer player) {
+		Utils.getLogger().info("Fire Pit: Extinguish()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 		ItemStack heldItem=player.getHeldItemMainhand();
 		tileentity.setExtinguishedState(true);
@@ -185,22 +189,27 @@ public class BlockFirepit extends BlockHearth{
 
 	@Override
 	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
+		Utils.getLogger().info("Fire Pit: GetFuel()");
 		return 0;
 	}
 
 
 	@Override
 	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) {
+		Utils.getLogger().info("Fire Pit: setFuel()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
 			String fuelItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();
 	        int fuelIndex = ListHandler.FuelList.indexOf(fuelItemName);
 			tileentity.setTEFuel(fuel, fuelIndex);
+		Utils.getLogger().info("Fire Pit: isLit() fuelItemName: " + fuelItemName + " Fuel Amount: " + fuel);
 	}
 	
 	public boolean attemptIgnite(int igniteChance, World world, BlockPos pos, EntityPlayer player) {
+		Utils.getLogger().info("Fire Pit: igniteChance()");
 		TileEntityFirepit tileentity = (TileEntityFirepit) world.getTileEntity(pos);
         ItemStack heldItem = player.getHeldItemMainhand();
-		return tileentity.attemptIgnite(igniteChance, pos);
+        Utils.getLogger().info("Fire Pit: igniteChance() igniteChance: " + igniteChance + " BlockPos " + pos + " tileentity: " + tileentity);
+        return tileentity.attemptIgnite(igniteChance, pos);
 	}
 	
 	/*============================================================================
@@ -208,6 +217,7 @@ public class BlockFirepit extends BlockHearth{
 	 *============================================================================*/
 
 	public boolean getWeather(World world, BlockPos pos) {
+		Utils.getLogger().info("Fire Pit: getWeather() pos");
 		if(world.isRainingAt(pos.up()) && world.canBlockSeeSky(pos))
 		{
 			return true;
@@ -219,6 +229,7 @@ public class BlockFirepit extends BlockHearth{
 
 	public int getState(World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos);
+		Utils.getLogger().info("Fire pit: getState(): " + getMetaFromState(state));
 		return getMetaFromState(state);
 	}
 	
@@ -226,7 +237,7 @@ public class BlockFirepit extends BlockHearth{
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		worldIn.setBlockState(pos, BlockInit.BLOCK_FIREPIT.getDefaultState().withProperty(PITSTATE, meta));
-	
+		Utils.getLogger().info("Fire Pit: setState()");
 		if(tileentity != null) {
 			tileentity.validate();
 			worldIn.setTileEntity(pos, tileentity);
@@ -235,6 +246,7 @@ public class BlockFirepit extends BlockHearth{
 	
 	@Override
 	public int getLightValue(IBlockState state) {
+		Utils.getLogger().info("Fire Pit: getLightValue() state" + state);
 			switch (getMetaFromState(state)) {
 			case 0: return 0; //empty_firepit
 					
@@ -275,13 +287,6 @@ public class BlockFirepit extends BlockHearth{
 	 *                         Initialization Elements
 	  ============================================================================*/	
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) 
-	{
-		return this.getDefaultState().withProperty(PITSTATE, 0);
-	}
-	
-
-	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) 
 	{
 		worldIn.setBlockState(pos, state.withProperty(PITSTATE, 0));
@@ -315,6 +320,7 @@ public class BlockFirepit extends BlockHearth{
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) 
 	{
+		Utils.getLogger().info("Fire pit: getStateForPlacement)");
 		return this.getDefaultState().withProperty(PITSTATE, 0);
 	}
 	
@@ -325,7 +331,10 @@ public class BlockFirepit extends BlockHearth{
 	 */
 	public int getMetaFromState(IBlockState state) 
 	{
+
+		Utils.getLogger().info("Fire pit: getMetaFromState(): " + state);
 		int meta = state.getValue(PITSTATE);
+		Utils.getLogger().info("Fire pit: getMetaFromState(): " + meta);
 		return meta;
 	}
 	
@@ -334,9 +343,9 @@ public class BlockFirepit extends BlockHearth{
 	/**
 	 * Gets the block state from the meta
 	 */
-
 	public IBlockState getStateFromMeta(int meta) 
 	{
+		Utils.getLogger().info("Fire pit: getStateFromMeta():" + meta);
 		return BlockFirepit.states[meta];
 	}
 	/**
@@ -356,6 +365,7 @@ public class BlockFirepit extends BlockHearth{
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
+		Utils.getLogger().info("Fire pit: createNewTileEntity");
 		return new TileEntityFirepit();
 	}
 
