@@ -17,8 +17,8 @@ public class ListHandler {
     private static String[] hearthfuels = {};
     private static String[] lanternfuels = {"test","one","two"};
     
-    private static String[] hearthfirestarters = {"minecraft:flint_and_steel:0","vme:atd_ember_bundle:0"};
-    private static String[] lanternfirestarters = {"minecraft:flint_and_steel:0"};
+    private static String[] hearthfirestarters = {"minecraft:flint_and_steel-0","vme:atd_ember_bundle-0","vme:atd_torch_base-1","vme:atd_torch_base-0"};
+    private static String[] lanternfirestarters = {"minecraft:flint_and_steel-0"};
     private static String[] torchfirestarters = {"minecraft:flint_and_steel-0","vme:blockFirepit-0","minecraft:magma-0","vme:atd_torch_base-0","vme:block_atd_torch_base-5","vme:block_atd_torch_base-6","vme:block_atd_torch_base-7","vme:block_atd_torch_base-8","vme:block_atd_torch_base-9"};
     
     private static String[] exts =    {"item.bucketWater","item.bucketMilk","tile.dirt"};

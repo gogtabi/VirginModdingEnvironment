@@ -102,7 +102,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		byte id = nbt.getId();
 		long start = nbt.getLong("start");
 		long timeset = nbt.getLong("timeset");
-		Utils.getLogger().info("BlockATD:time elapsed= "+(world.getTotalWorldTime()-start)+", burntimr= "+burnTime+", timeset= "+timeset+", on tagID= "+id);
+		//Utils.getLogger().info("BlockATD:time elapsed= "+(world.getTotalWorldTime()-start)+", burntimr= "+burnTime+", timeset= "+timeset+", on tagID= "+id);
 		if(start != 0 && timeset != 0)
 		{
 			return (timeset - (world.getTotalWorldTime()-start));
@@ -125,12 +125,12 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		if(!world.getBlockState(pos).getValue(LIT))
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, true));
-			Utils.getLogger().info("BlockATD:light block in block");
+			//Utils.getLogger().info("BlockATD:light block in block");
 			return true;
 		}
 		else
 		{
-			Utils.getLogger().info("BlockATD:block was alrdy lit");
+			//Utils.getLogger().info("BlockATD:block was alrdy lit");
 			return false;
 		}
 		
@@ -142,11 +142,11 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, false));
 
-			Utils.getLogger().info("BlockATD:ext block in block");
+			//Utils.getLogger().info("BlockATD:ext block in block");
 			return true;
 		}
 
-		Utils.getLogger().info("BlockATD:ext block in block fail");
+		//Utils.getLogger().info("BlockATD:ext block in block fail");
 		return false;
 	}
 	
@@ -176,38 +176,38 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
 			String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
 			if(stack.getItem() instanceof IIgnitable)
 			{
-				Utils.getLogger().info("BlockATD: item is ignitable" + heldItemName);
+				//Utils.getLogger().info("BlockATD: item is ignitable" + heldItemName);
 				return false; 
 			}
 			if (ListHandler.ExtinguishList.contains(heldItemName))
 			{
-				Utils.getLogger().info("BlockATD:ext-list" + heldItemName);
+				//Utils.getLogger().info("BlockATD:ext-list" + heldItemName);
 				this.extinguish(worldIn, pos, playerIn);
 				return true;
 			}
 			if(stack.isEmpty())
 			{
-				Utils.getLogger().info("BlockATD:hand is empty");
+				//Utils.getLogger().info("BlockATD:hand is empty");
 				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(ItemInit.ATD_TORCH));
 				IIgnitable item = (IIgnitable)playerIn.inventory.getCurrentItem().getItem();//getStackInSlot(playerIn.inventory.currentItem).getItem();
 				long time = getFuel(worldIn, pos, playerIn);
 				item.setFuel(stack, time, worldIn, pos);
-				Utils.getLogger().info("BlockATD:set item fuel to " + time + " on itemstack " + stack);
+				//Utils.getLogger().info("BlockATD:set item fuel to " + time + " on itemstack " + stack);
 				if(this.getMetaFromState(state)>=5)
 				{
 					item.attemptIgnite(100, worldIn, pos, playerIn);
-					Utils.getLogger().info("BlockATD:try to light the item");
+					//Utils.getLogger().info("BlockATD:try to light the item");
 				}
 				worldIn.setBlockToAir(pos);
 				worldIn.removeTileEntity(pos);
 	
-				Utils.getLogger().info("BlockATD:killed block and TE");
+				//Utils.getLogger().info("BlockATD:killed block and TE");
 				return true;
 			}
 			else
 			{
 	
-				Utils.getLogger().info("BlockATD:hand not empty");
+				//Utils.getLogger().info("BlockATD:hand not empty");
 				return false;
 			}
 		}

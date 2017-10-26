@@ -80,27 +80,29 @@ public class BlockFirepit extends BlockHearth{
 		ItemStack heldItemStack = player.getHeldItemMainhand();
 		Item heldItem = player.getHeldItemMainhand().getItem();
 		String heldItemName = heldItem.getRegistryName() + "-" + heldItemStack.getMetadata();	
-		/*Utils.getLogger().info("heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
-		Utils.getLogger().info("Length of FuelList: " + ListHandler.FuelList.size());
-		Utils.getLogger().info("Fuel Object List String: " +  VMEConfig.fuelObjectListString);
+		if(!world.isRemote)
+		{
+		/*Utils.getLogger().info("BFirepit:heldItemName: " + heldItemName + " ResourceLocation: " + heldItem.getRegistryName() + " Meta: " + heldItem.getMetadata(heldItemStack));
+		Utils.getLogger().info("BFirepit:Length of FuelList: " + ListHandler.FuelList.size());
+		Utils.getLogger().info("BFirepit:Fuel Object List String: " +  VMEConfig.fuelObjectListString);
 		
 		for(int i = 0;i<=(ListHandler.FuelList.size()-1);i++){
-			Utils.getLogger().info("Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
+			Utils.getLogger().info("BFirepit:Values of FuelList: " + i + " " + ListHandler.FuelList.get(i));	
 		}
 		for(int i = 0;i<=(ListHandler.BurnTimeList.size()-1);i++) {
-			Utils.getLogger().info("Values of BurnTimeList: " + i + " " + ListHandler.BurnTimeList.get(i));
+			Utils.getLogger().info("BFirepit:Values of BurnTimeList: " + i + " " + ListHandler.BurnTimeList.get(i));
 		}
 		*/
 		if(ListHandler.HearthFireStarterList.contains(heldItemName))
         {
-        	Utils.getLogger().info("HearthFireStarterListFired");
+        	Utils.getLogger().info("BFirepit:HearthFireStarterListFired");
         	return false;
         }
         else if (ListHandler.HearthFuelList.contains(heldItemName)) 
         {
         	if(tileentity.getTEFuelMax())
         	{
-        		Utils.getLogger().info("On Fuel List, Fuel Not Full");
+        		Utils.getLogger().info("BFirepit:On Fuel List, Fuel Not Full");
         		long fuel = ListHandler.BurnTimeList.get(ListHandler.FuelList.indexOf(heldItemName));
         		setFuel(heldItemStack, fuel, world, pos); //Fuel Long is set by setFuel before sending to setTEFuel
         		heldItemStack.shrink(1);
@@ -108,27 +110,27 @@ public class BlockFirepit extends BlockHearth{
         	}
 	        else
 	        {
-        		Utils.getLogger().info("On Fuel List, Fuel Full");
+        		Utils.getLogger().info("BFirepit:On Fuel List, Fuel Full");
         		player.sendMessage(new TextComponentString("This fire pit can hold no more fuel."));
 	        	return false;
 	        }
         }  
         else if (ListHandler.ExtinguishList.contains(heldItemName))
         {
-    		Utils.getLogger().info("On Extinguish List");
+    		Utils.getLogger().info("BFirepit:On Extinguish List");
            	tileentity.setExtinguishedState(true);
            	return true;
         }
         else if (ListHandler.BankerList.contains(heldItemName))
         {
         	player.sendMessage(new TextComponentString("You bank the coals."));
-    		Utils.getLogger().info("On Banker List, Fuel Full");
+    		Utils.getLogger().info("BFirepit:On Banker List, Fuel Full");
         	return true;
         }
         else if (ListHandler.PokerList.contains(heldItemName))
         {
         	player.sendMessage(new TextComponentString("You stoke the fire."));
-        	Utils.getLogger().info("On Poker List");
+        	Utils.getLogger().info("BFirepit:On Poker List");
         	return true;
         }
         else if (player.getHeldItemMainhand().getUnlocalizedName() == "item.atd_tinder_bundle") {
@@ -146,19 +148,22 @@ public class BlockFirepit extends BlockHearth{
         }
         else if (player.getHeldItemMainhand().isEmpty())
         {
-
-    		Utils.getLogger().info("Cleaning The Pit");
-    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
+    
+    		Utils.getLogger().info("BFirepit:Cleaning The Pit");
+    		Utils.getLogger().info("BFirepit:isLit?: " + tileentity.getIsLit());
         	tileentity.cleanPit(player);
         	return true;
+  
         }
         else
         {
-        	Utils.getLogger().info("Not On List");
-    		Utils.getLogger().info("isLit?: " + tileentity.getIsLit());
+        	Utils.getLogger().info("BFirepit:Not On List");
+    		Utils.getLogger().info("BFirepit:isLit?: " + tileentity.getIsLit());
         	return false;
         }
-    }
+	}
+	return false;
+}
 
 	
 	/* =========================================================================================================

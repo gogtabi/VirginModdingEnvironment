@@ -10,6 +10,7 @@ import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSou
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
 import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
+//Utils;
 import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
@@ -85,7 +86,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		RainRes = rainRes;
 		RainChance = rainChance;
 		setDamage(new ItemStack(this), 0);
-		Utils.getLogger().info("Torch:constructed torch");
+		//Utils.getLogger().info("Torch:constructed torch");
 		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() 
 		{
             @SideOnly(Side.CLIENT)
@@ -111,7 +112,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
-		Utils.getLogger().info("Torch:constructed TE");
+		//Utils.getLogger().info("Torch:constructed TE");
 		return new TileEntityMovingLightSource().setPlayer(player, this.lightlevel);
 	}
 	
@@ -138,7 +139,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				{
 					nbt = newNBT(stack);
 					//setDamage(stack, 0);
-					Utils.getLogger().info("new nbt on torch");
+					//Utils.getLogger().info("Torch:new nbt on torch");
 				}
 				else if (!nbt.hasKey("rainchance"))
 				{
@@ -157,22 +158,22 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					}
 					else
 					{
-						Utils.getLogger().info("stacks aren't the same apparently\n                                       "+stackSet+"\n                                       "+stack);
+						//Utils.getLogger().info("Torch:stacks aren't the same apparently\n                                       "+stackSet+"\n                                       "+stack);
 					}
 	                          				 if(isSelected && getTimeAway(stack) < this.TimeAway) 
 					 {
 						 setTimeAway(this.TimeAway, stack);
-						 Utils.getLogger().info("rst timeaway");
+						 //Utils.getLogger().info("Torch:rst timeaway");
 					 }
 					 else if (!isSelected && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH)
 					 {
 						 setTimeAway(getTimeAway(stack)-1, stack);
-						 Utils.getLogger().info("deduct timeaway");
+						 //Utils.getLogger().info("Torch:deduct timeaway");
 					 }
 					  
 					 if ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack) > this.BurnTime) 
 					 {
-						 Utils.getLogger().info("shrunk: " + "cur world time: " + world.getTotalWorldTime() + " - set world time: " + nbt.getLong("worldtime") + " + get burn time: " + getBurnTime(stack) + " > " + this.BurnTime);
+						 //Utils.getLogger().info("Torch:shrunk: " + "cur world time: " + world.getTotalWorldTime() + " - set world time: " + nbt.getLong("worldtime") + " + get burn time: " + getBurnTime(stack) + " > " + this.BurnTime);
 						 stack.shrink(1);
 					 }
 					 else if(getTimeAway(stack) <= 0) 
@@ -181,7 +182,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					 }
 					 else
 					 {
-						 Utils.getLogger().info(world.getTotalWorldTime()+" - "+ nbt.getLong("worldtime") +" + "+ getBurnTime(stack) +" > " + this.BurnTime);
+						 //Utils.getLogger().info(world.getTotalWorldTime()+" - "+ nbt.getLong("worldtime") +" + "+ getBurnTime(stack) +" > " + this.BurnTime);
 						 
 					 }
 					 
@@ -192,7 +193,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 						 float ran = world.rand.nextFloat();
 						 if (ran*cha>60) 
 						 {
-							Utils.getLogger().info(ran);
+							//Utils.getLogger().info(ran);
 							nbt.setInteger("rainres", res-1);
 							if (res<=0) 
 							{
@@ -205,12 +206,20 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					  if(world.isAirBlock(pos)) 
 					  {
 						 final BlockMovingLightSource lightSource = BlockInit.BLOCK_MLS;
+						 BlockPos pos1 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()+1);
+						 BlockPos pos2 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()-1);
+						 BlockPos pos3 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()+1);
+						 BlockPos pos4 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()-1);
 						 world.setBlockState(pos, lightSource.setPlayer(player).getDefaultState());
+						 world.setBlockState(pos1, lightSource.setPlayer(player).getDefaultState());
+						 world.setBlockState(pos2, lightSource.setPlayer(player).getDefaultState());
+						 world.setBlockState(pos3, lightSource.setPlayer(player).getDefaultState());
+						 world.setBlockState(pos4, lightSource.setPlayer(player).getDefaultState());
 					  }	
 				}
 				stack.setTagCompound(nbt);
 			
-				//Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
+				////Utils.getLogger().info(stack+","+itemSlot+","+isSelected + "," +  getTimeAway() + "," + isLit() + "," + getBurnTime() + "," + nbt.getLong("worldtime") + "," + world.getTotalWorldTime() );		  
 		 	}
 	    }
 		 
@@ -225,7 +234,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			}
 			else
 			{
-				Utils.getLogger().info("torch: attempted to light nothing");
+				//Utils.getLogger().info("torch: attempted to light nothing");
 			}
 		}
 		return false;
@@ -262,7 +271,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		/*this.setBurnTime(fuel, stack);*/
 		this.burntTime = fuel;
 		this.stackSet = stack;
-		Utils.getLogger().info("Torch: fuel: "+fuel+", stack: "+stack);
+		//Utils.getLogger().info("Torch: fuel: "+fuel+", stack: "+stack);
 		
 	}
 	
@@ -314,10 +323,10 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		if(nbt==null)
 		{
 			nbt = newNBT(stack);
-			Utils.getLogger().info("Torch: made new nbt for set burntime");
+			//Utils.getLogger().info("Torch: made new nbt for set burntime");
 		}		
 		nbt.setLong("burntime", burntime);
-		Utils.getLogger().info("Torch: set burntime to: " + burntime);
+		//Utils.getLogger().info("Torch: set burntime to: " + burntime);
 		stack.setTagCompound(nbt);
 	}
 	
@@ -328,17 +337,17 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		if(nbt==null)
 		{
 			nbt = newNBT(stack);
-			Utils.getLogger().info("Torch: made new nbt for get burntime");
+			//Utils.getLogger().info("Torch: made new nbt for get burntime");
 		}		
 		if(nbt.hasKey("burntime"))
 		{
 			burntime =  nbt.getLong("burntime");
-			Utils.getLogger().info("Torch: has burntime, got: " + burntime);
+			//Utils.getLogger().info("Torch: has burntime, got: " + burntime);
 		}
 		else
 		{
 			burntime = (long)0;
-			Utils.getLogger().info("Torch: no burntime, set to 0");
+			//Utils.getLogger().info("Torch: no burntime, set to 0");
 		}
 		return burntime;
 	}
@@ -380,21 +389,21 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			}
 			
 			world.setBlockState(pos, BS);
-			Utils.getLogger().info("placed it");
+			//Utils.getLogger().info("Torch:placed it");
 			if (nbt.getLong("worldtime") > 0)
 			{
 				time = BurnTime - ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack));
-				Utils.getLogger().info("place: burntime- " + BurnTime + ", world time- " + world.getTotalWorldTime()  +", set world time- " + nbt.getLong("worldtime") + ", get burntime- " + getBurnTime(stack));
+				//Utils.getLogger().info("Torch:place: burntime- " + BurnTime + ", world time- " + world.getTotalWorldTime()  +", set world time- " + nbt.getLong("worldtime") + ", get burntime- " + getBurnTime(stack));
 			}
 			else
 			{
 				time = BurnTime;
 			}
 			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(stack, time, world, pos);
-			Utils.getLogger().info("place: set fuel to " + time);
-			Utils.getLogger().info("place: itemstack b4 = " + player.inventory.getCurrentItem());
+			//Utils.getLogger().info("Torch:place: set fuel to " + time);
+			//Utils.getLogger().info("Torch:place: itemstack b4 = " + player.inventory.getCurrentItem());
 			player.inventory.getCurrentItem().shrink(1);//setCount(player.inventory.getCurrentItem().getCount() -1 );
-			Utils.getLogger().info("place: itemstack aftr = " + player.inventory.getCurrentItem());
+			//Utils.getLogger().info("Torch:place: itemstack aftr = " + player.inventory.getCurrentItem());
 			return true;
 	}
 	
@@ -414,7 +423,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	
 		if(!player.world.isRemote)
 		{
-			Utils.getLogger().info("onFirstTick");
+			//Utils.getLogger().info("Torch:onFirstTick");
 		}
 		
         return EnumActionResult.PASS;
@@ -425,7 +434,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
     {
 		if(!player.world.isRemote)
 		{
-			Utils.getLogger().info("onUsingTick: " + count);
+			Utils.getLogger().info("Torch:onUsingTick: " + count);
 		}
 	}
 	
@@ -434,7 +443,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
     {
 		if(!worldIn.isRemote)
 		{
-			Utils.getLogger().info("OnItemFinish");
+			Utils.getLogger().info("Torch:OnItemFinish");
 			RayTraceResult rt = this.rayTrace(worldIn, player, true);
 			EntityPlayer player = (EntityPlayer)entityLiving;
 			IBlockState blockstate =  worldIn.getBlockState(rt.getBlockPos());
@@ -442,53 +451,53 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
 			if(isLit(stack))
 			{
-				Utils.getLogger().info("im lit");
+				Utils.getLogger().info("Torch:im lit");
 				if (ListHandler.ExtinguishList.contains(blockName))
 				{
 					extinguish(worldIn, player.getPosition(), player);
-					Utils.getLogger().info("tried to extinguish me: " + blockName);
+					//Utils.getLogger().info("Torch:tried to extinguish me: " + blockName);
 				}
 				else if (blockstate.getBlock() instanceof IIgnitable && !((IIgnitable)blockstate.getBlock()).isLit(worldIn, rt.getBlockPos(), player))
 				{
 					if(blockstate.getBlock() instanceof BlockHearth && ListHandler.HearthFireStarterList.contains(heldItemName))
 					{
 						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						Utils.getLogger().info("tried to light it - hearth");
+						Utils.getLogger().info("Torch:tried to light it - hearth with "+heldItemName );
 					}
 					else if(blockstate.getBlock() instanceof BlockATDTorch && ListHandler.TorchFireStarterList.contains(heldItemName))
 					{
 						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						Utils.getLogger().info("tried to light it - torch");
+						//Utils.getLogger().info("Torch:tried to light it - torch");
 					}
 					else if(blockstate.getBlock() instanceof BlockHearth && ListHandler.LanternFireStarterList.contains(heldItemName))
 					{
 						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						Utils.getLogger().info("tried to light it - lantern");
+						//Utils.getLogger().info("Torch:tried to light it - lantern");
 					}
 					else
 					{
-						Utils.getLogger().info("didn't light it, i wasnt on the list: " + heldItemName);
+						Utils.getLogger().info("Torch:didn't light "+blockstate.getBlock()+", i wasnt on a list: " + heldItemName);
 					}
 				}
 			}
 			else if (ListHandler.TorchFireStarterList.contains(blockName))
 			{
 				attemptIgnite(100, worldIn, player.getPosition(), player);
-				Utils.getLogger().info("tried to light me");
+				//Utils.getLogger().info("Torch:tried to light me");
 				if(stack.getTagCompound().hasKey("burntime") && stack.getTagCompound().getLong("burntime") > 0)
 				{		
 					setBurnTime(stack.getTagCompound().getLong("burntime"), stack);
-					Utils.getLogger().info("set my burntime to:" + stack.getTagCompound().getLong("burntime"));
+					//Utils.getLogger().info("Torch:set my burntime to:" + stack.getTagCompound().getLong("burntime"));
 				}
 				else
 				{
 					setBurnTime((long)0, stack);
-					Utils.getLogger().info("set my burntime to 0");
+					//Utils.getLogger().info("Torch:set my burntime to 0");
 				}
 				
 			}        
 		}
-		Utils.getLogger().info("OnItemFinishUse: returned = "+player.getHeldItemMainhand());
+		//Utils.getLogger().info("Torch:OnItemFinishUse: returned = "+player.getHeldItemMainhand());
 		return player.getHeldItemMainhand();
     }
 	
@@ -535,7 +544,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				{
 					if (!ListHandler.ExtinguishList.contains(blockName) && !ListHandler.TorchFireStarterList.contains(blockName) && !(block instanceof IIgnitable && !((IIgnitable)block).isLit(worldIn, pos, player)))
 					{
-						Utils.getLogger().info("NOT on ext or FS list " + blockName);
+						//Utils.getLogger().info("Torch:NOT on ext or FS list " + blockName);
 						for (int i = 0;i < PlaceBlocks.length;i++)
 						{
 							if(PlaceBlocks[i]==worldIn.getBlockState(pos).getMaterial() || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT)
@@ -571,19 +580,19 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 									return EnumActionResult.FAIL;
 								}
 								
-								Utils.getLogger().info("IS PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
+								//Utils.getLogger().info("Torch:IS PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
 								place(worldIn, itemstack, BSHold, BP);
-								Utils.getLogger().info("onItemUse: itemstack b4 = " + player.inventory.getCurrentItem());
+								//Utils.getLogger().info("Torch:onItemUse: itemstack b4 = " + player.inventory.getCurrentItem());
 								//itemstack.shrink(1);
-								Utils.getLogger().info("onItemUse: itemstack aftr = " + player.inventory.getCurrentItem());
+								//Utils.getLogger().info("Torch:onItemUse: itemstack aftr = " + player.inventory.getCurrentItem());
 								return  EnumActionResult.FAIL;
 							}
 						}
-						Utils.getLogger().info("NOT PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
+						//Utils.getLogger().info("Torch:NOT PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
 					}
 					else
 					{
-						Utils.getLogger().info("IS on ext or FS list " + blockName); 
+						//Utils.getLogger().info("Torch:IS on ext or FS list " + blockName); 
 					 	player.setActiveHand(hand);
 					 	return EnumActionResult.PASS;
 					}
@@ -599,4 +608,10 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			entity.setFire(this.EntityFireTime);
 			return false;	
 		}
+    
+	
+	public int getMetadata(ItemStack stack)
+    {
+        return stack.getTagCompound().getBoolean("lit") ? 1 : 0;
+    }
 }
