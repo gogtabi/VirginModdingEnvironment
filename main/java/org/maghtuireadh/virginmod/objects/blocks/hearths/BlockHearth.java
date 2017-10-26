@@ -9,6 +9,7 @@ import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.item.itemFireStarter;
 import org.maghtuireadh.virginmod.tileentity.TileEntityFirepit;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
