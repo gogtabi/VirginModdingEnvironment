@@ -307,6 +307,7 @@ public class BlockATDTorch extends BlockTorch implements IHasModel, ITileEntityP
     {
         return getMetaFromState(state) > 4 ? MathHelper.floor(this.lightlevel * 15.0F) : 0;
     }
+
 }
 	
 	
