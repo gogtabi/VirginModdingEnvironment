@@ -48,7 +48,7 @@ public class MovingLightEvent {
 		if (event.getState().getBlock() == Blocks.TORCH) {
 			event.getDrops().clear();
 			event.setDropChance(1.0F);
-			event.getDrops().add(new ItemStack(ItemInit.ATD_TORCH));
+			event.getDrops().add(new ItemStack(ItemInit.ATD_TORCH_STICK));
 	 	 }
 	}
 

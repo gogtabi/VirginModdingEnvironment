@@ -1,5 +1,5 @@
 {
-    "parent": "item/generated",
+    "parent": "vme:block/torches/block_atd_torch_base_off",
     "textures": {
         "layer0": "vme:blocks/atd_torch_base_off"
     },

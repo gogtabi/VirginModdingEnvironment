@@ -19,10 +19,10 @@ public class ListHandler {
     
     private static String[] hearthfirestarters = {"minecraft:flint_and_steel-0","vme:atd_ember_bundle-0","vme:atd_torch_base-1","vme:atd_torch_base-0"};
     private static String[] lanternfirestarters = {"minecraft:flint_and_steel-0"};
-    private static String[] torchfirestarters = {"minecraft:flint_and_steel-0","vme:blockFirepit-0","minecraft:magma-0","vme:atd_torch_base-0","vme:block_atd_torch_base-5","vme:block_atd_torch_base-6","vme:block_atd_torch_base-7","vme:block_atd_torch_base-8","vme:block_atd_torch_base-9"};
+    private static String[] torchfirestarters = {"minecraft:flint_and_steel-0","vme:blockFirepit-5","vme:blockFirepit-6","vme:blockFirepit-7","vme:blockFirepit-11","vme:blockFirepit-12","minecraft:magma-0"};
     
-    private static String[] exts =    {"item.bucketWater","item.bucketMilk","tile.dirt"};
-    private static String[] snuffs =    {"test","one","two"};
+    private static String[] exts =    {"item.bucketWater-0","item.bucketMilk-0","tile.dirt-0"};
+    private static String[] snuffs =    {"item.bucketWater-0","item.bucketMilk-0"};
     private static String[] bankers =    {"item.atd_ash_wood","one","two"};
     private static String[] pokers =    {"item.atd_poker_iron","one","two"};
     

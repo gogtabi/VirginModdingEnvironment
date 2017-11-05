@@ -45,8 +45,19 @@ public class ItemInit {
 	public static final Item PICKAXE_COPPER = new ToolPickaxe("pickaxe_copper", TOOL_COPPER);
 	public static final Item SHOVEL_COPPER = new ToolShovel("shovel_copper", TOOL_COPPER);
 	public static final Item SWORD_COPPER = new ToolSword("sword_copper", TOOL_COPPER);*/
-	public static final Item ATD_TORCH = new AtdTorch("base", TOOL_COPPER, 0.95F, 500, 5, 70, 30, 16);
 	public static final Item ATD_POKER_IRON = new AtdPokerIron("atd_poker_iron", ToolMaterial.IRON);
+	
+	//Torches
+	public static final Item ATD_TORCH_STICK = 		 new AtdTorch("stick",		 ToolMaterial.WOOD, 0.4662F, 3000,  0.1F,  0.18F,  2,  0.9F,  30, 16);
+	public static final Item ATD_TORCH_BARK = 		 new AtdTorch("bark", 		 ToolMaterial.WOOD, 0.5328F, 6000,  0.15F, 0.16F,  2,  0.8F,  35, 16);
+	public static final Item ATD_TORCH_SAP = 		 new AtdTorch("sap", 		 ToolMaterial.WOOD, 0.5994F, 9000,  0.4F,  0.14F,  6,  0.7F,  45, 16);
+	public static final Item ATD_TORCH_TAR = 	     new AtdTorch("tar", 		 ToolMaterial.WOOD, 0.5994F, 12000, 0.5F,  0.12F,  10, 0.6F,  55, 16);
+	public static final Item ATD_TORCH_CLOTH = 		 new AtdTorch("cloth", 		 ToolMaterial.WOOD, 0.5994F, 4500,  0.25F, 0.13F,  2,  0.75F, 30, 16);
+	public static final Item ATD_TORCH_CLOTHSAP = 	 new AtdTorch("clothsap", 	 ToolMaterial.WOOD, 0.7326F, 9000,  0.5F,  0.11F,  6,  0.55F, 45, 16);
+	public static final Item ATD_TORCH_CLOTHTAR =	 new AtdTorch("clothtar", 	 ToolMaterial.WOOD, 0.7326F, 13500, 0.6F,  0.09F,  10, 0.45F, 55, 16);
+	public static final Item ATD_TORCH_HESCLOTH = 	 new AtdTorch("hescloth", 	 ToolMaterial.WOOD, 0.5328F, 6000,  0.35F, 0.1F,   2,  0.6F,  40, 16);
+	public static final Item ATD_TORCH_HESCLOTHSAP = new AtdTorch("hesclothsap", ToolMaterial.WOOD, 0.666F,  18000, 0.6F,  0.08F,  6,  0.4F,  50, 16);
+	public static final Item ATD_TORCH_HESCLOTHTAR = new AtdTorch("hesclothtar", ToolMaterial.WOOD, 0.666F,  24000, 0.7F,  0.06F,  10, 0.3F,  65, 16);
 	
 	//Armor
 	/*public static final Item HELMET_COPPER = new ArmorBase("helmet_copper", ARMOR_COPPER, 1, EntityEquipmentSlot.HEAD);

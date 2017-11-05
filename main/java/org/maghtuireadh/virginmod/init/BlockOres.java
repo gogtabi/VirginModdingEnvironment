@@ -68,6 +68,7 @@ public class BlockOres extends Block implements IHasModel, IMetaName {
 		{
 			items.add(new ItemStack(this, 1 , variant.getMeta()));
 		}
+		
 	};
 	
 	@Override

@@ -2,7 +2,11 @@
     "ambientocclusion": false,
     "textures": {
         "0": "vme:blocks/atd_torch_base_off",
+<<<<<<< HEAD
+        "particle": "minecraft:blocks/log_oak"
+=======
         "particle": "minecraft:blocks/fire_layer_0"
+>>>>>>> refs/remotes/origin/master
     },
     "elements": [
         {   "from": [ 7, 0, 7 ],

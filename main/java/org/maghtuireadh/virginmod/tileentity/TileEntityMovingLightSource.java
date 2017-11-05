@@ -4,7 +4,8 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
+import org.maghtuireadh.virginmod.objects.tools.AtdTorch;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.block.state.IBlockState;
@@ -34,12 +35,13 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 	@Override
 	public void update() 
 	{
-		if (shouldKill() && world.getBlockState(pos).getBlock() instanceof BlockMovingLightSource) 
+		if (shouldKill())// && world.getBlockState(pos).getBlock() instanceof BlockMovingLightSource) 
 		{
+			//Utils.getLogger().info("log 6 "+ world.getBlockState(pos).getBlock().getUnlocalizedName().substring(5));
 			world.setBlockToAir(pos);
 			world.removeTileEntity(pos);
 		}
-
+		//Utils.getLogger().info("log 5 "+ world.getBlockState(pos).getBlock().getUnlocalizedName().substring(5));
 	}
 
 	@Override
@@ -66,28 +68,30 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 	public boolean shouldKill() 
 	{
 		final EntityPlayer player = findLightSourceCreator();
+		ItemStack offStack = player.getHeldItemOffhand();
 		if (player == null  || player.getDistance(pos.getX(), pos.getY(), pos.getZ()) > 3.0D) 
 		{
+			//Utils.getLogger().info("log 1 " + player);
 			return true;
 		}
-		else if (player.getHeldItemOffhand().getItem() instanceof IIgnitable && player.getHeldItemOffhand().getTagCompound().getBoolean("lit"))
+		else if (offStack.getItem() instanceof AtdTorch && ((AtdTorch)offStack.getItem()).isLit(offStack))
 		{
+			//Utils.getLogger().info("log 2");
 			return false;
 		}
 		else for (ItemStack stack : player.inventory.mainInventory) 
 		{
-			if (stack.hasTagCompound() &&
-					stack.getTagCompound().hasKey("lit") && stack.getTagCompound().getBoolean("lit"))
+			if (stack.getItem() instanceof IIgnitable && ((IIgnitable)stack.getItem()).isLit(world, pos, player))
 			{
+				//Utils.getLogger().info("log 3");
 			return false;
 			}
 		}
 		return true;
 	}
 
-	public TileEntityMovingLightSource setPlayer(EntityPlayer player, float lightlevel) 
+	public TileEntityMovingLightSource setPlayer(EntityPlayer player) 
 	{
-		this.lightlevel = lightlevel;
 		if (player != null) 
 		{
 			playerUUID = player.getGameProfile() != null ? player.getGameProfile().getId() : null;
@@ -102,6 +106,6 @@ public class TileEntityMovingLightSource extends TileEntity implements ITickable
 		{
 			return world.getPlayerEntityByUUID(playerUUID);
 		}
-		return world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 2.0D, false);
+		return world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 3.0D, false);
 	}
 }

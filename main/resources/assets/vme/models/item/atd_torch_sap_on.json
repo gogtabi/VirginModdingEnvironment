@@ -1,0 +1,6 @@
+{
+    "parent": "vme:item/atd_torch_sap",
+    "textures": {
+        "layer0": "vme:blocks/atd_torch_sap_on"
+    }
+}

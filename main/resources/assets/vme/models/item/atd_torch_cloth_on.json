@@ -1,0 +1,6 @@
+{
+    "parent": "vme:item/atd_torch_cloth",
+    "textures": {
+        "layer0": "vme:blocks/atd_torch_cloth_on"
+    }
+}

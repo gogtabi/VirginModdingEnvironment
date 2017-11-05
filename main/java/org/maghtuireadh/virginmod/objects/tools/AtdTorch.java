@@ -3,23 +3,22 @@ package org.maghtuireadh.virginmod.objects.tools;
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.Main;
-import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.objects.blocks.hearths.BlockHearth;
 import org.maghtuireadh.virginmod.objects.blocks.movinglight.BlockMovingLightSource;
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
-import org.maghtuireadh.virginmod.tileentity.TileEntityMovingLightSource;
 import org.maghtuireadh.virginmod.util.Utils;
-//Utils;
 import org.maghtuireadh.virginmod.util.handlers.ListHandler;
 import org.maghtuireadh.virginmod.util.interfaces.IFireStarter;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 import org.maghtuireadh.virginmod.util.interfaces.IIgnitable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockTorch;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,10 +27,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -43,20 +42,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import scala.xml.dtd.EMPTY;
 
-public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvider, IIgnitable, IFireStarter
+public class AtdTorch extends ItemSword	 implements IHasModel, IIgnitable, IFireStarter
 {
 	
 
 	BlockPos BP;
 	IBlockState BSHold;
+	World wrld;
 	EntityPlayer player;
 	ItemStack stackSet = new ItemStack(Items.AIR);
 	long burntTime = 0;
 	private long BurnTime = 0;
 	private int EntityFireTime, RainRes;
-	private float RainChance, lightlevel;
+	private float RainChance, lightlevel, EntityFireChance, SwingExtChance;
 	private int TimeAway = 30;
-	public static Block ATD_TORCH;
+	public Block ATD_TORCH;
 	
 	
 	public static Material[] PlaceBlocks = new Material[] {Material.CLAY,Material.GRASS,Material.SAND,Material.SNOW,Material.CRAFTED_SNOW,Material.GROUND};
@@ -64,7 +64,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
      * ATD torch set
      * @param name The name of the torch, used for unlocalized and registry name
      * @param material The item material, affects damage to entity
-     * @param lightlevel the light level
+     * @param lightleve The brightness
      * @param burnTime How many ticks it can burn for
      * @param entityFireTime How long it sets entities on fire for
      * @param rainChance The chance that rain will damage res
@@ -72,21 +72,23 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
      * @param stackSize The size of the stack
      */
 	
-	public AtdTorch(String name, ToolMaterial material, float lightlevel, int burnTime, int entityFireTime, float rainChance, int rainRes, int stackSize) 
+	public AtdTorch(String name, ToolMaterial material, float lightleve, int burntime, float entityFireChance, float swingExtChance,  int entityFireTime, float rainChance, int rainRes, int stackSize) 
 	{
 		super(material);
 		setUnlocalizedName("atd_torch_"+name);
 		setRegistryName("atd_torch_"+name);
-		ATD_TORCH = new BlockATDTorch("block_atd_torch_"+name, lightlevel);
+		ATD_TORCH = new BlockATDTorch("block_atd_torch_"+name, lightleve, rainChance, burntime, this);
 		setCreativeTab(Main.virginmodtab);
-		this.maxStackSize = stackSize;
-		this.lightlevel = lightlevel;
-		this.EntityFireTime = entityFireTime;
-		BurnTime = (long)burnTime;
+		maxStackSize = stackSize;
+		lightlevel = lightleve;
+		EntityFireChance = entityFireChance;
+		SwingExtChance = swingExtChance;
+		EntityFireTime = entityFireTime;
+		BurnTime = burntime;
 		RainRes = rainRes;
 		RainChance = rainChance;
 		setDamage(new ItemStack(this), 0);
-		//Utils.getLogger().info("Torch:constructed torch");
+		ItemInit.ITEMS.add(this);
 		this.addPropertyOverride(new ResourceLocation("lit"), new IItemPropertyGetter() 
 		{
             @SideOnly(Side.CLIENT)
@@ -99,7 +101,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
             		return 0.0F;
             }
         });
-		ItemInit.ITEMS.add(this);
+
 	}
 	
 	@Override
@@ -109,27 +111,28 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	}
 	
 	
-	@Override
+	/*@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
-		//Utils.getLogger().info("Torch:constructed TE");
-		return new TileEntityMovingLightSource().setPlayer(player, this.lightlevel);
-	}
+		return new TileEntityMovingLightSource().setPlayer(player);
+	}*/
 	
 	public NBTTagCompound newNBT(ItemStack stack)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		//nbt.setLong("burntime", (long)0);
+		nbt.setLong("burntime", 0);
 		nbt.setFloat("rainchance", RainChance);
 		nbt.setInteger("rainres", RainRes);
 		nbt.setBoolean("lit", false);
 		stack.setTagCompound(nbt);
+		//Utils.getLogger().info("Torch:new nbt");
 		return nbt;
 	}
 	
 	@Override
 	public void onUpdate(final ItemStack stack, final World world, final Entity entityIn, final int itemSlot, final boolean isSelected)
 	    {
+		wrld = world;
 		 	if (!world.isRemote) 
 		 	{	
 				NBTTagCompound nbt = stack.getTagCompound();
@@ -138,8 +141,8 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				if(nbt == null)	
 				{
 					nbt = newNBT(stack);
-					//setDamage(stack, 0);
-					//Utils.getLogger().info("Torch:new nbt on torch");
+					setDamage(stack, 0);
+					//Utils.getLogger().info("new nbt on torch");
 				}
 				else if (!nbt.hasKey("rainchance"))
 				{
@@ -151,41 +154,39 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 
 				if(isLit(stack))// && nbt.hasKey("lit")) 
 				{
-					if(stackSet == stack)
-					{
-						setBurnTime(burntTime, stack);
-						stackSet = new ItemStack(Items.AIR);
-					}
-					else
-					{
-						//Utils.getLogger().info("Torch:stacks aren't the same apparently\n                                       "+stackSet+"\n                                       "+stack);
-					}
-	                          				 if(isSelected && getTimeAway(stack) < this.TimeAway) 
+					 Item item = stack.getItem();
+					 String name = item.getRegistryName() + "-" + item.getMetadata(stack);
+					 ItemStack stack2 = player.getHeldItemOffhand();
+					 Item item2 = stack2.getItem();
+					 String name2 = item2.getRegistryName() + "-" + item.getMetadata(stack2);
+					 Block block = world.getBlockState(pos).getBlock();
+					 Block block2 = world.getBlockState(pos.up()).getBlock();
+					 if(isSelected && getTimeAway(stack) < TimeAway) 
 					 {
-						 setTimeAway(this.TimeAway, stack);
-						 //Utils.getLogger().info("Torch:rst timeaway");
+						 setTimeAway(TimeAway, stack);
+					
 					 }
-					 else if (!isSelected && player.getHeldItemOffhand().getItem() != ItemInit.ATD_TORCH)
+					 else if (!isSelected && !(stack2 == stack))
 					 {
 						 setTimeAway(getTimeAway(stack)-1, stack);
 						 //Utils.getLogger().info("Torch:deduct timeaway");
 					 }
 					  
-					 if ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack) > this.BurnTime) 
+					 if ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack) > BurnTime) 
 					 {
-						 //Utils.getLogger().info("Torch:shrunk: " + "cur world time: " + world.getTotalWorldTime() + " - set world time: " + nbt.getLong("worldtime") + " + get burn time: " + getBurnTime(stack) + " > " + this.BurnTime);
+						 //Utils.getLogger().info("Torch:update():worldtime - (" + world.getTotalWorldTime() + " - " + nbt.getLong("worldtime") + ") + " + getBurnTime(stack) + " > " + BurnTime);
 						 stack.shrink(1);
 					 }
-					 else if(getTimeAway(stack) <= 0) 
+					 else if(getTimeAway(stack) <= 0 || (block == Blocks.WATER) || (block == Blocks.FLOWING_WATER)) 
 					 {
 						 extinguish(world, pos, player, stack);
 					 }
 					 else
 					 {
-						 //Utils.getLogger().info(world.getTotalWorldTime()+" - "+ nbt.getLong("worldtime") +" + "+ getBurnTime(stack) +" > " + this.BurnTime);
-						 
+
+						 //Utils.getLogger().info("Torch:update():worldtime - (" + world.getTotalWorldTime() + " - " + nbt.getLong("worldtime") + ") + " + getBurnTime(stack) + " < " + BurnTime);
 					 }
-					 
+					  
 					 if (world.isRainingAt(pos.up(1)))
 					 {
 						 int res = nbt.getInteger("rainres");
@@ -205,28 +206,20 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 					  
 					  if(world.isAirBlock(pos)) 
 					  {
-						 final BlockMovingLightSource lightSource = BlockInit.BLOCK_MLS;
+						 final BlockMovingLightSource lightSource = new BlockMovingLightSource("block_mls", lightlevel);
+						 IBlockState state = lightSource.setPlayer(player).getDefaultState();
+						/* 
 						 BlockPos pos1 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()+1);
 						 BlockPos pos2 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()-1);
-						 BlockPos pos3 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()+1);
-						 BlockPos pos4 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()-1);
-						 world.setBlockState(pos, lightSource.setPlayer(player).getDefaultState());
-						 if(world.isAirBlock(pos1)) 
-						 {
-							 world.setBlockState(pos1, lightSource.setPlayer(player).getDefaultState());	 
-						 }
-						 if(world.isAirBlock(pos2)) 
-						 {
-							 world.setBlockState(pos2, lightSource.setPlayer(player).getDefaultState());	 
-						 }
-						 if(world.isAirBlock(pos3)) 
-						 {
-							 world.setBlockState(pos3, lightSource.setPlayer(player).getDefaultState());	 
-						 }
-						 if(world.isAirBlock(pos4)) 
-						 {
-							 world.setBlockState(pos4, lightSource.setPlayer(player).getDefaultState());	 
-						 }
+						 BlockPos pos3 = new BlockPos(pos.getX()+1,pos.getY(),pos.getZ()-1);
+						 BlockPos pos4 = new BlockPos(pos.getX()-1,pos.getY(),pos.getZ()+1);*/
+						 
+						 world.setBlockState(pos, state);
+						 /*if(world.isAirBlock(pos1)) {world.setBlockState(pos1, state);}
+						 if(world.isAirBlock(pos2)) {world.setBlockState(pos2, state);}
+						 if(world.isAirBlock(pos3)) {world.setBlockState(pos3, state);}
+						 if(world.isAirBlock(pos4)) {world.setBlockState(pos4, state);}
+						 */
 						 
 					  }	
 				}
@@ -255,7 +248,17 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 
 	@Override
 	public boolean isLit(World world, BlockPos pos, EntityPlayer player) {
-		return player.inventory.getCurrentItem().getTagCompound().getBoolean("lit");
+		ItemStack stack = player.getHeldItemMainhand();
+		ItemStack stack2 = player.getHeldItemOffhand();
+		if(stack.hasTagCompound())
+		{
+			return stack.getTagCompound().getBoolean("lit");
+		}
+		else if(stack2.hasTagCompound())
+		{
+			return stack2.getTagCompound().getBoolean("lit");
+		}
+		return false;
 	}
 
 	@Override
@@ -267,25 +270,23 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	public boolean extinguish(World world, BlockPos pos, EntityPlayer player, ItemStack stack) 
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
-		setBurnTime(world.getTotalWorldTime() - (nbt.getLong("worldtime") - getBurnTime(stack)), stack);
+		setBurnTime((world.getTotalWorldTime() - (nbt.getLong("worldtime")) + getBurnTime(stack)), stack);
 		setLit(false, (long)0, stack);
+		//Utils.getLogger().info("Torch: ext(4)");
 		return true;
 	}
 
 	@Override
 	public long getFuel(World world, BlockPos pos, EntityPlayer player) {
 		NBTTagCompound nbt = player.inventory.getCurrentItem().getTagCompound(); 
-		return nbt.getBoolean("lit") ? (world.getTotalWorldTime() - (nbt.getLong("worldtime") - nbt.getLong("burntime"))) : nbt.getLong("burntime");
+		return nbt.getBoolean("lit") ? ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + nbt.getLong("burntime")) : nbt.getLong("burntime");
 	}
 
 	@Override
 	public void setFuel(ItemStack stack, long fuel, World world, BlockPos pos) 
 	{	
-		/*this.setBurnTime(fuel, stack);*/
-		this.burntTime = fuel;
-		this.stackSet = stack;
-		//Utils.getLogger().info("Torch: fuel: "+fuel+", stack: "+stack);
-		
+		setBurnTime(fuel, stack);	
+		//Utils.getLogger().info("Torch: setFuel(4)");
 	}
 	
 	public boolean isLit(ItemStack stack) 
@@ -330,7 +331,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		stack.setTagCompound(nbt);
 	}
 	
-	public void setBurnTime(long burntime, ItemStack stack) 
+	public ItemStack setBurnTime(long burntime, ItemStack stack) 
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(nbt==null)
@@ -341,6 +342,8 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 		nbt.setLong("burntime", burntime);
 		//Utils.getLogger().info("Torch: set burntime to: " + burntime);
 		stack.setTagCompound(nbt);
+		//Utils.getLogger().info("Torch: setBurnTime(): " + burntime);
+		return stack;
 	}
 	
 	public  Long getBurnTime(ItemStack stack) 
@@ -389,6 +392,8 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	
 	public boolean place(World world, ItemStack stack, IBlockState blockstate, BlockPos pos)
 	{
+		if(world.isAirBlock(pos) || world.getBlockState(pos).getBlock() instanceof BlockBush)
+		{
 			long time;
 			IBlockState BS;
 			NBTTagCompound nbt = stack.getTagCompound();
@@ -402,22 +407,22 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 			}
 			
 			world.setBlockState(pos, BS);
-			//Utils.getLogger().info("Torch:placed it");
+			//Utils.getLogger().info("placed it");
 			if (nbt.getLong("worldtime") > 0)
 			{
 				time = BurnTime - ((world.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack));
-				//Utils.getLogger().info("Torch:place: burntime- " + BurnTime + ", world time- " + world.getTotalWorldTime()  +", set world time- " + nbt.getLong("worldtime") + ", get burntime- " + getBurnTime(stack));
 			}
 			else
 			{
 				time = BurnTime;
 			}
-			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(stack, time, world, pos);
-			//Utils.getLogger().info("Torch:place: set fuel to " + time);
-			//Utils.getLogger().info("Torch:place: itemstack b4 = " + player.inventory.getCurrentItem());
+			((IIgnitable) world.getBlockState(BP).getBlock()).setFuel(stack, time, world, BP);
+			//Utils.getLogger().info("set fuel to " + time);
 			player.inventory.getCurrentItem().shrink(1);//setCount(player.inventory.getCurrentItem().getCount() -1 );
-			//Utils.getLogger().info("Torch:place: itemstack aftr = " + player.inventory.getCurrentItem());
+			//Utils.getLogger().info("set count to " + (player.inventory.getCurrentItem().getCount()));
 			return true;
+		}
+		return false;
 	}
 	
 /*	
@@ -436,7 +441,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	
 		if(!player.world.isRemote)
 		{
-			//Utils.getLogger().info("Torch:onFirstTick");
+			//Utils.getLogger().info("onFirstTick");
 		}
 		
         return EnumActionResult.PASS;
@@ -447,7 +452,7 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
     {
 		if(!player.world.isRemote)
 		{
-			Utils.getLogger().info("Torch:onUsingTick: " + count);
+			//Utils.getLogger().info("onUsingTick: " + count);
 		}
 	}
 	
@@ -456,44 +461,50 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
     {
 		if(!worldIn.isRemote)
 		{
-			Utils.getLogger().info("Torch:OnItemFinish");
+			//Utils.getLogger().info("OnItemFinish");
 			RayTraceResult rt = this.rayTrace(worldIn, player, true);
+			if (rt == null)
+			{
+				return stack;
+			}
 			EntityPlayer player = (EntityPlayer)entityLiving;
-			IBlockState blockstate =  worldIn.getBlockState(rt.getBlockPos());
-			String blockName = blockstate.getBlock().getRegistryName() + "-" + blockstate.getBlock().getMetaFromState(blockstate);
-			String heldItemName = stack.getItem().getRegistryName() + "-" + stack.getMetadata();	
+			BlockPos blockpos = rt.getBlockPos();
+			IBlockState blockstate =  worldIn.getBlockState(blockpos);
+			IBlockState blockstate2 =  worldIn.getBlockState(blockpos.offset(rt.sideHit));
+			Block blk = blockstate2.getBlock();
+			if (blk instanceof BlockLiquid)
+			{
+				blockstate = blockstate2;
+			}
+			
+			Block block = blockstate.getBlock();
+			Material mat = blockstate.getMaterial();
+			boolean canLight = block.isFlammable(worldIn, blockpos, rt.sideHit);
+			String name = block.getRegistryName() + "-" + block.getMetaFromState(blockstate);
+			
 			if(isLit(stack))
 			{
-				Utils.getLogger().info("Torch:im lit");
-				if (ListHandler.ExtinguishList.contains(blockName))
+				if (ListHandler.SnufferList.contains(name))
 				{
-					extinguish(worldIn, player.getPosition(), player);
-					//Utils.getLogger().info("Torch:tried to extinguish me: " + blockName);
+					extinguish(worldIn, blockpos, player);
+					//Utils.getLogger().info("tried to extinguish me");
 				}
-				else if (blockstate.getBlock() instanceof IIgnitable && !((IIgnitable)blockstate.getBlock()).isLit(worldIn, rt.getBlockPos(), player))
+				else if (block instanceof IIgnitable && !((IIgnitable)block).isLit(worldIn, blockpos, player))
 				{
-					if(blockstate.getBlock() instanceof BlockHearth && ListHandler.HearthFireStarterList.contains(heldItemName))
-					{
-						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						Utils.getLogger().info("Torch:tried to light it - hearth with "+heldItemName );
-					}
-					else if(blockstate.getBlock() instanceof BlockATDTorch && ListHandler.TorchFireStarterList.contains(heldItemName))
-					{
-						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						//Utils.getLogger().info("Torch:tried to light it - torch");
-					}
-					else if(blockstate.getBlock() instanceof BlockHearth && ListHandler.LanternFireStarterList.contains(heldItemName))
-					{
-						((IIgnitable)blockstate.getBlock()).attemptIgnite(100, worldIn, rt.getBlockPos(), player);
-						//Utils.getLogger().info("Torch:tried to light it - lantern");
-					}
-					else
-					{
-						Utils.getLogger().info("Torch:didn't light "+blockstate.getBlock()+", i wasnt on a list: " + heldItemName);
-					}
+					//Utils.getLogger().info("im lit");
+					((IIgnitable)block).attemptIgnite(100, worldIn, blockpos, player);
+					//Utils.getLogger().info("tried to light it");
+				}
+				else if (mat == Material.WATER)
+				{
+					extinguish(worldIn, blockpos, player, stack);
+				}
+				else if (canLight)
+				{
+					worldIn.setBlockState(blockpos, Blocks.FIRE.getDefaultState());
 				}
 			}
-			else if (ListHandler.TorchFireStarterList.contains(blockName))
+			else if (ListHandler.TorchFireStarterList.contains(name) || (block instanceof IIgnitable && ((IIgnitable)block).isLit(worldIn, blockpos, player)) || mat == Material.LAVA)
 			{
 				attemptIgnite(100, worldIn, player.getPosition(), player);
 				//Utils.getLogger().info("Torch:tried to light me");
@@ -505,17 +516,36 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 				else
 				{
 					setBurnTime((long)0, stack);
-					//Utils.getLogger().info("Torch:set my burntime to 0");
 				}
-				
+				attemptIgnite(100, worldIn, blockpos, player);
+
+				//Utils.getLogger().info("tried to light me");
 			}        
 		}
 		//Utils.getLogger().info("Torch:OnItemFinishUse: returned = "+player.getHeldItemMainhand());
 		return player.getHeldItemMainhand();
     }
 	
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) 
+	{
+		if(!entityLiving.world.isRemote)
+		{
+			EntityPlayer player = (EntityPlayer)entityLiving;
+			World world = player.world;
+			float flt = world.rand.nextFloat();
+			IIgnitable ig = (IIgnitable)stack.getItem();
+			
+			if(ig.isLit(world, player.getPosition(), player) && flt < SwingExtChance)
+			{
+				//Utils.getLogger().info("Torch: swing():" + flt + " < " + SwingExtChance);
+				extinguish(world, player.getPosition(), player, stack);
+			}
+			//Utils.getLogger().info(flt + " < " + SwingExtChance);
+		}
+		return super.onEntitySwing(entityLiving, stack);
+	}
 	
-
 	@Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
@@ -532,80 +562,69 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     	{
 		
-        	ItemStack itemstack = player.getHeldItem(hand);
-        	IBlockState blockstate = worldIn.getBlockState(pos);
-        	Block block = blockstate.getBlock();
-        	String blockName = block.getRegistryName() + "-" + block.getMetaFromState(blockstate);
-        	String heldItemName = itemstack.getItem().getRegistryName() + "-" + itemstack.getMetadata();	
-			IBlockState BS_up = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.UP);
-			IBlockState BS_north = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH);
-			IBlockState BS_south = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
-			IBlockState BS_east = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST);
-			IBlockState BS_west = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST);
-			int thisX = pos.getX();
-			int thisX1 = pos.getX() + 1;
-			int thisX2 = pos.getX() - 1;
-			int thisY = pos.getY();
-			int thisY1 = pos.getY() + 1;
-			int thisZ = pos.getZ();
-			int thisZ1 = pos.getZ() + 1;
-			int thisZ2 = pos.getZ() - 1;
-			RayTraceResult RT = this.rayTrace(worldIn, player, true);
+        	ItemStack stack = player.getHeldItem(hand);
+        	//IBlockState state = worldIn.getBlockState(pos);
+        	//Block block = state.getBlock();
+        	//String name = block.getRegistryName() + "-" + block.getMetaFromState(state);
+			RayTraceResult RT = rayTrace(worldIn, player, true);
+       
 			if (RT!=null && !worldIn.isRemote) 
 			{	
 				if(RT.typeOfHit != RayTraceResult.Type.ENTITY) 
-				{
-					if (!ListHandler.ExtinguishList.contains(blockName) && !ListHandler.TorchFireStarterList.contains(blockName) && !(block instanceof IIgnitable && !((IIgnitable)block).isLit(worldIn, pos, player)))
+				{	
+					BlockPos blockpos = RT.getBlockPos();
+					IBlockState state2 = worldIn.getBlockState(blockpos);
+					Block block = state2.getBlock();
+					IBlockState state3 = worldIn.getBlockState(blockpos.offset(facing));
+					Block block2 = state3.getBlock();
+					IBlockState stateUsed;
+					Block blockUsed;
+					String name;
+					if (block2 instanceof BlockLiquid)
 					{
-						//Utils.getLogger().info("Torch:NOT on ext or FS list " + blockName);
-						for (int i = 0;i < PlaceBlocks.length;i++)
-						{
-							if(PlaceBlocks[i]==worldIn.getBlockState(pos).getMaterial() || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT)
-							{
-								
-								if(RT.sideHit == EnumFacing.UP) 
-								{
-									BSHold = BS_up;
-									BP =  new BlockPos(thisX,thisY1,thisZ);
-								}
-								else if(RT.sideHit == EnumFacing.NORTH) 
-								{
-									BSHold = BS_north;		
-									BP =  new BlockPos(thisX,thisY,thisZ2);
-								}
-								else if(RT.sideHit == EnumFacing.SOUTH) 
-								{
-									BSHold = BS_south;	
-									BP =  new BlockPos(thisX,thisY,thisZ1);
-								}
-								else if(RT.sideHit == EnumFacing.EAST) 
-								{
-									BSHold = BS_east;	
-									BP =  new BlockPos(thisX1,thisY,thisZ);
-								}
-								else if(RT.sideHit == EnumFacing.WEST) 
-								{
-									BSHold = BS_west;
-									BP =  new BlockPos(thisX2,thisY,thisZ);
-								}
-								else
-								{
-									return EnumActionResult.FAIL;
-								}
-								
-								//Utils.getLogger().info("Torch:IS PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
-								place(worldIn, itemstack, BSHold, BP);
-								//Utils.getLogger().info("Torch:onItemUse: itemstack b4 = " + player.inventory.getCurrentItem());
-								//itemstack.shrink(1);
-								//Utils.getLogger().info("Torch:onItemUse: itemstack aftr = " + player.inventory.getCurrentItem());
-								return  EnumActionResult.FAIL;
-							}
-						}
-						//Utils.getLogger().info("Torch:NOT PlaceBlock " + worldIn.getBlockState(pos).getBlock().getUnlocalizedName());
+						stateUsed = state3;
+						blockUsed = block2;
+						name = block2.getRegistryName() + "-" + block2.getMetaFromState(state3);
+						//Utils.getLogger().info("instance of block liquid");
+						//Utils.getLogger().info(state3 + " - " + state2 + " - " + state3.getMaterial());
 					}
 					else
 					{
-						//Utils.getLogger().info("Torch:IS on ext or FS list " + blockName); 
+						stateUsed = state2;
+						blockUsed = block;
+						name = block.getRegistryName() + "-" + block.getMetaFromState(state2);
+						//Utils.getLogger().info("instance of block liquid");
+						//Utils.getLogger().info(state3 + " - " + state2 + " - " + state3.getMaterial());
+					}
+					Material mat = stateUsed.getMaterial();
+					boolean canLight = stateUsed.getBlock().isFlammable(worldIn, blockpos, facing);
+					if (!ListHandler.SnufferList.contains(name) && !ListHandler.TorchFireStarterList.contains(name) && !(blockUsed instanceof IIgnitable) && !(mat == Material.WATER || mat == Material.LAVA) && !(canLight))
+					{
+						//Utils.getLogger().info("NOT on ext or FS list " + name);
+						for (int i = 0;i < PlaceBlocks.length;i++)
+						{
+							if(PlaceBlocks[i]== mat || blockUsed == Blocks.DIRT || blockUsed instanceof BlockBush)
+							{
+								if(blockUsed instanceof BlockBush)
+								{
+									BSHold = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.UP);
+									BP =  pos;
+								}
+								else
+								{
+									BSHold = ATD_TORCH.getDefaultState().withProperty(BlockTorch.FACING, facing);
+									BP = pos.offset(facing);
+								}
+								
+								//Utils.getLogger().info("IS PlaceBlock " + name);
+								return place(worldIn, stack, BSHold, BP) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+							}
+						}
+						//Utils.getLogger().info("NOT PlaceBlock " + name);
+					}
+					else
+					{
+						//Utils.getLogger().info("IS on ext or FS list " + name); 
 					 	player.setActiveHand(hand);
 					 	return EnumActionResult.PASS;
 					}
@@ -618,9 +637,56 @@ public class AtdTorch extends ItemSword	 implements IHasModel, ITileEntityProvid
 	@Override
 	  public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 		{
-			entity.setFire(this.EntityFireTime);
-			return false;	
+		float flt = player.world.rand.nextFloat();
+			if(((IIgnitable)stack.getItem()).isLit(wrld, player.getPosition(), player) && flt < EntityFireChance)
+			{
+			entity.setFire(this.EntityFireTime); 
+			}
+			//Utils.getLogger().info("BURN! " + flt);
+			return false;
 		}
+	
+    @Override
+    public boolean showDurabilityBar(ItemStack stack)
+    {
+        return true;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack)
+    {
+    	if(stack.hasTagCompound())
+    	{
+    		NBTTagCompound nbt = stack.getTagCompound();  
+    		if(wrld != null && nbt.hasKey("worldtime") && nbt.getLong("worldtime") > 0) 
+    		{
+    			return (double)((wrld.getTotalWorldTime() - nbt.getLong("worldtime")) + getBurnTime(stack)) / (double)BurnTime;
+    		}
+    		else if(wrld != null && getBurnTime(stack) > 0) 
+    		{
+    			return ((double)getBurnTime(stack)) / (double)BurnTime;
+    		}
+    	}
+    	return 0;
+    }
+    /*
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+    	if(!worldIn.isRemote)
+    	{
+    		RayTraceResult RT = rayTrace(worldIn, playerIn, true);
+    		BlockPos blockpos = RT.getBlockPos();
+    		IBlockState iblockstate = worldIn.getBlockState(blockpos);
+            Material material = iblockstate.getMaterial();
+
+            if (material == Material.WATER || material == Material.LAVA)
+            {
+            	player.setActiveHand(handIn);
+            }
+    	}
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+    }*/
     
 	
 	public int getMetadata(ItemStack stack)

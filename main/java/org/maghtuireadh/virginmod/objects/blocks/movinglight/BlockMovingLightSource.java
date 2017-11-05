@@ -1,5 +1,7 @@
 package org.maghtuireadh.virginmod.objects.blocks.movinglight;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import org.maghtuireadh.virginmod.init.BlockInit;
@@ -27,32 +29,42 @@ public class BlockMovingLightSource extends BlockAir implements ITileEntityProvi
 	private EntityPlayer player;
 	float lightlevel;
 
-	public BlockMovingLightSource(String name, float lightlevel) 
+	public BlockMovingLightSource(String name, float lightleve) 
 	{
 		super();
-		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(Reference.MODID, name));
+		setUnlocalizedName(name);
+		setRegistryName(new ResourceLocation(Reference.MODID, name));
 		BlockInit.BLOCKS.add(this);
-		this.setDefaultState(getDefaultState());
+		setDefaultState(getDefaultState());
 		setLightLevel(lightlevel);
-		this.lightlevel = lightlevel;
+		lightlevel = lightleve;
 	}
+	
+	@Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+		if(!worldIn.isRemote)
+		{
+			worldIn.setBlockToAir(pos);
+			worldIn.removeTileEntity(pos);
+		}
+    }
 	
 	@Override
 	public boolean isReplaceable(IBlockAccess world, BlockPos pos) 
 	{
-		return false;
+		return true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) 
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityMovingLightSource().setPlayer(player, this.lightlevel);
+		return new TileEntityMovingLightSource().setPlayer(player);
 	}
 
-	public BlockMovingLightSource setPlayer(EntityPlayer player) 
+	public BlockMovingLightSource setPlayer(EntityPlayer playe) 
 	{
-		this.player = player;
+		player = playe;
 		return this;
 	}
 
@@ -103,4 +115,10 @@ public class BlockMovingLightSource extends BlockAir implements ITileEntityProvi
 	{
 	    return BlockFaceShape.UNDEFINED;
 	}
+	
+	@Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+    {
+        return (int)(this.lightlevel*15.0F);
+    }
 }

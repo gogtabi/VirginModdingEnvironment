@@ -1,6 +1,26 @@
 
 item.ingot_copper.name=Copper Ingot
-item.atd_torch.name=ATD Torch
+
+item.atd_bark.name=Bark
+item.atd_ash_wood.name=Wood Ash
+item.atd_string_jute.name=Jute String
+item.atd_string_sisal.name=Sisal String
+item.atd_tinder.name=Tinder
+item.atd_tinder_bundle.name=Tinder Bundle
+item.atd_ember_bundle.name=Ember Bundle
+item.atd_poker_iron.name=Iron Poker
+
+
+item.atd_torch_stick.name=Burning Stick
+item.atd_torch_bark.name=Bark Torch
+item.atd_torch_sap.name=Sap Torch
+item.atd_torch_tar.name=Tar Torch
+item.atd_torch_cloth.name=Wool Cloth Torch
+item.atd_torch_clothsap.name=Wool Cloth Sap Torch
+item.atd_torch_clothtar.name=Wool Cloth Tar Torch
+item.atd_torch_hescloth.name=Hessian Cloth Torch
+item.atd_torch_hesclothsap.name=Hessian Cloth Sap Torch
+item.atd_torch_hesclothtar.name=Hessian Cloth Tar Torch
 
 tile.block_copper.name=Copper Block
 tile.block_atd_torch.name=ATD Torch

@@ -15,7 +15,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 {
 	private int MaxBurn, hearthState, rainingBurnRate, bankedBurnRate, coalProdTime, coalInCount, coalProgress, coalProdBase, ashProdTime, ashBaseRate, ashInCount, ashProgress, ashBaseRateRate, baseBurnRate, fuelLevel, stokedTime, bankedburnRate, stokedBurnRate = 0;
 	private double coalProdRate, ashProdRate = 0.0;
-	private boolean isStoked, isBanked, Burning;
+	private boolean isStoked, isBanked, isLit;
 	
 	public TileEntityHearth() 
 	{
@@ -41,7 +41,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 		this.rainingBurnRate = nbt.getInteger("RainingBurnRate");
 		this.isStoked = nbt.getBoolean("IsStoked");
 		this.isBanked = nbt.getBoolean("IsBanked");
-		this.Burning = nbt.getBoolean("Burning");
+		this.isLit = nbt.getBoolean("IsLit");
 		this.ashProdRate = nbt.getDouble("AshProdRate");
 		this.coalProdRate = nbt.getDouble("CoalProdRate");
 	}
@@ -64,7 +64,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 		nbt.setInteger("RainingBurnRate", this.rainingBurnRate);
 		nbt.setBoolean("IsStoked", this.isStoked);
 		nbt.setBoolean("IsBanked", this.isBanked);
-		nbt.setBoolean("Burning", this.Burning);
+		nbt.setBoolean("IsLit", this.isLit);
 		nbt.setDouble("AshProdRate", this.ashProdRate);
 		nbt.setDouble("CoalProdRate", this.coalProdRate);
 		return super.writeToNBT(nbt);
@@ -73,7 +73,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 	@Override
 	public void update() 
 	{
-		if (Burning) 
+		if (isLit) 
 		{
 			if (stokedTime > 0) 
 			{
@@ -102,13 +102,13 @@ public class TileEntityHearth extends TileEntity implements ITickable
 						ashInCount++;
 						fuelLevel = 200;
 						isStoked = false;
-						Utils.getLogger().info("Coals Burning: " + coalInCount);
+						Utils.getLogger().info("Coals isLit: " + coalInCount);
 					} 
 					else 
 					{
 						fuelLevel = 0;
 						hearthState = 8;
-						Burning = false;
+						isLit = false;
 						isStoked = false;
 						isBanked = false;
 						stokedTime = 0;
@@ -124,7 +124,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 				{
 					fuelLevel = 0;
 					hearthState = 8;
-					Burning = false;
+					isLit = false;
 					isStoked = false;
 					isBanked = false;
 					stokedTime = 0;
@@ -178,12 +178,12 @@ public class TileEntityHearth extends TileEntity implements ITickable
 				Utils.getLogger().info("Oh Shit Son, What?");
 			}
 		}
-		if (((ashProgress >= ashProdRate) && Burning) && ashInCount < 10) 
+		if (((ashProgress >= ashProdRate) && isLit) && ashInCount < 10) 
 		{
 			ashInCount++; // Increase amount of ash that will be returned.
 			ashProgress = 0; // Reset ashProgress
 		}
-		if (((coalProgress >= coalProdRate) && Burning) && coalInCount < 10) 
+		if (((coalProgress >= coalProdRate) && isLit) && coalInCount < 10) 
 		{
 			coalInCount++; // Increase amount of coal that will be returned.
 			coalProgress = 0; // Reset coalProgress
@@ -195,7 +195,7 @@ public class TileEntityHearth extends TileEntity implements ITickable
 	
 	public void stokedCheck() 
 	{
-		if (isStoked == true && stokedTime == 0 || isStoked == true && Burning == false) 
+		if (isStoked == true && stokedTime == 0 || isStoked == true && isLit == false) 
 		{
 			isStoked = false;
 			stokedTime = 0;

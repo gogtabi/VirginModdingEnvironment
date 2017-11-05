@@ -3,22 +3,30 @@ package org.maghtuireadh.virginmod.tileentity;
 import org.maghtuireadh.virginmod.objects.blocks.torches.BlockATDTorch;
 import org.maghtuireadh.virginmod.util.Utils;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeCache;
+import net.minecraft.world.biome.BiomeProviderSingle;
+import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
 
 public class TileEntityATDTorch extends TileEntity implements ITickable
 {
-	long sentTimeset,sentStart,timeset,start = (long)0;
-	BlockPos sentPos = null;
-	Byte id = 42;
+	long timeleft,start,burntime = (long)0;
+	public NBTTagCompound nbt;
+	int setAblaze;
 
 	public TileEntityATDTorch()
 	{
-		Utils.getLogger().info("constructed TE");
+		
+		//Utils.getLogger().info("constructed TE");
 	}
 	
 
@@ -26,30 +34,26 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("timeset") && nbt.hasKey("start"))
+		if(burntime==0)
 		{
-			this.timeset = nbt.getLong("timeset");
-			this.start = nbt.getLong("start");
-			this.id = nbt.getByte("id");
-			Utils.getLogger().info("read from nbt id: "+nbt.getId());
+		burntime = nbt.getLong("burntime");
+		timeleft = nbt.getLong("timeleft");
+		start = nbt.getLong("start");
+		//Utils.getLogger().info("read from nbt:" + burntime + ", " + timeleft + ", " + start);
 		}
-		else
-		{
-			nbt.setLong("timeset", (long)0);
-			nbt.setLong("start", (long)0);
-			nbt.setByte("id", (byte)17);
-			Utils.getLogger().info("in READ i wrote");
-		}
+
 	}
 	
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) 
 	{
-		nbt.setLong("timeset", this.timeset);
-		nbt.setLong("start", this.start);
-		nbt.setByte("id", this.id);
-		Utils.getLogger().info("write to nbt TE id: "+nbt.getId());
 		super.writeToNBT(nbt);
+		nbt.setLong("burntime", burntime);
+		nbt.setLong("timeleft", timeleft);
+		nbt.setLong("start", start);
+
+		//Utils.getLogger().info("write to nbt TE:" + burntime + ", " + timeleft + ", " + start);
+		markDirty();
 		return nbt;
 	}
 
@@ -57,25 +61,29 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 	public void update() {
 		if(!world.isRemote)
 		{
-			if (sentPos != null && sentPos == pos)
+			if(timeleft > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == true)
 			{
-				Utils.getLogger().info("sent pos-" + sentPos + ", " + sentTimeset + ", " + sentStart);
-				timeset = sentTimeset;
-				start = sentStart;
-				sentTimeset = 0; 
-				sentStart = 0;
-				sentPos = null;
-				Utils.getLogger().info("set settings id: " + id);
-			}
-			if(timeset > 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == true)
-			{
-				Utils.getLogger().info(world.getTotalWorldTime()-start + " < " + timeset);
-				if (world.getTotalWorldTime()-start > timeset)
+				if(world.getBlockState(pos.up()).getBlock().isFlammable(world, pos, EnumFacing.UP))
+				{
+					setAblaze++;
+				}
+				else
+				{
+					setAblaze = 0;
+				}
+				if(setAblaze == 60)
+				{
+					world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState(), 11);
+				}
+				
+				//Utils.getLogger().info(world.getTotalWorldTime()-start + " < " + timeleft);
+				if (world.getTotalWorldTime()-start > timeleft)
 				{
 					//((IIgnitable)world.getBlockState(pos).getBlock()).extinguish(world, pos, null);
+					IBlockState state = world.getBlockState(pos);
 					world.setBlockToAir(pos);
 					world.removeTileEntity(pos);
-					Utils.getLogger().info("killed");
+					//Utils.getLogger().info("killed");
 				}
 				
 			}
@@ -83,53 +91,57 @@ public class TileEntityATDTorch extends TileEntity implements ITickable
 		}
 	}
 	
-	public void setTime(long time, BlockPos pos)
+	public void setTime(long time, long burntim)
 	{
-		if(!world.isRemote)
+		start = world.getTotalWorldTime();
+		timeleft = time;
+		burntime = burntim;
+		//Utils.getLogger().info("set time " + time);
+		markDirty();
+	}
+	public long getTime()
+	{
+		if(timeleft != 0 && world.getBlockState(pos).getValue(BlockATDTorch.LIT) == true)
 		{
-			sentStart = world.getTotalWorldTime();
-			sentTimeset = time;
-			sentPos = pos;
-			Utils.getLogger().info("set time " + time);
-			markDirty();
+			return timeleft - (world.getTotalWorldTime() - start);
 		}
+		return burntime;
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() 
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		int metadata = getBlockMetadata();
+		return new SPacketUpdateTileEntity(pos, metadata, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) 
 	{
-		this.readFromNBT(pkt.getNbtCompound());
+		readFromNBT(pkt.getNbtCompound());
 	}
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() 
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		int metadata = getBlockMetadata();
-		return new SPacketUpdateTileEntity(this.pos, metadata, nbt);
-	}
-
-
 
 	@Override
 	public NBTTagCompound getUpdateTag() 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
+		writeToNBT(nbt);
 		return nbt;
 	}
 
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) 
 	{
-		this.readFromNBT(tag);
+		readFromNBT(tag);
 	}
 
 	@Override
 	public NBTTagCompound getTileData() 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
+		writeToNBT(nbt);
 		return nbt;
 	}
 }

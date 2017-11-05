@@ -4,6 +4,7 @@ import org.maghtuireadh.virginmod.init.BlockInit;
 import org.maghtuireadh.virginmod.init.ItemInit;
 import org.maghtuireadh.virginmod.tileentity.TileEntityATDTorch;
 import org.maghtuireadh.virginmod.util.Reference;
+import org.maghtuireadh.virginmod.util.Utils;
 import org.maghtuireadh.virginmod.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
@@ -39,6 +40,7 @@ public class RegisteryHandler
 			if(item instanceof IHasModel)
 			{
 				((IHasModel)item).registerModels();
+				Utils.getLogger().info("Registered Model for item: " + item.getUnlocalizedName());
 			}
 		}
 		for(Block block : BlockInit.BLOCKS)
@@ -46,6 +48,7 @@ public class RegisteryHandler
 			if(block instanceof IHasModel)
 			{
 				((IHasModel)block).registerModels();
+				Utils.getLogger().info("Registered Model for block: " + block.getUnlocalizedName());
 			}
 		}
 	}
